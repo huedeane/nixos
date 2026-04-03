@@ -44,15 +44,13 @@
       layout = "us";
       variant = "";
     };
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
   };
 
   # Printing
   services.printing.enable = true;
 
   # Audio
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -75,6 +73,10 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+
+  # Gnome
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
