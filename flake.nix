@@ -15,9 +15,9 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/main/configuration.nix
-          home-manager.nixosModules.homeManager
+          home-manager.nixosModules.home-manager
           {
-            home-manager.users.huedeane = import ./home/home.nix
+            home-manager.users.huedeane = import ./home/home.nix;
           }
         ];
       };
