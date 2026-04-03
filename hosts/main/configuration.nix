@@ -1,29 +1,27 @@
 { config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-  }
+  };
 
   # Networking
   networking = {
     hostName = "main";
     networkmanager.enable = true;
-  }
+  };
 
   # Time zone
   time = {
     timeZone = "America/New_York";
-  }
+  };
 
-  # Select internationalisation properties.
+  # Internationalisation
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -35,18 +33,20 @@
       LC_NUMERIC = "en_US.UTF-8";
       LC_PAPER = "en_US.UTF-8";
       LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";  
-    }
-  }
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
 
-  # X11
+  # X11 + Display Manager + Desktop
   services.xserver = {
     enable = true;
     xkb = {
       layout = "us";
       variant = "";
-    }
-  }
+    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
 
   # Printing
   services.printing.enable = true;
@@ -62,45 +62,34 @@
     jack.enable = true;
   };
 
-  # Account
+  # User
   users.users.huedeane = {
     isNormalUser = true;
     description = "huedeane";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Desktop Environment: hyprland
+  # Hyprland
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayland = {
-      enable = true;
-    };
+    xwayland.enable = true;
   };
 
-  # Desktop Environment: gnome
-  services.xserver = {
-    displayManager.gdm.enable = true;
-    destkopManager.gnome.enable = true;
-  }
-
-  # Allow unfree packages
+  # Unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # System Package
+  # System packages
   environment.systemPackages = with pkgs; [
     git
   ];
 
-  # System Fonts
-  fonts.packages = with pkgs; [
-    
-  ];
-  
-  # Flake
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  # Fonts
+  fonts.packages = with pkgs; [];
+
+  # Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Version
   system.stateVersion = "24.11";
-
 }
