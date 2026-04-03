@@ -37,7 +37,7 @@
     };
   };
 
-  # X11 + Display Manager + Desktop
+  # X11
   services.xserver = {
     enable = true;
     xkb = {
@@ -67,18 +67,18 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Hyprland
+  # Desktop Environment: Hyprland
   programs.hyprland = {
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
   };
 
-  # Gnome
+  # Desktop Environemtn: Gnome
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # Unfree packages
+  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # System packages
