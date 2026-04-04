@@ -5,6 +5,7 @@
   		../common/bash/bash.nix
   		../common/mpd/mpd.nix
       ../common/kitty/kitty.nix
+      ../common/yazi/yazi.nix
   ];
   
   home.username = "huedeane";
