@@ -7,8 +7,7 @@ check_paths() {
       return 1
     fi
   done
-}vesk
-
+}
 
 nix-rebuild() {
   check_paths \

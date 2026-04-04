@@ -17,14 +17,14 @@
     
     initExtra = ''
     
-    # Functions
-    source ${./function/functions.sh}
-    
-    # PS1
-    source ${./function/ps1.sh}
-    
-    # Secrets
-    source ${./function/secrets.sh}
+		  # Functions
+		  source ${./function/functions.sh}
+		  
+		  # PS1
+		  source ${./function/ps1.sh}
+		  
+		  # Secrets
+    		source ${./function/secrets.sh}
     
     '';
   };
