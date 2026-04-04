@@ -4,6 +4,7 @@
   imports = [
   		../common/bash/bash.nix
   		../common/mpd/mpd.nix
+      ../common/kitty/kitty.nix
   ];
   
   home.username = "huedeane";
@@ -11,7 +12,7 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-  		mpd
+    mpd
     firefox
     kitty
     yazi
