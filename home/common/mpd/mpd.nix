@@ -6,13 +6,15 @@
 
     musicDirectory = "${config.home.homeDirectory}/Music";
     playlistDirectory = "${config.home.homeDirectory}/Music/Playlist";
-    dbFile = "${config.home.homeDirectory}/.config/mpd/database";
+    dbFile = "${config.xdg.configHome}/nixos/home/common/mpd/database";
+    network.listenAddress = "any";
+    network.startWhenNeeded = true;
 
     extraConfig = ''
-      log_file     "${config.home.homeDirectory}/.config/mpd/log"
-      pid_file     "${config.home.homeDirectory}/.config/mpd/pid"
-      state_file   "${config.home.homeDirectory}/.config/mpd/state"
-      sticker_file "${config.home.homeDirectory}/.config/mpd/sticker.sql"
+      log_file     "${config.xdg.configHome}/nixos/home/common/mpd/log"
+      pid_file     "${config.xdg.configHome}/nixos/home/common/mpd/pid"
+      state_file   "${config.xdg.configHome}/nixos/home/common/mpd/state"
+      sticker_file "${config.xdg.configHome}/nixos/home/common/mpd/sticker.sql"
 
       auto_update             "yes"
       follow_outside_symlinks "yes"
