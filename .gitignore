@@ -1,3 +1,4 @@
 home/common/mpd/etc/database
 home/common/mpd/etc/log
 home/common/mpd/etc/pid
+home/common/mpd/etc/state
