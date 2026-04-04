@@ -2,8 +2,7 @@
 
 {
   imports = [
-  		./common/bash/bash.nix
-  		./common/neovim/neovim.nix
+  		../common/bash/bash.nix
   ];
   
   home.username = "huedeane";
@@ -11,7 +10,6 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-    # Apps
     firefox
     kitty
     yazi

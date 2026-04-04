@@ -5,9 +5,9 @@
     enable = true;
     
     shellAliases = {
-			f = "yazi"
-			m = "music"
-			bash-update = "source ~/.bashrc"
+			f = "yazi";
+			m = "music";
+			bash-update = "source ~/.bashrc";
     };
     
     sessionVariables = {
@@ -18,13 +18,13 @@
     initExtra = ''
     
     # Functions
-    source ${./bash/function/functions.sh}
+    source ${./function/functions.sh}
     
     # PS1
-    source ${./bash/function/ps1.sh}
+    source ${./function/ps1.sh}
     
     # Secrets
-    source ${./bash/function/secrets.sh}
+    source ${./function/secrets.sh}
     
     '';
   };
