@@ -8,20 +8,27 @@
       ../common/yazi/yazi.nix
   ];
   
-  home.username = "huedeane";
-  home.homeDirectory = "/home/huedeane";
-  home.stateVersion = "24.11";
-
-  home.packages = with pkgs; [
-    mpd
-    firefox
-    kitty
-    yazi
-    rmpc
-    tmux
-    neovim
-    vesktop
-  ];
+  home = {
+  		username = "huedeane";
+  		homeDirectory = "/home/huedeane";
+  		stateVersion = "24.11";
+  		
+  		sessionVariables = {
+    		EDITOR = "nvim";
+    		VISUAL = "nvim";
+    };
+  		
+  		packages = with pkgs; [
+		  mpd
+		  firefox
+		  kitty
+		  yazi
+		  rmpc
+		  tmux
+		  neovim
+		  vesktop
+  		];
+  };
 
   programs.home-manager.enable = true;
 }

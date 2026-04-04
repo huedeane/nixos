@@ -11,11 +11,6 @@
 			secret-edit = "nvim $HOME/.config/nixos/home/common/bash/data/secrets.json";
     };
     
-    sessionVariables = {
-    		EDITOR = "nvim";
-    		VISUAL = "nvim";
-    };
-    
     initExtra = ''
     
 		  # Functions
