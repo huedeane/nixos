@@ -1,0 +1,2 @@
+2026-04-04T00:25:39 zeroconf: No global port, disabling zeroconf
+2026-04-04T00:25:39 exception: Failed to open "/home/huedeane/.config/nixos/home/common/mpd/state": No such file or directory
