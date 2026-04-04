@@ -8,6 +8,6 @@ if [ -f $HOME/.config/nixos/home/common/bash/data/secrets.json ]; then
   git config --global credential.helper store
   git config --global user.name "$GITHUB_USERNAME"
   git config --global user.email "$GITHUB_EMAIL"
-  echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" >~/.git-credentials
+  echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" >$HOME/.git-credentials
   git update-index --assume-unchanged $HOME/.config/nixos/home/common/bash/data/secrets.json
 fi
