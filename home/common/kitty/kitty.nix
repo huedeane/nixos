@@ -50,7 +50,7 @@
 
     # Themes
     extraConfig = ''
-      include ./theme/catppuccin-frappe-theme.conf
+      include ./themes/catppuccin-frappe-theme.conf
     '';
 
   };
