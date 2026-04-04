@@ -84,6 +84,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     git
+    jq
   ];
 
   # Fonts
