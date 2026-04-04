@@ -7,7 +7,7 @@ check_paths() {
       return 1
     fi
   done
-}
+}vesk
 
 
 nix-rebuild() {
@@ -37,13 +37,13 @@ hm-edit() {
 help() {
   echo ""
   echo "Nix"
-  echo "  nix-rebuild <host>   rebuild nixos config"
-  echo "  nix-edit <host>  edit host configuration.nix"
-  echo "  hm-edit          edit home.nix"
+  echo "  nix-rebuild <host>		rebuild nixos config"
+	echo "  nix-edit <host>  		edit host configuration.nix"
+  echo "  hm-edit <host>				edit home.nix"
   echo ""
   echo "Aliases"
-  echo "  f                yazi file manager"
-  echo "  m        				rmpc music player"
-  echo "  bash-update      reload bashrc"
+  echo "  f								yazi file manager"
+  echo "  m								rmpc music player"
+  echo "  bash-update			reload bashrc"
   echo ""
 }
