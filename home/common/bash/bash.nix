@@ -18,7 +18,7 @@
     initExtra = ''
     
     # Functions
-    source ${./bash/function/function.sh}
+    source ${./bash/function/functions.sh}
     
     # PS1
     source ${./bash/function/ps1.sh}
@@ -27,5 +27,5 @@
     source ${./bash/function/secrets.sh}
     
     '';
-  }
+  };
 }
