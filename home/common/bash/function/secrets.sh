@@ -4,4 +4,12 @@ if [ -f ..$HOME/.config/nixos/home/common/bash/data/secrets.json ]; then
 	export GITHUB_USERNAME=$(echo $secretKeys | jq -r '.github.username')
   export GITHUB_EMAIL=$(echo $secretKeys | jq -r '.github.email')
   export GITHUB_KEY=$(echo $secretKeys | jq -r '.github.key')
+  
+  echo "test"
+  
+  git config --global credential.helper store
+  git config --global user.name "$GITHUB_USERNAME"
+  git config --global user.email "$GITHUB_EMAIL"
+  echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" >~/.git-credentials
+  cd $HOME/.config/nixos && git update-index --assume-unchanged home/common/bash/data/secrets.json
 fi
