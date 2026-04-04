@@ -6,6 +6,7 @@
   		../common/mpd/mpd.nix
       ../common/kitty/kitty.nix
       ../common/yazi/yazi.nix
+      ../common/rmpc/rmpc.nix
   ];
   
   home = {

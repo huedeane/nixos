@@ -1,0 +1,382 @@
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+    /*
+    Documentation:
+    https://rmpc.mierak.dev/next/configuration/
+    */
+
+    /*
+    The address to connect to. Address can be either an IP address with a port
+    or a UNIX domain socket path.
+    */
+    address: "/run/user/1000/mpd/socket",
+
+    /*
+    Provide MPD with password upon connecting.
+    Default: None
+    */
+    password: None,
+
+    /*
+    Directory for rmpc’s cache files. Used for files downloaded for youtube
+    and might be used for more in the future.
+    Default: None
+    */
+    cache_dir: None,
+
+    /*
+    Directory where rmpc should search for lrc files.
+    Default: None
+    */
+    lyrics_dir: None,
+    
+    /*
+    Offset to apply to all lyrics globally in milliseconds.
+    Default: 0
+    */
+    lyrics_offset_ms: 0,
+    
+    /*
+    How long to wait for response to MPD command before giving up and reconnecting.
+    Default: 10_000
+    */
+    mpd_read_timeout_ms: 10_000,
+
+    /*
+    How long to wait for write to MPD socket to finish before giving up and reconnecting.
+    Default: 5_000
+    */
+    mpd_write_timeout_ms: 5_000,
+
+    /*
+    By default the client will wait forever for data from MPD to appear while being idle.
+    This makes it timeout after the specified timeout and try again.
+    Default: None
+    */
+    mpd_idle_read_timeout_ms: None,
+    
+    /*
+    PreviousTrack will rewind to start if elapsed time is past the configured value.
+    Default: None
+    */
+    rewind_to_start_sec: None,
+
+    /*
+    Whether to keep paused the current playback state when using the NextTrack/PreviousTrack actions.
+    Default: true
+    */
+    keep_state_on_song_change: true,
+    
+    /*
+    Theme file to use.
+    Default: None
+    */
+    theme: "catppuccin_frappe",
+
+    /*
+    Determines the step when changing volume with the volume up and down keybinds.
+    Default: 5%
+    */
+    volume_step: 1,
+
+    /*
+    This option sets how many frames rmpc can render in one second.
+    Default: 30
+    */
+    max_fps: 30,
+
+    /*
+    Minimal number of screen lines to keep above and below the cursor.
+    Cursor will always be in the middle of the screen if set to value bigger than half the viewport height.
+    Default: 0
+    */
+    scrolloff: 0,
+
+    /*
+    Whether to wrap around on Up/Down action in queue/browser panes upon reaching bottom/top.
+    Default: false
+    */
+    wrap_navigation: true,
+
+    /*
+    Enable mouse support.
+    Default: true
+    */
+    enable_mouse: true,
+
+    /*
+    Enable hot reload of configuration.
+    Default: true
+    */
+    enable_config_hot_reload: true,
+
+    /*
+    Interval for status update in milliseconds.
+    Default: 1000
+    */
+    status_update_interval_ms: 1000,
+
+    /*
+    Select the current song when it changes.
+    Default: false
+    */
+    select_current_song_on_change: true,
+
+    /*
+    Center the current song when it changes.
+    Default: false
+    */
+    center_current_song_on_change: true,
+
+    /*
+    Execute a command when the song changes.
+    First element is the command, rest are arguments.
+    Nothing executed if left empty.
+    */
+    on_song_change: ["~/.config/rmpc/script/playcount"],
+
+    /*
+    Execute the command provided to on_song_change at rmpc startup.
+    Matches the behavior of execute_on_song_change in ncmpcpp.
+    Default: false
+    */
+    exec_on_song_change_at_start: false,
+
+    /*
+    Execute given command when rmpc resizes.
+    First element is the command, rest are arguments.
+    Nothing executed if left empty.
+    */
+    on_resize: ["~/.config/rmpc/script/resize"],
+
+    /*
+    Leading "The" will be ignored while sorting in browser panes if set to true.
+    Default: false
+    */
+    ignore_leading_the: false,
+
+    /*
+    Defines how the songs are sorted in the browser panes.
+    */
+    browser_song_sort: [Disc, Track, Artist, Title],
+    
+    /*
+    Determines how the entries are sorted in the directories pane.
+    Format - Songs are sorted by their displayed format.
+    SortFormat - Similar to Format but songs are sorted by browser_song_sort.
+    ModifiedTime - Entries are sorted by their last modified time.
+    Default: SortFormat(group_by_type: true, reverse: false)
+    */
+    directories_sort: SortFormat(group_by_type: true, reverse: false),
+
+    /*
+    Whether to show playlists in browser or not.
+    Possible values:
+    All - Show all playlists
+    None - Do not show playlists
+    NonRoot - Show playlists everywhere except the root directory.
+    Default: NonRoot
+    */
+    show_playlists_in_browser: NonRoot,
+
+    /*
+    Reflects the changes from queue to the last loaded playlist.
+    Default: false
+    */
+    reflect_changes_to_playlist: false,
+
+    /*
+    Various options for album art display. By default should not be needed to be specified.
+    */
+    album_art: (
+        method: Auto,
+        order: EmbeddedFirst,
+        max_size_px: (width: 1200, height: 1200),
+        disabled_protocols: ["http://", "https://"],
+        vertical_align: Center,
+        horizontal_align: Center,
+    ),
+
+    /*
+    Keybinds to use. The default keybinds are used if this property is absent.
+    */
+    keybinds: (
+        global: {
+            ":":       CommandMode,
+            ",":       VolumeDown,
+            "s":       Stop,
+            ".":       VolumeUp,
+            "<Tab>":   NextTab,
+            "<S-Tab>": PreviousTab,
+            "1":       SwitchToTab("Queue"),
+            "2":       SwitchToTab("Directories"),
+            "3":       SwitchToTab("Artists"),
+            "4":       SwitchToTab("Album Artists"),
+            "5":       SwitchToTab("Albums"),
+            "6":       SwitchToTab("Playlists"),
+            "7":       SwitchToTab("Search"),
+            "q":       Quit,
+            ">":       NextTrack,
+            "p":       TogglePause,
+            "<":       PreviousTrack,
+            "f":       SeekForward,
+            "z":       ToggleRepeat,
+            "x":       ToggleRandom,
+            "c":       ToggleConsume,
+            "v":       ToggleSingle,
+            "b":       SeekBack,
+            "~":       ShowHelp,
+            "u":       Update,
+            "U":       Rescan,
+            "I":       ShowCurrentSongInfo,
+            "O":       ShowOutputs,
+            "P":       ShowDecoders,
+            "R":       AddRandom,
+        },
+        navigation: {
+            "k":          Up,
+            "j":          Down,
+            "h":          Left,
+            "l":          Right,
+            "<Up>":       Up,
+            "<Down>":     Down,
+            "<Left>":     Left,
+            "<Right>":    Right,
+            "<C-k>":      PaneUp,
+            "<C-j>":      PaneDown,
+            "<C-h>":      PaneLeft,
+            "<C-l>":      PaneRight,
+            "<C-u>":      UpHalf,
+            "N":          PreviousResult,
+            "a":          Add,
+            "A":          AddAll,
+            "r":          Rename,
+            "n":          NextResult,
+            "g":          Top,
+            "<Space>":    Select,
+            "<C-Space>":  InvertSelection,
+            "G":          Bottom,
+            "<CR>":       Confirm,
+            "i":          FocusInput,
+            "J":          MoveDown,
+            "<C-d>":      DownHalf,
+            "/":          EnterSearch,
+            "<C-c>":      Close,
+            "<Esc>":      Close,
+            "K":          MoveUp,
+            "D":          Delete,
+            "B":          ShowInfo,
+            "<C-z>":      ContextMenu(),
+            "<C-r>":      Rate(kind: Modal(values: [1,2,3,4,5]), current: true),
+            "<C-1>":      Rate(kind: Value(1), current: false),
+            "<C-2>":      Rate(kind: Value(2), current: false),
+            "<C-3>":      Rate(kind: Value(3), current: false),
+            "<C-4>":      Rate(kind: Value(4), current: false),
+            "<C-5>":      Rate(kind: Value(5), current: false),
+        },
+        queue: {
+            "D":       DeleteAll,
+            "<CR>":    Play,
+            "a":       AddToPlaylist,
+            "d":       Delete,
+            "C":       JumpToCurrent,
+            "X":       Shuffle,
+        },
+    ),
+
+    /*
+    Configures what tags are searchable on the Search pane.
+    Also sets whether the search should be case insensitive by default
+    and what kind of search mode to perform.
+    */
+    search: (
+        case_sensitive: false,
+        ignore_diacritics: false,
+        search_button: false,
+        mode: Contains,
+        tags: [
+            (value: "any",         label: "Any Tag"),
+            (value: "artist",      label: "Artist"),
+            (value: "album",       label: "Album"),
+            (value: "albumartist", label: "Album Artist"),
+            (value: "title",       label: "Title"),
+            (value: "filename",    label: "Filename"),
+            (value: "genre",       label: "Genre"),
+        ],
+    ),
+
+    /*
+    Configures how albums are displayed and sorted in the Artists, AlbumArtists and Browser panes.
+    Albums can display either only its name or include an album’s date as well.
+    Additionally, albums can be sorted by their name or date.
+    */
+    artists: (
+        /*
+        Can be one of the following:
+        SplitByDate - songs in the album will be split into separate album entries,
+        one for each date and the album date will be displayed in front of the album name in the format: (<date>) <album name>
+        NameOnly - only one entry for an album will be created and the album date will not be displayed
+        */
+        album_display_mode: SplitByDate,
+
+        /*
+        Can be one of the following:
+        Name - albums are sorted by their name first and date second if their names are identical
+        Date - albums will be simply sorted by date
+        */
+        album_sort_by: Date,
+
+        /*
+        List of metadata tags to search for album dates, in order of preference.
+        Default: [OriginalDate]
+        */
+        album_date_tags: [OriginalDate],
+    ),
+
+    /*
+    Provides an ability to configure what tabs are shown by rmpc.
+    */
+    tabs: [
+      (name: "Home", pane: Split(direction: Horizontal, panes: [
+        (size: "100%", borders: "NONE", pane: Component("custom-home")),
+      ])),
+      (name: "Directories", pane: Split(direction: Horizontal,panes: [
+        (size: "100%", borders: "ALL", pane: Pane(Directories)),
+      ])),
+      (name: "Playlists", pane: Split(direction: Horizontal, panes: [
+        (size: "100%", borders: "ALL", pane: Pane(Playlists)),
+      ])),
+      (name: "Albums", pane: Split(direction: Horizontal, panes: [
+        (size: "100%", borders: "ALL", pane: Pane(Albums)),
+      ])),
+      (name: "Album Artists", pane: Split(direction: Horizontal, panes: [
+          (size: "100%", borders: "ALL", pane: Pane(AlbumArtists)),
+      ])),
+      (name: "Genre", pane: Split(direction: Horizontal, panes: [
+        (size: "100%", borders: "ALL", pane: Pane(Browser(root_tag: "genre", separator: ";"))),
+      ])),
+      (name: "Search", pane: Split(direction: Horizontal, panes: [
+          (size: "100%", borders: "ALL", pane: Pane(Search)),
+      ])),
+    ],
+    cava: (
+      framerate: 60, 
+      autosens: true, 
+      sensitivity: 100,
+      lower_cutoff_freq: 50, 
+      higher_cutoff_freq: 10000,
+      input: (
+          method: Fifo,
+          source: "/tmp/mpd.fifo",
+          sample_rate: 44100,
+          channels: 2,
+          samble_bits: 16,
+      ),
+      smoothing: (
+          noise_reduction: 35,
+      ),
+      eq: []
+    ),
+)

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ $COLS -gt 170 ]]; then
+    rmpc remote set theme ~/.config/rmpc/themes/catppuccin_frappe.ron
+else
+    rmpc remote set theme ~/.config/rmpc/themes/catppuccin_frappe_mobile.ron
+fi
