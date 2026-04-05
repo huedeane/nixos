@@ -5,7 +5,8 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "system24-catppuccin-frappe.theme.css"
+        "system24-catppuccin-frappe.theme.css",
+        "catppuccin.css"
     ],
     "enableReactDevtools": false,
     "frameless": true,
@@ -553,7 +554,17 @@
         },
         "CustomCommands": {
             "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
+        },
+        "NoDefaultHangStatus": {
+            "enabled": false
         }
+    },
+    "uiElements": {
+        "chatBarButtons": {},
+        "messagePopoverButtons": {}
     },
     "notifications": {
         "timeout": 5000,
@@ -565,10 +576,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1775327261528
-    },
-    "uiElements": {
-        "chatBarButtons": {},
-        "messagePopoverButtons": {}
+        "settingsSyncVersion": 1775365449433
     }
 }
