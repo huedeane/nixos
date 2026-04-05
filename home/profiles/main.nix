@@ -23,7 +23,7 @@
   		
   	packages = with pkgs; [
 		  mpd
-		  firefox
+		  #firefox
 		  kitty
 		  yazi
 		  rmpc
