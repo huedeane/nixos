@@ -11,13 +11,13 @@
     initLua = ./init.lua;
 
     plugins = {
-      full-border = ./yazi/plugins/full-border.yazi
-      git = ./yazi/plugins/git.yazi
+      full-border = ./plugins/full-border.yazi;
+      git = ./plugins/git.yazi;
     };
     
     flavors = {
-      catppuccin-frappe = ./yazi/flavors/catppuccin-frappe.yazi
-    }
+      catppuccin-frappe = ./flavors/catppuccin-frappe.yazi;
+    };
   };
 
   home.file.".config/yazi/package.toml".source = ./package.toml;
