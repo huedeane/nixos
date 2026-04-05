@@ -8,8 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    textfox.url = "github:adriankarlen/textfox";
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs: {

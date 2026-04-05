@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, textfox, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -8,7 +8,7 @@
       ../common/yazi/yazi.nix
       ../common/rmpc/rmpc.nix
       ../optional/vesktop/vesktop.nix
-      ../optional/textfox/textfox.nix
+      ../optional/firefox/firefox.nix
   ];
   
   home = {
