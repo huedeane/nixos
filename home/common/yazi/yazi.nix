@@ -4,17 +4,21 @@
   programs.yazi = {
     enable = true;
     
-    theme = {
-      flavor = {
-        dark = "catppuccin-frappe";
-      };
+    settings = builtins.fromTOML (builtins.readFile ./yazi.toml);
+    keymap = builtins.fromTOML (builtins.readFile ./keymap.toml);
+    theme = builtins.fromTOML (builtins.readFile ./theme.toml);
+
+    initLua = ./init.lua;
+
+    plugins = {
+      full-border = ./yazi/plugins/full-border.yazi
+      git = ./yazi/plugins/git.yazi
     };
+    
+    flavors = {
+      catppuccin-frappe = ./yazi/flavors/catppuccin-frappe.yazi
+    }
   };
 
-  home.file.".config/yazi/init.lua".source = ./init.lua;
-  home.file.".config/yazi/keymap.toml".source = ./keymap.toml;
   home.file.".config/yazi/package.toml".source = ./package.toml;
-  home.file.".config/yazi/yazi.toml".source = ./yazi.toml;
-  home.file.".config/yazi/flavors".source = ./flavors;
-  home.file.".config/yazi/plugins".source = ./plugins;
 }
