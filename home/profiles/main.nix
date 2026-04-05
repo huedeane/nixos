@@ -20,17 +20,11 @@
     	EDITOR = "nvim";
     	VISUAL = "nvim";
     };
-  		
-  	packages = with pkgs; [
-		  mpd
-		  #firefox
-		  kitty
-		  yazi
-		  rmpc
-		  tmux
-		  neovim
-		  vesktop
-  	];
+
+    packages = with pkgs; [
+      tmux
+      neovim
+    ];
   };
 
   programs.home-manager.enable = true;

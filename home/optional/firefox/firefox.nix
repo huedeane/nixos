@@ -28,6 +28,6 @@
 
   };
 
-  home.file.".mozilla/firefox/huedeane".source = ./user.js;
+  home.file.".mozilla/firefox/huedeane/user.js".source = ./user.js;
   home.file.".mozilla/firefox/huedeane/chrome".source = ./chrome;
 }
