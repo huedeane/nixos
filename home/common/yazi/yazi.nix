@@ -20,5 +20,7 @@
     };
   };
 
-  home.file.".config/yazi/package.toml".source = ./package.toml;
+  xdg.configFile = {
+    "rmpc/package.toml".source = ./package.toml;
+  };
 }
