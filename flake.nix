@@ -8,17 +8,23 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    textfox.url = "github:adriankarlen/textfox";
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { nixpkgs, home-manager, ... } @ inputs: {
     nixosConfigurations = {
       main = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/main/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.users.huedeane = import ./home/profiles/main.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
           }
         ];
       };

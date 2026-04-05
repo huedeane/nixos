@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   programs.bash = {
@@ -20,7 +20,7 @@
 		  source ${./function/ps1.sh}
 		  
 		  # Secrets
-    		source ${./function/secrets.sh}
+    	source ${./function/secrets.sh}
     
     '';
   };

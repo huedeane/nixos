@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, textfox, ... }:
 
 {
   imports = [
@@ -8,19 +8,20 @@
       ../common/yazi/yazi.nix
       ../common/rmpc/rmpc.nix
       ../optional/vesktop/vesktop.nix
+      ../optional/textfox/textfox.nix
   ];
   
   home = {
-  		username = "huedeane";
-  		homeDirectory = "/home/huedeane";
-  		stateVersion = "24.11";
+    username = "huedeane";
+  	homeDirectory = "/home/huedeane";
+  	stateVersion = "24.11";
   		
-  		sessionVariables = {
-    		EDITOR = "nvim";
-    		VISUAL = "nvim";
+  	sessionVariables = {
+    	EDITOR = "nvim";
+    	VISUAL = "nvim";
     };
   		
-  		packages = with pkgs; [
+  	packages = with pkgs; [
 		  mpd
 		  firefox
 		  kitty
@@ -29,7 +30,7 @@
 		  tmux
 		  neovim
 		  vesktop
-  		];
+  	];
   };
 
   programs.home-manager.enable = true;
