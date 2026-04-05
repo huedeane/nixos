@@ -1,0 +1,136 @@
+/* .visual-refresh #app-mount .side_aa8da2 .item_aa8da2:active, .side_aa8da2 .themed_aa8da2.item_aa8da2.selected_aa8da2 {
+  background-color: var(--purple-3) !important;
+  color: #303446 !important;
+}
+
+.visual-refresh #app-mount .side_aa8da2 .themed_aa8da2.item_aa8da2:hover:not(.disabled_aa8da2) {
+  background-color: var(--purple-3) !important;
+  color: #303446 !important;
+} */
+
+/* Profile Name */
+.panelTitleContainer__37e49 .title_b6c092 {
+  color: var(--yellow-3);
+}
+
+/* Setting Multi Factor Container */
+.container__35859 {
+  border: none;
+  background-color: var(--green-3);
+}
+
+.container__35859 .text__35859 {
+  color: #303446 !important;
+}
+
+.container__35859 .icon__35859 {
+  color: #303446 !important;
+}
+
+/* Setting Tab */
+.top_aa8da2 .item_aa8da2.selected_aa8da2 {
+  color: var(--yellow-3);
+  border-bottom-color: var(--yellow-3) !important;
+}
+
+.top_aa8da2 .brand_aa8da2.item_aa8da2:hover {
+  color: var(--yellow-3) !important;
+}
+
+.top_aa8da2 .item_aa8da2.selected_aa8da2:after, .top_aa8da2 .item_aa8da2:hover:after {
+  background-color: var(--yellow-3) !important;
+}
+
+/* Close Vesktop Button */
+.trailing_c38106 .winButtonClose_c38106:hover {
+  color: #303446;
+}
+
+/* Update Notification */
+.vc-notification-root {
+  border: var(--border-thickness) solid var(--purple-3);
+  bottom: 1.25rem !important;
+  right: 1.25rem !important;
+  min-height: auto;
+}
+
+/* Setting Container Border */
+.modalContent_e44912 {
+  border: var(--border-thickness) solid var(--purple-3);
+}
+
+/* Channel Default Color */
+.containerDefault_c69b6d .icon__2ea32 {
+  color: #838ba7;
+}
+
+.containerDefault_c69b6d .name__2ea32 {
+  color: #838ba7;
+}
+
+/* Channel Title */
+.page__5e434 .title_f75fb0 .title__9293f {
+   color: var(--purple-3)
+}
+
+.page__5e434 .title_f75fb0 .channelIcon__9293f .icon__9293f {
+   color: var(--purple-3)
+}
+
+/* Channel Unread Color */
+.containerDefault_c69b6d .modeUnreadImportant__2ea32 .unreadImportant__2ea32 {
+  background-color: var(--purple-3);
+}
+
+.containerDefault_c69b6d .modeUnreadImportant__2ea32 .name__2ea32 {
+  color: var(--purple-3);
+}
+
+.containerDefault_c69b6d .modeUnreadImportant__2ea32 .icon__2ea32 {
+  color: var(--purple-3)
+}
+
+/* Channel Category Color */
+.containerDefault__29444 .overflow_b0dfc2 {
+  color: var(--yellow-3);
+}
+
+/* Channel Selected */
+.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32, .modeSelected__2ea32 .link__2ea32 {
+  background-color: var(--purple-3) !important;
+}
+
+.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32, .modeSelected__2ea32 .link__2ea32 .icon__2ea32 {
+  color: #303446;
+}
+
+.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32, .modeSelected__2ea32 .link__2ea32 .name__2ea32 {
+  color: #303446;
+}
+
+.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32, .modeSelected__2ea32 .link__2ea32 .actionIcon_c69b6d {
+  color: #303446;
+}
+
+/* Channel Selected Hover */
+.containerDefault_c69b6d .iconVisibility_c69b6d:hover .link__2ea32 {
+  background-color: var(--purple-3) !important;
+}
+
+.containerDefault_c69b6d .iconVisibility_c69b6d:hover .link__2ea32 .icon__2ea32 {
+  color: #303446;
+}
+
+.containerDefault_c69b6d .iconVisibility_c69b6d:hover .link__2ea32 .name__2ea32 {
+  color: #303446;
+}
+
+.containerDefault_c69b6d .iconVisibility_c69b6d:hover .link__2ea32 .actionIcon_c69b6d {
+  color: #303446;
+}
+
+/* Member category Color */
+
+.container_c8ffbb .membersGroup_c8ffbb .membersGroupHeader_c8ffbb {
+  color: var(--yellow-3);
+}

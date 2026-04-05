@@ -1,4 +1,4 @@
-{ config, ... }
+{ config, ... }:
 
 {
   programs.rmpc = {
@@ -7,5 +7,5 @@
 
   home.file.".config/rmpc/config.ron".source = ./config.ron;
   home.file.".config/rmpc/themes".source = ./themes;
-  home.file.".config/rmcp/script".source = ./script;
+  home.file.".config/rmpc/script".source = ./script;
 }

@@ -7,6 +7,7 @@
       ../common/kitty/kitty.nix
       ../common/yazi/yazi.nix
       ../common/rmpc/rmpc.nix
+      ../optional/vesktop/vesktop.nix
   ];
   
   home = {
