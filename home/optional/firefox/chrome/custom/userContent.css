@@ -1,0 +1,9 @@
+/* newtab.css */
+
+@-moz-document url("about:home"), url("about:newtab") {
+  .newtab-main {
+    justify-content: end !important;
+    width: 100% !important;
+    margin: 0px !important;
+  }
+}

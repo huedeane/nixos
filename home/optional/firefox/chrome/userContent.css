@@ -1,0 +1,14 @@
+ /*    __            __  ____            */
+ /*   / /____  _  __/ /_/ __/___  _  __  */
+ /*  / __/ _ \| |/_/ __/ /_/ __ \| |/_/  */
+ /* / /_/  __/>  </ /_/ __/ /_/ />  <    */
+ /* \__/\___/_/|_|\__/_/  \____/_/|_|    */
+
+@import url("custom/sidebery.css");
+@import url("content/about.css");
+@import url("content/newtab.css");
+@import url("custom/userContent.css");
+
+/* configurations - DO NOT CHANGE ORDER */
+@import url("defaults.css");
+@import url("custom/config.css");

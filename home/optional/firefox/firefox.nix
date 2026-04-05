@@ -4,12 +4,16 @@
   programs.firefox = {
     enable = true;
     
-    configPath = ".config/firefox";
+    #configPath = ".config/mozilla/firefox";
     profiles = {
-      main = {
+      huedeane = {
         isDefault = true;
-        name = "main";
+        name = "huedeane";
       };
     };
+
+
   };
+
+  home.file.".mozilla/firefox/main".source = ./chrome;
 }

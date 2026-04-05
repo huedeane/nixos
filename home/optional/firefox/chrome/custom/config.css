@@ -1,0 +1,28 @@
+:root {
+  --tf-font-family: "ComicShannsMono Nerd Font Mono", Consolas, monospace; /* Font family of config */
+  --tf-font-size: 14px; /* Font size of config */
+  --tf-browser-outer-margin: 20px;
+  --tf-browser-inner-margin: 10px;
+  --tf-accent: #737994; /* Accent color used, eg: color when hovering a container  */
+  --tf-bg: #303446; /* Background color of all elements, tab colors derive from this */
+  --tf-border: #737994; /* Border color when not hovered */
+  --tf-border-transition: 0.2s ease; /* Smooth color transitions for borders */
+  --tf-border-width: 2px; /* Width of borders */
+  --tf-rounding: 0px; /* Border radius used through out the config */
+  --tf-margin: 0.8rem; /* Margin used between elements in sidebery */
+  --tf-text-transform: none; /* Text transform to use */
+  --tf-window-control: #c6d0f5;
+  --tf-display-horizontal-tabs: none; /* If horizontal tabs should be shown, none = hidden, block = shown */
+  --tf-display-window-controls: flex; /* If the window controls should be shown (won't work with sidebery and hidden horizontal tabs), none = hidden, flex = shown */ 
+  --tf-display-nav-buttons: flex; /* If the navigation buttons (back, forward) should be shown, none = hidden, flex = shown */
+  --tf-display-urlbar-icons: none; /* If the icons inside the url bar should be shown, none = hidden, flex = shown */
+  --tf-display-sidebar-tools: flex; /* If the "Customize sidebar" button on the sidebar should be shown, none = hidden, flex = shown */ 
+  --tf-display-titles: none; /* If titles (tabs, navbar, main etc.) should be shown, none = hidden, flex = shown */
+  --tf-newtab-logo: "   __            __  ____          \A   / /____  _  __/ /_/ __/___  _  __\A  / __/ _ \\| |/_/ __/ /_/ __ \\| |/_/\A / /_/  __/>  </ /_/ __/ /_/ />  <  \A \\__/\\___/_/|_|\\__/_/  \\____/_/|_|  ";
+  --tf-navbar-margin: 20px 20px 10px 20px  ; /* navbar margin */
+  --tf-navbar-padding: 7px 0px; /* navbar padding */
+  --tf-bookmarks-alignment: center; /* alignment of bookmarks in the bookmarks toolbar (if you have many bookmarks, left is recommended) */
+  --tf-personal-toolbar-margin: var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-inner-margin) var(--tf-browser-outer-margin);
+  --tf-sidebar-box-margin: var(--tf-browser-inner-margin) var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-outer-margin);
+  --tf-tabbrowser-tabbox-margin: var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-outer-margin) var(--tf-browser-inner-margin);
+}
