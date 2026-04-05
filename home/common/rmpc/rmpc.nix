@@ -1,11 +1,14 @@
 { config, ... }:
 
-{
+{ 
   programs.rmpc = {
     enable = true;
+
+    config = builtins.readFile ./config.ron;
   };
 
-  home.file.".config/rmpc/config.ron".source = ./config.ron;
-  home.file.".config/rmpc/themes".source = ./themes;
-  home.file.".config/rmpc/script".source = ./script;
+  xdg.configFile = {
+    "rmpc/themes".source = ./themes;
+    "rmpc/script".source = ./script;
+  };
 }
