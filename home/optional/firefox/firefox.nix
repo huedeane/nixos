@@ -23,22 +23,29 @@
           "browser.toolbars.bookmarks.visibility" = "always";
           "ui.systemUsesDarkTheme" = 1;
           # Disable weather
-          #"browser.newtabpage.activity-stream.showWeather" = false;
+          "browser.newtabpage.activity-stream.showWeather" = false;
           
           # Disable recommended stories (Pocket)
-          #"browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-          #"browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
           
           # Disable recent activity / highlights
-          #"browser.newtabpage.activity-stream.feeds.section.highlights" = false;
-          #"browser.newtabpage.activity-stream.feeds.highlights" = false;
+          "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
+          "browser.newtabpage.activity-stream.feeds.highlights" = false;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "svg.context-properties.content.enabled" = true;
+          # enable custom wallpaper
+          "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = true;
+          "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = true;
+          "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.uuid" = "catppuccin-wallpaper";
+          "browser.newtabpage.activity-stream.newtabWallpapers.wallpaper" = "custom";
+          "layout.css.has-selector.enabled" = true;
         };
       };
     };
-
-
   };
 
-  home.file.".mozilla/firefox/huedeane/user.js".source = ./user.js;
+  #home.file.".mozilla/firefox/huedeane/user.js".source = ./user.js;
+  home.file.".mozilla/firefox/huedeane/wallpaper".source = ./wallpaper;
   home.file.".mozilla/firefox/huedeane/chrome".source = ./chrome;
 }
