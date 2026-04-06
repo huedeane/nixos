@@ -10,6 +10,7 @@
 
 #browser:not(.browser-toolbox-background) {
   :root[lwtheme] & {
+    background-color: var(--tf-bg) !important;
     background-image: unset !important;
   }
 }

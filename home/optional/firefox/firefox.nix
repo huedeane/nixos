@@ -9,7 +9,6 @@
       { }
     ];
 
-    #configPath = ".config/mozilla/firefox";
     profiles = {
       huedeane = {
         isDefault = true;
@@ -21,6 +20,18 @@
           "browser.startup.firstrunSkipsHomepage" = false;
           "trailhead.firstrun.didSeeAboutWelcome" = true;
           "browser.aboutwelcome.enabled" = false;
+          "browser.toolbars.bookmarks.visibility" = "always";
+          "ui.systemUsesDarkTheme" = 1;
+          # Disable weather
+          #"browser.newtabpage.activity-stream.showWeather" = false;
+          
+          # Disable recommended stories (Pocket)
+          #"browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+          #"browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+          
+          # Disable recent activity / highlights
+          #"browser.newtabpage.activity-stream.feeds.section.highlights" = false;
+          #"browser.newtabpage.activity-stream.feeds.highlights" = false;
         };
       };
     };
