@@ -37,7 +37,7 @@
           # enable custom wallpaper
           "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = true;
           "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = true;
-          "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.uuid" = "catppuccin-wallpaper";
+          "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.uuid" = "e3aa32e0-9a30-49ed-aa30-bd460a29149d";
           "browser.newtabpage.activity-stream.newtabWallpapers.wallpaper" = "custom";
           "layout.css.has-selector.enabled" = true;
         };
@@ -46,6 +46,6 @@
   };
 
   #home.file.".mozilla/firefox/huedeane/user.js".source = ./user.js;
-  home.file.".mozilla/firefox/huedeane/wallpaper".source = ./wallpaper;
+  home.file.".mozilla/firefox/huedeane/wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d".source = ./wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d;
   home.file.".mozilla/firefox/huedeane/chrome".source = ./chrome;
 }
