@@ -24,6 +24,7 @@
     packages = with pkgs; [
       tmux
       neovim
+      cava
     ];
   };
 
