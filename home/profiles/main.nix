@@ -10,6 +10,7 @@
       ../optional/vesktop/vesktop.nix
       ../optional/firefox/firefox.nix
       ../optional/hyprland/hyprland.nix
+      ../optional/rofi/rofi.nix
   ];
   
   home = {

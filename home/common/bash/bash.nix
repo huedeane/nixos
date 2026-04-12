@@ -9,6 +9,7 @@
 			m = "music";
 			bash-update = "source ~/.bashrc";
 			secret-edit = "nvim $HOME/.config/nixos/home/common/bash/data/secrets.json";
+      hypr-update = "nvim $HOME/.config/nixos/home/optional/hyprland/hyprland.conf";
     };
     
     initExtra = ''

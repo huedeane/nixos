@@ -45,5 +45,6 @@ help() {
   echo "  m --> rmpc music player"
   echo "  bash-update --> reload bashrc"
   echo "  secret-update --> edit secrets.json"
+  echo "  hypr-update --> edit hyprland.conf"
   echo ""
 }
