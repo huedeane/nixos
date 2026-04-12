@@ -8,6 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs: {
@@ -19,9 +21,14 @@
           ./hosts/main/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.huedeane = import ./home/profiles/main.nix;
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users.huedeane = import ./home/profiles/main.nix;
+              extraSpecialArgs = {
+                inherit inputs;
+              };
             };
           }
         ];

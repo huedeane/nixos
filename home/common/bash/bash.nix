@@ -12,7 +12,7 @@
     };
     
     initExtra = ''
-    
+
 		  # Functions
 		  source ${./function/functions.sh}
 		  

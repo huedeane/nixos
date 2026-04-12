@@ -72,6 +72,7 @@
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
   # Desktop Environemtn: Gnome
@@ -85,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     git
     jq
+    kitty
   ];
 
   # Fonts
