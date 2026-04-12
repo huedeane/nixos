@@ -27,6 +27,7 @@
       tmux
       neovim
       cava
+      rofi
     ];
   };
 

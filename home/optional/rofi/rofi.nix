@@ -3,13 +3,10 @@
 {
   programs.rofi = {
     enable = true;
-    terminal = "kitty";
-    location = "center";
-    theme = ./catppuccin-frappe.rasi;
+  };
 
-    extraConfig = {
-      modi = "drun,run,window";
-      show-icons = true;
-    };
+  xdg.configFile = {
+    "rofi/config.rasi".source = ./config.rasi;
+    "rofi/catppuccin-frappe.rasi".source = ./catppuccin-frappe.rasi;
   };
 }
