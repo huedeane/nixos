@@ -88,6 +88,12 @@
     kitty
   ];
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = [ pkgs.vulkan-loader pkgs.vulkan-validation-layers ];
+  };
+
   # Fonts
   fonts.packages = with pkgs; [];
 

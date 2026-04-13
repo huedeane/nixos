@@ -9,7 +9,7 @@
       ../common/rmpc/rmpc.nix
       ../optional/vesktop/vesktop.nix
       ../optional/firefox/firefox.nix
-      ../optional/hyprland/hyprland.nix
+      #../optional/hyprland/hyprland.nix
       ../optional/rofi/rofi.nix
   ];
   
@@ -28,6 +28,8 @@
       neovim
       cava
       rofi
+      steam
+      hyprland
     ];
   };
 
