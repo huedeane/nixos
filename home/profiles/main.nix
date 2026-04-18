@@ -12,7 +12,6 @@
       ../optional/hyprland/hyprland.nix
       ../optional/rofi/rofi.nix
       ../optional/waybar/waybar.nix
-      ../optional/hyprpaper/hyprpaper.nix
   ];
   
   home = {
