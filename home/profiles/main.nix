@@ -9,10 +9,10 @@
       ../common/rmpc/rmpc.nix
       ../optional/vesktop/vesktop.nix
       ../optional/firefox/firefox.nix
-      #../optional/hyprland/hyprland.nix
+      ../optional/hyprland/hyprland.nix
       ../optional/rofi/rofi.nix
       ../optional/waybar/waybar.nix
-      ../optional/hyprpaper.nix
+      ../optional/hyprpaper/hyprpaper.nix
   ];
   
   home = {
@@ -31,7 +31,6 @@
       cava
       rofi
       steam
-      hyprland
     ];
   };
 
