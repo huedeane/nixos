@@ -11,6 +11,7 @@
       ../optional/firefox/firefox.nix
       ../optional/hyprland/hyprland.nix
       ../optional/rofi/rofi.nix
+      ../optional/rofi/rofi-polkit.nix
       #../optional/waybar/waybar.nix
   ];
   
@@ -24,6 +25,10 @@
     	VISUAL = "nvim";
     };
 
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
+
     packages = with pkgs; [
       tmux
       neovim
@@ -31,7 +36,6 @@
       rofi
       steam
       waybar
-      cmd-polkit
     ];
   };
 
