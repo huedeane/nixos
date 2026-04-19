@@ -11,7 +11,7 @@
       ../optional/firefox/firefox.nix
       ../optional/hyprland/hyprland.nix
       ../optional/rofi/rofi.nix
-      ../optional/waybar/waybar.nix
+      #../optional/waybar/waybar.nix
   ];
   
   home = {
@@ -30,6 +30,8 @@
       cava
       rofi
       steam
+      waybar
+      cmd-polkit
     ];
   };
 
