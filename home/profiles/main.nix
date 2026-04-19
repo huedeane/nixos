@@ -19,10 +19,11 @@
     username = "huedeane";
   	homeDirectory = "/home/huedeane";
   	stateVersion = "24.11";
-  		
-  	sessionVariables = {
-    	EDITOR = "nvim";
-    	VISUAL = "nvim";
+    
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      NIXOS_HOST = "main";
     };
 
     sessionPath = [

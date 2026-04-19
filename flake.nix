@@ -26,6 +26,7 @@
               users.huedeane = import ./home/profiles/main.nix;
               extraSpecialArgs = {
                 inherit inputs;
+                hostName = "main";
               };
             };
           }

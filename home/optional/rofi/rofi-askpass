@@ -1,0 +1,2 @@
+#!/bin/bash
+printf '' | rofi -dmenu -p "Password:" -password -no-fixed-num-lines

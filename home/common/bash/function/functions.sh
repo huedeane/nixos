@@ -11,18 +11,18 @@ check_paths() {
 
 nix-rebuild() {
   check_paths \
-    "$NIXOS_CONFIG/hosts/$1/configuration.nix" \
+    "$NIXOS_CONFIG/hosts/$NIXOS_HOST/configuration.nix" \
     || return 1
 
-  sudo nixos-rebuild switch --flake "$NIXOS_CONFIG#$1"
+  sudo nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"
 }
 
 nix-edit() {
   check_paths \
-    "$NIXOS_CONFIG/hosts/$1/configuration.nix" \
+    "$NIXOS_CONFIG/hosts/$NIXOS_HOST/configuration.nix" \
     || return 1
 
-  nvim "$NIXOS_CONFIG/hosts/$1/configuration.nix"
+  nvim "$NIXOS_CONFIG/hosts/$NIXOS_HOST/configuration.nix"
 }
 
 hm-edit() {
