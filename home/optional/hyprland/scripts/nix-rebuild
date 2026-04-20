@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"

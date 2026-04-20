@@ -10,6 +10,7 @@
       ../optional/vesktop/vesktop.nix
       ../optional/firefox/firefox.nix
       ../optional/hyprland/hyprland.nix
+      ../optional/hyprland/plugins/hyprmoncfg/hyprmoncfg.nix
       ../optional/rofi/rofi.nix
       ../optional/rofi/rofi-polkit.nix
       #../optional/waybar/waybar.nix

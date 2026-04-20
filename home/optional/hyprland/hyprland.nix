@@ -10,7 +10,7 @@
     enable = true;
   };
   
-  home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+  home.file.".config/hypr/hyprpaper.conf".source = ./plugin/hyprpaper/hyprpaper.conf;
   home.file.".local/bin/nix-rebuild" = {
     source = ./scripts/nix-rebuild;
     executable = true;

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 case "$*" in 'h'|'help'|'-h'|'-help'|'--help')
     echo 'Usage: rofi-polkit-agent [ROFI_OPTIONS]...
