@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   programs.rofi = {
@@ -56,7 +56,7 @@
       max-history-size = 25;
 
       # drun
-      drun-display-format = "{name}";
+      drun-display-format = "{name} <span alpha='50%'>{generic}</span>";
       drun-match-fields = "name,generic,exec,categories,keywords";
       drun-show-actions = false;
       drun-url-launcher = "xdg-open";
@@ -106,6 +106,16 @@
       # on-screenshot-taken = "";
     };
 
+    # theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
     theme = ./catppuccin-frappe.rasi;
   };
+
+  # home.activation.copyRofiTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #   cp ${./catppuccin-frappe.rasi} $HOME/.config/rofi/catppuccin-frappe.rasi
+  # '';
+  
+  # home.file.".config/rofi/catppuccin-frappe.rasi".source = ./catppuccin-frappe.rasi;
+  # home.file.".config/rofi/catppuccin-frappe.rasi" = {
+  #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/path/to/catppuccin-frappe.rasi";
+  # };
 }

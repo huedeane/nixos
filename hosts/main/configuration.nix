@@ -87,6 +87,7 @@
     jq
     kitty
     nix-prefetch-github
+    gcc
   ];
 
   hardware.graphics = {
