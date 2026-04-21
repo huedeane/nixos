@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, username, ... }:
 
 {
   programs.firefox = {
@@ -10,14 +10,14 @@
     ];
 
     profiles = {
-      huedeane = {
+      ${username} = {
         isDefault = true;
-        name = "huedeane";
+        name = "${username}";
         settings = import ./settings.nix;
       };
     };
   };
 
-  home.file.".mozilla/firefox/huedeane/wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d".source = ./wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d;
-  home.file.".mozilla/firefox/huedeane/chrome".source = ./chrome;
+  home.file.".mozilla/firefox/${username}/wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d".source = ./wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d;
+  home.file.".mozilla/firefox/${username}/chrome".source = ./chrome;
 }

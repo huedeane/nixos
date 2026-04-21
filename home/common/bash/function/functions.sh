@@ -1,5 +1,3 @@
-NIXOS_CONFIG="$HOME/.config/nixos"
-
 check_paths() {
   for path in "$@"; do
     if [ ! -e "$path" ]; then

@@ -9,7 +9,7 @@ let
       rev = "v${version}";
       hash = "sha256-hflSsenv3rXKHVXm0PkB0Bag+dY7zLc8CuKzr4nqUuk=";
     };
-    vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    vendorHash = "sha256-ME0hsa+HRzYwx7y/nRmbzVHbq26aEfcKpc804FnCQC8=";
     subPackages = [
       "cmd/hyprmoncfg"
       "cmd/hyprmoncfgd"

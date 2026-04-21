@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, username, ... }:
 
 {
   imports = [
@@ -17,8 +17,8 @@
   ];
   
   home = {
-    username = "huedeane";
-  	homeDirectory = "/home/huedeane";
+    username = "${username}";
+  	homeDirectory = "/home/${username}";
   	stateVersion = "24.11";
     
     sessionVariables = {
@@ -38,6 +38,8 @@
       rofi
       steam
       waybar
+      dunst
+      libnotify
     ];
   };
 

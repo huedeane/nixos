@@ -1,4 +1,4 @@
-{ config, hostName, ... }:
+{ config, hostname, ... }:
 
 {
   programs.bash = {
@@ -13,7 +13,8 @@
     };
     
     initExtra = ''
-      export NIXOS_HOST="${hostName}"
+      export NIXOS_HOST="${hostname}"
+      export NIXOS_CONFIG="$HOME/.config/nixos"
 
 		  # Functions
 		  source ${./function/functions.sh}

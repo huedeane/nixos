@@ -41,7 +41,7 @@
   alternate-normal-foreground: @foreground;
   urgent-background:           @background;
   selected-normal-foreground:  @lightbg;
-  active-foreground:           @blue;
+  active-foreground:           @red;
   background:                  @base;
   selected-active-background:  @blue;
   active-background:           @background;
