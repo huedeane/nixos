@@ -1,4 +1,4 @@
-{ username, ... }:
+{ config, ... }:
 let
   wallpaper = "${config.home.homeDirectory}/.config/nixos/home/resources/wallpaper.png";
 in
