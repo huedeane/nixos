@@ -25,6 +25,7 @@
     nixpkgs, 
     home-manager,
     hyprland,
+    split-monitor-workspaces,
     ... 
   } @ inputs: let
     system = "x86_64-linux";

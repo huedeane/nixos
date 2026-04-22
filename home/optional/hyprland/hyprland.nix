@@ -1,6 +1,5 @@
 { config, pkgs, inputs, hostname, ... }: let
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.system};
-  smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.system};
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -21,7 +20,7 @@ in {
     };
 
     plugins = [
-      smwPkgs.split-monitor-workspaces
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
     ];
 
     extraConfig = builtins.readFile ./hyprland.conf;
