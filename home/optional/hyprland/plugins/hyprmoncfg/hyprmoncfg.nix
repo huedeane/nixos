@@ -1,15 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   hyprmoncfg = pkgs.buildGoModule rec {
     pname = "hyprmoncfg";
-    version = "1.2.0";
+    version = "1.4.1";
     src = pkgs.fetchFromGitHub {
       owner = "crmne";
       repo = "hyprmoncfg";
-      rev = "v${version}";
-      hash = "sha256-hflSsenv3rXKHVXm0PkB0Bag+dY7zLc8CuKzr4nqUuk=";
+      rev = "main";
+      hash = "sha256-UWt/gFrdxR7bTvX2ArMDDkXPkc6+VjjaopFq/5aGq+o="; 
     };
-    vendorHash = "sha256-ME0hsa+HRzYwx7y/nRmbzVHbq26aEfcKpc804FnCQC8=";
+    vendorHash = "sha256-gQbjvdKtO0hCXrs9RnWo1s0YeHf5W9t+8AgS2ELXlPo="; 
     subPackages = [
       "cmd/hyprmoncfg"
       "cmd/hyprmoncfgd"
@@ -33,5 +33,13 @@ in
     Install = {
       WantedBy = [ "graphical-session.target" ];
     };
+  };
+
+  xdg.desktopEntries."hyprmoncfg" = {
+    name = "Hyprmoncfg";
+    genericName = "Monitor Management";
+    exec = "kitty -e hyprmoncfg";
+    icon = "kitty";
+    categories = [ "Settings" "HardwareSettings" ];
   };
 }
