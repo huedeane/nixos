@@ -2,18 +2,37 @@
   description = "My NixOS config";
   
   inputs = {
+    # NixOS Rolling Release
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
+   
+    # Configuration Manager
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    
+    # Hyprland Plugin: Workspaces Enhancement
+    split-monitor-workspaces = {
+      url = "github:zjeffer/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs: {
+  outputs = { 
+    nixpkgs, 
+    home-manager,
+    hyprland,
+    ... 
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
     nixosConfigurations = {
       main = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/main/configuration.nix

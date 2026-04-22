@@ -1,9 +1,12 @@
-{ config, hostname, ... }:
-
-{
+{ config, pkgs, inputs, hostname, ... }: let
+  hyprlandPkgs = inputs.hyprland.packages.${pkgs.system};
+  smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.system};
+in {
   wayland.windowManager.hyprland = {
     enable = true;
-
+    package = hyprlandPkgs.hyprland;
+    portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
+    
     settings = {
       env = [
         "XCURSOR_SIZE,24"
@@ -16,6 +19,10 @@
         "NIXOS_HOST,${hostname}"
       ];
     };
+
+    plugins = [
+      smwPkgs.split-monitor-workspaces
+    ];
 
     extraConfig = builtins.readFile ./hyprland.conf;
   };
