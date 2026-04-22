@@ -1,6 +1,11 @@
 { config, pkgs, inputs, hostname, ... }: let
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.system};
+  smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.system};
 in {
+
+  imports = [ ./plugins/hyprmoncfg.nix ];
+  home.file.".config/hypr/hyprpaper.conf".source = ./plugins/hyprpaper/hyprpaper.conf;
+  
   wayland.windowManager.hyprland = {
     enable = true;
     package = hyprlandPkgs.hyprland;
@@ -20,7 +25,7 @@ in {
     };
 
     plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      smwPkgs.split-monitor-workspaces
     ];
 
     extraConfig = builtins.readFile ./hyprland.conf;
@@ -30,7 +35,6 @@ in {
     enable = true;
   };
   
-  home.file.".config/hypr/hyprpaper.conf".source = ./plugins/hyprpaper/hyprpaper.conf;
   home.file.".local/bin/nix-rebuild" = {
     source = ./scripts/nix-rebuild;
     executable = true;

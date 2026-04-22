@@ -1,6 +1,8 @@
 { config, lib, ... }:
 
 {
+  imports = [ ./plugins/rofi-polkit.nix ];
+
   programs.rofi = {
     enable = true;
     font = "ComicShannsMono Nerd Font Mono 14";
@@ -107,7 +109,7 @@
     };
 
     # theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
-    theme = ./catppuccin-frappe.rasi;
+    theme = ./themes/catppuccin-frappe.rasi;
   };
 
   # home.activation.copyRofiTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''

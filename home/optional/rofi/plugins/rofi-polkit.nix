@@ -25,7 +25,7 @@ in
   };
 
   home.file.".local/bin/rofi-askpass" = {
-    text = builtins.readFile ./rofi-askpass;
+    text = builtins.readFile ../plugins/rofi-askpass;
     executable = true;
   };
 
