@@ -30,9 +30,12 @@ in {
       smwPkgs.split-monitor-workspaces
     ];
 
-    extraConfig = builtins.readFile ./hyprland.conf;
+    # extraConfig = builtins.readFile ./hyprland.conf;
+    extraConfig = ''
+      source = ${config.home.homeDirectory}/.config/nixos/home/optional/hyprland/hyprland.conf
+    '';
   };
-  
+
   home.file.".local/bin/nix-rebuild" = {
     source = ./scripts/nix-rebuild;
     executable = true;
