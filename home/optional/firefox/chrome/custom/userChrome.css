@@ -95,6 +95,10 @@
   background-color: unset !important;
 }
 
+#urlbar #urlbar-results .urlbarView-row[selected] {
+  background-color: #232634 !important;
+}
+
 /* sidebar.css */
 #sidebar-box {
   margin: var(--tf-sidebar-box-margin);
