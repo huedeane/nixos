@@ -7,6 +7,7 @@
       ../common/kitty/kitty.nix
       ../common/yazi/yazi.nix
       ../common/rmpc/rmpc.nix
+      ../common/gitui/gitui.nix
       ../optional/vesktop/vesktop.nix
       ../optional/firefox/firefox.nix
       ../optional/hyprland/hyprland.nix
@@ -38,6 +39,9 @@
       waybar
       dunst
       libnotify
+      grimblast
+      satty
+      wl-clipboard
     ];
   };
 
