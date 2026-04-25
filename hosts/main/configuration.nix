@@ -97,7 +97,9 @@
   };
 
   # Fonts
-  fonts.packages = with pkgs; [];
+  fonts.packages = with pkgs; [
+    nerd-fonts.comic-shanns-mono
+  ];
 
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
