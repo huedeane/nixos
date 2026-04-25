@@ -26,7 +26,7 @@
   --tf-border: #737994; /* Border color when not hovered */
   --tf-border-transition: 0.2s ease; /* Smooth color transitions for borders */
   --tf-border-width: 2px; /* Width of borders */
-  --tf-rounding: 0px; /* Border radius used through out the config */
+  --tf-rounding: 20px; /* Border radius used through out the config */
   --tf-margin: 0.8rem; /* Margin used between elements in sidebery */
   --tf-text-transform: none; /* Text transform to use */
   --tf-window-control: #c6d0f5;

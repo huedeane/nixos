@@ -8,6 +8,7 @@
 @import url("content/about.css");
 @import url("content/newtab.css");
 @import url("custom/userContent.css");
+@import url("custom/vimium.css");
 
 /* configurations - DO NOT CHANGE ORDER */
 @import url("defaults.css");
