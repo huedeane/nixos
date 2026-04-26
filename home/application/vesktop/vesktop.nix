@@ -13,7 +13,7 @@
   };
 
   home.activation.vencordSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ln -sf "$HOME/.config/nixos/home/optional/vesktop/settings/settings.json" \
+    ln -sf "$HOME/.config/nixos/home/application/vesktop/settings/settings.json" \
     "$HOME/.config/vesktop/settings/settings.json"
   '';
 }

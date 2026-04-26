@@ -11,7 +11,7 @@
         move_up: Some(( code: Char('k'), modifiers: "")),
         move_down: Some(( code: Char('j'), modifiers: "")),
 
-        open_help: Some(( code: Char('?'), modifiers: "")),
+        open_help: Some(( code: Char('~'), modifiers: "")),
       )
     '';
 

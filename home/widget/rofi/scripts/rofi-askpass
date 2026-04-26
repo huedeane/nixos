@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf '' | rofi -dmenu -p "Password" -password -no-fixed-num-lines -mesg "{$1:-System} requesting administrative priviledge"

@@ -32,7 +32,7 @@ in {
 
     # extraConfig = builtins.readFile ./hyprland.conf;
     extraConfig = ''
-      source = ${config.home.homeDirectory}/.config/nixos/home/optional/hyprland/hyprland.conf
+      source = ${config.home.homeDirectory}/.config/nixos/home/compositor/hyprland/hyprland.conf
     '';
   };
 

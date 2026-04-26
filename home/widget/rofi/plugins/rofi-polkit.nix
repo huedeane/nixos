@@ -20,12 +20,12 @@ in
   home.packages = [ cmd-polkit ];
 
   home.file.".local/bin/rofi-polkit-agent" = {
-    text = builtins.readFile ./rofi-polkit-agent;
+    text = builtins.readFile ../scripts/rofi-polkit-agent;
     executable = true;
   };
 
   home.file.".local/bin/rofi-askpass" = {
-    text = builtins.readFile ../plugins/rofi-askpass;
+    text = builtins.readFile ../scripts/rofi-askpass;
     executable = true;
   };
 

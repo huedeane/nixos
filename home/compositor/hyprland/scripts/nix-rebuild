@@ -1,7 +1,7 @@
 #!/bin/sh
 id=$(notify-send "NixOS" "Building configuration..." --icon=system-software-install --expire-time=0 --print-id)
 
-if sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"; then
+if SUDO_PROMPT="NixOS" sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"; then
   notify-send "NixOS" "Build successful" --icon=emblem-ok-symbolic --replace-id=$id
 else
   notify-send "NixOS" "Build failed" --urgency=critical --icon=dialog-error --expire-time=0 --replace-id=$id

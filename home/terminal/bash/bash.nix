@@ -8,8 +8,8 @@
 			f = "yazi";
 			m = "music";
 			bash-update = "source ~/.bashrc";
-			secret-edit = "nvim $HOME/.config/nixos/home/common/bash/data/secrets.json";
-      hypr-update = "nvim $HOME/.config/nixos/home/optional/hyprland/hyprland.conf";
+			secret-edit = "nvim $HOME/.config/nixos/home/terminal/bash/data/secrets.json";
+      hypr-update = "nvim $HOME/.config/nixos/home/compositor/hyprland/hyprland.conf";
     };
     
     initExtra = ''

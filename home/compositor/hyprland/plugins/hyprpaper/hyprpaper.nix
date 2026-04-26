@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  wallpaper = "${config.home.homeDirectory}/.config/nixos/home/resources/wallpaper.png";
+  wallpaper = "${config.home.homeDirectory}/.config/nixos/resources/wallpaper.png";
 in
 {
   services.hyprpaper = {

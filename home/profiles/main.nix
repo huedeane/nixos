@@ -2,17 +2,17 @@
 
 {
   imports = [
-  		../common/bash/bash.nix
-  		../common/mpd/mpd.nix
-      ../common/kitty/kitty.nix
-      ../common/yazi/yazi.nix
-      ../common/rmpc/rmpc.nix
-      ../common/gitui/gitui.nix
-      ../optional/vesktop/vesktop.nix
-      ../optional/firefox/firefox.nix
-      ../optional/hyprland/hyprland.nix
-      ../optional/rofi/rofi.nix
-      #../optional/waybar/waybar.nix
+  		../terminal/bash/bash.nix
+      ../terminal/kitty/kitty.nix
+      ../terminal/yazi/yazi.nix
+      ../terminal/rmpc/rmpc.nix
+      ../terminal/gitui/gitui.nix
+      ../application/vesktop/vesktop.nix
+      ../application/firefox/firefox.nix
+  		../daemon/mpd/mpd.nix
+      ../compositor/hyprland/hyprland.nix
+      ../widget/rofi/rofi.nix
+      #../widget/waybar/waybar.nix
   ];
   
   home = {
@@ -31,14 +31,22 @@
     ];
 
     packages = with pkgs; [
+      # Terminal
       tmux
       neovim
       cava
-      rofi
+      
+      # Application
       steam
+      
+      # Widget
       waybar
+
+      # Notification
       dunst
       libnotify
+
+      # Screenshot
       grimblast
       satty
       wl-clipboard
