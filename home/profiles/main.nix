@@ -42,8 +42,10 @@
       # Widget
       waybar
 
-      # Notification
+      # Daemon
       dunst
+
+      # Library
       libnotify
 
       # Screenshot

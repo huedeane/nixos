@@ -1,8 +1,29 @@
 #!/bin/sh
-id=$(notify-send "NixOS" "Building configuration..." --icon=system-software-install --expire-time=0 --print-id)
+# id=$(notify-send "NixOS" "Building configuration..." --icon=system-software-install --expire-time=0 --print-id)
+#
+# if SUDO_PROMPT="NixOS" sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"; then
+#   notify-send "NixOS" "Build successful" --urgency=low --icon=emblem-ok-symbolic --replace-id=$id
+# else
+#   notify-send "NixOS" "Build failed" --urgency=critical --icon=dialog-error --expire-time=60 --replace-id=$id
+# fi
 
-if SUDO_PROMPT="NixOS" sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST"; then
-  notify-send "NixOS" "Build successful" --icon=emblem-ok-symbolic --replace-id=$id
+id=$(notify-send "NixOS" "Building configuration..." --urgency=normal --expire-time=0 --print-id)
+
+output=$(SUDO_PROMPT="NixOS" sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST" 2>&1)
+
+if [ $? -eq 0 ]; then
+  notify-send "NixOS" "Build successful" \
+    --urgency=low \
+    --replace-id=$id \
+    --action="view=View Output"
 else
-  notify-send "NixOS" "Build failed" --urgency=critical --icon=dialog-error --expire-time=0 --replace-id=$id
-fi
+  notify-send "NixOS" "Build failed" \
+    --urgency=critical \
+    --replace-id=$id \
+    --action="view=View Output" \
+    --expire-time = 60
+fi | while read -r action; do
+  if [ "$action" = "view" ]; then
+    echo "$output" | rofi -dmenu -p "Build Output" -no-fixed-num-lines
+  fi
+done
