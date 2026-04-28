@@ -1,0 +1,1 @@
+../home/configuration/terminal/bash/function/ps1.sh

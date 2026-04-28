@@ -22,6 +22,7 @@
   };
 
   outputs = { 
+    self,
     nixpkgs, 
     home-manager,
     hyprland,
@@ -30,6 +31,8 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    configDir = self.outPath;
+    configHomeDir = "${self.outPath}/home/configuration";
   in {
     nixosConfigurations = {
       main = nixpkgs.lib.nixosSystem {
@@ -45,7 +48,7 @@
               backupFileExtension = "backup";
               users.huedeane = import ./home/profiles/main.nix;
               extraSpecialArgs = {
-                inherit inputs;
+                inherit inputs configDir configHomeDir;
                 hostname = "main";
                 username = "huedeane";
               };

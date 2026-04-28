@@ -1,20 +1,20 @@
-{ config, pkgs, inputs, username, ... }:
+{ config, pkgs, configHomeDir, username, ... }:
 
 {
   imports = [
-  		../terminal/bash/bash.nix
-      ../terminal/kitty/kitty.nix
-      ../terminal/yazi/yazi.nix
-      ../terminal/rmpc/rmpc.nix
-      ../terminal/gitui/gitui.nix
-      ../application/vesktop/vesktop.nix
-      ../application/firefox/firefox.nix
-  		../daemon/mpd/mpd.nix
-      ../compositor/hyprland/hyprland.nix
-      ../widget/rofi/rofi.nix
-      #../widget/waybar/waybar.nix
+  		(configHomeDir + "/terminal/bash/bash.nix")
+      (configHomeDir + "/terminal/kitty/kitty.nix")
+      (configHomeDir + "/terminal/yazi/yazi.nix")
+      (configHomeDir + "/terminal/rmpc/rmpc.nix")
+      (configHomeDir + "/terminal/gitui/gitui.nix")
+      (configHomeDir + "/compositor/hyprland/hyprland.nix")
+      (configHomeDir + "/daemon/mpd/mpd.nix")
+      (configHomeDir + "/application/vesktop/vesktop.nix")
+      (configHomeDir + "/application/firefox/firefox.nix")
+      (configHomeDir + "/widget/rofi/rofi.nix")
+      #(configHomeDir + "/widget/waybar/waybar.nix")
   ];
-  
+
   home = {
     username = "${username}";
   	homeDirectory = "/home/${username}";

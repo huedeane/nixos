@@ -1,0 +1,1 @@
+../home/configuration/terminal/rmpc/script/resize

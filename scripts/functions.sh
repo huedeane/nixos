@@ -1,0 +1,1 @@
+../home/configuration/terminal/bash/function/functions.sh

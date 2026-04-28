@@ -1,0 +1,1 @@
+../home/configuration/widget/rofi/scripts/rofi-askpass
