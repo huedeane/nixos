@@ -21,9 +21,9 @@ in {
         "VISUAL,nvim"
         "PATH,$HOME/.local/bin:$PATH"
         "SUDO_ASKPASS,$HOME/.local/bin/rofi-askpass"
-        "NIXOS_CONFIGHOMEDIR,${configHomeDir}"
-        "NIXOS_CONFIG,${config.xdg.configHome}/nixos"
         "NIXOS_HOST,${hostname}"
+        "NIXOS_CONFIG,${config.xdg.configHome}/nixos"
+        "NIXOS_CONFIGHOMEDIR,${config.xdg.configHome}/nixos/home/configuration"
       ];
     };
 

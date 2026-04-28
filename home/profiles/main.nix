@@ -25,7 +25,7 @@
       VISUAL = "nvim";
       NIXOS_HOST = "${hostname}";
       NIXOS_CONFIG = "${config.xdg.configHome}/nixos";
-      NIXOS_CONFIGHOMEDIR = "${configHomeDir}";
+      NIXOS_CONFIGHOMEDIR = "${config.xdg.configHome}/nixos/home/configuration";
     };
 
     sessionPath = [

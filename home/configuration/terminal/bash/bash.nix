@@ -6,16 +6,13 @@
     
     shellAliases = {
 			f = "yazi";
-			m = "music";
+			m = "rmpc";
 			bash-update = "source ~/.bashrc";
-			secret-edit = "nvim ${configHomeDir}/terminal/bash/data/secrets.json";
-      hypr-update = "nvim ${configHomeDir}/compositor/hyprland/hyprland.conf";
+			secret-edit = "nvim ${config.xdg.configHome}/nixos/home/configuration/terminal/bash/data/secrets.json";
+      hypr-update = "nvim ${config.xdg.configHome}/nixos/home/configuration/hyprland/hyprland.conf";
     };
     
     initExtra = ''
-      export NIXOS_HOST="${hostname}"
-      export NIXOS_CONFIG="${config.xdg.configHome}/nixos"
-      export NIXOS_CONFIGHOMEDIR="${configHomeDir}"
 
 		  # Functions
 		  source ${./function/functions.sh}

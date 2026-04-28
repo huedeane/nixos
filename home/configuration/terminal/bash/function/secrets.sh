@@ -10,5 +10,5 @@ if [ -f "$NIXOS_CONFIGHOMEDIR/terminal/bash/data/secrets.json" ]; then
   git config --global user.name "$GITHUB_USERNAME"
   git config --global user.email "$GITHUB_EMAIL"
   echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" >"$HOME/.git-credentials"
-  git update-index --assume-unchanged "$NIXOS_CONFIGHOMEDIR/terminal/bash/data/secrets.json"
+  cd "$NIXOS_CONFIG" && git update-index --assume-unchanged home/configuration/terminal/bash/data/secrets.json
 fi
