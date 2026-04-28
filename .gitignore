@@ -1,4 +1,4 @@
-home/common/mpd/etc/database
-home/common/mpd/etc/log
-home/common/mpd/etc/pid
-home/common/mpd/etc/state
+home/daemon/mpd/etc/database
+home/daemon/mpd/etc/log
+home/daemon/mpd/etc/pid
+home/daemon/mpd/etc/state
