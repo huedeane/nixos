@@ -15,6 +15,7 @@
     initExtra = ''
       export NIXOS_HOST="${hostname}"
       export NIXOS_CONFIG="${config.xdg.configHome}/nixos"
+      export NIXOS_CONFIGHOMEDIR="${configHomeDir}"
 
 		  # Functions
 		  source ${./function/functions.sh}

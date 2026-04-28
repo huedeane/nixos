@@ -1,4 +1,4 @@
-{ config, pkgs, configHomeDir, username, ... }:
+{ config, pkgs, configHomeDir, hostname, username, ... }:
 
 {
   imports = [
@@ -23,7 +23,9 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      NIXOS_HOST = "main";
+      NIXOS_HOST = "${hostname}";
+      NIXOS_CONFIG = "${config.xdg.configHome}/nixos";
+      NIXOS_CONFIGHOMEDIR = "${configHomeDir}";
     };
 
     sessionPath = [
