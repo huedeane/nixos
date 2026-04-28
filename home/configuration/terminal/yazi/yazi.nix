@@ -3,8 +3,9 @@
 {
   programs.yazi = {
     enable = true;
+    enableBashIntegration = true;
+    shellWrapperName = "f";
 
-    shellWrapperName = "y";    
     settings = builtins.fromTOML (builtins.readFile ./yazi.toml);
     keymap = builtins.fromTOML (builtins.readFile ./keymap.toml);
     theme = builtins.fromTOML (builtins.readFile ./theme.toml);

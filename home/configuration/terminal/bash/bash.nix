@@ -5,7 +5,6 @@
     enable = true;
     
     shellAliases = {
-			f = "yazi";
 			m = "rmpc";
 			bash-update = "source ~/.bashrc";
 			secret-edit = "nvim ${config.xdg.configHome}/nixos/home/configuration/terminal/bash/data/secrets.json";
@@ -22,7 +21,7 @@
 		  
 		  # Secrets
     	source ${./function/secrets.sh}
-    
+      
     '';
   };
 }
