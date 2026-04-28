@@ -5,4 +5,4 @@ case "$1" in
 *) msg="${1:-System}" ;;
 esac
 
-printf '' | rofi -dmenu -p "Password" -password -no-fixed-num-lines -mesg "$msg requesting administrative privilege"
+printf '' | rofi -dmenu -p "Password" -password -no-fixed-num-lines -mesg "<b><span foreground='#e78284'>$msg</span></b> requesting administrative privilege"

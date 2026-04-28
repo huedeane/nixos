@@ -122,7 +122,7 @@ mainbox {
     border:  0;
 }
 message {
-    padding:      1px ;
+    padding:      10px 5px 0px 10px;
     border-color: @separatorcolor;
     border:       2px dash 0px 0px ;
 }

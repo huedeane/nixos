@@ -111,13 +111,4 @@
     # theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
     theme = ./themes/catppuccin-frappe.rasi;
   };
-
-  # home.activation.copyRofiTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  #   cp ${./catppuccin-frappe.rasi} $HOME/.config/rofi/catppuccin-frappe.rasi
-  # '';
-  
-  # home.file.".config/rofi/catppuccin-frappe.rasi".source = ./catppuccin-frappe.rasi;
-  # home.file.".config/rofi/catppuccin-frappe.rasi" = {
-  #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/path/to/catppuccin-frappe.rasi";
-  # };
 }
