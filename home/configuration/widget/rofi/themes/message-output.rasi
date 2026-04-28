@@ -1,0 +1,10 @@
+// @import "./catppuccin-frappe.rasi"
+
+window {
+  width: 2000px;
+  height: 600px;
+}
+
+listview {
+  scrollbar: true;
+}
