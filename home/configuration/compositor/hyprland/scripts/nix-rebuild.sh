@@ -1,8 +1,13 @@
 #!/usr/bin/env sh
-
 id=$(notify-send "NixOS" "Building configuration..." --urgency=normal --expire-time=0 --print-id)
 output=$(SUDO_PROMPT="NixOS" sudo -A nixos-rebuild switch --flake "$NIXOS_CONFIG#$NIXOS_HOST" 2>&1)
+
+log_dir="$HOME/.local/share/nixos-builds"
+mkdir -p "$log_dir"
+log_file="$log_dir/$(date '+%Y-%m-%d_%H-%M-%S').log"
+
 exit_code=$?
+echo "$output" >"$log_file"
 if [ $exit_code -eq 0 ]; then
   notify-send "NixOS" "Build successful" \
     --urgency=low \
@@ -16,6 +21,6 @@ else
     --expire-time=60000
 fi | while read -r action; do
   if [ "$action" = "view" ]; then
-    echo "$output" | rofi -dmenu -p "Build Output" -no-fixed-num-lines -theme "$HOME/.config/rofi/message-output.rasi"
+    echo "$output" | rofi -dmenu -p "Build Output" -no-fixed-num-lines -theme "$HOME/.config/rofi/message-output-test.rasi"
   fi
 done
