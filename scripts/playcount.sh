@@ -1,1 +1,1 @@
-../home/configuration/terminal/rmpc/script/playcount
+../home/configuration/terminal/rmpc/script/playcount.sh

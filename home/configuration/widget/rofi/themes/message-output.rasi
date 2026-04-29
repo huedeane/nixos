@@ -1,5 +1,96 @@
 @import "./catppuccin-frappe.rasi"
 
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    highlight:        inherit;
+    padding:          0px;
+    font:             "ComicShannsMono Nerd Font Mono 12";
+}
+
+element normal.normal {
+    background-color: inherit;
+    text-color:       @lavender;
+}
+element normal.urgent {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element normal.active {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element selected.normal {
+    background-color: @lavender;
+    text-color:       inherit;
+}
+element selected.urgent {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element selected.active {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element alternate.normal {
+    background-color: inherit;
+    text-color:       @lavender;
+}
+element alternate.urgent {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element alternate.active {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element {
+    padding: 0px ;
+    cursor:  pointer;
+    spacing: 0px ;
+    border:  0;
+    children: ["element-text"];
+}
+
+mainbox {
+  children: [textbox-title, listview];
+  padding: 0px;
+  margin: 0px;
+  spacing: 0px;
+}
+
+window {
+  width: 1275px;
+  height: 700px;
+}
+
+textbox-title {
+    expand: false;
+    str: "Build Output";
+    padding: 10px;
+    margin: 0px;
+    text-color: @yellow;
+    border: 0px 0px 2px 0px;
+    horizontal-align: 0.5;
+    font: "ComicShannsMono Nerd Font Mono Bold 14";
+}
+
+inputbar {
+  enabled: false;
+}
+
 listview {
-  scrollbar: false;
+    columns:          1;
+    scrollbar:        true;
+    scrollbar-width:  100;
+    margin:           0px;
+    padding:          20px 20px 0px 20px;
+    border-color:     @border-color;
+    spacing:          0px;
+    border:           none;
+}
+
+scrollbar {
+  handle-width: 0px;
 }

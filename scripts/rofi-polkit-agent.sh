@@ -1,1 +1,1 @@
-../home/configuration/widget/rofi/scripts/rofi-polkit-agent
+../home/configuration/widget/rofi/scripts/rofi-polkit-agent.sh

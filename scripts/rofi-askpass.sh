@@ -1,1 +1,1 @@
-../home/configuration/widget/rofi/scripts/rofi-askpass
+../home/configuration/widget/rofi/scripts/rofi-askpass.sh

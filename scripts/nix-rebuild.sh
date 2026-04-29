@@ -1,1 +1,1 @@
-../home/configuration/compositor/hyprland/scripts/nix-rebuild
+../home/configuration/compositor/hyprland/scripts/nix-rebuild.sh

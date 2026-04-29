@@ -1,1 +1,1 @@
-../home/configuration/terminal/rmpc/script/resize
+../home/configuration/terminal/rmpc/script/resize.sh

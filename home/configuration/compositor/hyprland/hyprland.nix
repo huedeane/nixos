@@ -37,8 +37,13 @@ in {
     '';
   };
 
-  home.file.".local/bin/nix-rebuild" = {
-    source = ./scripts/nix-rebuild;
+  home.file.".local/bin/nix-rebuild.sh" = {
+    source = ./scripts/nix-rebuild.sh;
+    executable = true;
+  };
+  
+  home.file.".local/bin/nix-log.sh" = {
+    source = ./scripts/nix-log.sh;
     executable = true;
   };
 }

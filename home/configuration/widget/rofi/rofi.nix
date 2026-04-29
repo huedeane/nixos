@@ -25,7 +25,7 @@
       eh = 1;
       fixed-num-lines = true;
       sidebar-mode = false;
-      scroll-method = 0;
+      scroll-method = 1;
       m = "-1";
       # dpi = -1;
       # xoffset = 0;
