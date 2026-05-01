@@ -109,8 +109,8 @@
     };
 
     # theme = "${config.home.homeDirectory}/.config/rofi/message-output-test.rasi";
-    theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
-    # theme = ./themes/catppuccin-frappe.rasi;
+    # theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
+    theme = ./themes/catppuccin-frappe.rasi;
   };
 
   xdg.configFile."rofi/message-output.rasi".source = config.lib.file.mkOutOfStoreSymlink "${configHomeDir}/widget/rofi/themes/message-output.rasi";

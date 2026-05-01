@@ -21,37 +21,37 @@
   overlay0: #737994;
   surface2: #626880;
   surface1: #51576d;
-  surface0: #414559;
+  surface0: #414559F2;
   base: #303446;
   mantle: #292c3c;
   crust: #232634;
   
-  selected-active-foreground:  @background;
-  lightfg:                     @text;
-  separatorcolor:              @foreground;
-  urgent-foreground:           @red;
-  alternate-urgent-background: @lightbg;
-  lightbg:                     @mantle;
-  background-color:            transparent;
-  border-color:                @lavender;
-  normal-background:           @background;
-  selected-urgent-background:  @red;
-  alternate-active-background: @lightbg;
-  spacing:                     10;
-  alternate-normal-foreground: @foreground;
-  urgent-background:           @background;
-  selected-normal-foreground:  @crust;
-  active-foreground:           @blue;
-  background:                  @base;
-  selected-active-background:  @blue;
-  active-background:           @background;
-  selected-normal-background:  @lavender;
-  alternate-normal-background: @background;
-  foreground:                  @text;
-  selected-urgent-foreground:  @background;
-  normal-foreground:           @foreground;
-  alternate-urgent-foreground: @red;
-  alternate-active-foreground: @blue;
+active-background:           @background;
+active-foreground:           @blue;
+alternate-active-background: @lightbg;
+alternate-active-foreground: @yellow;
+alternate-normal-background: inherit;
+alternate-normal-foreground: @foreground;
+alternate-urgent-background: @lightbg;
+alternate-urgent-foreground: @red;
+background:                  @surface0;
+background-color:            transparent;
+border-color:                @lavender;
+foreground:                  @text;
+lightbg:                     @crust;
+lightfg:                     @text;
+normal-background:           inherit;
+normal-foreground:           @foreground;
+selected-active-background:  @lavender;
+selected-active-foreground:  @crust;
+selected-normal-background:  @lavender;
+selected-normal-foreground:  @crust;
+selected-urgent-background:  @red;
+selected-urgent-foreground:  @background;
+separatorcolor:              @foreground;
+spacing:                     10;
+urgent-background:           @background;
+urgent-foreground:           @red;
 
 }
 element {
@@ -131,7 +131,7 @@ textbox {
 }
 listview {
     padding:      10px;
-    scrollbar:    false;
+    scrollbar:    true;
     border-color: @border-color;
     spacing:      2px;
     lines:        10;
