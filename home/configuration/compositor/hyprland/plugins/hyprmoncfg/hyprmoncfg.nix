@@ -38,7 +38,7 @@ in
   xdg.desktopEntries."hyprmoncfg" = {
     name = "Hyprmoncfg";
     genericName = "Monitor Management";
-    exec = "kitty -e hyprmoncfg";
+    exec = "kitty --class tui-hyprmoncfg -e hyprmoncfg";
     icon = "kitty";
     categories = [ "Settings" "HardwareSettings" ];
   };

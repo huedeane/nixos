@@ -18,7 +18,7 @@ else
     --urgency=critical \
     --replace-id=$id \
     --action="view=View Output" \
-    --expire-time=60000
+    --expire-time=15000
 fi | while read -r action; do
   if [ "$action" = "view" ]; then
     echo "$output" | fold -sw 130 | nl -ba -w2 -s"| " | rofi -dmenu -p "Build Output" -kb-accept-entry "" -kb-accept-custom "" -no-fixed-num-lines -theme "$HOME/.config/rofi/message-output.rasi"

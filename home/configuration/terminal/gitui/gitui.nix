@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, configDir, ... }:
 
 {
   programs.gitui = {
@@ -40,5 +40,13 @@
         branch_fg: Some("#81c8be")
       )
     '';
+  };
+
+  xdg.desktopEntries."gitui" = {
+    name = "GitUI";
+    genericName = "Version Control";
+    exec = "kitty --class tui-gitui -e gitui -d ${config.home.homeDirectory}/.config/nixos";
+    icon = "kitty";
+    categories = [ "X-TUI" ];
   };
 }
