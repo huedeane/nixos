@@ -12,7 +12,7 @@
 
   # Networking
   networking = {
-    hostName = "main";
+    hostName = "laptop";
     networkmanager.enable = true;
   };
 

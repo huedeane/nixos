@@ -35,11 +35,11 @@
     configHomeDir = "${self.outPath}/home/configuration";
   in {
     nixosConfigurations = {
-      main = nixpkgs.lib.nixosSystem {
+      laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/main/configuration.nix
+          ./hosts/laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
