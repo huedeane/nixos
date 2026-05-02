@@ -1,1 +1,0 @@
-../home/configuration/compositor/hyprland/plugins/hyprmoncfg/hyprmoncfg.nix

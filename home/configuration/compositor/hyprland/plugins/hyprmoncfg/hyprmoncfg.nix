@@ -1,24 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, configDir, ... }:
 let
-  hyprmoncfg = pkgs.buildGoModule rec {
-    pname = "hyprmoncfg";
-    version = "1.4.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "crmne";
-      repo = "hyprmoncfg";
-      rev = "main";
-      hash = "sha256-UWt/gFrdxR7bTvX2ArMDDkXPkc6+VjjaopFq/5aGq+o="; 
-    };
-    vendorHash = "sha256-gQbjvdKtO0hCXrs9RnWo1s0YeHf5W9t+8AgS2ELXlPo="; 
-    subPackages = [
-      "cmd/hyprmoncfg"
-      "cmd/hyprmoncfgd"
-    ];
-  };
+  hyprmoncfg = pkgs.callPackage "${configDir}/derivations/hyprmoncfg.nix" { };
 in
 {
   home.packages = [ hyprmoncfg ];
-
+  
   systemd.user.services.hyprmoncfgd = {
     Unit = {
       Description = "Hyprland monitor configuration daemon";
@@ -34,12 +20,15 @@ in
       WantedBy = [ "graphical-session.target" ];
     };
   };
-
+  
   xdg.desktopEntries."hyprmoncfg" = {
     name = "Hyprmoncfg";
     genericName = "Monitor Management";
     exec = "kitty --class tui-hyprmoncfg -e hyprmoncfg";
     icon = "kitty";
-    categories = [ "Settings" "HardwareSettings" ];
+    categories = [ "Settings" "HardwareSettings" "X-TUI" ];
+    settings = {
+      Keywords = "Settings;HardwareSettings;Tui"
+    };
   };
 }

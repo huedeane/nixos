@@ -37,7 +37,7 @@
     categories = [ "System" "FileManager" "FileTools" "ConsoleOnly" "X-TUI" ];
     settings = {
       TryExec = "yazi";
-      Keywords = "File;Manager;Explorer;Browser;Launcher;";
+      Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";
     };
   };
 }
