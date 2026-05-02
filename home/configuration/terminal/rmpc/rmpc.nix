@@ -17,7 +17,9 @@
     genericName = "Audio Player";
     exec = "kitty --class tui-rmpc -e queue-rmpc %f";
     icon = "kitty";
+    terminal = false;
     categories = [ "Audio" ];
+    type = "Application";
     mimeType = [ 
       "audio/mpeg" 
       "audio/flac" 
@@ -26,5 +28,8 @@
       "audio/x-flac"
       "audio/mp4"
     ];
+    settings = {
+      Keywords = "Audio;Music;Player;Tui;";
+    };
   };
 }

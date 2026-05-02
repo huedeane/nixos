@@ -25,4 +25,19 @@
   xdg.configFile = {
     "rmpc/package.toml".source = ./package.toml;
   };
+
+  xdg.desktopEntries.yazi = {
+    name = "Yazi";
+    genericName = "File Manager";
+    icon = "yazi";
+    terminal = false;
+    exec = "kitty --class tui-yazi yazi %f";
+    type = "Application";
+    mimeType = [ "inode/directory" ];
+    categories = [ "System" "FileManager" "FileTools" "ConsoleOnly" "X-TUI" ];
+    settings = {
+      TryExec = "yazi";
+      Keywords = "File;Manager;Explorer;Browser;Launcher;";
+    };
+  };
 }

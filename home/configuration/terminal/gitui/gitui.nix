@@ -47,6 +47,11 @@
     genericName = "Version Control";
     exec = "kitty --class tui-gitui -e gitui -d ${config.home.homeDirectory}/.config/nixos";
     icon = "kitty";
+    type = "Application";
+    terminal = false;
     categories = [ "X-TUI" ];
+    settings = {
+      Keywords = "Git;Tui;Kitty;";
+    };
   };
 }
