@@ -5,7 +5,6 @@ html {
 iframe.vomnibar-frame {
   width: 100% !important;
   height: 100vh !important;
-  display: block !important;
   border: none !important;
   position: absolute !important;
   left: 0px !important;
