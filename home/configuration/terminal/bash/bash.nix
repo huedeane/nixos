@@ -1,4 +1,4 @@
-{ config, hostname, configHomeDir, ... }:
+{ config, ... }:
 
 {
   programs.bash = {

@@ -49,7 +49,7 @@
               users.huedeane = import ./home/profiles/main.nix;
               extraSpecialArgs = {
                 inherit inputs configDir configHomeDir;
-                hostname = "main";
+                hostname = "laptop";
                 username = "huedeane";
               };
             };
