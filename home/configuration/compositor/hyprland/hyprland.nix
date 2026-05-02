@@ -1,5 +1,4 @@
 { config, pkgs, inputs, username, hostname, configHomeDir, ... }: let
-  hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
   smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in {
 
@@ -10,8 +9,8 @@ in {
   
   wayland.windowManager.hyprland = {
     enable = true;
-    package = hyprlandPkgs.hyprland;
-    portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
+    xwayland.enable = true;
+    systemd.enable = false;
     
     settings = {
       env = [
@@ -31,10 +30,6 @@ in {
       smwPkgs.split-monitor-workspaces
     ];
 
-    # extraConfig = builtins.readFile ./hyprland.conf;
-    # extraConfig = ''
-    #   source = ${configHomeDir}/compositor/hyprland/hyprland.conf
-    # '';
     extraConfig = ''
       source = $HOME/.config/nixos/home/configuration/compositor/hyprland/hyprland.conf
     '';

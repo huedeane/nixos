@@ -3,7 +3,5 @@
 {
   programs.obsidian = {
     enable = true;
-
-
   };
 }

@@ -108,7 +108,7 @@
       # on-screenshot-taken = "";
     };
 
-    # theme = "${config.home.homeDirectory}/.config/rofi/message-output-test.rasi";
+    # theme = "${config.home.homeDirectory}/.config/rofi/message-output.rasi";
     # theme = "${config.home.homeDirectory}/.config/rofi/catppuccin-frappe.rasi";
     theme = ./themes/catppuccin-frappe.rasi;
   };
