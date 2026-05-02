@@ -15,6 +15,10 @@
   }
 }
 
+#browser {
+  background-color: var(--tf-bg) !important;
+}
+
 /* config.css */
 :root {
   --tf-font-family: "ComicShannsMono Nerd Font Mono", Consolas, monospace; /* Font family of config */

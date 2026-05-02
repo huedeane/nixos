@@ -1,4 +1,5 @@
 { config, pkgs, inputs, username, hostname, configHomeDir, ... }: let
+  hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
   smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in {
 
@@ -11,6 +12,8 @@ in {
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
+    package = hyprlandPkgs.hyprland;
+    portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
     
     settings = {
       env = [
@@ -23,6 +26,7 @@ in {
         "NIXOS_HOST,${hostname}"
         "NIXOS_CONFIG,${config.xdg.configHome}/nixos"
         "NIXOS_CONFIGHOMEDIR,${config.xdg.configHome}/nixos/home/configuration"
+        "MOZ_LEGACY_PROFILES,1"
       ];
     };
 

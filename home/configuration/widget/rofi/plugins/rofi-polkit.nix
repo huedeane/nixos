@@ -36,7 +36,7 @@ in
       WantedBy = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "/home/huedeane/.local/bin/rofi-polkit-agent";
+      ExecStart = "${config.home.homeDirectory}/.local/bin/rofi-polkit-agent";
       Restart = "on-failure";
     };
   };
