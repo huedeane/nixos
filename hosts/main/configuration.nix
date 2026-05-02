@@ -60,6 +60,9 @@
     jack.enable = true;
   };
 
+  # Mount
+  services.udisks2.enable = true;
+
   # User
   users.users.huedeane = {
     isNormalUser = true;

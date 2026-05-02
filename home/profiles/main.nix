@@ -10,6 +10,7 @@
       (configHomeDir + "/compositor/hyprland/hyprland.nix")
       (configHomeDir + "/daemon/mpd/mpd.nix")
       (configHomeDir + "/daemon/dunst/dunst.nix")
+      (configHomeDir + "/daemon/udiskie/udiskie.nix")
       (configHomeDir + "/application/vesktop/vesktop.nix")
       (configHomeDir + "/application/firefox/firefox.nix")
       (configHomeDir + "/application/obsidian/obsidian.nix")
