@@ -18,7 +18,7 @@
     exec = "kitty --class tui-rmpc -e queue-rmpc %f";
     icon = "kitty";
     terminal = false;
-    categories = [ "Audio" ];
+    categories = [ "Audio" "X-TUI" ];
     type = "Application";
     mimeType = [ 
       "audio/mpeg" 

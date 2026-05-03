@@ -19,6 +19,12 @@
       url = "github:zjeffer/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
+
+    # Encryption
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
@@ -27,6 +33,7 @@
     home-manager,
     hyprland,
     split-monitor-workspaces,
+    sops-nix,
     ... 
   } @ inputs: let
     system = "x86_64-linux";
@@ -39,7 +46,8 @@
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/laptop/configuration.nix
+          sops-nix.nixosModules.sops
+          ./hosts/profiles/laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
