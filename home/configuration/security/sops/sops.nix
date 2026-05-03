@@ -2,9 +2,9 @@
 
 {
   sops = {
-    defaultSopsFile = "../../../../secrets/secrets.yaml";
+    defaultSopsFile = "./secrets.yaml";
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     secrets = {
       "github/username" = {};
