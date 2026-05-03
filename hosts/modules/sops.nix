@@ -1,8 +1,8 @@
-{ username, ... }:
+{ configDir, username, ... }:
 
 {
   sops = {
-    defaultSopsFile = /home/${username}/.config/nixos/secrets/secrets.yaml;
+    defaultSopsFile = "${configDir}/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
 

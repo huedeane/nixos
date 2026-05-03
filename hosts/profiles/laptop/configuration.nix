@@ -1,9 +1,9 @@
-{ config, pkgs, hostname, username, ... }:
+{ config, pkgs, hostname, username, configDir, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/sops.nix
+    "${configDir}/hosts/modules/sops.nix"
   ];
 
   # Bootloader

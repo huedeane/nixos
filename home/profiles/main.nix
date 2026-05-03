@@ -6,6 +6,7 @@
       (configHomeDir + "/terminal/kitty/kitty.nix")
       (configHomeDir + "/terminal/yazi/yazi.nix")
       (configHomeDir + "/terminal/rmpc/rmpc.nix")
+      (configHomeDir + "/terminal/git/git.nix")
       (configHomeDir + "/terminal/gitui/gitui.nix")
       (configHomeDir + "/compositor/hyprland/hyprland.nix")
       (configHomeDir + "/daemon/mpd/mpd.nix")
