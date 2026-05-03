@@ -1,16 +1,22 @@
-{ inputs, configDir, username, ... }:
+{ config, inputs, ... }:
 
 {
-  sops = {
-    defaultSopsFile = "./secrets.yaml";
-    defaultSopsFormat = "yaml";
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  imports = [
+    inputs.sops-nix.homeManagerModules.sops
+  ];
 
+  sops = {
+    age.keyFile = "/home/huedeane/.config/sops/age/keys.txt";
+
+    defaultSopsFile = ./secrets.yaml;
+    defaultSymlinkPath = "/run/user/1000/secrets";
+    defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+    
     secrets = {
-      "github/username" = {};
-      "github/email" = {};
-      "github/key" = {};
-      "chatgpt/key" = {};
+      "chatgpt/key".path = "${config.sops.defaultSymlinkPath}/chatgpt_key";
+      "github/username".path = "${config.sops.defaultSymlinkPath}/github_username";
+      "github/email".path = "${config.sops.defaultSymlinkPath}/github_email";
+      "github/key".path = "${config.sops.defaultSymlinkPath}/github_key";
     };
   };
 }

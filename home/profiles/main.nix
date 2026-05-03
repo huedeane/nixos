@@ -2,7 +2,6 @@
 
 {
   imports = [
-      inputs.sops-nix.homeManagerModules.sops
       (configHomeDir + "/terminal/bash/bash.nix")
       (configHomeDir + "/terminal/kitty/kitty.nix")
       (configHomeDir + "/terminal/yazi/yazi.nix")
@@ -17,7 +16,7 @@
       (configHomeDir + "/application/firefox/firefox.nix")
       (configHomeDir + "/application/obsidian/obsidian.nix")
       (configHomeDir + "/widget/rofi/rofi.nix")
-      # (configHomeDir + "/security/sops/sops.nix")
+      (configHomeDir + "/security/sops/sops.nix")
       #(configHomeDir + "/widget/waybar/waybar.nix")
   ];
 
@@ -60,19 +59,6 @@
       satty
       wl-clipboard
     ];
-  };
-
-  sops = {
-    defaultSopsFile = "/home/${username}/.config/nixos/secrets/secrets2.yaml";
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-
-    secrets = {
-      "github/username" = {};
-      "github/email" = {};
-      "github/key" = {};
-      "chatgpt/key" = {};
-    };
   };
 
   programs.home-manager.enable = true;

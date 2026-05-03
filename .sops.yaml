@@ -1,7 +1,7 @@
 keys:
-  - &huedeane age1cewzrp82aq9rjr406h6vtmlqku6gnnl2033fwz4pdxe7wsjkj97s52l8qc
+  - &huedeane age1r2s8v4ydhqyyaypsfxv2krrvs2jhcz9s22hw2xkmd62hkjgdke8qlnynwh
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets\.yaml$
     key_groups:
       - age:
         - *huedeane
