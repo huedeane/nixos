@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    "${configDir}/hosts/modules/sops.nix"
   ];
 
   # Bootloader
