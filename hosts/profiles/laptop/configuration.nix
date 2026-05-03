@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/sddm.nix
   ];
 
   # Bootloader
@@ -81,12 +82,6 @@
     xwayland.enable = true;
   };
   
-  # Display Manager
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-
   # Desktop Environemtn: Gnome
   # services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
