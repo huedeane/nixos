@@ -50,7 +50,6 @@
           username = "huedeane";
         };
         modules = [
-          sops-nix.nixosModules.sops
           ./hosts/profiles/laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
