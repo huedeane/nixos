@@ -44,7 +44,11 @@
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { 
+          inherit inputs; 
+          username = "huedeane";
+          hostname = "laptop";
+        };
         modules = [
           sops-nix.nixosModules.sops
           ./hosts/profiles/laptop/configuration.nix

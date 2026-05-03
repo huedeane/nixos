@@ -26,9 +26,11 @@ in
     genericName = "Monitor Management";
     exec = "kitty --class tui-hyprmoncfg -e hyprmoncfg";
     icon = "kitty";
+    terminal = false;
+    type = "Application";
     categories = [ "Settings" "HardwareSettings" "X-TUI" ];
     settings = {
-      Keywords = "Settings;HardwareSettings;Tui"
+      Keywords = "Settings;HardwareSettings;Tui";
     };
   };
 }

@@ -12,17 +12,17 @@ check_paths() {
 nix-rebuild() {
   local host="${1:-$NIXOS_HOST}"
   check_paths \
-    "$NIXOS_CONFIG/hosts/$host/configuration.nix" \
+    "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
   sudo nixos-rebuild switch --flake "$NIXOS_CONFIG#$host"
 }
 
 nix-edit() {
   check_paths \
-    "$NIXOS_CONFIG/hosts/$NIXOS_HOST/configuration.nix" \
+    "$NIXOS_CONFIG/hosts/profiles/$NIXOS_HOST/configuration.nix" \
     || return 1
 
-  nvim "$NIXOS_CONFIG/hosts/$NIXOS_HOST/configuration.nix"
+  nvim "$NIXOS_CONFIG/hosts/profiles/$NIXOS_HOST/configuration.nix"
 }
 
 hm-edit() {

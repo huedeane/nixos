@@ -1,11 +1,9 @@
-{ config, pkgs, ... }:
-let
-  hostName = "laptop";
-  userName = "huedeane"
-in 
+{ config, pkgs, hostname, username, ... }:
+
 {
   imports = [
     ./hardware-configuration.nix
+    ../modules/sops.nix
   ];
 
   # Bootloader
@@ -16,7 +14,7 @@ in
 
   # Networking
   networking = {
-    hostName = "${hostName}";
+    hostName = "${hostname}";
     networkmanager.enable = true;
   };
 
@@ -71,9 +69,9 @@ in
   services.udisks2.enable = true;
 
   # User
-  users.users.huedeane = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "${userName}";
+    description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
