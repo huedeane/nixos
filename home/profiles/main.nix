@@ -16,6 +16,7 @@
       (configHomeDir + "/application/firefox/firefox.nix")
       (configHomeDir + "/application/obsidian/obsidian.nix")
       (configHomeDir + "/widget/rofi/rofi.nix")
+      (configHomeDir + "/widget/ags/ags.nix")
       (configHomeDir + "/security/sops/sops.nix")
       #(configHomeDir + "/widget/waybar/waybar.nix")
   ];
