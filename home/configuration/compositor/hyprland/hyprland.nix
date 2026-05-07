@@ -34,6 +34,7 @@ in {
           "waybar"
           "dunst"
           "rofi-polkit-agent"
+          "hyprmoncfgd"
       ];
     };
 

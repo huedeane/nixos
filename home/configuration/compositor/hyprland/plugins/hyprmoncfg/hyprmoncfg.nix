@@ -5,22 +5,6 @@ in
 {
   home.packages = [ hyprmoncfg ];
   
-  systemd.user.services.hyprmoncfgd = {
-    Unit = {
-      Description = "Hyprland monitor configuration daemon";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${hyprmoncfg}/bin/hyprmoncfgd";
-      Restart = "on-failure";
-      RestartSec = "3s";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
-  
   xdg.desktopEntries."hyprmoncfg" = {
     name = "Hyprmoncfg";
     genericName = "Monitor Management";
