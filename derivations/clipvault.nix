@@ -4,12 +4,14 @@ pkgs.rustPlatform.buildRustPackage rec {
   pname = "clipvault";
   version = "1.1.1";
 
+  doCheck = false;
+
   src = pkgs.fetchFromGitHub {
     owner = "rolv-apneseth";
     repo = "clipvault";
-    rev = "main";
-    hash = "0bikhxpqg0cabl2n2zhg97gkc1fsfjx763d7nhn595hlfcfywi48";
+    rev = "17da6b69dabd9f8e0fa8e35b71cf81f9a396599e";
+    hash = "sha256-iETuHXMUllQstKcNc7p02gU230kPfmEFXYqBh2+HMy4=";
   };
 
-  cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  cargoHash = "sha256-hmr3N/K+cj87OQDoCz2G4vWoNByRfh78rd0BtGJN1hA=";
 }

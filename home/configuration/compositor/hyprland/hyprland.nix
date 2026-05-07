@@ -35,6 +35,7 @@ in {
           "dunst"
           "rofi-polkit-agent"
           "hyprmoncfgd"
+          "dunst-clipboard-notify.sh"
       ];
     };
 
@@ -54,6 +55,11 @@ in {
   
   home.file.".local/bin/nix-log.sh" = {
     source = ./scripts/nix-log.sh;
+    executable = true;
+  };
+
+  home.file.".local/bin/dunst-clipboard-notify.sh" = {
+    source = ./scripts/dunst-clipboard-notify.sh;
     executable = true;
   };
 }

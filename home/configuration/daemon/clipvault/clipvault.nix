@@ -3,6 +3,6 @@ let
   clipvault = pkgs.callPackage "${configDir}/derivations/clipvault.nix" { };
 in
 {
-  home.packages = [ hyprmoncfg ];
+  home.packages = [ clipvault ];
 }
   
