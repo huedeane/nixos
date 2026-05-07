@@ -5,6 +5,7 @@ in {
 
   imports = [ 
     ./plugins/hyprmoncfg/hyprmoncfg.nix 
+    ./plugins/hyprpaper/hyprpaper.nix
   ];
   
   wayland.windowManager.hyprland = {
@@ -27,6 +28,13 @@ in {
         "NIXOS_CONFIGHOMEDIR,${config.xdg.configHome}/nixos/home/configuration"
         "MOZ_LEGACY_PROFILES,1"
       ];
+
+      exec-once = [
+          "hyprpaper"
+          "waybar"
+          "dunst"
+          "rofi-polkit-agent"
+      ];
     };
 
     plugins = [
@@ -47,6 +55,4 @@ in {
     source = ./scripts/nix-log.sh;
     executable = true;
   };
-
-  xdg.configFile."hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "${configHomeDir}/compositor/hyprland/hyprpaper.conf";
 }
