@@ -5,7 +5,6 @@ in {
 
   imports = [ 
     ./plugins/hyprmoncfg/hyprmoncfg.nix 
-    ./plugins/hyprpaper/hyprpaper.nix
   ];
   
   wayland.windowManager.hyprland = {
@@ -48,4 +47,6 @@ in {
     source = ./scripts/nix-log.sh;
     executable = true;
   };
+
+  xdg.configFile."hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "${configHomeDir}/compositor/hyprland/hyprpaper.conf";
 }
