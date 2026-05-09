@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   programs.kitty = {
@@ -9,7 +9,6 @@
       name = "ComicShannsMono Nerd Font Mono";
       size = 14.0;
     };
-
     settings = {
       # Terminal opacity and blur
       background_opacity          = "1.0";
@@ -46,6 +45,18 @@
 
       # Options
       detect_urls                 = true;
+
+      # Scrollback
+      scrollback_pager = lib.concatStringsSep " | " [
+        "bash -c 'sed /─◖/d"                            # delete top PS1 line (╭─◖ line)
+        "sed \"s/.*╰─ //\""                             # delete everything before ╰─  (bottom PS1 line), keeping the command
+        "sed \"/133;A/d\""                              # delete blank OSC shell integration lines
+        "sed \"s/.*133;C[^m]*m//\""                     # strip OSC prefix from error lines
+        "sed \"s/\\x1b\\[[0-9;:]*[a-zA-Z]//g\""         # strip ANSI color codes
+        "sed \"s/\\[m//g\""                             # strip leftover [m reset codes
+        "sed /^$/d"                                     # delete empty lines
+        "nvim -c \"set ft=man\" -'"                     # open in nvim
+      ];
     };
 
     # Themes
