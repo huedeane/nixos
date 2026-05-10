@@ -17,8 +17,6 @@ in {
     
     settings = {
       env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
         "EDITOR,nvim"
         "VISUAL,nvim"
         "PATH,$HOME/.local/bin:$PATH"

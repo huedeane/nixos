@@ -20,6 +20,7 @@
       # (configHomeDir + "/widget/ags/ags.nix")
       (configHomeDir + "/security/sops/sops.nix")
       #(configHomeDir + "/widget/waybar/waybar.nix")
+      (configHomeDir + "/apperance/pointer/pointer.nix")
   ];
 
   home = {
