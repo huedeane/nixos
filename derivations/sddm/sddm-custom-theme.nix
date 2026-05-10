@@ -1,8 +1,8 @@
-{ pkgs, stdenvNoCC }:
+{ pkgs, stdenvNoCC, lib }:
 stdenvNoCC.mkDerivation {
   pname = "sddm-custom-theme";
   version = "1.0.0";
-  src = "./theme";
+  src = lib.cleanSource ./theme;
   dontWrapQtApps = true;
 
   propagatedBuildInputs = with pkgs.kdePackages; [
