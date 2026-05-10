@@ -1,6 +1,6 @@
-{ pkgs, ... }: 
+{ pkgs, username,... }: 
 let
-  sddm-custom-theme = pkgs.callPackage ../../derivations/sddm-custom-theme.nix {};
+  sddm-custom-theme = pkgs.callPackage ../../derivations/sddm/sddm-custom-theme.nix {};
 in 
 {
   environment.systemPackages = [
@@ -14,13 +14,13 @@ in
       package = pkgs.kdePackages.sddm;
 
       theme = "sddm-custom-theme";
-      extraPackages = [
+      extraPackages = with pkgs; [
         sddm-custom-theme
       ];
     };
     autoLogin = {
       enable = false;
-      user = "huedeane";
+      user = "${username}";
     };
   };
 }
