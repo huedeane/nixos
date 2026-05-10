@@ -1,6 +1,6 @@
 { pkgs, configDir, ... }:
 let
-  hyprmoncfg = pkgs.callPackage "${configDir}/derivations/hyprmoncfg.nix" { };
+  hyprmoncfg = pkgs.callPackage "${configDir}/derivations/hyprmoncfg/hyprmoncfg.nix" { };
 in
 {
   home.packages = [ hyprmoncfg ];
