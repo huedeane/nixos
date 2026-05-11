@@ -1,6 +1,6 @@
 { pkgs, username,... }: 
 let
-  sddm-custom-theme = pkgs.callPackage ../../derivations/sddm/sddm-theme.nix {};
+  sddm-theme = pkgs.callPackage ../../derivations/sddm/sddm-theme.nix {};
 in 
 {
   environment.systemPackages = [

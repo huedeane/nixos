@@ -1,8 +1,0 @@
-[SddmGreeterTheme]
-Name=Huedeane
-Description=Huedeane SDDM Theme
-Author=Huedeane
-Type=sddm-theme
-MainScript=Main.qml
-ConfigFile=theme.conf
-QtVersion=6
