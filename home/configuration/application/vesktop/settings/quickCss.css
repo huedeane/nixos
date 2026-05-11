@@ -134,3 +134,13 @@
 .container_c8ffbb .membersGroup_c8ffbb .membersGroupHeader_c8ffbb {
   color: var(--yellow-3);
 }
+
+/* Voice Channel Selected Color */
+.container__2637a .content_d125d2 .selectedChannel_c69b6d .link__2ea32 {
+  background-color: #414559 !important;
+
+}
+
+.container__2637a .content_d125d2 .selectedChannel_c69b6d .link__2ea32 .name__2ea32 {
+  color: var(--yellow-3);
+}
