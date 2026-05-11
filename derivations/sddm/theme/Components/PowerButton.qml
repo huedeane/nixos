@@ -24,7 +24,7 @@ Item {
       text: "REBOOT"
 
       // Position
-      anchors.verticalCenter: parent.bottom
+      anchors.verticalCenter: parent.verticalCenter
 
       // Modification
       font {
@@ -53,7 +53,7 @@ Item {
       text: "SHUTDOWN"
 
       // Position
-      anchors.verticalCenter: parent.bottom
+      anchors.verticalCenter: parent.verticalCenter
 
       // Modification
       font {

@@ -12,10 +12,10 @@ Item {
   property color  propTextColor:        config.ColorText
   property string propFontFamily:       config.Font
   property int    propUserIndex:        0
+  property int    propSessionIndex:        0
   property int    propRoundCorners:    config.RoundCorners !== "" ? parseInt(config.RoundCorners) : 10
 
   // Signals
-  signal loginSubmitted()
   signal userSwitched()
 
   // Public functions
@@ -27,12 +27,17 @@ Item {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
   }
+  function login() {
+    var n = (idUserHelper.currentItem && idUserHelper.currentItem.uLogin !== "")
+      ? idUserHelper.currentItem.uLogin
+      : (typeof userModel !== "undefined" ? userModel.lastUser : "")
+    if (typeof sddm !== "undefined") sddm.login(n, idPasswordInput.text, propSessionIndex)
+  }
   // Callback
   Connections {
     target: typeof sddm !== "undefined" ? sddm : null
     
     function onLoginFailed() {
-      root.propStateLoginError = true
       idError.text = "ACCESS DENIED"
       idPasswordInput.text = ""
       idPasswordInput.forceActiveFocus()
@@ -230,8 +235,8 @@ Item {
           // Action
           onTextEdited: idError.text = ""
           onActiveFocusChanged: if (!activeFocus && text.length === 0) wasClicked = false
-          Keys.onReturnPressed: idLoginFormComponent.loginSubmitted()
-          Keys.onEnterPressed: idLoginFormComponent.loginSubmitted()
+          Keys.onReturnPressed: login()
+          Keys.onEnterPressed: login()
         }
 
         Text {
@@ -361,7 +366,7 @@ Item {
           cursorShape: Qt.PointingHandCursor
 
           // Action
-          onClicked: idLoginFormComponent.loginSubmitted()
+          onClicked: login()
         }
       }
 

@@ -4,10 +4,11 @@ Item {
   id: idSessionButtonComponent
 
   // Properties
-  property real   propScale:       1
-  property color  propTextColor:   config.ColorText
-  property color  propAccentColor: config.ColorGreen
-  property string propFontFamily:  config.Font
+  property real   propScale:        1
+  property color  propTextColor:    config.ColorText
+  property color  propAccentColor:  config.ColorGreen
+  property string propFontFamily:   config.Font
+  property int    propSessionIndex: 0
   
   // Signal
   signal clicked()
@@ -16,7 +17,7 @@ Item {
   ListView {
     id: sessionHelper
     model: typeof sessionModel !== "undefined" ? sessionModel : null
-    currentIndex: root.propStateSessionIndex
+    currentIndex: propSessionIndex
     opacity: 0; width: 1; height: 1; z: -100
     delegate: Item { property string sName: model.name || "" }
   }
@@ -47,8 +48,6 @@ Item {
 
       // Position
       anchors {
-        leftMargin: 10 * s
-        rightMargin: 10 * s
         verticalCenter: parent.verticalCenter 
       }
 

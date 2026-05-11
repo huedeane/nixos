@@ -22,24 +22,15 @@ Item {
   // State
   property int  propStateUserIndex:        (typeof userModel !== "undefined" && userModel.lastIndex >= 0) ? userModel.lastIndex : 0
   property int  propStateSessionIndex:     (typeof sessionModel !== "undefined" && sessionModel.lastIndex >= 0) ? sessionModel.lastIndex : 0
-  property bool propStateLoginError:       false
   property bool propStateSessionMenuOpen:  false
-
-  // Font
-  readonly property string  propFontFamily:   config.Font
-  readonly property int     propFontSize:     config.FontSize !== "" ? parseInt(config.FontSize) : parseInt(height / 80) || 13
-
+  
   // Visual
   readonly property string  propBackground:              Qt.resolvedUrl(config.Background)
   readonly property string  propBackgroundPlaceholder:   Qt.resolvedUrl(config.BackgroundPlaceholder)
 
-  // --- Function ---
-  function login() {
-    var n = (userHelper.currentItem && userHelper.currentItem.uLogin !== "")
-      ? userHelper.currentItem.uLogin
-      : (typeof userModel !== "undefined" ? userModel.lastUser : "")
-    if (typeof sddm !== "undefined") sddm.login(n, pwd.text, root.propStateSessionIndex)
-  }  
+  // Font
+  readonly property string  propFontFamily:   config.Font
+  readonly property int     propFontSize:     config.FontSize !== "" ? parseInt(config.FontSize) : parseInt(height / 80) || 13
 
   // --- Layer ---
   // Fallback -1000
@@ -99,12 +90,12 @@ Item {
     }
 
     LoginForm {
-      id: idLoginForm
 
       // Position
       anchors.fill: parent
       propScale:     s
       propUserIndex: root.propStateUserIndex
+      propSessionIndex: root.propStateSessionIndex
       // propErrorColor:
       // propBackgroundColor:
       // propAccentColor:
@@ -113,8 +104,6 @@ Item {
       // propRoundedCorner:
 
       // Action
-      //
-      onLoginSubmitted: login()
       onUserSwitched: {
         if (typeof userModel !== "undefined" && userModel.rowCount() > 0)
           root.propStateUserIndex = (root.propStateUserIndex + 1) % userModel.rowCount()
@@ -144,6 +133,7 @@ Item {
 
         // Properties
         propScale:       s 
+        propSessionIndex: root.propStateSessionIndex
         // propTextColor:
         // propAccentColor:
         // propFontFamily:
