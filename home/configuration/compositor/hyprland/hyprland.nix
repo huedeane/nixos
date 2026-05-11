@@ -17,6 +17,10 @@ in {
     
     settings = {
       env = [
+        "HYPRCURSOR_THEME,catppuccin-frappe-green-cursors"
+        "HYPRCURSOR_SIZE,36"
+        "XCURSOR_THEME,catppuccin-frappe-green-cursors"
+        "XCURSOR_SIZE,36"
         "EDITOR,nvim"
         "VISUAL,nvim"
         "PATH,$HOME/.local/bin:$PATH"
