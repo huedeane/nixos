@@ -4,9 +4,9 @@ import QtMultimedia
 Item {
   id: idBackgroundComponent
 
-  property string propSource:      Qt.resolvedUrl(config.background)
-  property string propPlaceholder: Qt.resolvedUrl(config.backgroundplaceholder)  
-  property bool   propCrop:        true
+  property string propSource:        ""
+  property string propPlaceholder:   ""  
+  property bool   propCrop:       true
 
   // Placeholder shown while video loads
   Image {

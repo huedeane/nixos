@@ -65,7 +65,7 @@ Column {
     // Modification
     font {
       family: propFontFamily
-      pixelSize: 18  * propScale
+      pixelSize: 22  * propScale
       letterSpacing: 12  * propScale
       weight: Font.DemiBold
     }
@@ -81,7 +81,7 @@ Column {
         color: "#000000"
         radius: 40  * propScale
         samples: 41
-        spread: 0.2
+        spread: 0.3
         verticalOffset: 6  * propScale
         transparentBorder: true
       }
