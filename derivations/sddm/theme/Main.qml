@@ -2,7 +2,7 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 import QtMultimedia
 import Qt.labs.folderlistmodel
-import "Component"
+import "Components"
 
 Item {
   id: root

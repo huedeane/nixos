@@ -2,7 +2,7 @@
 stdenvNoCC.mkDerivation {
   pname = "sddm-custom-theme";
   version = "1.0.0";
-  src = lib.cleanSource ./theme;
+  src = ./theme;
   dontWrapQtApps = true;
 
   propagatedBuildInputs = with pkgs.kdePackages; [
@@ -16,6 +16,6 @@ stdenvNoCC.mkDerivation {
     basePath = "$out/share/sddm/themes/sddm-custom-theme";
   in ''
     mkdir -p ${basePath}
-    cp -r $src/* ${basePath}
+    cp -rv $src/. ${basePath}/
   '';
 }
