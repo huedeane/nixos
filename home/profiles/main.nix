@@ -8,6 +8,7 @@
       (configHomeDir + "/terminal/rmpc/rmpc.nix")
       (configHomeDir + "/terminal/git/git.nix")
       (configHomeDir + "/terminal/gitui/gitui.nix")
+      (configHomeDir + "/terminal/fastfetch/fastfetch.nix")
       (configHomeDir + "/compositor/hyprland/hyprland.nix")
       (configHomeDir + "/daemon/mpd/mpd.nix")
       (configHomeDir + "/daemon/dunst/dunst.nix")
