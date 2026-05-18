@@ -31,6 +31,11 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
   };
 
   outputs = { 
@@ -40,6 +45,8 @@
     hyprland,
     split-monitor-workspaces,
     sops-nix,
+    ags,
+    nvf,
     ... 
   } @ inputs: let
     system = "x86_64-linux";
