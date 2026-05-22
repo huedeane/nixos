@@ -32,10 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
+    # Neovim
+    nixCats = {
+      url = "github:BirdeeHub/nixCats-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
   };
 
   outputs = { 
@@ -46,7 +47,7 @@
     split-monitor-workspaces,
     sops-nix,
     ags,
-    nvf,
+    nixCats,
     ... 
   } @ inputs: let
     system = "x86_64-linux";
@@ -71,7 +72,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              users.huedeane = import ./home/profiles/main.nix;
+              sharedModules = [ 
+                nixCats.homeModule
+              ];
+              users.huedeane = ./home/profiles/main.nix;
               extraSpecialArgs = {
                 inherit inputs configDir configHomeDir;
                 hostname = "laptop";

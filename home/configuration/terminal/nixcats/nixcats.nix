@@ -1,0 +1,9 @@
+{ config }:
+
+{
+  nixCats = {
+    enable = true;
+
+
+  };
+}
