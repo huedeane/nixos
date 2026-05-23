@@ -1,0 +1,1 @@
+../home/configuration/terminal/yazi/scripts/tree-directory.sh
