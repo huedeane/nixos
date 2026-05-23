@@ -22,6 +22,11 @@
     };
   };
 
+  home.file.".local/bin/tree-directory.sh" = {
+    source = ./scripts/tree-directory.sh;
+    executable = true;
+  };
+
   xdg.configFile = {
     "rmpc/package.toml".source = ./package.toml;
   };

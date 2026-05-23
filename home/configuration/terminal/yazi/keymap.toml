@@ -85,6 +85,8 @@ keymap = [
 	{ on = "z",         run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
 	{ on = "Z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
 
+	{ on = ["<C-;", "t"], run = "tree-directory", desc = "Get directory tree output" },
+
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },
 	{ on = [ "m", "p" ], run = "linemode permissions", desc = "Linemode: permissions" },
