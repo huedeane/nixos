@@ -46,9 +46,9 @@
     packages = with pkgs; [
       # Terminal
       tmux
-      neovim
       cava  
       caligula
+      tree
 
       # Application
       steam

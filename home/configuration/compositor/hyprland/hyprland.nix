@@ -32,12 +32,10 @@ in {
       ];
 
       exec-once = [
-          "hyprpaper"
-          "waybar"
-          "dunst"
-          "rofi-polkit-agent"
-          "hyprmoncfgd"
-          "dunst-clipboard-notify.sh"
+        "uwsm app -- waybar"
+        "uwsm qpp -- hyprmoncfgd"
+        "uwsm app -- rofi-polkit-agent"
+        "uwsm app -- dunst-clipboard-notify.sh"
       ];
     };
 

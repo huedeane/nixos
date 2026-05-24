@@ -35,7 +35,6 @@
     # Neovim
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
