@@ -1,7 +1,7 @@
-{ config, configDir, editMode, ... }:
+{ config, lib, editMode, ... }:
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/gitui";
-  settings = {
+  setting = {
     enable = true;
   };
 in
@@ -12,8 +12,8 @@ in
   } else {});
 
  xdg.configFile = if editMode then {
-    "gitui/key_bindings.ron".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/key_bindings.ron";
-    "gitui/theme.ron".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/theme.ron";
+    "gitui/key_bindings.ron".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${dirPath}/key_bindings.ron");
+    "gitui/theme.ron".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${dirPath}/theme.ron");
   } else {};
 
   xdg.desktopEntries."gitui" = {

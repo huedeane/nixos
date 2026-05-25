@@ -53,6 +53,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
     configDir = self.outPath;
     configHomeDir = "${self.outPath}/home/configuration";
+    editMode = builtins.getEnv "EDIT_MODE" == "1";
   in {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
@@ -71,12 +72,13 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
+              overwriteBackup = true;
               sharedModules = [ 
                 nixCats.homeModule
               ];
               users.huedeane = ./home/profiles/main.nix;
               extraSpecialArgs = {
-                inherit inputs configDir configHomeDir;
+                inherit inputs configDir configHomeDir editMode;
                 hostname = "laptop";
                 username = "huedeane";
               };
