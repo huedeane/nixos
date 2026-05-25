@@ -19,10 +19,14 @@
     algorithm = histogram
 
 [credential]
-    helper = store
+  helper = store
 
 [core]
     autocrlf = input
 
 [submodule]
     recurse = true
+
+[push]
+  default = current
+
