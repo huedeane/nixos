@@ -14,7 +14,7 @@ let
 in
 {
   programs.git = setting // (if !editMode then { 
-    extraConfig = builtins.readFile ./config;
+    includes = [{ path = ./config; }];
   } else {});
 
  xdg.configFile = if editMode then {
