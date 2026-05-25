@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 System="${1:-System}"
 
-tree -f |
-  grep '─' |
-  awk '{print $NF}' |
+ tree -f -i $(pwd) | 
+  sed "s|$(pwd)/|./|g"|
   wl-copy
 
 dunstify \

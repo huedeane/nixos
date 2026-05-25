@@ -38,13 +38,19 @@ end, 500, Header.LEFT)
 -- Override status mode to return full string
 function Status:mode()
 	local mode = tostring(self._tab.mode):upper()
+  local style = self:style()
+  local mode_colors = {
+    NORMAL  = "#babbf1",
+    SELECT  = "#ca9ee6",
+    UNSET = "#ef9f76",
+  }
+  local color = mode_colors[mode] or "#000000"
 
-	local style = self:style()
-	return ui.Line({
-		ui.Span(th.status.sep_left.open):fg("#babbf1"):bg("reset"),
-		ui.Span(" " .. mode .. " "):style(style.main),
-		ui.Span(th.status.sep_left.close):fg("#babbf1"):bg("#414559"),
-	})
+  return ui.Line({
+    ui.Span(th.status.sep_left.open):fg(color):bg("reset"),
+    ui.Span(" " .. mode .. " "):style(style.main),
+    ui.Span(th.status.sep_left.close):fg(color):bg("#414559"),
+  })
 end
 
 require("git"):setup()

@@ -27,9 +27,9 @@
 
   home = {
     username = "${username}";
-  	homeDirectory = "/home/${username}";
-  	stateVersion = "24.11";
-    
+    homeDirectory = "/home/${username}";
+    stateVersion = "24.11";
+
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
@@ -46,13 +46,13 @@
     packages = with pkgs; [
       # Terminal
       tmux
-      cava  
+      cava
       caligula
       tree
 
       # Application
       steam
-      
+
       # Widget
       waybar
 

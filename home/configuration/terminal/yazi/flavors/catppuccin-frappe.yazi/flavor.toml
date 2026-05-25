@@ -57,8 +57,8 @@ select_main = { fg = "#303446", bg = "#ca9ee6", bold = true }
 select_alt  = { fg = "#ca9ee6", bg = "#414559" }
 
 # Unset mode
-unset_main = { fg = "#303446", bg = "#a6d189", bold = true }
-unset_alt  = { fg = "#a6d189", bg = "#414559" }
+unset_main = { fg = "#303446", bg = "#ef9f76", bold = true }
+unset_alt  = { fg = "#ef9f76", bg = "#414559" }
 
 # : }}}
 

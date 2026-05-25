@@ -53,6 +53,11 @@ in {
     executable = true;
   };
   
+  home.file.".local/bin/nix-rebuild-edit.sh" = {
+    source = ./scripts/nix-rebuild-edit.sh;
+    executable = true;
+  };
+  
   home.file.".local/bin/nix-log.sh" = {
     source = ./scripts/nix-log.sh;
     executable = true;

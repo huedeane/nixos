@@ -17,6 +17,14 @@ nix-rebuild() {
   sudo nixos-rebuild switch --flake "$NIXOS_CONFIG#$host"
 }
 
+nix-rebuild-edit() {
+  local host="${1:-$NIXOS_HOST}"
+  check_paths \
+    "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
+    || return 1
+  EDIT_MODE=1 sudo -E nixos-rebuild switch --flake "$NIXOS_CONFIG#$host" --impure
+}
+
 nix-edit() {
   check_paths \
     "$NIXOS_CONFIG/hosts/profiles/$NIXOS_HOST/configuration.nix" \
