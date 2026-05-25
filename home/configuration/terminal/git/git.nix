@@ -1,32 +1,25 @@
-{ config, ... }:
-
-{
-  programs.git = {
+{ config, editMode, ... }:
+let
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/git";
+  setting = {
     enable = true;
-
-     ignores = [
+    ignores = [
       ".direnv"
       "*.swp"
       "*~"
       ".DS_Store"
     ];
-
     signing.format = null;
-
-    settings = {
-      init.defaultBranch = "main";
-      pull.rebase = true;
-      push.autoSetupRemote = true;
-      push.default = "current";
-      fetch.prune = true;
-      fetch.prunetags = true;
-      rerere.enabled = true;
-      diff.algorithm = "histogram";
-      credential.helper = "store";
-      core.autocrlf = "input";
-      submodule.recurse = true;
-    };
   };
+in
+{
+  programs.git = setting // (if !editMode then { 
+    extraConfig = builtins.readFile ./config;
+  } else {});
+
+ xdg.configFile = if editMode then {
+    "git/config".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/config";
+  } else {};
 }
 
 

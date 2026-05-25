@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, username, hostname, configHomeDir, ... }: let
+{ config, pkgs, inputs, hostname, editMode, ... }: let
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
   smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in {
@@ -43,9 +43,10 @@ in {
       smwPkgs.split-monitor-workspaces
     ];
 
-    extraConfig = ''
-      source = $HOME/.config/nixos/home/configuration/compositor/hyprland/hyprland.conf
-    '';
+    extraConfig = if !editMode then 
+      builtins.readFile ./hyprland.conf 
+    else 
+      "source = $HOME/.config/nixos/home/configuration/compositor/hyprland/hyprland.conf";
   };
 
   home.file.".local/bin/nix-rebuild.sh" = {

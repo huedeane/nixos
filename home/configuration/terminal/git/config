@@ -1,0 +1,28 @@
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+    default = current
+
+[fetch]
+    prune = true
+    prunetags = true
+
+[rerere]
+    enabled = true
+
+[diff]
+    algorithm = histogram
+
+[credential]
+    helper = store
+
+[core]
+    autocrlf = input
+
+[submodule]
+    recurse = true
