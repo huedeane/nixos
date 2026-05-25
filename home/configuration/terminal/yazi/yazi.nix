@@ -1,6 +1,6 @@
 { config, lib, editMode, ... }:
 let
-  yaziDir = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/yazi";
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/yazi";
   setting = {
     enable = true;
     enableBashIntegration = true;
@@ -24,15 +24,15 @@ in
   } else {});
 
  xdg.configFile = if editMode then {
-    "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/yazi.toml";
-    "yazi/keymap.toml".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/keymap.toml";
-    "yazi/theme.toml".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/theme.toml";
-    "yazi/package.toml".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/package.toml";
-    "yazi/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/init.lua";
-    "yazi/flavors/catppuccin-frappe.yazi".source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/flavors/catppuccin-frappe.yazi";
+    "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/yazi.toml";
+    "yazi/keymap.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/keymap.toml";
+    "yazi/theme.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/theme.toml";
+    "yazi/package.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/package.toml";
+    "yazi/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/init.lua";
+    "yazi/flavors/catppuccin-frappe.yazi".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/flavors/catppuccin-frappe.yazi";
   } // lib.mapAttrs' (name: _: {
     name = "yazi/plugins/${name}";
-    value.source = config.lib.file.mkOutOfStoreSymlink "${yaziDir}/plugins/${name}";
+    value.source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/plugins/${name}";
   }) (builtins.readDir ./plugins)
   else {};
  
