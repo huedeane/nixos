@@ -23,7 +23,7 @@ in {
           lualine-nvim
           lualine-lsp-progress
           gitsigns-nvim
-        ]
+        ];
       };
       lspsAndRuntimeDeps = {};
     };

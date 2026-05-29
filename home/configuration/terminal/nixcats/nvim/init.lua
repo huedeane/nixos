@@ -13,4 +13,8 @@ require('lze').h.lsp.set_ft_fallback(function(name)
   return dofile(nixCats.pawsible({ "allPlugins", "opt", "nvim-lspconfig" }) .. "/lsp/" .. name .. ".lua").filetypes or {}
 end)
 
-require('lze').load({ ... })
+require('lze').load({ 
+  { import = "plugins.general.catppuccin-nvim", },
+  { import = "plugins.general.gitsigns-nvim", },
+  { import = "plugins.general.lualine-nvim", },
+})

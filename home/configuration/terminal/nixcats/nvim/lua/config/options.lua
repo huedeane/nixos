@@ -51,6 +51,7 @@ vim.opt.updatetime = 250                                            -- ms before
 vim.opt.timeoutlen = 300                                            -- ms to wait for a mapped sequence to complete
 vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"  -- sync with system clipboard, disabled over SSH to use OSC 52
 vim.opt.confirm = true                                              -- prompt to save changes before exiting a modified buffer
+vim.opt.undolevels = 10000         -- maximum number of undo steps
 
 
 
@@ -87,7 +88,6 @@ vim.opt.confirm = true                                              -- prompt to
 -- opt.splitbelow = true          -- open horizontal splits below the current window
 -- opt.splitkeep = "screen"       -- keep text on screen when splitting
 -- opt.splitright = true          -- open vertical splits to the right of the current window
--- opt.undolevels = 10000         -- maximum number of undo steps
 -- opt.virtualedit = "block"      -- allow cursor to move into empty space in visual block mode
 -- opt.wildmode = "longest:full,full" -- command-line completion: complete longest match then full list
 -- opt.winminwidth = 5            -- minimum width of any window
