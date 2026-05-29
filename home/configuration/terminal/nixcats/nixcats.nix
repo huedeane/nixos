@@ -57,6 +57,7 @@ in
             lualine-nvim
             lualine-lsp-progress
             gitsigns-nvim
+            blink-cmp
           ];
 
           lsp = with pkgs.vimPlugins; [
