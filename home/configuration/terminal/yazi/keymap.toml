@@ -133,6 +133,7 @@ keymap = [
   { on = [ "g", "f" ],       run = "follow",                                  desc = "Follow hovered symlink" },
   { on = [ "g", "N" ],       run = "cd ~/.config/nixos/",                     desc = "Go ~/.config/nixos/" },
   { on = [ "g", "H" ],       run = "cd ~/.config/nixos/home/configuration/",  desc = "Go ~/.config/nixos/home/configuration/" },
+  { on = [ "g", "t" ],       run = "cd ~/.local/share/Trash",  desc = "Go ~/.local/share/Trash" },
 
   # Tabs
   { on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
