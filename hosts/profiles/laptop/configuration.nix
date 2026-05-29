@@ -1,4 +1,9 @@
-{ config, pkgs, hostname, username, configDir, ... }:
+{
+  pkgs,
+  hostname,
+  username,
+  ...
+}:
 
 {
   imports = [
@@ -50,7 +55,7 @@
 
   # Polkit
   security.polkit.enable = true;
-  
+
   # Printing
   services.printing.enable = true;
 
@@ -72,7 +77,10 @@
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Desktop Environment: Hyprland
@@ -81,7 +89,7 @@
     withUWSM = true;
     xwayland.enable = true;
   };
-  
+
   # Desktop Environemtn: Gnome
   # services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
@@ -103,7 +111,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = [ pkgs.vulkan-loader pkgs.vulkan-validation-layers ];
+    extraPackages = [
+      pkgs.vulkan-loader
+      pkgs.vulkan-validation-layers
+    ];
   };
 
   # Fonts
@@ -112,7 +123,10 @@
   ];
 
   # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Version
   system.stateVersion = "24.11";

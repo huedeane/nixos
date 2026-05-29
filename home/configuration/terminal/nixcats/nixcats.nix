@@ -1,6 +1,13 @@
-{ config, lib, inputs, configDir, hostname, username, ... }: let
+{
+  inputs,
+  hostname,
+  username,
+  ...
+}:
+let
   utils = inputs.nixCats.utils;
-in {
+in
+{
   nixCats = {
     enable = true;
 
@@ -8,84 +15,88 @@ in {
     packageNames = [ "nvim" ];
     luaPath = ./nvim;
 
-    categoryDefinitions.replace = { pkgs, ... }: {
-      lspsAndRuntimeDeps = {
-        lsp = with pkgs; [
-          # C#
-          omnisharp-roslyn
+    categoryDefinitions.replace =
+      { pkgs, ... }:
+      {
+        lspsAndRuntimeDeps = {
+          lsp = with pkgs; [
+            # C#
+            omnisharp-roslyn
 
-          # Lua
-          lua-language-server
-          stylua
+            # Lua
+            lua-language-server
+            stylua
 
-          # TOML
-          taplo
+            # TOML
+            taplo
 
-          # CSS
-          vscode-langservers-extracted
+            # CSS
+            vscode-langservers-extracted
 
-          # Nix
-          nixd
-          nil
-          nixfmt-rfc-style
+            # Nix
+            nixd
+            nil
+            nixfmt-rfc-style
 
-          # YAML
-          yaml-language-server
-        ];
+            # YAML
+            yaml-language-server
+          ];
+        };
+
+        startupPlugins = {
+          general = with pkgs.vimPlugins; [
+            lze
+            lzextras
+            catppuccin-nvim
+          ];
+        };
+
+        optionalPlugins = {
+          general = with pkgs.vimPlugins; [
+            vim-startuptime
+            lualine-nvim
+            lualine-lsp-progress
+            gitsigns-nvim
+          ];
+
+          lsp = with pkgs.vimPlugins; [
+            nvim-lspconfig
+          ];
+        };
+
+        environmentVariables = {
+
+        };
+
+        extraWrapperArgs = {
+
+        };
       };
-
-      startupPlugins = {
-        general = with pkgs.vimPlugins; [
-          lze
-          lzextras
-          catppuccin-nvim
-        ];
-      };
-
-      optionalPlugins = {
-        general = with pkgs.vimPlugins; [
-          vim-startuptime
-          lualine-nvim
-          lualine-lsp-progress
-          gitsigns-nvim
-        ];
-
-        lsp = with pkgs.vimPlugins; [
-          nvim-lspconfig
-        ];
-      };
-
-      environmentVariables = {
-
-      };
-
-      extraWrapperArgs = {
-
-      };
-    };
 
     packageDefinitions.replace = {
-      nvim = { pkgs, name, ... }: {
-        settings = {
-          suffix-path = true;
-          suffix-LD = true;
-          wrapRc  = true;
-          aliases = [ "vim" ];
+      nvim =
+        { pkgs, name, ... }:
+        {
+          settings = {
+            suffix-path = true;
+            suffix-LD = true;
+            wrapRc = true;
+            aliases = [ "vim" ];
+          };
+          categories = {
+            general = true;
+            lsp = true;
+          };
+          extra = {
+            nixdExtras.nixpkgs = "import ${pkgs.path} {}";
+            nixdExtras.nixos_options = ''
+              (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.${hostname}.options
+            '';
+            nixdExtras.home_manager_options = ''
+              (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.${username}.options
+            '';
+          };
         };
-        categories = {
-          general = true;
-          lsp = true;
-        };
-        extra = {
-          nixdExtras.nixpkgs = ''import ${pkgs.path} {}'';
-          nixdExtras.nixos_options = ''
-            (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.${hostname}.options
-          '';
-          nixdExtras.home_manager_options = ''
-            (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.${username}.options
-          '';
-        };
-      };
     };
   };
 }

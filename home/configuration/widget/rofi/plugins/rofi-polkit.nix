@@ -12,8 +12,17 @@ let
       sha256 = "sha256-oQaGV/ROP9YFyL8owduKOZLjqyx9D35xH67gNKECduQ=";
     };
 
-    nativeBuildInputs = with pkgs; [ meson ninja pkg-config ];
-    buildInputs = with pkgs; [ glib json-glib polkit gtk3 ];
+    nativeBuildInputs = with pkgs; [
+      meson
+      ninja
+      pkg-config
+    ];
+    buildInputs = with pkgs; [
+      glib
+      json-glib
+      polkit
+      gtk3
+    ];
   };
 in
 {

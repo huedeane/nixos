@@ -1,4 +1,8 @@
-{ config, lib, configHomeDir, ... }:
+{
+  config,
+  configHomeDir,
+  ...
+}:
 
 {
   imports = [ ./plugins/rofi-polkit.nix ];
@@ -113,5 +117,6 @@
     theme = ./themes/catppuccin-frappe.rasi;
   };
 
-  xdg.configFile."rofi/message-output.rasi".source = config.lib.file.mkOutOfStoreSymlink "${configHomeDir}/widget/rofi/themes/message-output.rasi";
+  xdg.configFile."rofi/message-output.rasi".source =
+    config.lib.file.mkOutOfStoreSymlink "${configHomeDir}/widget/rofi/themes/message-output.rasi";
 }

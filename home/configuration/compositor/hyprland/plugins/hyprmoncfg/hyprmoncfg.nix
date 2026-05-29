@@ -4,7 +4,7 @@ let
 in
 {
   home.packages = [ hyprmoncfg ];
-  
+
   xdg.desktopEntries."hyprmoncfg" = {
     name = "Hyprmoncfg";
     genericName = "Monitor Management";
@@ -12,7 +12,11 @@ in
     icon = "kitty";
     terminal = false;
     type = "Application";
-    categories = [ "Settings" "HardwareSettings" "X-TUI" ];
+    categories = [
+      "Settings"
+      "HardwareSettings"
+      "X-TUI"
+    ];
     settings = {
       Keywords = "Settings;HardwareSettings;Tui";
     };

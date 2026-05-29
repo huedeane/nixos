@@ -47,4 +47,3 @@
     echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" > "$HOME/.git-credentials"
   '';
 }
-

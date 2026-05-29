@@ -1,4 +1,7 @@
-{ pkgs, stdenvNoCC, lib }:
+{
+  pkgs,
+  stdenvNoCC,
+}:
 stdenvNoCC.mkDerivation {
   pname = "sddm-theme";
   version = "1.0.0";
@@ -11,10 +14,12 @@ stdenvNoCC.mkDerivation {
     qt5compat
   ];
 
-  installPhase = let
-    basePath = "$out/share/sddm/themes/sddm-theme";
-  in ''
-    mkdir -p ${basePath}
-    cp -rv $src/. ${basePath}/
-  '';
+  installPhase =
+    let
+      basePath = "$out/share/sddm/themes/sddm-theme";
+    in
+    ''
+      mkdir -p ${basePath}
+      cp -rv $src/. ${basePath}/
+    '';
 }

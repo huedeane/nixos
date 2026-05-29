@@ -1,4 +1,9 @@
-{ config, lib, editMode, ... }:
+{
+  config,
+  lib,
+  editMode,
+  ...
+}:
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/yazi";
   setting = {
@@ -9,33 +14,45 @@ let
 in
 {
 
-  programs.yazi = setting // (if !editMode then { 
-    initLua = ./init.lua;
-    settings = builtins.fromTOML (builtins.readFile ./yazi.toml);
-    keymap = builtins.fromTOML (builtins.readFile ./keymap.toml);
-    theme = builtins.fromTOML (builtins.readFile ./theme.toml);
-    plugins = {
-      full-border = ./plugins/full-border.yazi;
-      git = ./plugins/git.yazi;
-    };
-    flavors = {
-      catppuccin-frappe = ./flavors/catppuccin-frappe.yazi;
-    };
-  } else {});
+  programs.yazi =
+    setting
+    // (
+      if !editMode then
+        {
+          initLua = ./init.lua;
+          settings = builtins.fromTOML (builtins.readFile ./yazi.toml);
+          keymap = builtins.fromTOML (builtins.readFile ./keymap.toml);
+          theme = builtins.fromTOML (builtins.readFile ./theme.toml);
+          plugins = {
+            full-border = ./plugins/full-border.yazi;
+            git = ./plugins/git.yazi;
+          };
+          flavors = {
+            catppuccin-frappe = ./flavors/catppuccin-frappe.yazi;
+          };
+        }
+      else
+        { }
+    );
 
- xdg.configFile = if editMode then {
-    "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/yazi.toml";
-    "yazi/keymap.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/keymap.toml";
-    "yazi/theme.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/theme.toml";
-    "yazi/package.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/package.toml";
-    "yazi/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/init.lua";
-    "yazi/flavors/catppuccin-frappe.yazi".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/flavors/catppuccin-frappe.yazi";
-  } // lib.mapAttrs' (name: _: {
-    name = "yazi/plugins/${name}";
-    value.source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/plugins/${name}";
-  }) (builtins.readDir ./plugins)
-  else {};
- 
+  xdg.configFile =
+    if editMode then
+      {
+        "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/yazi.toml";
+        "yazi/keymap.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/keymap.toml";
+        "yazi/theme.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/theme.toml";
+        "yazi/package.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/package.toml";
+        "yazi/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/init.lua";
+        "yazi/flavors/catppuccin-frappe.yazi".source =
+          config.lib.file.mkOutOfStoreSymlink "${dirPath}/flavors/catppuccin-frappe.yazi";
+      }
+      // lib.mapAttrs' (name: _: {
+        name = "yazi/plugins/${name}";
+        value.source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/plugins/${name}";
+      }) (builtins.readDir ./plugins)
+    else
+      { };
+
   home.file.".local/bin/tree-directory.sh" = {
     source = ./scripts/tree-directory.sh;
     executable = true;
@@ -49,7 +66,13 @@ in
     exec = "kitty --class tui-yazi yazi %f";
     type = "Application";
     mimeType = [ "inode/directory" ];
-    categories = [ "System" "FileManager" "FileTools" "ConsoleOnly" "X-TUI" ];
+    categories = [
+      "System"
+      "FileManager"
+      "FileTools"
+      "ConsoleOnly"
+      "X-TUI"
+    ];
     settings = {
       TryExec = "yazi";
       Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";

@@ -1,10 +1,10 @@
 {
   description = "My NixOS config";
-  
+
   inputs = {
     # NixOS Rolling Release
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-   
+
     # Configuration Manager
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -13,7 +13,7 @@
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
-    
+
     # Hyprland Plugin: Workspaces Enhancement
     split-monitor-workspaces = {
       url = "github:zjeffer/split-monitor-workspaces";
@@ -25,7 +25,7 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # User Interface
     ags = {
       url = "github:aylur/ags";
@@ -38,54 +38,58 @@
     };
   };
 
-  outputs = { 
-    self,
-    nixpkgs, 
-    home-manager,
-    hyprland,
-    split-monitor-workspaces,
-    sops-nix,
-    ags,
-    nixCats,
-    ... 
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    configDir = self.outPath;
-    configHomeDir = "${self.outPath}/home/configuration";
-    editMode = builtins.getEnv "EDIT_MODE" == "1";
-  in {
-    nixosConfigurations = {
-      laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { 
-          inherit inputs configDir;
-          hostname = "laptop";
-          username = "huedeane";
-        };
-        modules = [
-          ./hosts/profiles/laptop/configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              overwriteBackup = true;
-              sharedModules = [ 
-                nixCats.homeModule
-              ];
-              users.huedeane = ./home/profiles/main.nix;
-              extraSpecialArgs = {
-                inherit inputs configDir configHomeDir editMode;
-                hostname = "laptop";
-                username = "huedeane";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      sops-nix,
+      nixCats,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      configDir = self.outPath;
+      configHomeDir = "${self.outPath}/home/configuration";
+      editMode = builtins.getEnv "EDIT_MODE" == "1";
+    in
+    {
+      nixosConfigurations = {
+        laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs configDir;
+            hostname = "laptop";
+            username = "huedeane";
+          };
+          modules = [
+            ./hosts/profiles/laptop/configuration.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                overwriteBackup = true;
+                sharedModules = [
+                  nixCats.homeModule
+                ];
+                users.huedeane = ./home/profiles/main.nix;
+                extraSpecialArgs = {
+                  inherit
+                    inputs
+                    configDir
+                    configHomeDir
+                    editMode
+                    ;
+                  hostname = "laptop";
+                  username = "huedeane";
+                };
               };
-            };
-          }
-        ];
+            }
+          ];
+        };
       };
     };
-  };
 }

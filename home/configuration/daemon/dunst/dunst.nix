@@ -7,9 +7,13 @@ in
     enable = true;
   };
 
-  xdg.configFile = if editMode then {
-    "dunst/dunstrc".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/dunstrc";
-  } else {
-    "dunst/dunstrc".source = ./dunstrc;
-  };
+  xdg.configFile =
+    if editMode then
+      {
+        "dunst/dunstrc".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/dunstrc";
+      }
+    else
+      {
+        "dunst/dunstrc".source = ./dunstrc;
+      };
 }

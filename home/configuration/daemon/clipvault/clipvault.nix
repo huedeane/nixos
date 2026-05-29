@@ -5,4 +5,3 @@ in
 {
   home.packages = [ clipvault ];
 }
-  

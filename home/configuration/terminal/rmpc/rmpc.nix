@@ -1,6 +1,6 @@
-{ config, ... }:
+{ ... }:
 
-{ 
+{
   programs.rmpc = {
     enable = true;
 
@@ -18,11 +18,14 @@
     exec = "kitty --class tui-rmpc -e queue-rmpc %f";
     icon = "kitty";
     terminal = false;
-    categories = [ "Audio" "X-TUI" ];
+    categories = [
+      "Audio"
+      "X-TUI"
+    ];
     type = "Application";
-    mimeType = [ 
-      "audio/mpeg" 
-      "audio/flac" 
+    mimeType = [
+      "audio/mpeg"
+      "audio/flac"
       "audio/ogg"
       "audio/wav"
       "audio/x-flac"

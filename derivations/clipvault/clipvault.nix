@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-pkgs.rustPlatform.buildRustPackage rec {
+pkgs.rustPlatform.buildRustPackage {
   pname = "clipvault";
   version = "1.1.1";
 
