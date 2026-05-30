@@ -13,11 +13,21 @@ require('lze').h.lsp.set_ft_fallback(function(name)
   return dofile(nixCats.pawsible({ "allPlugins", "opt", "nvim-lspconfig" }) .. "/lsp/" .. name .. ".lua").filetypes or {}
 end)
 
+vim.diagnostic.config({
+  virtual_text = true,     -- show error message inline
+  signs = true,            -- show signs in sign column
+  underline = true,        -- underline the error
+  update_in_insert = false, -- don't update while typing
+  severity_sort = true,    -- sort by severity
+})
+
 require('lze').load({ 
-  { import = "plugins.general.catppuccin-nvim" },
-  { import = "plugins.general.gitsigns-nvim" },
-  { import = "plugins.general.lualine-nvim" },
-  { import = "plugins.general.blink-cmp" },
+  { import = "plugins.functionality.blink-cmp" },
+  { import = "plugins.fucntionality.nvim-treesitter" },
+
+  { import = "plugins.visual.catppuccin-nvim" },
+  { import = "plugins.visual.gitsigns-nvim" },
+  { import = "plugins.visual.lualine-nvim" },
 
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.nixd" },

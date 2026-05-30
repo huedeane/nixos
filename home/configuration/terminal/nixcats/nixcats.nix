@@ -76,7 +76,7 @@ in
 
     packageDefinitions.replace = {
       nvim =
-        { pkgs, name, ... }:
+        { pkgs, ... }:
         {
           settings = {
             suffix-path = true;

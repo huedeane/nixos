@@ -31,6 +31,7 @@ vim.opt.scrolloff = 10                                      -- keep 10 lines vis
 vim.opt.conceallevel = 0                                    -- don't hide * markup for bold and italic but not substitution markers
 vim.opt.cursorline = true                                   -- highlight the line the cursor is on
 vim.opt.smoothscroll = true        -- scroll by screen lines rather than file lines
+vim.opt.foldlevel = 99             -- start with all folds open
 
 ------------
 -- Search --
@@ -68,7 +69,6 @@ vim.opt.undolevels = 10000         -- maximum number of undo steps
 --   diff = "╱",
 --   eob = " ",
 -- }
--- opt.foldlevel = 99             -- start with all folds open
 -- opt.foldmethod = "indent"      -- fold based on indentation
 -- opt.foldtext = ""              -- use default text for closed folds
 -- opt.formatoptions = "jcroqlnt" -- control auto-formatting: join comments, wrap, insert comment leader etc
