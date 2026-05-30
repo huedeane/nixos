@@ -36,7 +36,7 @@ in
             # Nix
             nixd
             nil
-            nixfmt-rfc-style
+            nixfmt
 
             # YAML
             yaml-language-server
@@ -58,6 +58,7 @@ in
             lualine-lsp-progress
             gitsigns-nvim
             blink-cmp
+            nvim-treesitter.withAllGrammars
           ];
 
           lsp = with pkgs.vimPlugins; [

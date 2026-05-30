@@ -21,9 +21,9 @@ vim.diagnostic.config({
   severity_sort = true,    -- sort by severity
 })
 
-require('lze').load({ 
+require('lze').load({
   { import = "plugins.functionality.blink-cmp" },
-  { import = "plugins.fucntionality.nvim-treesitter" },
+  { import = "plugins.functionality.nvim-treesitter" },
 
   { import = "plugins.visual.catppuccin-nvim" },
   { import = "plugins.visual.gitsigns-nvim" },
