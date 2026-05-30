@@ -17,7 +17,9 @@ require('lze').load({
   { import = "plugins.general.catppuccin-nvim", },
   { import = "plugins.general.gitsigns-nvim", },
   { import = "plugins.general.lualine-nvim", },
-  
+  { import = "plugins.general.blink-cmp", },
+
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.nixd", }
+  { import = "plugins.lsp.lua-ls", }
 })
