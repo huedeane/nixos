@@ -53,12 +53,15 @@ in
 
         optionalPlugins = {
           general = with pkgs.vimPlugins; [
-            vim-startuptime
+            # vim-startuptime
+            # lualine-lsp-progress
             lualine-nvim
-            lualine-lsp-progress
             gitsigns-nvim
             blink-cmp
             nvim-treesitter.withAllGrammars
+            neo-tree-nvim
+            nui-nvim
+            nvim-web-devicons
           ];
 
           lsp = with pkgs.vimPlugins; [
@@ -92,10 +95,10 @@ in
           extra = {
             nixdExtras.nixpkgs = "import ${pkgs.path} {}";
             nixdExtras.nixos_options = ''
-              (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.${hostname}.options
+              (builtins.getFlake "path:${inputs.self.outPath}").nixosConfigurations.${hostname}.options
             '';
             nixdExtras.home_manager_options = ''
-              (builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.${username}.options
+              (builtins.getFlake "path:${inputs.self.outPath}").homeConfigurations.${username}.options
             '';
           };
         };

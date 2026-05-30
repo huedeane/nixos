@@ -28,6 +28,7 @@ require('lze').load({
   { import = "plugins.visual.catppuccin-nvim" },
   { import = "plugins.visual.gitsigns-nvim" },
   { import = "plugins.visual.lualine-nvim" },
+  { import = "plugins.visual.neo-tree-nvim" },
 
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.nixd" },
