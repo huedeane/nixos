@@ -36,6 +36,11 @@
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
     };
+
+    # WSL
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+    };
   };
 
   outputs =
@@ -45,6 +50,7 @@
       home-manager,
       sops-nix,
       nixCats,
+      nixos-wsl,
       ...
     }@inputs:
     let
@@ -52,18 +58,27 @@
       configDir = self.outPath;
       configHomeDir = "${self.outPath}/home/configuration";
       editMode = builtins.getEnv "EDIT_MODE" == "1";
-    in
-    {
-      nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
+
+      mkSystem =
+        {
+          hostname,
+          username,
+          hostModule,
+          homeProfile,
+          extraModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs configDir;
-            hostname = "laptop";
-            username = "huedeane";
+            inherit
+              inputs
+              configDir
+              hostname
+              username
+              ;
           };
           modules = [
-            ./hosts/profiles/laptop/configuration.nix
+            hostModule
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
@@ -72,10 +87,8 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 overwriteBackup = true;
-                sharedModules = [
-                  nixCats.homeModule
-                ];
-                users.huedeane = ./home/profiles/main.nix;
+                sharedModules = [ nixCats.homeModule ];
+                users.${username} = homeProfile;
                 extraSpecialArgs = {
                   inherit
                     inputs
@@ -83,12 +96,29 @@
                     configHomeDir
                     editMode
                     ;
-                  hostname = "laptop";
-                  username = "huedeane";
+                  inherit hostname username;
                 };
               };
             }
-          ];
+          ]
+          ++ extraModules;
+        };
+    in
+    {
+      nixosConfigurations = {
+        laptop = mkSystem {
+          hostname = "laptop";
+          username = "huedeane";
+          hostModule = ./hosts/profiles/laptop/configuration.nix;
+          homeProfile = ./home/profiles/main.nix;
+        };
+
+        wsl = mkSystem {
+          hostname = "nixos";
+          username = "nixos";
+          hostModule = ./hosts/profiles/wsl/configuration.nix; # ← separate file
+          homeProfile = ./home/profiles/wsl.nix;
+          extraModules = [ nixos-wsl.nixosModules.default ];
         };
       };
     };
