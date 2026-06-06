@@ -100,11 +100,8 @@
   # System packages
   environment.systemPackages = with pkgs; [
     git
-    jq
-    kitty
     nix-prefetch-github
     gcc
-    sops
     age
   ];
 

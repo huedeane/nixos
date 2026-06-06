@@ -10,13 +10,10 @@
 {
   imports = [
     (configHomeDir + "/terminal/bash/bash.nix")
-    (configHomeDir + "/terminal/kitty/kitty.nix")
     (configHomeDir + "/terminal/yazi/yazi.nix")
-    (configHomeDir + "/terminal/git/git.nix")
     (configHomeDir + "/terminal/gitui/gitui.nix")
     (configHomeDir + "/terminal/fastfetch/fastfetch.nix")
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
-    (configHomeDir + "/security/sops/sops.nix")
   ];
 
   home = {
@@ -43,7 +40,7 @@
       tree
 
       # Formatter
-      nixfmt-rfc-style
+      nixfmt
     ];
   };
 

@@ -33,17 +33,21 @@
   };
 
   home.activation.gitCredentials = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    GITHUB_USERNAME=$(cat /run/user/1000/secrets/github_username)
-    GITHUB_EMAIL=$(cat /run/user/1000/secrets/github_email)
-    GITHUB_KEY=$(cat /run/user/1000/secrets/github_key)
-
-    mkdir -p "${config.xdg.configHome}/git"
-    cat > "${config.xdg.configHome}/git/identity" << EOF
+    if [ -f /run/user/1000/secrets/github_username ] && \
+       [ -f /run/user/1000/secrets/github_email ] && \
+       [ -f /run/user/1000/secrets/github_key ]; then
+        GITHUB_USERNAME=$(cat /run/user/1000/secrets/github_username)
+        GITHUB_EMAIL=$(cat /run/user/1000/secrets/github_email)
+        GITHUB_KEY=$(cat /run/user/1000/secrets/github_key)
+        mkdir -p "${config.xdg.configHome}/git"
+        cat > "${config.xdg.configHome}/git/identity" << EOF
     [user]
         name = $GITHUB_USERNAME
         email = $GITHUB_EMAIL
     EOF
-
-    echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" > "$HOME/.git-credentials"
+        echo "https://$GITHUB_USERNAME:$GITHUB_KEY@github.com" > "$HOME/.git-credentials"
+      else
+        echo "Skipping git credentials: sops secrets not found"
+      fi
   '';
 }

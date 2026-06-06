@@ -114,9 +114,9 @@
         };
 
         wsl = mkSystem {
-          hostname = "nixos";
+          hostname = "wsl";
           username = "nixos";
-          hostModule = ./hosts/profiles/wsl/configuration.nix; # ← separate file
+          hostModule = ./hosts/profiles/wsl/configuration.nix;
           homeProfile = ./home/profiles/wsl.nix;
           extraModules = [ nixos-wsl.nixosModules.default ];
         };
