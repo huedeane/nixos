@@ -25,6 +25,7 @@
     (configHomeDir + "/application/vesktop/vesktop.nix")
     (configHomeDir + "/application/firefox/firefox.nix")
     (configHomeDir + "/application/obsidian/obsidian.nix")
+    (configHomeDir + "/application/godot/godot.nix")
     (configHomeDir + "/widget/rofi/rofi.nix")
     # (configHomeDir + "/widget/ags/ags.nix")
     (configHomeDir + "/security/sops/sops.nix")

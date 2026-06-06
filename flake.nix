@@ -59,27 +59,32 @@
       configHomeDir = "${self.outPath}/home/configuration";
       editMode = builtins.getEnv "EDIT_MODE" == "1";
 
+      sharedArgs = {
+        inherit
+          inputs
+          configDir
+          configHomeDir
+          editMode
+          ;
+      };
+
       mkSystem =
         {
           hostname,
           username,
           hostModule,
           homeProfile,
-          extraModules ? [ ],
+          extraSystemModules ? [ ],
+          extraHomeModules ? [ ],
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit
-              inputs
-              configDir
-              hostname
-              username
-              ;
+            inherit sharedArgs;
+            inherit hostname username;
           };
           modules = [
             hostModule
-            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -87,30 +92,34 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 overwriteBackup = true;
-                sharedModules = [ nixCats.homeModule ];
+                sharedModules = extraHomeModules;
                 users.${username} = homeProfile;
                 extraSpecialArgs = {
-                  inherit
-                    inputs
-                    configDir
-                    configHomeDir
-                    editMode
-                    ;
+                  inherit sharedArgs;
                   inherit hostname username;
                 };
               };
             }
           ]
-          ++ extraModules;
+          ++ extraSystemModules;
         };
     in
     {
+      homeModules = {
+        godot = ./derivations/godot/godot.nix;
+      };
+
       nixosConfigurations = {
         laptop = mkSystem {
           hostname = "laptop";
           username = "huedeane";
           hostModule = ./hosts/profiles/laptop/configuration.nix;
           homeProfile = ./home/profiles/main.nix;
+          extraSystemModules = [ sops-nix.nixosModules.sops ];
+          extraHomeModules = [
+            nixCats.homeModule
+            self.homeModules.godot
+          ];
         };
 
         wsl = mkSystem {
@@ -118,7 +127,8 @@
           username = "nixos";
           hostModule = ./hosts/profiles/wsl/configuration.nix;
           homeProfile = ./home/profiles/wsl.nix;
-          extraModules = [ nixos-wsl.nixosModules.default ];
+          extraSystemModules = [ nixos-wsl.nixosModules.default ];
+          extraHomeModules = [ nixCats.homeModule ];
         };
       };
     };
