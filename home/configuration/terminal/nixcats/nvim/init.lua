@@ -24,6 +24,7 @@ vim.diagnostic.config({
 require('lze').load({
   { import = "plugins.functionality.blink-cmp" },
   { import = "plugins.functionality.nvim-treesitter" },
+  { import = "plugins.functionality.edgy-nvim" },
 
   { import = "plugins.visual.catppuccin-nvim" },
   { import = "plugins.visual.gitsigns-nvim" },

@@ -1,7 +1,9 @@
 {
+  config,
   inputs,
   hostname,
   username,
+  editMode,
   ...
 }:
 let
@@ -21,7 +23,7 @@ in
         lspsAndRuntimeDeps = {
           lsp = with pkgs; [
             # C#
-            omnisharp-roslyn
+            rosyln-nvim
 
             # Lua
             lua-language-server
@@ -50,7 +52,7 @@ in
             catppuccin-nvim
           ];
         };
-
+    
         optionalPlugins = {
           general = with pkgs.vimPlugins; [
             # vim-startuptime
@@ -62,6 +64,7 @@ in
             neo-tree-nvim
             nui-nvim
             nvim-web-devicons
+            edgy-nvim
           ];
 
           lsp = with pkgs.vimPlugins; [
@@ -85,7 +88,8 @@ in
           settings = {
             suffix-path = true;
             suffix-LD = true;
-            wrapRc = true;
+            wrapRc = if editMode then false else true;
+            unwrappedCfgPath = if editMode then "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/nixcats/nvim" else null;
             aliases = [ "vim" ];
           };
           categories = {

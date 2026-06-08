@@ -10,6 +10,7 @@ return {
     require("neo-tree").setup({
       close_if_last_window = true,
       window = {
+        position = "right",
         width = 30,
         mappings = {
           ["<space>"] = "toggle_node",
@@ -27,6 +28,7 @@ return {
           ["p"] = "paste_from_clipboard",
           ["m"] = "move",
         },
+        border = "rounded",
       },
       filesystem = {
         filtered_items = {
@@ -52,7 +54,5 @@ return {
         },
       },
     })
-
-    vim.keymap.set("n", "-", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
   end,
 }

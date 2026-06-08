@@ -63,9 +63,11 @@ return {
         default_integrations = true,
         auto_integrations = false,
         integrations = {
-            cmp = true,
             gitsigns = true,
-            nvimtree = true,
+            neotree = true,
+            blink_cmp = {
+              style = 'borded',
+            },
             notify = false,
             mini = {
                 enabled = true,

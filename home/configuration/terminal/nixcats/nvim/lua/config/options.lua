@@ -32,6 +32,11 @@ vim.opt.conceallevel = 0                                    -- don't hide * mark
 vim.opt.cursorline = true                                   -- highlight the line the cursor is on
 vim.opt.smoothscroll = true        -- scroll by screen lines rather than file lines
 vim.opt.foldlevel = 99             -- start with all folds open
+vim.opt.fillchars = {              -- characters used to fill UI elements
+  eob = " ",
+}
+vim.opt.winborder = "rounded"
+vim.opt.showtabline = 0
 
 ------------
 -- Search --
@@ -61,14 +66,6 @@ vim.opt.undolevels = 10000         -- maximum number of undo steps
 -- -- Only in LazyVim
 -- -- =====================
 -- opt.autowrite = true           -- automatically save before commands like :next and :make
--- opt.fillchars = {              -- characters used to fill UI elements
---   foldopen = "",
---   foldclose = "",
---   fold = " ",
---   foldsep = " ",
---   diff = "╱",
---   eob = " ",
--- }
 -- opt.foldmethod = "indent"      -- fold based on indentation
 -- opt.foldtext = ""              -- use default text for closed folds
 -- opt.formatoptions = "jcroqlnt" -- control auto-formatting: join comments, wrap, insert comment leader etc
