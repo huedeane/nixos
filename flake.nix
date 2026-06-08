@@ -79,8 +79,7 @@
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {
-            inherit sharedArgs;
+          specialArgs = sharedArgs // {
             inherit hostname username;
           };
           modules = [
@@ -94,8 +93,7 @@
                 overwriteBackup = true;
                 sharedModules = extraHomeModules;
                 users.${username} = homeProfile;
-                extraSpecialArgs = {
-                  inherit sharedArgs;
+                extraSpecialArgs = sharedArgs // {
                   inherit hostname username;
                 };
               };
