@@ -14,11 +14,11 @@ require('lze').h.lsp.set_ft_fallback(function(name)
 end)
 
 vim.diagnostic.config({
-  virtual_text = true,     -- show error message inline
-  signs = true,            -- show signs in sign column
-  underline = true,        -- underline the error
+  virtual_text = true,      -- show error message inline
+  signs = true,             -- show signs in sign column
+  underline = true,         -- underline the error
   update_in_insert = false, -- don't update while typing
-  severity_sort = true,    -- sort by severity
+  severity_sort = true,     -- sort by severity
 })
 
 require('lze').load({
@@ -35,7 +35,7 @@ require('lze').load({
   { import = "plugins.lsp.nixd" },
   { import = "plugins.lsp.lua-language-server" },
   { import = "plugins.lsp.vscode-langservers-extracted" },
-  { import = "plugins.lsp.omnisharp-roslyn" },
   { import = "plugins.lsp.taplo" },
   { import = "plugins.lsp.yaml-language-server" },
+  { import = "plugins.lsp.rosyln-nvim" },
 })

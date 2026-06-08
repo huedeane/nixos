@@ -1,41 +1,26 @@
 return {
   "roslyn.nvim",
-  enabled = nixCats('lsp') or false,
-  event = "DeferredUIEnter",
-  load = function(name)
-    vim.cmd.packadd(name)
-  end,
+  ft = { "cs" },
   after = function()
-    vim.lsp.config("roslyn", {
-      capabilities = require('blink.cmp').get_lsp_capabilities(),
-      settings = {
-        ["csharp|inlay_hints"] = {
-          ["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
-          ["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
-          ["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
-          ["csharp_enable_inlay_hints_for_types"] = true,
-          ["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
-          ["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
-          ["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
-          ["dotnet_enable_inlay_hints_for_other_parameters"] = true,
-          ["dotnet_enable_inlay_hints_for_parameters"] = true,
-          ["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
-          ["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
-          ["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
-        },
-        ["csharp|completion"] = {
-          ["dotnet_provide_regex_completions"] = true,
-          ["dotnet_show_completion_items_from_unimported_namespaces"] = true,
-          ["dotnet_show_name_completion_suggestions"] = true,
-        },
-      },
+    require("roslyn").setup({
+      filewatching = "auto",
+      broad_search = false,
+      lock_target = false,
     })
 
-    require("roslyn").setup({
-      exe = vim.fn.expand("~/.dotnet/tools/roslyn-language-server"),
-      filewatching = "auto",
-      broad_search = true,
-      lock_target = false,
+    vim.lsp.config("roslyn", {
+      on_attach = function()
+      end,
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+      settings = {
+        ["csharp|inlay_hints"] = {
+          csharp_enable_inlay_hints_for_implicit_object_creation = true,
+          csharp_enable_inlay_hints_for_implicit_variable_types = true,
+        },
+        ["csharp|code_lens"] = {
+          dotnet_enable_references_code_lens = true,
+        },
+      },
     })
   end,
 }

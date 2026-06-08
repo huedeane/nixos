@@ -23,7 +23,8 @@ in
         lspsAndRuntimeDeps = {
           lsp = with pkgs; [
             # C#
-            rosyln-nvim
+            roslyn-ls
+            dotnet-sdk
 
             # Lua
             lua-language-server
@@ -50,6 +51,10 @@ in
             lze
             lzextras
             catppuccin-nvim
+          ];
+
+          lsp = with pkgs.vimPlugins; [
+            roslyn-nvim
           ];
         };
     
