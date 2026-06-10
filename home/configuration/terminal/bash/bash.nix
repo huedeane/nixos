@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  lib,
+  hostname,
+  ...
+}:
 
 {
   programs.bash = {
@@ -11,6 +16,12 @@
       secret-edit = "nvim ${config.xdg.configHome}/sops/age/keys.txt";
       hypr-update = "nvim ${config.xdg.configHome}/nixos/home/configuration/compositor/hyprland/hyprland.conf";
     };
+
+    profileExtra = lib.mkIf (hostname == "wsl1") ''
+      if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+      fi
+    '';
 
     initExtra = ''
       # Functions

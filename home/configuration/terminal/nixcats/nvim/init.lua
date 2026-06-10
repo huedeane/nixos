@@ -37,5 +37,5 @@ require('lze').load({
   { import = "plugins.lsp.vscode-langservers-extracted" },
   { import = "plugins.lsp.taplo" },
   { import = "plugins.lsp.yaml-language-server" },
-  { import = "plugins.lsp.rosyln-nvim" },
+  { import = "plugins.lsp.roslyn-nvim" },
 })

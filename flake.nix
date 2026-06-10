@@ -55,6 +55,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
       configDir = self.outPath;
       configHomeDir = "${self.outPath}/home/configuration";
       editMode = builtins.getEnv "EDIT_MODE" == "1";
@@ -101,6 +102,21 @@
           ]
           ++ extraSystemModules;
         };
+
+      mkStandalone =
+        {
+          hostname,
+          username,
+          homeProfile,
+          extraHomeModules ? [ ],
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ homeProfile ] ++ extraHomeModules;
+          extraSpecialArgs = sharedArgs // {
+            inherit hostname username;
+          };
+        };
     in
     {
       homeModules = {
@@ -120,12 +136,21 @@
           ];
         };
 
-        wsl = mkSystem {
-          hostname = "wsl";
+        wsl2 = mkSystem {
+          hostname = "wsl2";
           username = "nixos";
           hostModule = ./hosts/profiles/wsl/configuration.nix;
           homeProfile = ./home/profiles/wsl.nix;
           extraSystemModules = [ nixos-wsl.nixosModules.default ];
+          extraHomeModules = [ nixCats.homeModule ];
+        };
+      };
+
+      homeConfiguration = {
+        wsl1 = mkStandalone {
+          hostname = "wsl1";
+          username = "nix";
+          homeProfile = ./home/profiles/wsl.nix;
           extraHomeModules = [ nixCats.homeModule ];
         };
       };
