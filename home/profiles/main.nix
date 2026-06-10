@@ -74,6 +74,11 @@
 
       # Formatter
       nixfmt-rfc-style
+
+      # Find
+      fzf
+      fd
+      ripgrep
     ];
   };
 

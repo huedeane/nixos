@@ -41,6 +41,11 @@
 
       # Formatter
       nixfmt
+
+      # Find
+      fzf
+      fd
+      ripgrep
     ];
   };
 

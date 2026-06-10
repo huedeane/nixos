@@ -1,0 +1,1 @@
+/home/huedeane/.config/nixos/home/configuration/terminal/nixcats/nvim/lua/config/keymaps.lua

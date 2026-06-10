@@ -51,13 +51,14 @@ in
             lze
             lzextras
             catppuccin-nvim
+            fzf-lua
           ];
 
           lsp = with pkgs.vimPlugins; [
             roslyn-nvim
           ];
         };
-    
+
         optionalPlugins = {
           general = with pkgs.vimPlugins; [
             # vim-startuptime
@@ -70,6 +71,7 @@ in
             nui-nvim
             nvim-web-devicons
             edgy-nvim
+            which-key-nvim
           ];
 
           lsp = with pkgs.vimPlugins; [

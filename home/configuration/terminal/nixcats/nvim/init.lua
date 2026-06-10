@@ -25,11 +25,13 @@ require('lze').load({
   { import = "plugins.functionality.blink-cmp" },
   { import = "plugins.functionality.nvim-treesitter" },
   { import = "plugins.functionality.edgy-nvim" },
+  { import = "plugins.functionality.fzf-lua" },
 
   { import = "plugins.visual.catppuccin-nvim" },
   { import = "plugins.visual.gitsigns-nvim" },
   { import = "plugins.visual.lualine-nvim" },
   { import = "plugins.visual.neo-tree-nvim" },
+  { import = "plugins.visual.which-key-nvim" },
 
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.nixd" },
