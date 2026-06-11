@@ -23,9 +23,11 @@ in
         "kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/kitty.conf";
         "kitty/themes/catppuccin-frappe-theme.conf".source =
           config.lib.file.mkOutOfStoreSymlink "${dirPath}/themes/catppuccin-frappe-theme.conf";
+        "kitty/script/nvim_watcher.py".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/script/nvim_watcher.py";
       }
     else
       {
         "kitty/themes/catppuccin-frappe-theme.conf".source = ./themes/catppuccin-frappe-theme.conf;
+        "kitty/script/nvim_watcher.py".source = "${dirPath}/script/nvim_watcher.py";
       };
 }

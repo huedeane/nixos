@@ -78,9 +78,4 @@ in
     source = ./scripts/dunst-clipboard-notify.sh;
     executable = true;
   };
-
-  home.file.".local/bin/nvim" = {
-    source = ./scripts/nvim;
-    executable = true;
-  };
 }

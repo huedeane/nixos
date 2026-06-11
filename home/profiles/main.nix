@@ -73,7 +73,7 @@
       wl-clipboard
 
       # Formatter
-      nixfmt-rfc-style
+      nixfmt
 
       # Find
       fzf
