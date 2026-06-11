@@ -9,8 +9,9 @@ return {
   after = function()
     require("neo-tree").setup({
       close_if_last_window = true,
+      popup_border_style = "rounded",
       window = {
-        position = "right",
+        position = "left",
         width = 30,
         mappings = {
           ["<space>"] = "toggle_node",

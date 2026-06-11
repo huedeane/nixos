@@ -2,7 +2,7 @@ vim.g.mapleader = ' '        -- set space as the global leader key
 vim.g.maplocalleader = ' '   -- set space as the local leader key (for buffer-local mappings)
 
 -------------
--- Spacing --
+-- spacing --
 -------------
 vim.opt.expandtab = true       -- insert spaces instead of tabs
 vim.opt.tabstop = 2            -- number of spaces a tab character counts for
@@ -10,36 +10,40 @@ vim.opt.shiftwidth = 2         -- number of spaces for each indent level
 vim.opt.shiftround = true      -- round indentation to nearest multiple of shiftwidth
 vim.opt.smartindent = true     -- automatically insert indents for new lines
 vim.opt.breakindent = true     -- wrapped lines continue visually indented
--- vim.opt.cpoptions:append('I')  -- dont move cursor to start of line on certain movements
+-- vim.opt.cpoptions:append('i')  -- dont move cursor to start of line on certain movements
 
 -----------
--- Cases --
+-- cases --
 -----------
 vim.o.ignorecase = true        -- case-insensitive search by default
 vim.o.smartcase = true         -- override ignorecase if search contains uppercase
 
 ------------
--- Visual --
+-- visual --
 ------------
 vim.opt.list = true 	                                      -- show invisible characters
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- define how invisible chars look
 vim.opt.number = true                                       -- show absolute line numbers
 vim.opt.relativenumber = false                              -- show relative line numbers (combined with above: hybrid mode)
 vim.opt.signcolumn = "yes"                                  -- always show the sign column
-vim.opt.termguicolors = true                                -- enable 24-bit RGB color in the terminal
+vim.opt.termguicolors = true                                -- enable 24-bit rgb color in the terminal
 vim.opt.scrolloff = 10                                      -- keep 10 lines visible above/below cursor when scrolling
 vim.opt.conceallevel = 0                                    -- don't hide * markup for bold and italic but not substitution markers
 vim.opt.cursorline = true                                   -- highlight the line the cursor is on
 vim.opt.smoothscroll = true        -- scroll by screen lines rather than file lines
 vim.opt.foldlevel = 99             -- start with all folds open
-vim.opt.fillchars = {              -- characters used to fill UI elements
+vim.opt.fillchars = {              -- characters used to fill ui elements
   eob = " ",
+  vertleft = "│",
+  horiz = "⎯",
 }
 vim.opt.winborder = "rounded"
 vim.opt.showtabline = 0
+vim.opt.splitkeep = "screen"       -- keep text on screen when splitting
+vim.opt.laststatus = 3             -- single global statusline instead of one per window
 
 ------------
--- Search --
+-- search --
 ------------
 vim.opt.hlsearch = true           -- highlight all search matches
 vim.opt.inccommand = 'split'      -- show live preview of substitutions in a split
@@ -47,23 +51,23 @@ vim.opt.inccommand = 'split'      -- show live preview of substitutions in a spl
 
 
 -------------------
--- Functionality --
+-- functionality --
 -------------------
 vim.opt.mouse = 'a'                                                 -- enable mouse support in all modes
 vim.opt.undofile = true                                             -- persist undo history across sessions
 vim.opt.completeopt = 'menu,preview,noselect'                       -- completion menu: show menu, preview, dont auto-select
 -- vim.opt.completeopt = "menu,menuone,noselect"                    -- similar to yours but uses menuone instead of preview
-vim.opt.updatetime = 250                                            -- ms before writing swap file / triggering CursorHold
+vim.opt.updatetime = 250                                            -- ms before writing swap file / triggering cursorhold
 vim.opt.timeoutlen = 300                                            -- ms to wait for a mapped sequence to complete
-vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"  -- sync with system clipboard, disabled over SSH to use OSC 52
+vim.opt.clipboard = vim.env.ssh_connection and "" or "unnamedplus"  -- sync with system clipboard, disabled over ssh to use osc 52
 vim.opt.confirm = true                                              -- prompt to save changes before exiting a modified buffer
 vim.opt.undolevels = 10000         -- maximum number of undo steps
 
 
 
--- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')          -- clear search highlights on Esc
+-- vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')          -- clear search highlights on esc
 -- -- =====================
--- -- Only in LazyVim
+-- -- only in lazyvim
 -- -- =====================
 -- opt.autowrite = true           -- automatically save before commands like :next and :make
 -- opt.foldmethod = "indent"      -- fold based on indentation
@@ -72,18 +76,16 @@ vim.opt.undolevels = 10000         -- maximum number of undo steps
 -- opt.grepformat = "%f:%l:%c:%m" -- format string for grep output
 -- opt.grepprg = "rg --vimgrep"   -- use ripgrep as the grep program
 -- opt.jumpoptions = "view"       -- restore view when jumping through the jumplist
--- opt.laststatus = 3             -- single global statusline instead of one per window
 -- opt.linebreak = true           -- wrap long lines at word boundaries
 -- opt.pumblend = 10              -- pseudo-transparency for the popup menu
 -- opt.pumheight = 10             -- max number of items in the popup menu
 -- opt.ruler = false              -- hide the default cursor position ruler
 -- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" } -- what to save in a session
--- opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- suppress various intro and completion messages
--- opt.showmode = false           -- dont show -- INSERT --, statusline handles it
+-- opt.shortmess:append({ w = true, i = true, c = true, c = true }) -- suppress various intro and completion messages
+-- opt.showmode = false           -- dont show -- insert --, statusline handles it
 -- opt.sidescrolloff = 8          -- keep 8 columns visible to the left/right of cursor
 -- opt.spelllang = { "en" }       -- set spell check language to english
 -- opt.splitbelow = true          -- open horizontal splits below the current window
--- opt.splitkeep = "screen"       -- keep text on screen when splitting
 -- opt.splitright = true          -- open vertical splits to the right of the current window
 -- opt.virtualedit = "block"      -- allow cursor to move into empty space in visual block mode
 -- opt.wildmode = "longest:full,full" -- command-line completion: complete longest match then full list

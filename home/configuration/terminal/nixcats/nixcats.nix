@@ -51,7 +51,6 @@ in
             lze
             lzextras
             catppuccin-nvim
-            fzf-lua
           ];
 
           lsp = with pkgs.vimPlugins; [
@@ -72,6 +71,7 @@ in
             nvim-web-devicons
             edgy-nvim
             which-key-nvim
+            fzf-lua
           ];
 
           lsp = with pkgs.vimPlugins; [

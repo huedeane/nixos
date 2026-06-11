@@ -1,6 +1,6 @@
 return {
   "lualine.nvim",
-  load = function (name)
+  load = function(name)
     vim.cmd.packadd(name)
   end,
   after = function(plugin)
@@ -14,7 +14,7 @@ return {
           normal = {
             a = { bg = C.lavender, fg = C.mantle, gui = "bold" },
             b = { bg = C.surface0, fg = C.lavender },
-            c = { bg = transparent_bg, fg = C.text },
+            c = { bg = transparent_bg, fg = C.yellow },
           },
           insert = {
             a = { bg = C.green, fg = C.base, gui = "bold" },
@@ -39,11 +39,11 @@ return {
           inactive = {
             a = { bg = transparent_bg, fg = C.blue },
             b = { bg = transparent_bg, fg = C.surface1, gui = "bold" },
-            c = { bg = transparent_bg, fg = C.overlay0 },
+            c = { bg = transparent_bg, fg = C.lavender },
           },
         },
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         disabled_filetypes = {
           statusline = {},
           winbar = {},
@@ -72,24 +72,62 @@ return {
         }
       },
       sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {'filename'},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
         lualine_y = {},
         lualine_z = {}
       },
       tabline = {},
-      winbar = {},
-      inactive_winbar = {},
+      winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            function()
+              local bufname = vim.api.nvim_buf_get_name(0)
+              if bufname:match("neo%-tree filesystem") then
+                return "%=File System%="
+              elseif bufname:match("neo%-tree buffers") then
+                return "%=Buffers%="
+              end
+              return "%=Editor%="
+            end
+          },
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            function()
+              local bufname = vim.api.nvim_buf_get_name(0)
+              if bufname:match("neo%-tree filesystem") then
+                return "%=File System%="
+              elseif bufname:match("neo%-tree buffers") then
+                return "%=Buffers%="
+              end
+              return "%=Editor%="
+            end
+          },
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
       extensions = {}
     })
   end,
