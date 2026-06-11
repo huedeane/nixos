@@ -41,6 +41,16 @@ hm-edit() {
   nvim "$NIXOS_CONFIG/home/profiles/$1.nix"
 }
 
+veb() {
+  if [[ "$TERM" == "xterm-kitty" ]]; then
+    kitty @ set-spacing padding=0 margin=0
+    command nvim "$@"
+    kitty @ set-spacing padding=default margin=default
+  else
+    command nvim "$@"
+  fi
+}
+
 help() {
   echo ""
   echo "Nix"
