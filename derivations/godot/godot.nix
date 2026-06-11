@@ -19,12 +19,12 @@ let
       runtimeLibs =
         with pkgs;
         [
-          xorg.libX11
-          xorg.libXcursor
-          xorg.libXinerama
-          xorg.libXrandr
-          xorg.libXi
-          xorg.libXext
+          libX11
+          libXcursor
+          libXinerama
+          libXrandr
+          libXi
+          libXext
           libGL
           alsa-lib
           libpulseaudio
