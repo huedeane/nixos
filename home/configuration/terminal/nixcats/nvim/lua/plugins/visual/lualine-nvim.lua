@@ -14,7 +14,8 @@ return {
           normal = {
             a = { bg = C.lavender, fg = C.mantle, gui = "bold" },
             b = { bg = C.surface0, fg = C.lavender },
-            c = { bg = transparent_bg, fg = C.yellow },
+            c = { bg = transparent_bg, fg = C.yellow, gui = "bold" },
+            x = { fg = C.lavender },
           },
           insert = {
             a = { bg = C.green, fg = C.base, gui = "bold" },

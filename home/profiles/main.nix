@@ -17,6 +17,7 @@
     (configHomeDir + "/terminal/gitui/gitui.nix")
     (configHomeDir + "/terminal/fastfetch/fastfetch.nix")
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
+    (configHomeDir + "/terminal/tmux/tmux.nix")
     (configHomeDir + "/compositor/hyprland/hyprland.nix")
     (configHomeDir + "/daemon/mpd/mpd.nix")
     (configHomeDir + "/daemon/dunst/dunst.nix")
@@ -53,7 +54,6 @@
 
     packages = with pkgs; [
       # Terminal
-      tmux
       cava
       caligula
       tree
