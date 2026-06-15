@@ -125,6 +125,18 @@
     "flakes"
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-termfilechooser
+    ];
+    config = {
+      hyprland.default = [ "hyprland" "gtk" ];
+      hyprland."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+    };
+  };
+
   # Version
   system.stateVersion = "24.11";
 }

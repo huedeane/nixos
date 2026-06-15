@@ -38,6 +38,7 @@ in
         "NIXOS_CONFIG,${config.xdg.configHome}/nixos"
         "NIXOS_CONFIGHOMEDIR,${config.xdg.configHome}/nixos/home/configuration"
         "MOZ_LEGACY_PROFILES,1"
+        "GTK_USE_PORTAL,1"
       ];
 
       exec-once = [

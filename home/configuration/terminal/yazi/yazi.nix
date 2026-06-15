@@ -20,9 +20,9 @@ in
       if !editMode then
         {
           initLua = ./init.lua;
-          settings = builtins.fromTOML (builtins.readFile ./yazi.toml);
-          keymap = builtins.fromTOML (builtins.readFile ./keymap.toml);
-          theme = builtins.fromTOML (builtins.readFile ./theme.toml);
+          settings = fromTOML (builtins.readFile ./yazi.toml);
+          keymap = fromTOML (builtins.readFile ./keymap.toml);
+          theme = fromTOML (builtins.readFile ./theme.toml);
           plugins = {
             full-border = ./plugins/full-border.yazi;
             git = ./plugins/git.yazi;
@@ -35,8 +35,17 @@ in
         { }
     );
 
-  xdg.configFile =
-    if editMode then
+  xdg.configFile = lib.mkMerge [
+    {
+      "xdg-desktop-portal-termfilechooser/config".text = ''
+        [filechooser]
+        cmd=${config.home.homeDirectory}/.local/bin/yazi-wrapper.sh
+        default_dir=$HOME
+        open_mode=suggested
+        save_mode=last
+      '';
+    }
+    (lib.optionalAttrs editMode (
       {
         "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/yazi.toml";
         "yazi/keymap.toml".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/keymap.toml";
@@ -50,32 +59,46 @@ in
         name = "yazi/plugins/${name}";
         value.source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/plugins/${name}";
       }) (builtins.readDir ./plugins)
-    else
-      { };
+    ))
+  ];
 
   home.file.".local/bin/tree-directory.sh" = {
     source = ./scripts/tree-directory.sh;
     executable = true;
   };
 
-  xdg.desktopEntries.yazi = {
-    name = "Yazi";
-    genericName = "File Manager";
-    icon = "yazi";
-    terminal = false;
-    exec = "kitty --class tui-yazi yazi %f";
-    type = "Application";
-    mimeType = [ "inode/directory" ];
-    categories = [
-      "System"
-      "FileManager"
-      "FileTools"
-      "ConsoleOnly"
-      "X-TUI"
-    ];
-    settings = {
-      TryExec = "yazi";
-      Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";
+  home.file.".local/bin/yazi-wrapper.sh" = {
+    source = ./scripts/yazi-wrapper.sh;
+    executable = true;
+  };
+
+  xdg.desktopEntries = {
+    yazi = {
+      name = "Yazi";
+      genericName = "File Manager";
+      icon = "yazi";
+      terminal = false;
+      exec = "kitty --class tui-yazi yazi %f";
+      type = "Application";
+      mimeType = [ "inode/directory" ];
+      categories = [
+        "System"
+        "FileManager"
+        "FileTools"
+        "ConsoleOnly"
+        "X-TUI"
+      ];
+      settings = {
+        TryExec = "yazi";
+        Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";
+      };
+    };
+
+    yazi-chooser = {
+      name = "Yazi (File Chooser)";
+      exec = "kitty --class tui-file-chooser yazi %f";
+      terminal = false;
+      type = "Application";
     };
   };
 }
