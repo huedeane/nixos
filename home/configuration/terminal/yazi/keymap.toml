@@ -86,6 +86,7 @@ keymap = [
   { on = "Z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
 
   { on = ["<C-;>", "t"], run = "shell 'tree-directory.sh Yazi'", desc = "Get directory tree output" },
+  { on = ["<C-;>", "v"], run = "shell 'nvim .' --block", desc = "Open nvim at this directory" },
 
   # Linemode
   { on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },

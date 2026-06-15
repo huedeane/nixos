@@ -17,11 +17,12 @@ parse_git_branch() {
 }
 
 calculate_command_length() {
-  # Get the current command line number
-  local command_length=$(echo -n '\#' | wc -m)
+  # Get the length of current command line number and add 1 to account for next render
+  local command_num="\#"
+  local command_length=$(( ${command_num@P} + 1 ))
 
   # Echo the command length so it can be captured
-  echo ${command_length}
+  echo ${#command_length}
 }
 
 # Function to calculate directory length
@@ -33,7 +34,7 @@ caculate_directory_length() {
   local prompt_length=$(echo -n "$pwd2" | wc -m)
 
   # Calculate how much space is left after the prompt
-  local directory_length=$((prompt_length)) # Adjusted for "$ " at the end
+  local directory_length=$((prompt_length))
 
   # Echo the directory length so it can be captured
   echo ${directory_length}
@@ -61,7 +62,7 @@ calculate_line_length() {
   # Set static length left-side
   local leftover_length_left=13
   # Set static length right-side
-  local leftover_length_right=13
+  local leftover_length_right=12
 
   # Get Caculated Length
   local directory_length=$(caculate_directory_length)
@@ -72,7 +73,7 @@ calculate_line_length() {
   local term_width=$(tput cols)
 
   local term_filler=0
-  if [[ !"$TERM" == "xterm-kitty" ]]; then
+  if [[ "$TERM" != "xterm-kitty" && "$TERM" != "tmux-256color" ]]; then
     term_filler=1
   fi
 
@@ -170,36 +171,18 @@ set_ps1() {
     fi
   }
 
-  generate_right_align_text() {
-    # Set static length left-side
-    local leftover_length_left="9"
-
-    # Set static length left-side
-    local leftover_length_right="16"
-
-    # Set align text
-    local right_text="${icon_left}${space}${icon_box_drawings_light_horizontal}${space}${info_time}${space}${icon_box_drawings_light_horizontal}${icon_box_drawings_light_horizontal}${icon_box_drawings_light_arc_up_and_left}${space}" # Replace with the text you want
-
-    # Get Terminal Width
-    local terminal_width=$(tput cols)
-
-    # Calculate the padding for right alignment
-    local right_space=$(((terminal_width + 6) - ${leftover_length_right} - ${leftover_length_right}))
-
-    # If there is room, print the right-aligned text
-    if [ $right_space -gt 0 ]; then
-      tput sc # Save the cursor position
-      tput ed # Clear from the cursor to the end of the line
-      printf "%${right_space}s%s" "" "$right_text"
-      tput rc # Restore the cursor position
-    fi
-  }
-
   local pwd2=$(echo "$PWD" | sed -e "s:$HOME:~:" -e "s:\([^/]\)/:\1$(printf ' \356\202\261 '):g")
 
-  if [[ "$TERM" == "xterm-kitty" ]]; then
+  if [[ -n "$__first_prompt" ]]; then
+    local leading=""
+    __first_prompt=""
+  else
+    local leading="\n"
+  fi
+
+  if [[ "$TERM" == "xterm-kitty" || "$TERM" == "tmux-256color" ]]; then
     PS1=$(
-      printf "%s" "\n" \
+      printf "%s" "${leading}" \
         "${begin}\e[${foreground};2;${color_lavender}m${end}${icon_box_drawings_light_arc_down_and_right}${icon_box_drawings_light_horizontal}${icon_left_half_black_circle}${end_color}" \
         "${begin}\e[${background};2;${color_lavender}m\e[${foreground};2;${color_black}m${end}${info_command_number}${space}${end_color}" \
         "${begin}\e[${background};2;${color_white}m\e[${foreground};2;${color_lavender}m${end}${icon_segment_seperator}${end_color}" \
@@ -216,7 +199,7 @@ set_ps1() {
     )
   else
     PS1=$(
-      printf "%s" "\n" \
+      printf "%s" "${leading}" \
         "${begin}\e[${foreground};2;${color_lavender}m${end}${icon_box_drawings_light_arc_down_and_right}${icon_box_drawings_light_horizontal}${end_color}" \
         "${begin}\e[${background};2;${color_lavender}m\e[${foreground};2;${color_black}m${end}${space}${info_command_number}${space}${end_color}" \
         "${begin}\e[${background};2;${color_white}m\e[${foreground};2;${color_lavender}m${end}${icon_segment_seperator}${end_color}" \
@@ -231,4 +214,5 @@ set_ps1() {
   fi
 }
 
+__first_prompt=1
 PROMPT_COMMAND="set_ps1"

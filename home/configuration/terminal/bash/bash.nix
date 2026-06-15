@@ -4,7 +4,9 @@
   hostname,
   ...
 }:
-
+let
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/bash";
+in
 {
   programs.bash = {
     enable = true;
@@ -25,13 +27,13 @@
 
     initExtra = ''
       # Functions
-      source ${./function/functions.sh}
+      source ${dirPath}/function/functions.sh
 
       # PS1
-      source ${./function/ps1.sh}
+      source ${dirPath}/function/ps1.sh
 
       # Secrets
-      source ${./function/secrets.sh}
+      source ${dirPath}/function/secrets.sh
     '';
   };
 }
