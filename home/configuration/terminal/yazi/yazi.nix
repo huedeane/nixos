@@ -72,33 +72,24 @@ in
     executable = true;
   };
 
-  xdg.desktopEntries = {
-    yazi = {
-      name = "Yazi";
-      genericName = "File Manager";
-      icon = "yazi";
-      terminal = false;
-      exec = "kitty --class tui-yazi yazi %f";
-      type = "Application";
-      mimeType = [ "inode/directory" ];
-      categories = [
-        "System"
-        "FileManager"
-        "FileTools"
-        "ConsoleOnly"
-        "X-TUI"
-      ];
-      settings = {
-        TryExec = "yazi";
-        Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";
-      };
-    };
-
-    yazi-chooser = {
-      name = "Yazi (File Chooser)";
-      exec = "kitty --class tui-file-chooser yazi %f";
-      terminal = false;
-      type = "Application";
+  xdg.desktopEntries.yazi = {
+    name = "Yazi";
+    genericName = "File Manager";
+    icon = "yazi";
+    terminal = false;
+    exec = "kitty --class tui-yazi yazi %f";
+    type = "Application";
+    mimeType = [ "inode/directory" ];
+    categories = [
+      "System"
+      "FileManager"
+      "FileTools"
+      "ConsoleOnly"
+      "X-TUI"
+    ];
+    settings = {
+      TryExec = "yazi";
+      Keywords = "File;Manager;Explorer;Browser;Launcher;Tui";
     };
   };
 }

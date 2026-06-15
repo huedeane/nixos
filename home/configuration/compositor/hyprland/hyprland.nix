@@ -25,25 +25,9 @@ in
     portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 
     settings = {
-      env = [
-        "HYPRCURSOR_THEME,catppuccin-frappe-green-cursors"
-        "HYPRCURSOR_SIZE,36"
-        "XCURSOR_THEME,catppuccin-frappe-green-cursors"
-        "XCURSOR_SIZE,36"
-        "EDITOR,nvim"
-        "VISUAL,nvim"
-        "PATH,$HOME/.local/bin:$PATH"
-        "SUDO_ASKPASS,$HOME/.local/bin/rofi-askpass"
-        "NIXOS_HOST,${hostname}"
-        "NIXOS_CONFIG,${config.xdg.configHome}/nixos"
-        "NIXOS_CONFIGHOMEDIR,${config.xdg.configHome}/nixos/home/configuration"
-        "MOZ_LEGACY_PROFILES,1"
-        "GTK_USE_PORTAL,1"
-      ];
-
       exec-once = [
         "uwsm app -- waybar"
-        "uwsm qpp -- hyprmoncfgd"
+        "uwsm app -- hyprmoncfgd"
         "uwsm app -- rofi-polkit-agent"
         "uwsm app -- dunst-clipboard-notify.sh"
       ];
@@ -59,6 +43,39 @@ in
       else
         "source = $HOME/.config/nixos/home/configuration/compositor/hyprland/hyprland.conf";
   };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-termfilechooser
+    ];
+    config = {
+      common.default = [ "gtk" ];
+      common."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      hyprland.default = [ "hyprland" "gtk" ];
+      hyprland."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+    };
+  };
+
+  xdg.configFile."uwsm/env".text = ''
+    export PATH="$HOME/.local/bin:$PATH"
+    export GTK_USE_PORTAL=1
+    export XCURSOR_THEME=catppuccin-frappe-green-cursors
+    export XCURSOR_SIZE=36
+    export EDITOR=nvim
+    export VISUAL=nvim
+    export MOZ_LEGACY_PROFILES=1
+    export NIXOS_HOST=${hostname}
+    export NIXOS_CONFIG=${config.xdg.configHome}/nixos
+    export NIXOS_CONFIGHOMEDIR=${config.xdg.configHome}/nixos/home/configuration
+    export SUDO_ASKPASS=$HOME/.local/bin/rofi-askpass
+  '';
+
+  xdg.configFile."uwsm/env-hyprland".text = ''
+    export HYPRCURSOR_THEME=catppuccin-frappe-green-cursors
+    export HYPRCURSOR_SIZE=36
+  '';
 
   home.file.".local/bin/nix-rebuild.sh" = {
     source = ./scripts/nix-rebuild.sh;

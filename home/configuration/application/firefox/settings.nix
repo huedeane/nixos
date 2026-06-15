@@ -179,4 +179,7 @@
   "findbar.highlightAll" = true;
   "layout.word_select.eat_space_to_next_word" = false;
   "browser.autofocus" = false;
+
+  # Tui Prompt
+  "widget.use-xdg-desktop-portal.file-picker" = 1;
 }
