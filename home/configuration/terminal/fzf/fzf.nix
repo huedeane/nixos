@@ -13,6 +13,7 @@ in
     bat
     fd
     ripgrep
+    file
   ];
 
   programs.fzf = {

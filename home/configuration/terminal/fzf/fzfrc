@@ -1,20 +1,60 @@
+# --- Layout ---
 --style=full
---layout=reverse
 --height=100%
---preview-window=right:55%:wrap
+--preview-window='right,50%,wrap,<60(up,60%,wrap)'
+--border --padding 1,2
+
+# --- Symbol ---
 --prompt="  "
 --pointer="➤"
 --marker="➤"
---info=inline
---border=rounded
---input-border=rounded
---list-border=rounded
---preview-border=rounded
---input-label=" Prompt "
+--color=pointer:#232634
+--color=marker:#BABBF1
+
+# --- Border ---
+--border-label=" Search "
+--border=bold
+--color=border:#BABBF1,label:#E5C890
+
+# --- List ---
 --list-label=" Results "
+--list-border=sharp
+--bind 'result:transform-list-label:
+  if [[ -z $FZF_QUERY ]]; then
+    echo " $FZF_MATCH_COUNT items "
+  else
+    echo " $FZF_MATCH_COUNT matches for [$FZF_QUERY] "
+  fi
+  '
+--bind 'ctrl-r:change-list-label( Reloading the list )+reload(sleep 2; git ls-files)'
+--color 'list-border:#737994,list-label:#BABBF1'
+
+# --- Preview ---
 --preview-label=" Preview "
---color=bg+:#414559,bg:#303446,spinner:#F2D5CF,hl:#E78284
---color=fg:#C6D0F5,header:#E78284,info:#CA9EE6,pointer:#F2D5CF
---color=marker:#BABBF1,fg+:#C6D0F5,prompt:#CA9EE6,hl+:#E78284
---color=selected-bg:#51576D
---color=border:#737994,label:#C6D0F5
+--preview-border=sharp
+--preview 'fzf-preview.sh {}'
+--bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}'
+--color 'preview-border:#737994,preview-label:#BABBF1'
+
+# --- Input ---
+--input-label " Input "
+--input-border=sharp
+--prompt=" > "
+--color 'input-border:#737994,input-label:#BABBF1,input:#BABBF1'
+--color=prompt:#BABBF1
+--color=spinner:#F2D5CF
+
+# --- Info ---
+--color=info:#BABBF1
+
+# --- Header ---
+--header-label " File Type "
+--header-border=sharp
+--bind 'focus:transform-header:file --brief {} || echo "No file selected"'
+--color 'header-border:#737994,header-label:#BABBF1,header:#BABBF1'
+
+# --- Other ---
+--color=bg:#303446,fg:#C6D0F5
+--color=bg+:#babbf1,fg+:#232634
+--color=hl:#E78284,hl+:#E78284
+--color=selected-bg:#BABBF1
