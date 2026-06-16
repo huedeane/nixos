@@ -19,6 +19,7 @@
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
     (configHomeDir + "/terminal/tmux/tmux.nix")
     (configHomeDir + "/terminal/nix-search-tv/nix-search-tv.nix")
+    (configHomeDir + "/terminal/fzf/fzf.nix")
     (configHomeDir + "/compositor/hyprland/hyprland.nix")
     (configHomeDir + "/daemon/mpd/mpd.nix")
     (configHomeDir + "/daemon/dunst/dunst.nix")
@@ -77,7 +78,6 @@
       nixfmt
 
       # Find
-      fzf
       fd
       ripgrep
     ];
