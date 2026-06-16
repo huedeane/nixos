@@ -18,6 +18,7 @@
     (configHomeDir + "/terminal/fastfetch/fastfetch.nix")
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
     (configHomeDir + "/terminal/tmux/tmux.nix")
+    (configHomeDir + "/terminal/nix-search-tv/nix-search-tv.nix")
     (configHomeDir + "/compositor/hyprland/hyprland.nix")
     (configHomeDir + "/daemon/mpd/mpd.nix")
     (configHomeDir + "/daemon/dunst/dunst.nix")
