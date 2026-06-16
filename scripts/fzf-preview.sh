@@ -1,0 +1,1 @@
+/home/huedeane/.config/nixos/home/configuration/terminal/fzf/script/fzf-preview.sh

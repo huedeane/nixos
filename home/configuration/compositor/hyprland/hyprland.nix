@@ -70,6 +70,7 @@ in
     export NIXOS_CONFIG=${config.xdg.configHome}/nixos
     export NIXOS_CONFIGHOMEDIR=${config.xdg.configHome}/nixos/home/configuration
     export SUDO_ASKPASS=$HOME/.local/bin/rofi-askpass
+    exprot FZF_DEFAULT_OPTS_FILE=${config.xdg.configHome}/fzf/fzfrc
   '';
 
   xdg.configFile."uwsm/env-hyprland".text = ''

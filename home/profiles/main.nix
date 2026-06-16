@@ -48,6 +48,7 @@
       NIXOS_CONFIG = "${config.xdg.configHome}/nixos";
       NIXOS_CONFIGHOMEDIR = "${config.xdg.configHome}/nixos/home/configuration";
       MOZ_LEGACY_PROFILES = "1";
+      FZF_DEFAULT_OPTS_FILE = "${config.xdg.configHome}/fzf/fzfrc";
     };
 
     sessionPath = [
@@ -76,10 +77,6 @@
 
       # Formatter
       nixfmt
-
-      # Find
-      fd
-      ripgrep
     ];
   };
 
