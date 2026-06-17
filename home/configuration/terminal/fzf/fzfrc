@@ -58,3 +58,6 @@
 --color=bg+:#babbf1,fg+:#232634
 --color=hl:#E78284,hl+:#E78284
 --color=selected-bg:#BABBF1
+--bind 'ctrl-v:execute(nvim {})'
+
+

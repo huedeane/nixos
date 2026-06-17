@@ -123,10 +123,19 @@ PREVIEW_WINDOW='
     fi
 '
 
-$CMD print | fzf \
+HEADER="${HEADER%$'\n'}"
+
+eval "$CMD print | fzf \
     --preview '$CMD preview \$(cat $STATE_FILE) {}' \
     --bind '$OPEN_SOURCE_KEY:execute($CMD source \$(cat $STATE_FILE) {} | xargs $OPENER)' \
     --bind '$OPEN_HOMEPAGE_KEY:execute($CMD homepage \$(cat $STATE_FILE) {} | xargs $OPENER)' \
     --bind $'$SEARCH_SNIPPET_KEY:execute($SEARCH_SNIPPET_CMD | xargs $OPENER)' \
     --bind $'$NIX_SHELL_KEY:become($NIX_SHELL_CMD)' \
     --bind $'$PRINT_PREVIEW_KEY:execute($CMD preview \$(cat $STATE_FILE) {} | less)' \
+    --bind 'focus:transform-header(echo \"$HEADER\")' \
+    --scheme history \
+    --header '$HEADER' \
+    --header-border \
+    --header-label \"Help\" \
+    $FZF_BINDS
+"

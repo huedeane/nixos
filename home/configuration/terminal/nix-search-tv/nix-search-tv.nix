@@ -5,7 +5,7 @@
   ...
 }:
 let
-  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/fzf";
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/nix-search-tv";
 in
 {
   programs.nix-search-tv = {
@@ -27,7 +27,9 @@ in
       ];
       text =
         if editMode then
-          config.lib.file.mkOutOfStoreSymlink "${dirPath}/scripts/nixpkgs.sh"
+          ''
+            exec bash "${dirPath}/scripts/nixpkgs.sh" "$@"
+          ''
         else
           builtins.readFile ./scripts/nixpkgs.sh;
     })
