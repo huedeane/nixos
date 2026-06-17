@@ -1,5 +1,12 @@
-{ pkgs, ... }:
-
+{
+  pkgs,
+  config,
+  editMode,
+  ...
+}:
+let
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/fzf";
+in
 {
   programs.nix-search-tv = {
     enable = true;
@@ -18,7 +25,11 @@
         nix-search-tv
         xdg-utils
       ];
-      text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
+      text =
+        if editMode then
+          config.lib.file.mkOutOfStoreSymlink "${dirPath}/scripts/nixpkgs.sh"
+        else
+          builtins.readFile ./scripts/nixpkgs.sh;
     })
   ];
 }
