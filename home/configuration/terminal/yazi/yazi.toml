@@ -194,8 +194,8 @@ create_offset = [ 0, 0, 50, 3 ]
 
 # rename
 rename_title  = "─ Rename "
-rename_origin = "center"
-rename_offset = [ 0, 0, 50, 3 ]
+rename_origin = "hovered"
+rename_offset = [ 0, 1, 50, 3 ]
 
 # filter
 filter_title  = "─ Filter "

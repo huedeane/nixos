@@ -15,7 +15,7 @@ return {
             a = { bg = C.lavender, fg = C.mantle, gui = "bold" },
             b = { bg = C.surface0, fg = C.lavender },
             c = { bg = transparent_bg, fg = C.yellow, gui = "bold" },
-            x = { fg = C.lavender },
+            -- x = { fg = C.lavender },
           },
           insert = {
             a = { bg = C.green, fg = C.base, gui = "bold" },
@@ -76,7 +76,7 @@ return {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'filesize' , 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { 'fileformat', 'filetype' },
+        lualine_x = { '' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
       },

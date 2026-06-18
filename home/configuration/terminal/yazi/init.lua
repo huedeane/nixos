@@ -93,25 +93,6 @@ Status:children_add(function(self)
   return ui.Line({ ui.Span("  " .. branch .. " "):fg(color):bg("#414559") })
 end, 1000, Status.LEFT)
 
-Status:children_add(function(self)
-  local mode = (CUSTOM_MODE or tostring(self._tab.mode)):upper()
-  local color = mode_colors[mode] or "#000000"
-
-  local h = self._tab.current.hovered
-  if not h then return ui.Line({}) end
-
-  local kind
-  if h.cha.is_dir then
-    kind = "dir"
-  elseif h.cha.is_link then
-    kind = "link"
-  else
-    kind = h.name:match("%.([^.]+)$") or "file"  -- extension, or "file" if none
-  end
-
-  return ui.Line({ ui.Span("  " .. kind .. ""):fg(color):bg("#292c3c") })
-end, 1100, Status.RIGHT)
-
 require("git"):setup()
 require("full-border"):setup({
   type = ui.Border.PLAIN,

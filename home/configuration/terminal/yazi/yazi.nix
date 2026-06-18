@@ -26,7 +26,7 @@ in
           plugins = {
             full-border = ./plugins/full-border.yazi;
             git = ./plugins/git.yazi;
-            cmd-mode = ./plugins/cmd-mode.yazi;
+            custom-mode = ./plugins/custom-mode.yazi;
           };
           flavors = {
             catppuccin-frappe = ./flavors/catppuccin-frappe.yazi;
