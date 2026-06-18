@@ -6,27 +6,27 @@
 cwd = { fg = "#e5c890" }
 
 # Hovered
-hovered         = { fg = "#303446", bg = "#babbf1", bold = true }
+hovered = { fg = "#303446", bg = "#babbf1", bold = true }
 preview_hovered = { fg = "#e5c890", bg = "reset" }
 
 # Find
-find_keyword  = { fg = "#e78284", bold = true, italic = true, underline = true }
+find_keyword = { fg = "#e78284", bold = true, italic = true, underline = true }
 find_position = { fg = "#e78284", bg = "#babbf1", bold = true, italic = true }
 
 # Marker
-marker_copied   = { fg = "#a6d189", bg = "#a6d189" }
-marker_cut      = { fg = "#e78284", bg = "#e78284" }
-marker_marked   = { fg = "#e5c890", bg = "#e5c890" }
+marker_copied = { fg = "#a6d189", bg = "#a6d189" }
+marker_cut = { fg = "#e78284", bg = "#e78284" }
+marker_marked = { fg = "#e5c890", bg = "#e5c890" }
 marker_selected = { fg = "#e5c890", bg = "#e5c890" }
 
 # Count
-count_copied   = { fg = "#303446", bg = "#a6d189" }
-count_cut      = { fg = "#303446", bg = "#e78284" }
+count_copied = { fg = "#303446", bg = "#a6d189" }
+count_cut = { fg = "#303446", bg = "#e78284" }
 count_selected = { fg = "#303446", bg = "#e5c890" }
 
 # Border
 border_symbol = "│"
-border_style  = { fg = "#737994" }
+border_style = { fg = "#737994" }
 
 # : }}}
 
@@ -35,12 +35,12 @@ border_style  = { fg = "#737994" }
 
 [tabs]
 
-active   = { fg = "#303446", bg = "#babbf1", bold = true }
+active = { fg = "#303446", bg = "#babbf1", bold = true }
 inactive = { fg = "#babbf1", bg = "#414559" }
 
 # Seperator
 sep_right = { open = "", close = "" }
-sep_left  = { open = "", close = "" }
+sep_left = { open = "", close = "" }
 
 # : }}}
 
@@ -50,15 +50,15 @@ sep_left  = { open = "", close = "" }
 [mode]
 
 normal_main = { fg = "#303446", bg = "#babbf1", bold = true }
-normal_alt  = { fg = "#babbf1", bg = "#414559" }
+normal_alt = { fg = "#babbf1", bg = "#414559" }
 
 # Select mode
 select_main = { fg = "#303446", bg = "#ca9ee6", bold = true }
-select_alt  = { fg = "#ca9ee6", bg = "#414559" }
+select_alt = { fg = "#ca9ee6", bg = "#414559" }
 
 # Unset mode
-unset_main = { fg = "#303446", bg = "#ef9f76", bold = true }
-unset_alt  = { fg = "#ef9f76", bg = "#414559" }
+unset_main = { fg = "#303446", bg = "#ca9ee6", bold = true }
+unset_alt = { fg = "#ca9ee6", bg = "#414559" }
 
 # : }}}
 
@@ -67,23 +67,23 @@ unset_alt  = { fg = "#ef9f76", bg = "#414559" }
 
 [status]
 # Status
-overall = { fg = "#e5c890"}
+overall = { fg = "#e5c890", bg = '#292c3c' }
 
 # Seperator
-# sep_right = { open = "", close = "" }
-# sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+sep_left = { open = "", close = "" }
 
 # Permissions
-perm_sep   = { fg = "#c6d0f5" }
-perm_type  = { fg = "#c6d0f5" }
-perm_read  = { fg = "#a6d189" }
+perm_sep = { fg = "#c6d0f5" }
+perm_type = { fg = "#c6d0f5" }
+perm_read = { fg = "#a6d189" }
 perm_write = { fg = "#e5c890" }
-perm_exec  = { fg = "#e78284" }
+perm_exec = { fg = "#e78284" }
 
 # Progress
-progress_label  = { fg = "#303446", bold = true }
+progress_label = { fg = "#303446", bold = true }
 progress_normal = { bg = "#e5c890" }
-progress_error  = { bg = "#e78284" }
+progress_error = { bg = "#e78284" }
 
 # : }}}
 
@@ -91,11 +91,11 @@ progress_error  = { bg = "#e78284" }
 
 [which]
 cols = 3
-mask            = { bg = "#414559" }
-cand            = { fg = "#e5c890", bold = true }
-rest            = { fg = "red" }
-desc            = { fg = "#c6d0f5" }
-separator       = "  "
+mask = { bg = "#414559" }
+cand = { fg = "#e5c890", bold = true }
+rest = { fg = "red" }
+desc = { fg = "#c6d0f5" }
+separator = "  "
 separator_style = { fg = "#c6d0f5" }
 
 # : }}}
@@ -103,22 +103,22 @@ separator_style = { fg = "#c6d0f5" }
 # : Confirm {{{
 
 [confirm]
-border      = { fg = "#babbf1" }
-title       = { fg = "#babbf1"}
-content     = { fg = "#e5c890"}
-list        = { fg = "#e5c890"}
-btn_yes     = { fg = "#303446", bg = "#babbf1"}
-btn_no      = { fg = "#303446", bg = "#babbf1"}
-btn_labels  = [ " (Y)es ", " (N)o " ]
+border = { fg = "#babbf1" }
+title = { fg = "#babbf1" }
+content = { fg = "#e5c890" }
+list = { fg = "#e5c890" }
+btn_yes = { fg = "#303446", bg = "#babbf1" }
+btn_no = { fg = "#303446", bg = "#babbf1" }
+btn_labels = [" (Y)es ", " (N)o "]
 
 # : }}}
 
 # : Spotter {{{
 
 [spot]
-border   = { fg = "#babbf1" }
-title    = { fg = "#babbf1" }
-tbl_col  = { fg = "#e5c890" }
+border = { fg = "#babbf1" }
+title = { fg = "#babbf1" }
+tbl_col = { fg = "#e5c890" }
 tbl_cell = { fg = "#e5c890" }
 
 # : }}}
@@ -126,8 +126,8 @@ tbl_cell = { fg = "#e5c890" }
 # : Notification {{{
 
 [notify]
-title_info  = { fg = "#a6d189" }
-title_warn  = { fg = "#e5c890" }
+title_info = { fg = "#a6d189" }
+title_warn = { fg = "#e5c890" }
 title_error = { fg = "#e78284" }
 
 # : }}}
@@ -135,8 +135,8 @@ title_error = { fg = "#e78284" }
 # : Pick {{{
 
 [pick]
-border   = { fg = "#babbf1" }
-active   = { fg = "#e5c890", bold = true }
+border = { fg = "#babbf1" }
+active = { fg = "#e5c890", bold = true }
 inactive = { fg = "#c6d0f5" }
 
 # : }}}
@@ -144,9 +144,9 @@ inactive = { fg = "#c6d0f5" }
 # : Input {{{
 
 [input]
-border   = { fg = "#c6d0f5" }
-title    = { fg = "#babbf1"}
-value    = { fg = "#c6d0f5"}
+border = { fg = "#babbf1" }
+title = { fg = "#babbf1" }
+value = { fg = "#c6d0f5" }
 selected = { reversed = true }
 
 # : }}}
@@ -154,20 +154,20 @@ selected = { reversed = true }
 # : Completion {{{
 
 [cmp]
-border        = { fg = "#c6d0f5" }
-active        = { fg = "#e5c890" }
-inactive      = { fg = "#babbf1" }
-icon_file     = "󰈔"
-icon_folder   = "󰉋"
-icon_command  = ""
+border = { fg = "#c6d0f5" }
+active = { fg = "#e5c890" }
+inactive = { fg = "#babbf1" }
+icon_file = "󰈔"
+icon_folder = "󰉋"
+icon_command = ""
 
 # : }}}
 
 # : Tasks {{{
 
 [tasks]
-border  = { fg = "#c6d0f5" }
-title   = { fg = "#c6d0f5" }
+border = { fg = "#c6d0f5" }
+title = { fg = "#c6d0f5" }
 hovered = { fg = "#e5c890", bold = true }
 
 # : }}}
@@ -175,14 +175,14 @@ hovered = { fg = "#e5c890", bold = true }
 # : Help {{{
 
 [help]
-on          = { fg = "#e5c890" }
-run         = { fg = "#babbf1" }
-desc        = { fg = "#c6d0f5" }
-hovered     = { reversed = true, bold = true }
-footer      = { fg = "#303446", bg = "#babbf1" }
-icon_info   = "test"
-icon_warn   = "test"
-icon_error  = "test"
+on = { fg = "#e5c890" }
+run = { fg = "#babbf1" }
+desc = { fg = "#c6d0f5" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#303446", bg = "#babbf1" }
+icon_info = "test"
+icon_warn = "test"
+icon_error = "test"
 
 # : }}}
 
@@ -191,22 +191,22 @@ icon_error  = "test"
 [filetype]
 
 rules = [
-	# Image
+  # Image
   # { mime = "image/*", fg = "#c6d0f5" },
-	# Media
+  # Media
   # { mime = "{audio,video}/*", fg = "#8caaee" },
-	# Archive
+  # Archive
   # { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#e78284" },
-	# Document
+  # Document
   # { mime = "application/{pdf,doc,rtf}", fg = "#a6d189" },
-	# Virtual file system
+  # Virtual file system
   # { mime = "vfs/{absent,stale}", fg = "#949cbb" },
-	# Fallback
+  # Fallback
   # { url = "*", fg = "#c6d0f5" },
   # { url = "*/", fg = "#8caaee" },
-	
+
   { name = "*", fg = "#c6d0f5" },
-	{ name = "*/", fg = "#c6d0f5" }
+  { name = "*/", fg = "#c6d0f5" },
 ]
 
 # : }}}
@@ -222,24 +222,24 @@ globs = [
 
 dirs = [
   { name = "desktop", text = "", fg = "#e5c890" },
-  { name = "documents", text ="󰪶", fg = "#e5c890"},
-  { name = "downloads", text ="󰇚", fg = "#e5c890"},
-  { name = "music", text ="󰝚", fg = "#e5c890"},
-  { name = "pictures", text ="󰋩", fg = "#e5c890"},
-  { name = "videos", text ="󰕧", fg = "#e5c890"},
-  { name = "documents", text ="󰪶", fg = "#e5c890"},
+  { name = "documents", text = "󰪶", fg = "#e5c890" },
+  { name = "downloads", text = "󰇚", fg = "#e5c890" },
+  { name = "music", text = "󰝚", fg = "#e5c890" },
+  { name = "pictures", text = "󰋩", fg = "#e5c890" },
+  { name = "videos", text = "󰕧", fg = "#e5c890" },
+  { name = "documents", text = "󰪶", fg = "#e5c890" },
 ]
 
 exts = [
   # Music
-  { name = "mp3",  text = "󰝚", fg = "#8caaee" },
+  { name = "mp3", text = "󰝚", fg = "#8caaee" },
   { name = "flac", text = "󰝚", fg = "#8caaee" },
-  { name = "wav",  text = "󰝚", fg = "#8caaee" },
-  { name = "m4a",  text = "󰝚", fg = "#8caaee" },
-  { name = "aac",  text = "󰝚", fg = "#8caaee" },
-  { name = "ogg",  text = "󰝚", fg = "#8caaee" },
+  { name = "wav", text = "󰝚", fg = "#8caaee" },
+  { name = "m4a", text = "󰝚", fg = "#8caaee" },
+  { name = "aac", text = "󰝚", fg = "#8caaee" },
+  { name = "ogg", text = "󰝚", fg = "#8caaee" },
   { name = "opus", text = "󰝚", fg = "#8caaee" },
-  
+
   # Video
   { name = "mp4", text = "󰕧", fg = "#81c8be" },
   { name = "mkv", text = "󰕧", fg = "#81c8be" },
@@ -250,58 +250,58 @@ exts = [
   { name = "webm", text = "󰕧", fg = "#81c8be" },
 
   # Image
-  { name = "jpg",  text = "󰋩", fg = "#a6d189" },
+  { name = "jpg", text = "󰋩", fg = "#a6d189" },
   { name = "jpeg", text = "󰋩", fg = "#a6d189" },
-  { name = "png",  text = "󰋩", fg = "#a6d189" },
-  { name = "gif",  text = "󰋩", fg = "#a6d189" },
-  { name = "bmp",  text = "󰋩", fg = "#a6d189" },
-  { name = "svg",  text = "󰋩", fg = "#a6d189" },
+  { name = "png", text = "󰋩", fg = "#a6d189" },
+  { name = "gif", text = "󰋩", fg = "#a6d189" },
+  { name = "bmp", text = "󰋩", fg = "#a6d189" },
+  { name = "svg", text = "󰋩", fg = "#a6d189" },
   { name = "webp", text = "󰋩", fg = "#a6d189" },
   { name = "tiff", text = "󰋩", fg = "#a6d189" },
 
   # Document
-  { name = "pdf",  text = "󰈙", fg = "#a6d189" },
-  { name = "doc",  text = "󰈙", fg = "#a6d189" },
+  { name = "pdf", text = "󰈙", fg = "#a6d189" },
+  { name = "doc", text = "󰈙", fg = "#a6d189" },
   { name = "docx", text = "󰈙", fg = "#a6d189" },
-  { name = "xls",  text = "󰈙", fg = "#a6d189" },
+  { name = "xls", text = "󰈙", fg = "#a6d189" },
   { name = "xlsx", text = "󰈙", fg = "#a6d189" },
-  { name = "ppt",  text = "󰈙", fg = "#a6d189" },
+  { name = "ppt", text = "󰈙", fg = "#a6d189" },
   { name = "pptx", text = "󰈙", fg = "#a6d189" },
-  { name = "txt",  text = "󰈙", fg = "#a6d189" },
+  { name = "txt", text = "󰈙", fg = "#a6d189" },
 
   # Code
-  { name = "py",   text = "", fg = "#ef9f76" },
-  { name = "js",   text = "", fg = "#ef9f76" },
-  { name = "ts",   text = "", fg = "#ef9f76" },
+  { name = "py", text = "", fg = "#ef9f76" },
+  { name = "js", text = "", fg = "#ef9f76" },
+  { name = "ts", text = "", fg = "#ef9f76" },
   { name = "html", text = "", fg = "#ef9f76" },
-  { name = "css",  text = "", fg = "#ef9f76" },
+  { name = "css", text = "", fg = "#ef9f76" },
   { name = "java", text = "", fg = "#ef9f76" },
-  { name = "cpp",  text = "", fg = "#ef9f76" },
-  { name = "c",    text = "", fg = "#ef9f76" },
-  { name = "sh",   text = "", fg = "#ef9f76" },
+  { name = "cpp", text = "", fg = "#ef9f76" },
+  { name = "c", text = "", fg = "#ef9f76" },
+  { name = "sh", text = "", fg = "#ef9f76" },
 
   # Config
-  { name = "ini",  text = "", fg = "#c6d0f5" },
-  { name = "cfg",  text = "", fg = "#c6d0f5" },
+  { name = "ini", text = "", fg = "#c6d0f5" },
+  { name = "cfg", text = "", fg = "#c6d0f5" },
   { name = "json", text = "", fg = "#c6d0f5" },
-  { name = "xml",  text = "", fg = "#c6d0f5" },
-  { name = "yml",  text = "", fg = "#c6d0f5" },
-  { name = "log",  text = "", fg = "#c6d0f5" },
+  { name = "xml", text = "", fg = "#c6d0f5" },
+  { name = "yml", text = "", fg = "#c6d0f5" },
+  { name = "log", text = "", fg = "#c6d0f5" },
 
   # Font
-  { name = "ttf",  text = "", fg = "#c6d0f5" },
-  { name = "otf",  text = "", fg = "#c6d0f5" },
+  { name = "ttf", text = "", fg = "#c6d0f5" },
+  { name = "otf", text = "", fg = "#c6d0f5" },
   { name = "woff", text = "", fg = "#c6d0f5" },
-  { name = "woff2",text = "", fg = "#c6d0f5" },
+  { name = "woff2", text = "", fg = "#c6d0f5" },
 
   # Compressed
-  { name = "zip",  text = "", fg = "#f4b8e4" },
-  { name = "rar",  text = "", fg = "#f4b8e4" },
-  { name = "7z",   text = "", fg = "#f4b8e4" },
-  { name = "tar",  text = "", fg = "#f4b8e4" },
-  { name = "gz",   text = "", fg = "#f4b8e4" },
-  { name = "bz2",  text = "", fg = "#f4b8e4" },
-  { name = "iso",  text = "", fg = "#f4b8e4" },
+  { name = "zip", text = "", fg = "#f4b8e4" },
+  { name = "rar", text = "", fg = "#f4b8e4" },
+  { name = "7z", text = "", fg = "#f4b8e4" },
+  { name = "tar", text = "", fg = "#f4b8e4" },
+  { name = "gz", text = "", fg = "#f4b8e4" },
+  { name = "bz2", text = "", fg = "#f4b8e4" },
+  { name = "iso", text = "", fg = "#f4b8e4" },
 ]
 
 conds = [

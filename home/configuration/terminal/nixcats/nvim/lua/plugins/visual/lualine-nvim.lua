@@ -39,7 +39,7 @@ return {
           },
           inactive = {
             a = { bg = transparent_bg, fg = C.blue },
-            b = { bg = transparent_bg, fg = C.surface1, gui = "bold" },
+            b = { bg = transparent_bg, fg = C.surface0, gui = "bold" },
             c = { bg = transparent_bg, fg = C.lavender },
           },
         },
@@ -74,9 +74,9 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_b = { 'branch', 'filesize' , 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
       },
