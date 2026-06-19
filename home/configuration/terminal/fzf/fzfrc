@@ -29,13 +29,6 @@
 --bind 'ctrl-r:change-list-label( Reloading the list )+reload(sleep 2; git ls-files)'
 --color 'list-border:#737994,list-label:#BABBF1'
 
-# --- Preview ---
---preview-label=" Preview "
---preview-border=sharp
---preview 'fzf-preview.sh {}'
---bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}'
---color 'preview-border:#737994,preview-label:#BABBF1'
-
 # --- Input ---
 --input-label " Input "
 --input-border=sharp
@@ -47,11 +40,6 @@
 # --- Info ---
 --color=info:#BABBF1
 
-# --- Header ---
---header-label " File Type "
---header-border=sharp
---bind 'focus:transform-header:file --brief {} || echo "No file selected"'
---color 'header-border:#737994,header-label:#BABBF1,header:#BABBF1'
 
 # --- Other ---
 --color=bg:#303446,fg:#C6D0F5
@@ -60,4 +48,8 @@
 --color=selected-bg:#BABBF1
 --bind 'ctrl-v:execute(nvim {})'
 
+# --- Preview ---
+--color 'preview-border:#737994,preview-label:#BABBF1'
 
+# --- Header ---
+--color 'header-border:#737994,header-label:#BABBF1,header:#BABBF1'

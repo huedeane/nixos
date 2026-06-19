@@ -28,4 +28,8 @@ in
     source = ./scripts/fzf-preview.sh;
     executable = true;
   };
+  home.file.".local/bin/fzf-file.sh" = {
+    source = ./scripts/fzf-file.sh;
+    executable = true;
+  };
 }

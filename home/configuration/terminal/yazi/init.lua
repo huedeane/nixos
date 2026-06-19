@@ -39,7 +39,7 @@ Header:children_add(function(self)
     return ""
   end
 
-  return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ": "):fg("#babbf1")
+  return ui.Span(ya.host_name() .. "@" .. ya.user_name() .. ": "):fg("#babbf1")
 end, 500, Header.LEFT)
 
 -- Override status mode to return full string
