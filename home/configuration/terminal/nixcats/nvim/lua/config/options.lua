@@ -41,6 +41,8 @@ vim.opt.winborder = "rounded"
 vim.opt.showtabline = 0
 vim.opt.splitkeep = "screen"       -- keep text on screen when splitting
 vim.opt.laststatus = 3             -- single global statusline instead of one per window
+vim.opt.title = true
+vim.opt.titlestring = "nvim [%t]"
 
 ------------
 -- search --
