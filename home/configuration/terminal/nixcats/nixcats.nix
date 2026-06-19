@@ -4,12 +4,17 @@
   hostname,
   username,
   editMode,
+  pkgs,
   ...
 }:
 let
   utils = inputs.nixCats.utils;
 in
 {
+  home.packages = with pkgs; [
+    nixfmt
+  ];
+
   nixCats = {
     enable = true;
 
@@ -51,6 +56,8 @@ in
             lze
             lzextras
             catppuccin-nvim
+            nui-nvim
+            nvim-notify
           ];
 
           lsp = with pkgs.vimPlugins; [
@@ -67,11 +74,11 @@ in
             blink-cmp
             nvim-treesitter.withAllGrammars
             neo-tree-nvim
-            nui-nvim
             nvim-web-devicons
             edgy-nvim
             which-key-nvim
             fzf-lua
+            noice-nvim
           ];
 
           lsp = with pkgs.vimPlugins; [

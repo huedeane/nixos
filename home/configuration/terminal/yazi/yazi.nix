@@ -2,6 +2,7 @@
   config,
   lib,
   editMode,
+  pkgs,
   ...
 }:
 let
@@ -13,6 +14,9 @@ let
   };
 in
 {
+  home.packages = with pkgs; [
+    tree
+  ];
 
   programs.yazi =
     setting

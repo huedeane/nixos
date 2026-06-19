@@ -1,6 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    tree
+  ];
+
   programs.rmpc = {
     enable = true;
 

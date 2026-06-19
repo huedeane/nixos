@@ -1,8 +1,12 @@
-{ config, editMode, ... }:
+{ config, editMode, pkgs, ... }:
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/daemon/dunst";
 in
 {
+  home.packages = with pkgs; [
+    libnotify
+  ];
+
   services.dunst = {
     enable = true;
   };

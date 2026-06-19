@@ -11,6 +11,11 @@ let
   smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
+  home.packages = with pkgs; [
+    grimblast
+    satty
+    wl-clipboard
+  ];
 
   imports = [
     ./plugins/hyprmoncfg/hyprmoncfg.nix
@@ -53,7 +58,10 @@ in
     config = {
       common.default = [ "gtk" ];
       common."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      hyprland.default = [ "hyprland" "gtk" ];
+      hyprland.default = [
+        "hyprland"
+        "gtk"
+      ];
       hyprland."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
     };
   };

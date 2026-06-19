@@ -57,26 +57,13 @@
 
     packages = with pkgs; [
       # Terminal
-      cava
       caligula
-      tree
 
       # Application
       steam
 
       # Widget
       waybar
-
-      # Library
-      libnotify
-
-      # Screenshot
-      grimblast
-      satty
-      wl-clipboard
-
-      # Formatter
-      nixfmt
     ];
   };
 
