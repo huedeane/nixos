@@ -1,0 +1,146 @@
+[
+  {
+    "keys": "['C-space', '<C-q>']",
+    "group": "tmux",
+    "description": "Kill current window",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-t>']",
+    "group": "tmux",
+    "description": "Create new window",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-h>']",
+    "group": "tmux",
+    "description": "Select previous window",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-j>']",
+    "group": "tmux",
+    "description": "Swap window with next and select it",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-k>']",
+    "group": "tmux",
+    "description": "Swap window with previous and select it",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-l>']",
+    "group": "tmux",
+    "description": "Select next window",
+    "tags": [
+      "window"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-v>']",
+    "group": "tmux",
+    "description": "Create new pane vertically",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'q']",
+    "group": "tmux",
+    "description": "Kill current pane",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'h']",
+    "group": "tmux",
+    "description": "Select previous pane",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'j']",
+    "group": "tmux",
+    "description": "Resize pane left by 5",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'k']",
+    "group": "tmux",
+    "description": "Resize pane right by 5",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'l']",
+    "group": "tmux",
+    "description": "Select next pane",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', 'p']",
+    "group": "tmux",
+    "description": "Move pane to window (prompted)",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-p>']",
+    "group": "tmux",
+    "description": "Break pane into a new window",
+    "tags": [
+      "pane"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-escape>']",
+    "group": "tmux",
+    "description": "Kill tmux server",
+    "tags": [
+      "session"
+    ]
+  },
+  {
+    "keys": "['C-space', '<C-w>']",
+    "group": "tmux",
+    "description": "Choose session tree",
+    "tags": [
+      "session"
+    ]
+  },
+  {
+    "keys": "['C-space', 'escape']",
+    "group": "tmux",
+    "description": "Detach client",
+    "tags": [
+      "session"
+    ]
+  },
+  {
+    "keys": "['C-space', 'r']",
+    "group": "tmux",
+    "description": "Rename current session",
+    "tags": [
+      "session"
+    ]
+  }
+]
