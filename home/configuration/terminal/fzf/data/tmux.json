@@ -1,267 +1,195 @@
 [
   {
-    "keys": "['C-space', '<C-q>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Kill current window",
-    "tags": [
-      "window"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-t>']",
+    "keys": "['<C-space>', '<C-t>']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Create new window",
     "tags": [
-      "window"
+      "window",
+      "create",
+      "new"
     ]
   },
   {
-    "keys": "['C-space', '<C-h>']",
+    "keys": "['<C-space>', '<C-q>']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Kill current window",
+    "tags": [
+      "window",
+      "kill",
+      "close"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '<C-h>']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select previous window",
     "tags": [
-      "window"
+      "window",
+      "navigate",
+      "previous",
+      "prev"
     ]
   },
   {
-    "keys": "['C-space', '<C-j>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Swap window with next and select it",
-    "tags": [
-      "window"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-k>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Swap window with previous and select it",
-    "tags": [
-      "window"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-l>']",
+    "keys": "['<C-space>', '<C-l>']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select next window",
     "tags": [
-      "window"
+      "window",
+      "navigate",
+      "next"
     ]
   },
   {
-    "keys": "['C-space', 't']",
+    "keys": "['<C-space>', '<C-j>']",
     "group": "tmux",
     "mode": "Normal",
-    "description": "Create new pane vertically",
+    "description": "Swap window with next and select it",
     "tags": [
-      "pane"
+      "window",
+      "swap",
+      "move",
+      "reorder"
     ]
   },
   {
-    "keys": "['C-space', 'q']",
+    "keys": "['<C-space>', '<C-k>']",
     "group": "tmux",
     "mode": "Normal",
-    "description": "Kill current pane",
+    "description": "Swap window with previous and select it",
     "tags": [
-      "pane"
+      "window",
+      "swap",
+      "move",
+      "reorder"
     ]
   },
   {
-    "keys": "['C-space', 'h']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Select previous pane",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', 'j']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Resize pane left by 5",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', 'k']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Resize pane right by 5",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', 'l']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Select next pane",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', 'p']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Move pane to window (prompted)",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-p>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Break pane into a new window",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-escape>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Kill tmux server",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['C-space', '<C-w>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Open session tree",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['C-space', 'escape']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Detach client",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['C-space', 'r']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Rename current session",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['C-space', '0']",
+    "keys": "['<C-space>', '0']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 0",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '1']",
+    "keys": "['<C-space>', '1']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 1",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '2']",
+    "keys": "['<C-space>', '2']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 2",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '3']",
+    "keys": "['<C-space>', '3']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 3",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '4']",
+    "keys": "['<C-space>', '4']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 4",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '5']",
+    "keys": "['<C-space>', '5']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 5",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '6']",
+    "keys": "['<C-space>', '6']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 6",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '7']",
+    "keys": "['<C-space>', '7']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 7",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '8']",
+    "keys": "['<C-space>', '8']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 8",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', '9']",
+    "keys": "['<C-space>', '9']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 9",
     "tags": [
-      "window"
+      "window",
+      "select",
+      "jump",
+      "number"
     ]
   },
   {
-    "keys": "['C-space', ':']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Prompt for a command",
-    "tags": [
-      "command"
-    ]
-  },
-  {
-    "keys": "['C-space', '<']",
+    "keys": "['<C-space>', '<']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Display window menu",
@@ -271,7 +199,126 @@
     ]
   },
   {
-    "keys": "['C-space', '>']",
+    "keys": "['<C-space>', 't']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Create new pane vertically",
+    "tags": [
+      "pane",
+      "split",
+      "create",
+      "new"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'q']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Kill current pane",
+    "tags": [
+      "pane",
+      "kill",
+      "close"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'h']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Select previous pane",
+    "tags": [
+      "pane",
+      "navigate",
+      "previous",
+      "prev",
+      "focus"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'l']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Select next pane",
+    "tags": [
+      "pane",
+      "navigate",
+      "next",
+      "focus"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'j']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Resize pane left by 5",
+    "tags": [
+      "pane",
+      "resize",
+      "width",
+      "left"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'k']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Resize pane right by 5",
+    "tags": [
+      "pane",
+      "resize",
+      "width",
+      "right"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'p']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Move pane to window (prompted)",
+    "tags": [
+      "pane",
+      "move",
+      "join",
+      "window"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '<C-p>']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Break pane into a new window",
+    "tags": [
+      "pane",
+      "break",
+      "move",
+      "window"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'z']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Zoom the active pane",
+    "tags": [
+      "pane",
+      "zoom",
+      "fullscreen",
+      "maximize"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'space']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Rotate selected pane",
+    "tags": [
+      "pane",
+      "rotate",
+      "reorder"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '>']",
     "group": "tmux",
     "mode": "Normal",
     "description": "Display pane menu",
@@ -281,93 +328,239 @@
     ]
   },
   {
-    "keys": "['C-space', '?']",
+    "keys": "['<C-space>', 'n']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Create new session",
+    "tags": [
+      "session",
+      "create",
+      "new"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 's']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Save tmux environment",
+    "tags": [
+      "session",
+      "save",
+      "resurrect",
+      "persist",
+      "backup"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'r']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Restore tmux environment",
+    "tags": [
+      "session",
+      "restore",
+      "resurrect",
+      "persist",
+      "backup"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'R']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Rename current session",
+    "tags": [
+      "session",
+      "rename"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'Q']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Detach client",
+    "tags": [
+      "session",
+      "detach",
+      "client",
+      "exit"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '<C-w>']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Open session tree",
+    "tags": [
+      "session",
+      "tree",
+      "switch",
+      "navigate",
+      "picker"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '<C-escape>']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Kill tmux server",
+    "tags": [
+      "session",
+      "kill",
+      "server",
+      "quit",
+      "exit"
+    ]
+  },
+  {
+    "keys": "['<C-space>', ':']",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Prompt for a command",
+    "tags": [
+      "command",
+      "prompt"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '?']",
     "group": "tmux",
     "mode": "Normal",
     "description": "List key bindings",
     "tags": [
-      "help"
+      "help",
+      "keybind",
+      "list",
+      "bindings"
     ]
   },
   {
-    "keys": "['C-space', 'z']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Zoom the active pane",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['C-space', '<space>']",
-    "group": "tmux",
-    "mode": "Normal",
-    "description": "Rotate selected pane",
-    "tags": [
-      "pane"
-    ]
-  },
-  {
-    "keys": "['x']",
-    "group": "tmux",
-    "mode": "Session Tree",
-    "description": "Kill selected item",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['h'] / ['←']",
-    "group": "tmux",
-    "mode": "Session Tree",
-    "description": "Collapse selected item",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['l'] / ['→']",
-    "group": "tmux",
-    "mode": "Session Tree",
-    "description": "Expand selected item",
-    "tags": [
-      "session"
-    ]
-  },
-  {
-    "keys": "['j'] / ['↑']",
+    "keys": "['<C-space>', 'j']",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move up in list",
     "tags": [
-      "session"
+      "session",
+      "tree",
+      "navigate",
+      "up"
     ]
   },
   {
-    "keys": "['k'] / ['↓']",
+    "keys": "['<C-space>', '↑']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Move up in list",
+    "tags": [
+      "session",
+      "tree",
+      "navigate",
+      "up"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'k']",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move down in list",
     "tags": [
-      "session"
+      "session",
+      "tree",
+      "navigate",
+      "down"
     ]
   },
   {
-    "keys": "['Enter']",
+    "keys": "['<C-space>', '↓']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Move down in list",
+    "tags": [
+      "session",
+      "tree",
+      "navigate",
+      "down"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'h']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Collapse selected item",
+    "tags": [
+      "session",
+      "tree",
+      "collapse"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '←']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Collapse selected item",
+    "tags": [
+      "session",
+      "tree",
+      "collapse"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'l']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Expand selected item",
+    "tags": [
+      "session",
+      "tree",
+      "expand"
+    ]
+  },
+  {
+    "keys": "['<C-space>', '→']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Expand selected item",
+    "tags": [
+      "session",
+      "tree",
+      "expand"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'Enter']",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Execute item",
     "tags": [
-      "session"
+      "session",
+      "tree",
+      "select",
+      "execute",
+      "open"
     ]
   },
   {
-    "keys": "['Escape']",
+    "keys": "['<C-space>', 'x']",
+    "group": "tmux",
+    "mode": "Session Tree",
+    "description": "Kill selected item",
+    "tags": [
+      "session",
+      "tree",
+      "kill",
+      "close",
+      "delete"
+    ]
+  },
+  {
+    "keys": "['<C-space>', 'Escape']",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Execute session tree",
     "tags": [
-      "session"
+      "session",
+      "tree",
+      "escape"
     ]
   }
 ]

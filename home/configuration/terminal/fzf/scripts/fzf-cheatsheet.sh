@@ -27,7 +27,7 @@ build() {
       | [ $program,
           (.mode // ""),
           (.keys // ""),
-          ((.tags // []) | join(",")),
+          ((.tags // []) | join(", ")),
           (.description // "") ]
       | @tsv
     ' "$f"
@@ -114,7 +114,8 @@ set -- \
   --bind 'result:transform-list-label:echo ""' \
   --ellipsis='...' \
   --delimiter='\t' \
-  --with-nth=1
+  --exact \
+  --with-nth=1 
 
 if [ "$no_match" -eq 1 ]; then
   set -- "$@" \

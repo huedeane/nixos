@@ -36,7 +36,6 @@ in
       }
       battery
       prefix-highlight
-      tmux-fzf
     ]
     ++ lib.optional editMode {
       plugin = tmux-autoreload;

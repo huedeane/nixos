@@ -47,6 +47,7 @@
 --color=hl:#E78284,hl+:#E78284
 --color=selected-bg:#BABBF1
 --bind 'ctrl-v:execute(nvim {})'
+--no-hscroll
 
 # --- Preview ---
 --color 'preview-border:#737994,preview-label:#BABBF1'
