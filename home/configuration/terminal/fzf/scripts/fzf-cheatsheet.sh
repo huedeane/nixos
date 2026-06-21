@@ -4,7 +4,7 @@ set -eu
 CHEAT_DIR="$HOME/.config/nixos/home/configuration/terminal/fzf/data"
 CMD="${1:-${CALLER_TTY:-}}"
 case "$CMD" in
-  /dev/*|pts/*) CMD=$(detect_foreground "$CMD") ;;
+  /dev/*|pts/*) CMD=$(detect-foreground.sh "$CMD") ;;
 esac
 filter="$CMD"
 
