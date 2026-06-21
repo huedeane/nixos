@@ -2,7 +2,7 @@
 --style=full
 --height=100%
 --preview-window='right,50%,wrap,<60(up,60%,wrap)'
---border --padding 1,2
+--border --padding 1,0,0,0
 
 # --- Symbol ---
 --prompt="  "

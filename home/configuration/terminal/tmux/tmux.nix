@@ -49,4 +49,9 @@ in
       '' else
         builtins.readFile ./tmux.conf;
   };
+
+  home.file.".local/bin/detect-foreground.sh" = {
+    source = ./scripts/detect-foreground.sh;
+    executable = true;
+  };
 }
