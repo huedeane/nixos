@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 set -eu
-
 CHEAT_DIR="$HOME/.config/nixos/home/configuration/terminal/fzf/data"
+export CHEAT_DIR          # so the fzf ctrl-e child process can see it
+
 CMD="${1:-${CALLER_TTY:-}}"
 case "$CMD" in
   /dev/*|pts/*) CMD=$(detect-foreground.sh "$CMD") ;;
@@ -42,17 +43,17 @@ if [ -n "$filter" ] && ! printf '%s\n' "$DATA" | cut -f1 | grep -Fxq "$filter"; 
 fi
 
 # --- Build display list (drops Group when filtering, drops Mode when all empty) ---
+# Output fields:  1=display line   2=group   3=description
 display() {
   cols=$(tput cols </dev/tty 2>/dev/null || echo 80)
   OFFSET=10
   width=$((cols > OFFSET ? cols - OFFSET : cols))
-  printf '%s\n' "$DATA" | awk -F'\t' -v filter="$filter" -v width="$width" '
+  printf '%s\n' "$DATA" | awk -F'\t' -v filter="$filter" -v width="$width" -v cheatdir="$CHEAT_DIR" '
     BEGIN {
       wp = length("Group"); wm = length("Mode")
       wk = length("Keys");  wd = length("Description")
     }
     {
-      # Store fields into array, filter if possible
       if (filter != "" && $1 != filter) next
       n++
       prog[n]=$1; mode[n]=$2; keys[n]=$3; tags[n]=$4; desc[n]=$5
@@ -73,8 +74,7 @@ display() {
         show_mode = 0
       }
       for (i = 1; i <= n; i++) if (mode[i] != "") { show_mode = 1; break }
-
-      # Header
+      # Header (single field, no hidden cols)
       h = ""
       if (show_group) h = h sprintf("%-*s  ", wp, "Group")
       if (show_mode)  h = h sprintf("%-*s  ", wm, "Mode")
@@ -82,8 +82,7 @@ display() {
       h = h sprintf("%-*s  ", wd, "Description")
       h = h "Tags"
       print h
-
-      # Rows
+      # Rows: display \t group \t description
       for (i = 1; i <= n; i++) {
         line = ""
         if (show_group) line = line sprintf("%-*s  ", wp, prog[i])
@@ -91,7 +90,7 @@ display() {
         line = line sprintf("%-*s  ", wk, keys[i])
         line = line sprintf("%-*s  ", wd, desc[i])
         line = line tags[i]
-        printf "%s\t%s\t%s\n", line, keys[i], desc[i]
+        printf "%s\t%s\t%s\n", line, (cheatdir "/" prog[i] ".json"), desc[i]
       }
     }
   '
@@ -112,10 +111,11 @@ set -- \
   --header-lines=1 \
   --list-label='' \
   --bind 'result:transform-list-label:echo ""' \
+  --bind 'ctrl-e:execute(ln=$(grep -nF -- {3} {2} | head -1 | cut -d: -f1); nvim "+${ln:-1}" {2})' \
   --ellipsis='...' \
   --delimiter='\t' \
   --exact \
-  --with-nth=1 
+  --with-nth=1
 
 if [ "$no_match" -eq 1 ]; then
   set -- "$@" \

@@ -1,0 +1,2568 @@
+[
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Exit visual mode, clear selection, or cancel search",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "",
+    "description": "Exit visual mode, clear selection, or cancel search",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'q'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Quit the process",
+    "tags": [
+      "quit",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Q'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Quit without outputting cwd-file",
+    "tags": [
+      "quit",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Close the current tab, or quit if it's last",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-z'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Suspend the process",
+    "tags": [
+      "suspend"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Previous file",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Next file",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Previous file",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Next file",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-u'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor up half page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "halfpage"
+    ]
+  },
+  {
+    "keys": "'Ctrl-d'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor down half page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "halfpage"
+    ]
+  },
+  {
+    "keys": "'Ctrl-b'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor up one page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "page",
+      "fullpage"
+    ]
+  },
+  {
+    "keys": "'Ctrl-f'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor down one page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "page",
+      "fullpage"
+    ]
+  },
+  {
+    "keys": "'S-PageUp'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor up half page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "halfpage"
+    ]
+  },
+  {
+    "keys": "'S-PageDown'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor down half page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "halfpage"
+    ]
+  },
+  {
+    "keys": "'PageUp'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor up one page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "page",
+      "fullpage"
+    ]
+  },
+  {
+    "keys": "'PageDown'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Move cursor down one page",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor",
+      "page",
+      "fullpage"
+    ]
+  },
+  {
+    "keys": "'g', 'g'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go to top",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'G'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go to bottom",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'h'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Back to the parent directory",
+    "tags": [
+      "navigate",
+      "parent",
+      "back",
+      "directory"
+    ]
+  },
+  {
+    "keys": "'l'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Enter the child directory",
+    "tags": [
+      "navigate",
+      "open",
+      "directory"
+    ]
+  },
+  {
+    "keys": "'Left'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Back to the parent directory",
+    "tags": [
+      "navigate",
+      "parent",
+      "back",
+      "directory"
+    ]
+  },
+  {
+    "keys": "'Right'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Enter the child directory",
+    "tags": [
+      "navigate",
+      "open",
+      "directory"
+    ]
+  },
+  {
+    "keys": "'H'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Back to previous directory",
+    "tags": [
+      "navigate",
+      "history",
+      "back"
+    ]
+  },
+  {
+    "keys": "'L'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Forward to next directory",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'Space'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Toggle the current selection state",
+    "tags": [
+      "select",
+      "toggle"
+    ]
+  },
+  {
+    "keys": "'Ctrl-a'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Select all files",
+    "tags": [
+      "select",
+      "all",
+      "toggle"
+    ]
+  },
+  {
+    "keys": "'Ctrl-r'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Invert selection of all files",
+    "tags": [
+      "select",
+      "all",
+      "toggle"
+    ]
+  },
+  {
+    "keys": "'v'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Enter visual mode (selection mode)",
+    "tags": [
+      "select",
+      "visual"
+    ]
+  },
+  {
+    "keys": "'V'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Enter visual mode (unset mode)",
+    "tags": [
+      "select",
+      "visual"
+    ]
+  },
+  {
+    "keys": "'K'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Seek up 5 units in the preview",
+    "tags": [
+      "preview",
+      "seek",
+      "scroll"
+    ]
+  },
+  {
+    "keys": "'J'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Seek down 5 units in the preview",
+    "tags": [
+      "preview",
+      "seek",
+      "scroll"
+    ]
+  },
+  {
+    "keys": "'Tab'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Spot hovered file",
+    "tags": [
+      "spot",
+      "preview"
+    ]
+  },
+  {
+    "keys": "'o'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open selected files",
+    "tags": [
+      "open"
+    ]
+  },
+  {
+    "keys": "'O'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open selected files interactively",
+    "tags": [
+      "open",
+      "interactive"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open selected files",
+    "tags": [
+      "open"
+    ]
+  },
+  {
+    "keys": "'S-Enter'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open selected files interactively",
+    "tags": [
+      "open",
+      "interactive"
+    ]
+  },
+  {
+    "keys": "'y'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Yank selected files (copy)",
+    "tags": [
+      "copy",
+      "yank",
+      "cut"
+    ]
+  },
+  {
+    "keys": "'x'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Yank selected files (cut)",
+    "tags": [
+      "yank",
+      "cut"
+    ]
+  },
+  {
+    "keys": "'p'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Paste yanked files",
+    "tags": [
+      "paste"
+    ]
+  },
+  {
+    "keys": "'P'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Paste yanked files (overwrite if the destination exists)",
+    "tags": [
+      "paste"
+    ]
+  },
+  {
+    "keys": "'-'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Symlink the absolute path of yanked files",
+    "tags": [
+      "link",
+      "symlink"
+    ]
+  },
+  {
+    "keys": "'_'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Symlink the relative path of yanked files",
+    "tags": [
+      "link",
+      "symlink"
+    ]
+  },
+  {
+    "keys": "'Ctrl--'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Hardlink yanked files",
+    "tags": [
+      "link",
+      "hardlink"
+    ]
+  },
+  {
+    "keys": "'Y'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Cancel the yank status",
+    "tags": [
+      "yank",
+      "cancel"
+    ]
+  },
+  {
+    "keys": "'X'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Cancel the yank status",
+    "tags": [
+      "yank",
+      "cancel"
+    ]
+  },
+  {
+    "keys": "'d'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Trash selected files",
+    "tags": [
+      "delete",
+      "remove",
+      "trash"
+    ]
+  },
+  {
+    "keys": "'D'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Permanently delete selected files",
+    "tags": [
+      "delete",
+      "remove",
+      "trash",
+      "permanent",
+      "force"
+    ]
+  },
+  {
+    "keys": "'a'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Create a file (ends with / for directories)",
+    "tags": [
+      "create",
+      "new",
+      "file",
+      "directory"
+    ]
+  },
+  {
+    "keys": "'r'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Rename selected file(s)",
+    "tags": [
+      "rename"
+    ]
+  },
+  {
+    "keys": "';'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Run a shell command",
+    "tags": [
+      "plugin"
+    ]
+  },
+  {
+    "keys": "':'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Run a shell command (block until finishes)",
+    "tags": [
+      "plugin"
+    ]
+  },
+  {
+    "keys": "'.'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Toggle the visibility of hidden files",
+    "tags": [
+      "hidden",
+      "toggle",
+      "dotfiles"
+    ]
+  },
+  {
+    "keys": "'s'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Search files by name via fd",
+    "tags": [
+      "search",
+      "find"
+    ]
+  },
+  {
+    "keys": "'S'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Search files by content via ripgrep",
+    "tags": [
+      "search",
+      "find"
+    ]
+  },
+  {
+    "keys": "'Ctrl-s'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Cancel the ongoing search",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'z'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Jump to a file/directory via fzf",
+    "tags": [
+      "shell",
+      "command"
+    ]
+  },
+  {
+    "keys": "'Z'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Jump to a directory via zoxide",
+    "tags": [
+      "plugin"
+    ]
+  },
+  {
+    "keys": "'Ctrl-;', 't'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Get directory tree output",
+    "tags": [
+      "shell",
+      "command"
+    ]
+  },
+  {
+    "keys": "'Ctrl-;', 'v'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open nvim at this directory",
+    "tags": [
+      "shell",
+      "command"
+    ]
+  },
+  {
+    "keys": "'m', 's'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: size",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'m', 'p'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: permissions",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'m', 'b'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: btime",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'m', 'm'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: mtime",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'m', 'o'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: owner",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'m', 'n'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Linemode: none",
+    "tags": [
+      "linemode",
+      "display",
+      "columns"
+    ]
+  },
+  {
+    "keys": "'c', 'c'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Copy the file path",
+    "tags": [
+      "copy",
+      "clipboard"
+    ]
+  },
+  {
+    "keys": "'c', 'd'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Copy the directory path",
+    "tags": [
+      "copy",
+      "clipboard"
+    ]
+  },
+  {
+    "keys": "'c', 'f'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Copy the filename",
+    "tags": [
+      "copy",
+      "clipboard"
+    ]
+  },
+  {
+    "keys": "'c', 'n'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Copy the filename without extension",
+    "tags": [
+      "copy",
+      "clipboard"
+    ]
+  },
+  {
+    "keys": "'f'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Filter files",
+    "tags": [
+      "filter"
+    ]
+  },
+  {
+    "keys": "'/'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Find next file",
+    "tags": [
+      "find",
+      "search"
+    ]
+  },
+  {
+    "keys": "'?'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Find previous file",
+    "tags": [
+      "find",
+      "search"
+    ]
+  },
+  {
+    "keys": "'n'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Next found",
+    "tags": [
+      "find",
+      "next",
+      "search"
+    ]
+  },
+  {
+    "keys": "'N'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Previous found",
+    "tags": [
+      "find",
+      "next",
+      "search"
+    ]
+  },
+  {
+    "keys": "',', 'm'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by modified time",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'M'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by modified time (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 'b'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by birth time",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'B'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by birth time (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 'e'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by extension",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'E'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by extension (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 'a'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort alphabetically",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'A'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort alphabetically (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 'n'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort naturally",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'N'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort naturally (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 's'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by size",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "',', 'S'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort by size (reverse)",
+    "tags": [
+      "sort",
+      "order",
+      "reverse",
+      "descending"
+    ]
+  },
+  {
+    "keys": "',', 'r'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Sort randomly",
+    "tags": [
+      "sort",
+      "order"
+    ]
+  },
+  {
+    "keys": "'g', 'h'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go home",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "home"
+    ]
+  },
+  {
+    "keys": "'g', 'c'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go ~/.config",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "config"
+    ]
+  },
+  {
+    "keys": "'g', 'd'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go ~/Downloads",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "downloads"
+    ]
+  },
+  {
+    "keys": "'g', 'Space'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Jump interactively",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "interactive"
+    ]
+  },
+  {
+    "keys": "'g', 'f'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Follow hovered symlink",
+    "tags": [
+      "symlink",
+      "follow"
+    ]
+  },
+  {
+    "keys": "'g', 'N'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go ~/.config/nixos/",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "config",
+      "nixos"
+    ]
+  },
+  {
+    "keys": "'g', 'H'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go ~/.config/nixos/home/configuration/",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "config",
+      "nixos",
+      "home"
+    ]
+  },
+  {
+    "keys": "'g', 'V'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go nixcats config",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "config",
+      "nixcats",
+      "nvim"
+    ]
+  },
+  {
+    "keys": "'g', 't'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Go ~/.local/share/Trash",
+    "tags": [
+      "navigate",
+      "goto",
+      "directory",
+      "jump",
+      "trash"
+    ]
+  },
+  {
+    "keys": "'t'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Create a new tab with CWD",
+    "tags": [
+      "tab",
+      "create",
+      "new"
+    ]
+  },
+  {
+    "keys": "'1'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to first tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'2'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to second tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'3'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to third tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'4'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to fourth tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'5'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to fifth tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'6'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to sixth tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'7'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to seventh tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'8'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to eighth tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'9'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to ninth tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'['",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to previous tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "']'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Switch to next tab",
+    "tags": [
+      "tab",
+      "switch",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'{'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Swap current tab with previous tab",
+    "tags": [
+      "tab",
+      "swap",
+      "move"
+    ]
+  },
+  {
+    "keys": "'}'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Swap current tab with next tab",
+    "tags": [
+      "tab",
+      "swap",
+      "move"
+    ]
+  },
+  {
+    "keys": "'w'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Show task manager",
+    "tags": [
+      "tasks",
+      "jobs"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Close task manager",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Close task manager",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Close task manager",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'w'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Close task manager",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Previous task",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Next task",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Previous task",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Next task",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Inspect the task",
+    "tags": [
+      "inspect",
+      "task"
+    ]
+  },
+  {
+    "keys": "'x'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Cancel the task",
+    "tags": [
+      "cancel",
+      "task"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Tasks",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Close the spot",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Close the spot",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Close the spot",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Tab'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Close the spot",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'h'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Swipe to previous file",
+    "tags": [
+      "swipe",
+      "navigate",
+      "preview"
+    ]
+  },
+  {
+    "keys": "'l'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Swipe to next file",
+    "tags": [
+      "swipe",
+      "navigate",
+      "preview"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Left'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Swipe to previous file",
+    "tags": [
+      "swipe",
+      "navigate",
+      "preview"
+    ]
+  },
+  {
+    "keys": "'Right'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Swipe to next file",
+    "tags": [
+      "swipe",
+      "navigate",
+      "preview"
+    ]
+  },
+  {
+    "keys": "'c', 'c'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Copy selected cell",
+    "tags": [
+      "copy",
+      "clipboard"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Spot",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Cancel pick",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Cancel pick",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Cancel pick",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Submit the pick",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Previous option",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Next option",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Previous option",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Next option",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Pick",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cancel input",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Submit input",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Back to normal mode, or cancel input",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Back to normal mode, or cancel input",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'i'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Enter insert mode",
+    "tags": [
+      "insert",
+      "edit"
+    ]
+  },
+  {
+    "keys": "'I'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the BOL, and enter insert mode",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'a'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Enter append mode",
+    "tags": [
+      "insert",
+      "edit"
+    ]
+  },
+  {
+    "keys": "'A'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the EOL, and enter append mode",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'v'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Enter visual mode",
+    "tags": [
+      "visual",
+      "select"
+    ]
+  },
+  {
+    "keys": "'r'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Replace a single character",
+    "tags": [
+      "replace",
+      "edit"
+    ]
+  },
+  {
+    "keys": "'V'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Select from BOL to EOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-A'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Select from EOL to BOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-E'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Select from BOL to EOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'h'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'l'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Left'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Right'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-b'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-f'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward a character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'b'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back to the start of the current or previous word",
+    "tags": [
+      "move",
+      "word",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'B'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back to the start of the current or previous WORD",
+    "tags": [
+      "move",
+      "word",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'w'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward to the start of the next word",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'W'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward to the start of the next WORD",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'e'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward to the end of the current or next word",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'E'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward to the end of the current or next WORD",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'A-b'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move back to the start of the current or previous word",
+    "tags": [
+      "move",
+      "word",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'A-f'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move forward to the end of the current or next word",
+    "tags": [
+      "navigate",
+      "history",
+      "forward"
+    ]
+  },
+  {
+    "keys": "'0'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the BOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'$'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the EOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'_'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the first non-whitespace character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'^'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the first non-whitespace character",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-a'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the BOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-e'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the EOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Home'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the BOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'End'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Move to the EOL",
+    "tags": [
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Backspace'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Delete the character before the cursor",
+    "tags": [
+      "delete",
+      "backspace"
+    ]
+  },
+  {
+    "keys": "'Delete'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Delete the character under the cursor",
+    "tags": [
+      "delete",
+      "backspace"
+    ]
+  },
+  {
+    "keys": "'Ctrl-h'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Delete the character before the cursor",
+    "tags": [
+      "delete",
+      "backspace"
+    ]
+  },
+  {
+    "keys": "'Ctrl-d'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Delete the character under the cursor",
+    "tags": [
+      "delete",
+      "backspace"
+    ]
+  },
+  {
+    "keys": "'Ctrl-u'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Kill backwards to the BOL",
+    "tags": [
+      "delete",
+      "kill"
+    ]
+  },
+  {
+    "keys": "'Ctrl-k'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Kill forwards to the EOL",
+    "tags": [
+      "delete",
+      "kill"
+    ]
+  },
+  {
+    "keys": "'Ctrl-w'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Kill backwards to the start of the current word",
+    "tags": [
+      "delete",
+      "kill"
+    ]
+  },
+  {
+    "keys": "'A-d'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Kill forwards to the end of the current word",
+    "tags": [
+      "delete",
+      "kill"
+    ]
+  },
+  {
+    "keys": "'d'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut selected characters",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'D'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut until EOL",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'c'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut selected characters, and enter insert mode",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'C'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut until EOL, and enter insert mode",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'s'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut current character, and enter insert mode",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'S'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut from BOL until EOL, and enter insert mode",
+    "tags": [
+      "move",
+      "cursor",
+      "cut"
+    ]
+  },
+  {
+    "keys": "'x'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Cut current character",
+    "tags": [
+      "cut",
+      "delete"
+    ]
+  },
+  {
+    "keys": "'y'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Copy selected characters",
+    "tags": [
+      "copy",
+      "yank",
+      "cut"
+    ]
+  },
+  {
+    "keys": "'p'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Paste copied characters after the cursor",
+    "tags": [
+      "paste"
+    ]
+  },
+  {
+    "keys": "'P'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Paste copied characters before the cursor",
+    "tags": [
+      "paste"
+    ]
+  },
+  {
+    "keys": "'u'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Undo the last operation",
+    "tags": [
+      "undo"
+    ]
+  },
+  {
+    "keys": "'Ctrl-r'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Redo the last operation",
+    "tags": [
+      "redo"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Input",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Cancel the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Cancel the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Cancel the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Submit the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'n'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Cancel the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'y'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Submit the confirm",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Confirm",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Cancel completion",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Tab'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Submit the completion",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Enter'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Complete and submit the input",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'A-k'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Previous item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'A-j'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Next item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Previous item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Next item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-p'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Previous item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-n'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Next item",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'F1'",
+    "group": "yazi",
+    "mode": "Completion",
+    "description": "Open help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Clear the filter, or hide the help",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-['",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Clear the filter, or hide the help",
+    "tags": [
+      "escape",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Hide the help",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Previous line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Next line",
+    "tags": [
+      "navigate",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'f'",
+    "group": "yazi",
+    "mode": "Help",
+    "description": "Filter help items",
+    "tags": [
+      "filter"
+    ]
+  }
+]

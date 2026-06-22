@@ -1,0 +1,850 @@
+[
+  {
+    "keys": "':'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Enter command mode",
+    "tags": [
+      "command",
+      "mode",
+      "prompt"
+    ]
+  },
+  {
+    "keys": "','",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Decrease volume",
+    "tags": [
+      "volume",
+      "down",
+      "sound"
+    ]
+  },
+  {
+    "keys": "'s'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Stop playback",
+    "tags": [
+      "playback",
+      "stop",
+      "control"
+    ]
+  },
+  {
+    "keys": "'.'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Increase volume",
+    "tags": [
+      "volume",
+      "up",
+      "sound"
+    ]
+  },
+  {
+    "keys": "'Tab'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Next tab",
+    "tags": [
+      "tab",
+      "next",
+      "switch"
+    ]
+  },
+  {
+    "keys": "'S-Tab'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Previous tab",
+    "tags": [
+      "tab",
+      "previous",
+      "prev",
+      "switch"
+    ]
+  },
+  {
+    "keys": "'1'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Queue tab",
+    "tags": [
+      "tab",
+      "switch",
+      "queue",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'2'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Directories tab",
+    "tags": [
+      "tab",
+      "switch",
+      "directories",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'3'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Artists tab",
+    "tags": [
+      "tab",
+      "switch",
+      "artists",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'4'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Album Artists tab",
+    "tags": [
+      "tab",
+      "switch",
+      "album",
+      "artists",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'5'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Albums tab",
+    "tags": [
+      "tab",
+      "switch",
+      "albums",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'6'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Playlists tab",
+    "tags": [
+      "tab",
+      "switch",
+      "playlists",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'7'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Switch to Search tab",
+    "tags": [
+      "tab",
+      "switch",
+      "search",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'q'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Quit",
+    "tags": [
+      "quit",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'>'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Next track",
+    "tags": [
+      "playback",
+      "next",
+      "track",
+      "skip",
+      "control"
+    ]
+  },
+  {
+    "keys": "'p'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle pause",
+    "tags": [
+      "playback",
+      "pause",
+      "play",
+      "toggle",
+      "control"
+    ]
+  },
+  {
+    "keys": "'<'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Previous track",
+    "tags": [
+      "playback",
+      "previous",
+      "prev",
+      "track",
+      "control"
+    ]
+  },
+  {
+    "keys": "'f'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Seek forward",
+    "tags": [
+      "seek",
+      "forward",
+      "scrub"
+    ]
+  },
+  {
+    "keys": "'z'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle repeat",
+    "tags": [
+      "toggle",
+      "repeat",
+      "mode"
+    ]
+  },
+  {
+    "keys": "'x'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle random",
+    "tags": [
+      "toggle",
+      "random",
+      "shuffle",
+      "mode"
+    ]
+  },
+  {
+    "keys": "'c'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle consume",
+    "tags": [
+      "toggle",
+      "consume",
+      "mode"
+    ]
+  },
+  {
+    "keys": "'v'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle single",
+    "tags": [
+      "toggle",
+      "single",
+      "mode"
+    ]
+  },
+  {
+    "keys": "'b'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Seek backward",
+    "tags": [
+      "seek",
+      "back",
+      "backward",
+      "scrub"
+    ]
+  },
+  {
+    "keys": "'~'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Show help",
+    "tags": [
+      "help",
+      "keybind"
+    ]
+  },
+  {
+    "keys": "'u'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Update database",
+    "tags": [
+      "update",
+      "database",
+      "library"
+    ]
+  },
+  {
+    "keys": "'U'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rescan database",
+    "tags": [
+      "rescan",
+      "database",
+      "library"
+    ]
+  },
+  {
+    "keys": "'I'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Show current song info",
+    "tags": [
+      "info",
+      "song",
+      "current"
+    ]
+  },
+  {
+    "keys": "'O'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Show outputs",
+    "tags": [
+      "outputs",
+      "audio",
+      "devices"
+    ]
+  },
+  {
+    "keys": "'P'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Show decoders",
+    "tags": [
+      "decoders",
+      "info"
+    ]
+  },
+  {
+    "keys": "'R'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Add random songs",
+    "tags": [
+      "add",
+      "random",
+      "queue"
+    ]
+  },
+  {
+    "keys": "'k'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move up",
+    "tags": [
+      "navigate",
+      "up",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'j'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move down",
+    "tags": [
+      "navigate",
+      "down",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'h'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move left",
+    "tags": [
+      "navigate",
+      "left",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'l'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move right",
+    "tags": [
+      "navigate",
+      "right",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Up'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move up",
+    "tags": [
+      "navigate",
+      "up",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Down'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move down",
+    "tags": [
+      "navigate",
+      "down",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Left'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move left",
+    "tags": [
+      "navigate",
+      "left",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Right'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move right",
+    "tags": [
+      "navigate",
+      "right",
+      "move",
+      "cursor"
+    ]
+  },
+  {
+    "keys": "'Ctrl-k'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Focus pane up",
+    "tags": [
+      "pane",
+      "up",
+      "focus",
+      "navigate"
+    ]
+  },
+  {
+    "keys": "'Ctrl-j'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Focus pane down",
+    "tags": [
+      "pane",
+      "down",
+      "focus",
+      "navigate"
+    ]
+  },
+  {
+    "keys": "'Ctrl-h'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Focus pane left",
+    "tags": [
+      "pane",
+      "left",
+      "focus",
+      "navigate"
+    ]
+  },
+  {
+    "keys": "'Ctrl-l'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Focus pane right",
+    "tags": [
+      "pane",
+      "right",
+      "focus",
+      "navigate"
+    ]
+  },
+  {
+    "keys": "'Ctrl-u'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move up half page",
+    "tags": [
+      "navigate",
+      "up",
+      "halfpage",
+      "scroll"
+    ]
+  },
+  {
+    "keys": "'N'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Previous search result",
+    "tags": [
+      "search",
+      "previous",
+      "prev",
+      "result",
+      "find"
+    ]
+  },
+  {
+    "keys": "'a'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Add to queue",
+    "tags": [
+      "add",
+      "queue"
+    ]
+  },
+  {
+    "keys": "'A'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Add all to queue",
+    "tags": [
+      "add",
+      "all",
+      "queue"
+    ]
+  },
+  {
+    "keys": "'r'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rename",
+    "tags": [
+      "rename"
+    ]
+  },
+  {
+    "keys": "'n'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Next search result",
+    "tags": [
+      "search",
+      "next",
+      "result",
+      "find"
+    ]
+  },
+  {
+    "keys": "'g'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Go to top",
+    "tags": [
+      "navigate",
+      "top",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'Space'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Toggle selection",
+    "tags": [
+      "select",
+      "toggle"
+    ]
+  },
+  {
+    "keys": "'Ctrl-Space'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Invert selection",
+    "tags": [
+      "select",
+      "invert",
+      "toggle"
+    ]
+  },
+  {
+    "keys": "'G'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Go to bottom",
+    "tags": [
+      "navigate",
+      "bottom",
+      "jump"
+    ]
+  },
+  {
+    "keys": "'CR'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Confirm / select",
+    "tags": [
+      "confirm",
+      "enter",
+      "select"
+    ]
+  },
+  {
+    "keys": "'i'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Focus input",
+    "tags": [
+      "input",
+      "focus",
+      "edit"
+    ]
+  },
+  {
+    "keys": "'J'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move item down",
+    "tags": [
+      "move",
+      "down",
+      "reorder"
+    ]
+  },
+  {
+    "keys": "'Ctrl-d'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move down half page",
+    "tags": [
+      "navigate",
+      "down",
+      "halfpage",
+      "scroll"
+    ]
+  },
+  {
+    "keys": "'/'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Enter search",
+    "tags": [
+      "search",
+      "find"
+    ]
+  },
+  {
+    "keys": "'Ctrl-c'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Close / cancel",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'Esc'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Close / cancel",
+    "tags": [
+      "close",
+      "cancel",
+      "exit"
+    ]
+  },
+  {
+    "keys": "'K'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Move item up",
+    "tags": [
+      "move",
+      "up",
+      "reorder"
+    ]
+  },
+  {
+    "keys": "'D'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Delete",
+    "tags": [
+      "delete",
+      "remove"
+    ]
+  },
+  {
+    "keys": "'B'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Show info",
+    "tags": [
+      "info"
+    ]
+  },
+  {
+    "keys": "'Ctrl-z'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Open context menu",
+    "tags": [
+      "menu",
+      "context"
+    ]
+  },
+  {
+    "keys": "'Ctrl-r'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate current song (choose 1-5)",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'Ctrl-1'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate 1 star",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'Ctrl-2'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate 2 stars",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'Ctrl-3'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate 3 stars",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'Ctrl-4'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate 4 stars",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'Ctrl-5'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Rate 5 stars",
+    "tags": [
+      "rate",
+      "rating",
+      "stars"
+    ]
+  },
+  {
+    "keys": "'D'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Delete all from queue",
+    "tags": [
+      "queue",
+      "delete",
+      "all",
+      "clear"
+    ]
+  },
+  {
+    "keys": "'CR'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Play selected",
+    "tags": [
+      "queue",
+      "play",
+      "playback"
+    ]
+  },
+  {
+    "keys": "'a'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Add to playlist",
+    "tags": [
+      "queue",
+      "add",
+      "playlist"
+    ]
+  },
+  {
+    "keys": "'d'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Delete from queue",
+    "tags": [
+      "queue",
+      "delete",
+      "remove"
+    ]
+  },
+  {
+    "keys": "'C'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Jump to current song",
+    "tags": [
+      "queue",
+      "jump",
+      "current"
+    ]
+  },
+  {
+    "keys": "'X'",
+    "group": "rmpc",
+    "mode": "",
+    "description": "Shuffle queue",
+    "tags": [
+      "queue",
+      "shuffle",
+      "random"
+    ]
+  }
+]
