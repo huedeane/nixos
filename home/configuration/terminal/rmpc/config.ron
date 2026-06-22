@@ -135,7 +135,7 @@
     First element is the command, rest are arguments.
     Nothing executed if left empty.
     */
-    on_song_change: ["~/.config/rmpc/script/playcount"],
+    on_song_change: ["~/.config/rmpc/script/playcount.sh"],
 
     /*
     Execute the command provided to on_song_change at rmpc startup.
@@ -149,7 +149,7 @@
     First element is the command, rest are arguments.
     Nothing executed if left empty.
     */
-    on_resize: ["~/.config/rmpc/script/resize"],
+    on_resize: ["~/.config/rmpc/script/resize.sh"],
 
     /*
     Leading "The" will be ignored while sorting in browser panes if set to true.
