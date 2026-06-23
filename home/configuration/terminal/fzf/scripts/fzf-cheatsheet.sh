@@ -7,6 +7,7 @@ CMD="${1:-${CALLER_TTY:-}}"
 case "$CMD" in
   /dev/*|pts/*) CMD=$(detect-foreground.sh "$CMD") ;;
 esac
+[ "$CMD" = "cava" ] && CMD="rmpc"
 filter="$CMD"
 
 # --- Validate JSON ---

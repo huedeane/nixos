@@ -191,7 +191,7 @@
     Various options for album art display. By default should not be needed to be specified.
     */
     album_art: (
-        method: Auto,
+        method: Kitty,
         order: EmbeddedFirst,
         max_size_px: (width: 1200, height: 1200),
         disabled_protocols: ["http://", "https://"],

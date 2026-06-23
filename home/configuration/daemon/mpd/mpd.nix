@@ -1,35 +1,15 @@
-{ config, editMode, ... }:
+{ config, ... }:
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/daemon/mpd";
-  setting = {
+in
+{
+  services.mpd = {
     enable = true;
     network.startWhenNeeded = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
     extraConfig = ''
+      ${builtins.readFile ./mpd.conf}
       sticker_file "${dirPath}/etc/sticker.sql"
     '';
   };
-in
-{
-  services.mpd =
-    setting
-    // (
-      if !editMode then
-        {
-          extraConfig = ''
-            ${builtins.readFile ./mpd.conf}
-            sticker_file "${dirPath}/etc/sticker.sql"
-          '';
-        }
-      else
-        { }
-    );
-
-  xdg.configFile =
-    if editMode then
-      {
-        "mpd/mpd.conf".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/mpd.conf";
-      }
-    else
-      { };
 }
