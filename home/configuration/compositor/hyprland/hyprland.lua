@@ -249,7 +249,7 @@ hl.bind(mainMod .. " + T",                hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + T",        hl.dsp.exec_cmd(terminal .. " -o shell=bash"))
 hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(rofi_drun))
 hl.bind(mainMod .. " + W",                hl.dsp.exec_cmd(rofi_window))
-hl.bind(mainMod .. " + Escape",           hl.dsp.exit())
+hl.bind(mainMod .. " + Escape",           hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(mainMod .. " + 0",                hl.dsp.exec_cmd("pkill waybar && waybar &"))
 hl.bind(mainMod .. " + R",                hl.dsp.exec_cmd("nix-rebuild-edit.sh"))
 hl.bind(mainMod .. " + SHIFT + R",        hl.dsp.exec_cmd("nix-log.sh"))
@@ -258,6 +258,9 @@ hl.bind(mainMod .. " + Q",                hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q",        hl.dsp.window.kill())
 hl.bind(mainMod .. " + F",                hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P",                hl.dsp.exec_cmd("grimblast --freeze save area - | satty -f -"))
+hl.bind(mainMod .. " + comma",            hl.dsp.exec_cmd("rmpc prev"))
+hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("rmpc next"))
+hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("rmpc togglepause"))
 
 -- Switch active window
 hl.bind(mainMod .. " + H",     hl.dsp.layout("move -col"))
@@ -375,7 +378,7 @@ hl.window_rule({
 })
 
 hl.layer_rule({
-  name        = "layerrule-1",
+  name        = "layerrule-rofi",
   match       = { namespace = "^(rofi)$" },
   order       = 2,
   dim_around  = true,
@@ -384,45 +387,75 @@ hl.layer_rule({
 })
 
 hl.window_rule({
-  name    = "windowrule-3",
+  name    = "windowrule-screen-capture",
   match   = { class = "com.gabm.satty" },
   float   = true,
   no_anim = true,
 })
 
 hl.window_rule({
-  name    = "windowrule-4",
+  name    = "windowrule-kitty-transparent",
   match   = { class = "kitty" },
   opacity = 0.95,
 })
 
 hl.window_rule({
-  name  = "windowrule-5",
+  name  = "windowrule-tui",
   match = { class = "^(tui-.*)$" },
   float = true,
   size  = { "monitor_w*0.80", "monitor_h*0.70" },
 })
 
 hl.window_rule({
-  name  = "windowrule-6",
+  name  = "windowrule-filechooser",
   match = { title = "^(termfilechooser)$" },
   float = true,
   size  = { "monitor_w*0.80", "monitor_h*0.70" },
 })
 
 hl.window_rule({
-  name  = "windowrule-7",
+  name  = "windowrule-steam-float",
   match = { class = "^(steam)$" },
   float = true,
   size  = { "monitor_w*0.31", "monitor_h*0.55" },
 })
 
 hl.window_rule({
-  name  = "windowrule-8",
+  name  = "windowrule-steam",
   match = { title = "^(Steam)$" },
   float = false,
 })
 
+hl.window_rule({
+  name  = "windowrule-steam",
+  match = { title = "^(Steam)$" },
+  float = false,
+})
+
+local fx_prev, fx_cur = nil, nil
+
+hl.on("window.active", function(w)
+  if w and w.class == "firefox" then
+    local a = "address:" .. tostring(w.address)
+    if a ~= fx_cur then fx_prev, fx_cur = fx_cur, a end
+  end
+end)
+
+hl.on("window.title", function(w)
+  if w.title and w.title:match("^Extension:") and w.class == "firefox" then
+    local popup  = "address:" .. tostring(w.address)
+    local parent = (fx_cur == popup) and fx_prev or fx_cur
+    local mon    = hl.get_active_monitor()
+
+    hl.dispatch(hl.dsp.window.float({ window = popup, action = "on" }))
+    hl.dispatch(hl.dsp.window.resize({ window = popup,
+      x = math.floor(mon.width * 0.31), y = math.floor(mon.height * 0.55) }))
+
+    if parent then hl.dispatch(hl.dsp.focus({ window = parent })) end
+  end
+end)
+
+-- Focus browser when link open
 hl.config({
   misc = {
     focus_on_activate = true,
