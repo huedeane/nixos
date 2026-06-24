@@ -4,9 +4,11 @@
   inputs,
   hostname,
   editMode,
+  lib,
   ...
 }:
 let
+  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/compositor/hyprland";
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
   smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in
@@ -24,29 +26,12 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "lua";
     xwayland.enable = true;
     systemd.enable = false;
     package = hyprlandPkgs.hyprland;
     portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
-
-    settings = {
-      exec-once = [
-        "uwsm app -- waybar"
-        "uwsm app -- hyprmoncfgd"
-        "uwsm app -- rofi-polkit-agent"
-        "uwsm app -- dunst-clipboard-notify.sh"
-      ];
-    };
-
-    plugins = [
-      smwPkgs.split-monitor-workspaces
-    ];
-
-    extraConfig =
-      if !editMode then
-        builtins.readFile ./hyprland.conf
-      else
-        "source = $HOME/.config/nixos/home/configuration/compositor/hyprland/hyprland.conf";
+    extraConfig = if editMode then "" else builtins.readFile ./hyprland.lua;
   };
 
   xdg.portal = {
@@ -78,13 +63,24 @@ in
     export NIXOS_CONFIG=${config.xdg.configHome}/nixos
     export NIXOS_CONFIGHOMEDIR=${config.xdg.configHome}/nixos/home/configuration
     export SUDO_ASKPASS=$HOME/.local/bin/rofi-askpass
-    exprot FZF_DEFAULT_OPTS_FILE=${config.xdg.configHome}/fzf/fzfrc
+    export FZF_DEFAULT_OPTS_FILE=${config.xdg.configHome}/fzf/fzfrc
   '';
 
   xdg.configFile."uwsm/env-hyprland".text = ''
     export HYPRCURSOR_THEME=catppuccin-frappe-green-cursors
     export HYPRCURSOR_SIZE=36
   '';
+
+  xdg.configFile."hypr/plugins.lua".text = ''
+    hl.on("hyprland.start", function()
+      hl.exec_cmd("${hyprlandPkgs.hyprland}/bin/hyprctl plugin load ${smwPkgs.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so")
+    end)
+  '';
+
+  xdg.configFile."hypr/hyprland.lua".source =
+    lib.mkIf editMode (lib.mkForce (
+      config.lib.file.mkOutOfStoreSymlink "${dirPath}/hyprland.lua"
+    ));
 
   home.file.".local/bin/nix-rebuild.sh" = {
     source = ./scripts/nix-rebuild.sh;
@@ -105,4 +101,13 @@ in
     source = ./scripts/dunst-clipboard-notify.sh;
     executable = true;
   };
-}
+
+  home.activation.ensureMonitorsLua =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      target="${config.xdg.configHome}/hypr/monitors.lua"
+      if [ ! -e "$target" ]; then
+        mkdir -p "$(dirname "$target")"
+        touch "$target"
+      fi
+    '';
+  }

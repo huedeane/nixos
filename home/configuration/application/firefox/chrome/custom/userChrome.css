@@ -61,6 +61,9 @@
 
 
 /* navbar.css */
+#navigator-toolbox {
+  background-color: var(--tf-bg);
+}
 
 #PlacesToolbarItems {
   justify-content: center;

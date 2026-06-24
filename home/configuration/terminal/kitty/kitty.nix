@@ -28,6 +28,6 @@ in
     else
       {
         "kitty/themes/catppuccin-frappe-theme.conf".source = ./themes/catppuccin-frappe-theme.conf;
-        "kitty/script/nvim_watcher.py".source = "${dirPath}/script/nvim_watcher.py";
+        "kitty/script/nvim_watcher.py".source = ./script/nvim_watcher.py;
       };
 }

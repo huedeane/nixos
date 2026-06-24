@@ -5,10 +5,6 @@
 [mgr]
 cwd = { fg = "#e5c890" }
 
-# Hovered
-hovered = { fg = "#303446", bg = "#babbf1", bold = true }
-preview_hovered = { fg = "#e5c890", bg = "reset" }
-
 # Find
 find_keyword = { fg = "#e78284", bold = true, italic = true, underline = true }
 find_position = { fg = "#e78284", bg = "#babbf1", bold = true, italic = true }
@@ -30,17 +26,26 @@ border_style = { fg = "#737994" }
 
 # : }}}
 
+# : Indicator {{{
+
+[indicator]
+
+# Hovered
+parent = { fg = "#303446", bg = "#babbf1", bold = true }
+current = { fg = "#303446", bg = "#babbf1", bold = true }
+preview = { fg = "#e5c890", bg = "#303446" }
+
+# : }}}
 
 # : Tabs {{{
 
 [tabs]
 
 active = { fg = "#303446", bg = "#babbf1", bold = true }
-inactive = { fg = "#babbf1", bg = "#414559" }
+inactive = { fg = "#babbf1", bg = "#292c3c" }
 
-# Seperator
-sep_right = { open = "", close = "" }
-sep_left = { open = "", close = "" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
 
 # : }}}
 
@@ -87,19 +92,6 @@ progress_error = { bg = "#e78284" }
 
 # : }}}
 
-# : Which {{{
-
-[which]
-cols = 3
-mask = { bg = "#414559" }
-cand = { fg = "#e5c890", bold = true }
-rest = { fg = "red" }
-desc = { fg = "#c6d0f5" }
-separator = "  "
-separator_style = { fg = "#c6d0f5" }
-
-# : }}}
-
 # : Confirm {{{
 
 [confirm]
@@ -111,26 +103,9 @@ btn_yes = { fg = "#303446", bg = "#babbf1" }
 btn_no = { fg = "#303446", bg = "#babbf1" }
 btn_labels = [" (Y)es ", " (N)o "]
 
-# : }}}
-
-# : Spotter {{{
-
-[spot]
-border = { fg = "#babbf1" }
-title = { fg = "#babbf1" }
-tbl_col = { fg = "#e5c890" }
-tbl_cell = { fg = "#e5c890" }
 
 # : }}}
 
-# : Notification {{{
-
-[notify]
-title_info = { fg = "#a6d189" }
-title_warn = { fg = "#e5c890" }
-title_error = { fg = "#e78284" }
-
-# : }}}
 
 # : Pick {{{
 
@@ -172,6 +147,20 @@ hovered = { fg = "#e5c890", bold = true }
 
 # : }}}
 
+
+# : Which {{{
+
+[which]
+cols = 3
+mask = { bg = "#414559" }
+cand = { fg = "#e5c890", bold = true }
+rest = { fg = "red" }
+desc = { fg = "#c6d0f5" }
+separator = "  "
+separator_style = { fg = "#c6d0f5" }
+
+# : }}}
+
 # : Help {{{
 
 [help]
@@ -185,6 +174,26 @@ icon_warn = "test"
 icon_error = "test"
 
 # : }}}
+
+# : Spotter {{{
+
+[spot]
+border = { fg = "#babbf1" }
+title = { fg = "#babbf1" }
+tbl_col = { fg = "#e5c890" }
+tbl_cell = { fg = "#e5c890" }
+
+# : }}}
+
+# : Notification {{{
+
+[notify]
+title_info = { fg = "#a6d189" }
+title_warn = { fg = "#e5c890" }
+title_error = { fg = "#e78284" }
+
+# : }}}
+
 
 # : File-specific styles {{{
 
@@ -205,8 +214,8 @@ rules = [
   # { url = "*", fg = "#c6d0f5" },
   # { url = "*/", fg = "#8caaee" },
 
-  { name = "*", fg = "#c6d0f5" },
-  { name = "*/", fg = "#c6d0f5" },
+  { url = "*", fg = "#c6d0f5" },
+  { url = "*/", fg = "#c6d0f5" },
 ]
 
 # : }}}

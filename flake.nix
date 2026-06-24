@@ -124,6 +124,18 @@
       };
 
       nixosConfigurations = {
+        desktop = mkSystem {
+          hostname = "desktop";
+          username = "huedeane";
+          hostModule = ./hosts/profiles/desktop/configuration.nix;
+          homeProfile = ./home/profiles/main.nix;
+          extraSystemModules = [ sops-nix.nixosModules.sops ];
+          extraHomeModules = [
+            nixCats.homeModule
+            self.homeModules.godot
+          ];
+        };
+
         laptop = mkSystem {
           hostname = "laptop";
           username = "huedeane";

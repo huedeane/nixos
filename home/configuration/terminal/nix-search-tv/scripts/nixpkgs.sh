@@ -114,15 +114,6 @@ SEARCH_SNIPPET_CMD="$SEARCH_SNIPPET_CMD | xargs printf \"https://github.com/sear
 NIX_SHELL_CMD='nix-shell --run $SHELL -p $(echo "{}" | sed "s:nixpkgs/::g"'
 NIX_SHELL_CMD="$NIX_SHELL_CMD | tr -d \"\'\")"
 
-# shellcheck disable=SC2016
-PREVIEW_WINDOW='
-    if [[ ${FZF_COLS:-$COLUMNS} -lt 130 ]]; then
-        echo "+change-preview-window(wrap,up)"
-    else
-        echo "+change-preview-window(wrap)"
-    fi
-'
-
 HEADER="${HEADER%$'\n'}"
 
 eval "$CMD print | fzf \

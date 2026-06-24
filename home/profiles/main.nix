@@ -39,7 +39,7 @@
   home = {
     username = "${username}";
     homeDirectory = "/home/${username}";
-    stateVersion = "24.11";
+    stateVersion = "26.05";
 
     sessionVariables = {
       EDITOR = "nvim";

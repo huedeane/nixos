@@ -1,14 +1,14 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "eaf6920"
-hash = "27ca02f49fd236b5cc7bf03c243859fe"
+rev = "38efe09"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "eaf6920"
-hash = "3996fc74044bc44144b323686f887e1"
+rev = "38efe09"
+hash = "7b625412411be411153886894d9acaf"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "ba27774"
-hash = "2af5f0305730530f23e61ccaba119efe"
+rev = "0f9204b"
+hash = "1844f850b0c5d1af511c84399c95e3d7"
