@@ -16,7 +16,7 @@ in
       g = "gitui";
       bash-update = "source ~/.bashrc";
       secret-edit = "nvim ${config.xdg.configHome}/sops/age/keys.txt";
-      hypr-update = "nvim ${config.xdg.configHome}/nixos/home/configuration/compositor/hyprland/hyprland.conf";
+      hypr-update = "nvim ${config.xdg.configHome}/nixos/home/configuration/compositor/hyprland/hyprland.lua";
     };
 
     profileExtra = lib.mkIf (hostname == "wsl1") ''

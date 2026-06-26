@@ -19,7 +19,7 @@
   xdg.desktopEntries."rmpc" = {
     name = "Rmpc";
     genericName = "Audio Player";
-    exec = "kitty --class tui-rmpc -e queue-rmpc %f";
+    exec = "kitty --class tui-rmpc rmpc";
     icon = "kitty";
     terminal = false;
     categories = [

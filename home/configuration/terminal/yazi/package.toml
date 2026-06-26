@@ -8,6 +8,11 @@ use = "yazi-rs/plugins:full-border"
 rev = "38efe09"
 hash = "7b625412411be411153886894d9acaf"
 
+[[plugin.deps]]
+use = "XYenon/clipboard"
+rev = "0ac0320"
+hash = "f80172438b4b5c31e94d6c891f734445"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
 rev = "0f9204b"
