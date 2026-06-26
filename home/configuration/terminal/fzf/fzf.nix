@@ -38,4 +38,9 @@ in
     source = ./scripts/fzf-cheatsheet.sh;
     executable = true;
   };
+
+  home.file.".local/bin/fzf-clipvault.sh" = {
+    source = ./scripts/fzf-clipvault.sh;
+    executable = true;
+  };
 }

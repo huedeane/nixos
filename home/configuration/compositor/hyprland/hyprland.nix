@@ -97,11 +97,6 @@ in
     executable = true;
   };
 
-  home.file.".local/bin/dunst-clipboard-notify.sh" = {
-    source = ./scripts/dunst-clipboard-notify.sh;
-    executable = true;
-  };
-
   home.activation.ensureMonitorsLua =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       target="${config.xdg.configHome}/hypr/monitors.lua"

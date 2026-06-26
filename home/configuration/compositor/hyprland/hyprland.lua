@@ -47,7 +47,9 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- waybar")
   hl.exec_cmd("uwsm app -- hyprmoncfgd")
   hl.exec_cmd("uwsm app -- rofi-polkit-agent")
-  hl.exec_cmd("uwsm app -- dunst-clipboard-notify.sh")
+  hl.exec_cmd("uwsm app -- wl-paste --watch clipvault store --ignore-pattern '^<meta http-equiv=' --max-entries 50 --max-entry-age 1d")
+  hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
+  hl.exec_cmd("uwsm app -- wl-paste --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
 end)
 
 ------------------
@@ -262,7 +264,7 @@ hl.bind(mainMod .. " + m",                hl.dsp.exec_cmd("kitty --class tui-rmp
 hl.bind(mainMod .. " + comma",            hl.dsp.exec_cmd("rmpc prev"))
 hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("rmpc next"))
 hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("rmpc togglepause"))
-
+hl.bind(mainMod .. " + c",                hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
 -- Switch active window
 hl.bind(mainMod .. " + H",     hl.dsp.layout("move -col"))
 hl.bind(mainMod .. " + L",     hl.dsp.layout("move +col"))
