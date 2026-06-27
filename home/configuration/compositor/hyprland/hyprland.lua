@@ -265,6 +265,7 @@ hl.bind(mainMod .. " + comma",            hl.dsp.exec_cmd("rmpc prev"))
 hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("rmpc next"))
 hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("rmpc togglepause"))
 hl.bind(mainMod .. " + c",                hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
+
 -- Switch active window
 hl.bind(mainMod .. " + H",     hl.dsp.layout("move -col"))
 hl.bind(mainMod .. " + L",     hl.dsp.layout("move +col"))

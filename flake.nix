@@ -31,6 +31,7 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    astal.url = "github:aylur/astal";
 
     # Neovim
     nixCats = {
@@ -40,6 +41,11 @@
     # WSL
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
+    };
+
+    # Waydroid
+    waydroid-script = {
+      url = "github:casualsnek/waydroid_script";
     };
   };
 
@@ -51,6 +57,7 @@
       sops-nix,
       nixCats,
       nixos-wsl,
+      waydroid-script,
       ...
     }@inputs:
     let
@@ -59,6 +66,11 @@
       configDir = self.outPath;
       configHomeDir = "${self.outPath}/home/configuration";
       editMode = builtins.getEnv "EDIT_MODE" == "1";
+      waydroidModule = {
+        environment.systemPackages = [
+          waydroid-script.packages.${system}.default
+        ];
+      };
 
       sharedArgs = {
         inherit
@@ -129,7 +141,10 @@
           username = "huedeane";
           hostModule = ./hosts/profiles/desktop/configuration.nix;
           homeProfile = ./home/profiles/main.nix;
-          extraSystemModules = [ sops-nix.nixosModules.sops ];
+          extraSystemModules = [ 
+            sops-nix.nixosModules.sops 
+            waydroidModule
+          ];
           extraHomeModules = [
             nixCats.homeModule
             self.homeModules.godot
@@ -141,7 +156,10 @@
           username = "huedeane";
           hostModule = ./hosts/profiles/laptop/configuration.nix;
           homeProfile = ./home/profiles/main.nix;
-          extraSystemModules = [ sops-nix.nixosModules.sops ];
+          extraSystemModules = [ 
+            sops-nix.nixosModules.sops 
+            waydroidModule
+          ];
           extraHomeModules = [
             nixCats.homeModule
             self.homeModules.godot

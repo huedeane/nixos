@@ -116,6 +116,7 @@
     age
   ];
 
+  # Graphic
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -124,6 +125,9 @@
       pkgs.vulkan-validation-layers
     ];
   };
+
+  # Android
+  virtualisation.waydroid.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [

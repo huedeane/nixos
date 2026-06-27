@@ -18,12 +18,14 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
-      theme = pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "grub";
-        rev = "main";
-        sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-      } + "/src/catppuccin-mocha-grub-theme";
+      theme =
+        pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "grub";
+          rev = "main";
+          sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
+        }
+        + "/src/catppuccin-mocha-grub-theme";
     };
     efi.canTouchEfiVariables = true;
   };
@@ -116,6 +118,7 @@
     age
   ];
 
+  # Graphic
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -123,6 +126,14 @@
       pkgs.vulkan-loader
       pkgs.vulkan-validation-layers
     ];
+  };
+
+  # Virtualisation
+  virtualisation = {
+    waydroid = {
+      enable = true;
+      package = pkgs.waydroid-nftables;
+    };
   };
 
   # Fonts
