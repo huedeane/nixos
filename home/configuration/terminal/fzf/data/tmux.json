@@ -211,6 +211,18 @@
     ]
   },
   {
+    "keys": "'leader', 'v'",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Create new pane horizontally",
+    "tags": [
+      "pane",
+      "split",
+      "create",
+      "new"
+    ]
+  },
+  {
     "keys": "'leader', 'q'",
     "group": "tmux",
     "mode": "Normal",

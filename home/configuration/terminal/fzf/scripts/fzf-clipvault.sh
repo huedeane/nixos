@@ -2,7 +2,7 @@
 
 set -eu
 
-COPY=${CLIPVAULT_COPY:-wl-copy}
+COPY=${CLIPVAULT_COPY:-"wl-copy"}
 
 PREVIEW='
     f=$(mktemp) || exit
@@ -25,18 +25,16 @@ CLEAR='
     esac
 '
 
-selection=$(
-    clipvault list | fzf \
-        --no-sort \
-        --border-label=" Clipboard History " \
-        --delimiter="$TAB" \
-        --with-nth=2.. \
-        --header-label=' Help ' \
-        --header='enter: copy   ctrl-d: delete   ctrl-x: clear all   esc: quit' \
-        --preview-label=" Preview " \
-        --preview="$PREVIEW" \
-        --bind='ctrl-d:execute-silent(printf %s {} | clipvault delete)+reload(clipvault list)' \
-        --bind="ctrl-x:execute($CLEAR)+reload(clipvault list)"
-) || exit 0
-[ -n "$selection" ] || exit 0
-printf '%s' "$selection" | clipvault get | $COPY
+clipvault list | fzf \
+  --no-sort \
+  --border-label=" Clipboard History " \
+  --delimiter="$TAB" \
+  --with-nth=2.. \
+  --header-label=' Help ' \
+  --header='enter: copy   ctrl-d: delete   ctrl-x: clear all   esc: quit' \
+  --preview-label=" Preview " \
+  --preview="$PREVIEW" \
+  --bind="esc:become(true)" \
+  --bind="enter:execute-silent(printf %s {} | clipvault get | $COPY)" \
+  --bind='ctrl-d:execute-silent(printf %s {} | clipvault delete)+reload(clipvault list)' \
+  --bind="ctrl-x:execute($CLEAR)+reload(clipvault list)"
