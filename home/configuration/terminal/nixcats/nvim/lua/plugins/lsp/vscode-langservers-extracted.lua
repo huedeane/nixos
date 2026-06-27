@@ -24,7 +24,12 @@ return {
     "eslint",
     enabled = nixCats('lsp') or false,
     lsp = {
-      filetypes = { 'javascript', 'typescript' },
+      filetypes = {
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact'
+      },
     },
   },
 }

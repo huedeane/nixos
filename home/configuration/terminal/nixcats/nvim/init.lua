@@ -26,6 +26,7 @@ require('lze').load({
   { import = "plugins.functionality.nvim-treesitter" },
   { import = "plugins.functionality.edgy-nvim" },
   { import = "plugins.functionality.fzf-lua" },
+  { import = "plugins.functionality.conform-nvim" },
 
   { import = "plugins.visual.catppuccin-nvim" },
   { import = "plugins.visual.gitsigns-nvim" },
@@ -40,6 +41,8 @@ require('lze').load({
   { import = "plugins.lsp.taplo" },
   { import = "plugins.lsp.yaml-language-server" },
   { import = "plugins.lsp.roslyn-nvim" },
+  { import = "plugins.lsp.emmet-language-server" },
+  { import = "plugins.lsp.typescript-language-server" },
   {
     "noice.nvim",
     event = "DeferredUIEnter", -- give it a real trigger too

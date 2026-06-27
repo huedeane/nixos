@@ -46,6 +46,14 @@ in
             nil
             nixfmt
 
+            # Typescript / JavaScript / React (JSX/TSX)
+            typescript-language-server
+            typescript
+            emmet-language-server
+
+            # Formatter
+            prettierd
+
             # YAML
             yaml-language-server
           ];
@@ -79,6 +87,7 @@ in
             which-key-nvim
             fzf-lua
             noice-nvim
+            conform-nvim
           ];
 
           lsp = with pkgs.vimPlugins; [
