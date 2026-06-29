@@ -77,10 +77,9 @@ in
     end)
   '';
 
-  xdg.configFile."hypr/hyprland.lua".source =
-    lib.mkIf editMode (lib.mkForce (
-      config.lib.file.mkOutOfStoreSymlink "${dirPath}/hyprland.lua"
-    ));
+  xdg.configFile."hypr/hyprland.lua".source = lib.mkIf editMode (
+    lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${dirPath}/hyprland.lua")
+  );
 
   home.file.".local/bin/nix-rebuild.sh" = {
     source = ./scripts/nix-rebuild.sh;
@@ -97,12 +96,11 @@ in
     executable = true;
   };
 
-  home.activation.ensureMonitorsLua =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      target="${config.xdg.configHome}/hypr/monitors.lua"
-      if [ ! -e "$target" ]; then
-        mkdir -p "$(dirname "$target")"
-        touch "$target"
-      fi
-    '';
-  }
+  home.activation.ensureMonitorsLua = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    target="${config.xdg.configHome}/hypr/monitors.lua"
+    if [ ! -e "$target" ]; then
+      mkdir -p "$(dirname "$target")"
+      touch "$target"
+    fi
+  '';
+}
