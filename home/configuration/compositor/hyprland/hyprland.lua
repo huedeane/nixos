@@ -44,7 +44,6 @@ local colors = {
 ------------------
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd("uwsm app -- waybar")
   hl.exec_cmd("uwsm app -- hyprmoncfgd")
   hl.exec_cmd("uwsm app -- rofi-polkit-agent")
   hl.exec_cmd(
@@ -255,7 +254,7 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal .. " -o shell=bash"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(rofi_drun))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("uwsm stop"))
+hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(mainMod .. " + 0", hl.dsp.exec_cmd("pkill waybar && waybar &"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("nix-rebuild-edit.sh"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nix-log.sh"))
