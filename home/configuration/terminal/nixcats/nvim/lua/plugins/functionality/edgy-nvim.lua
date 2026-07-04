@@ -11,10 +11,22 @@ return {
     vim.cmd.packadd(name)
   end,
   after = function()
-    require("edgy").setup({
+    local edgy = require("edgy")
+    local keymap = require("config.utils").keymap
+
+    local function toggle_left()
+      edgy.toggle("left")
+      vim.defer_fn(edgy.goto_main, 50)
+    end
+
+    keymap({
+      { "n", "<leader>en", toggle_left, desc = "(Edgy) Toggle Neotree" },
+    })
+
+    edgy.setup({
       left = {
         {
-          title = center("File System",40),
+          title = center("File System", 40),
           ft = "neo-tree",
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
@@ -61,5 +73,12 @@ return {
         signcolumn = "no",
       },
     })
+
+    local arg = vim.fn.argv(0)
+    if arg and arg ~= "" and vim.fn.isdirectory(arg) == 1 then
+      vim.defer_fn(function()
+        require("edgy").open("left")
+      end, 200)
+    end
   end,
 }

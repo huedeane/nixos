@@ -33,6 +33,7 @@ require('lze').load({
   { import = "plugins.visual.lualine-nvim" },
   { import = "plugins.visual.neo-tree-nvim" },
   { import = "plugins.visual.which-key-nvim" },
+  { import = "plugins.visual.noice-nvim" },
 
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.nixd" },
@@ -43,31 +44,4 @@ require('lze').load({
   { import = "plugins.lsp.roslyn-nvim" },
   { import = "plugins.lsp.emmet-language-server" },
   { import = "plugins.lsp.typescript-language-server" },
-  {
-    "noice.nvim",
-    event = "DeferredUIEnter", -- give it a real trigger too
-    before = function(_)
-      vim.cmd.packadd("nui.nvim")
-    end,
-    after = function(_)
-      require("noice").setup({
-        cmdline = {
-          view = "cmdline_popup", -- centered floating cmdline instead of bottom
-        },
-        -- optional: also route long/normal messages away from the bottom
-        messages = {
-          enabled = true,
-          view = "notify",
-          view_error = "notify",
-          view_warn = "notify",
-        },
-        routes = {
-          {
-            filter = { event = "msg_show", kind = "" },
-            view = "mini", -- short ":w" type messages as a small popup instead of bottom line
-          },
-        },
-      })
-    end,
-  },
 })

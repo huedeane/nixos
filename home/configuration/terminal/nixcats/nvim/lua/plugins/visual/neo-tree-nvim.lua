@@ -14,7 +14,7 @@ return {
         position = "left",
         width = 30,
         mappings = {
-          ["<space>"] = "toggle_node",
+          ["<space>"] = "none",
           ["<cr>"] = "open",
           ["s"] = "open_vsplit",
           ["S"] = "open_split",
