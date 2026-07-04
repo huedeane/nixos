@@ -77,19 +77,19 @@ display() {
       for (i = 1; i <= n; i++) if (mode[i] != "") { show_mode = 1; break }
       # Header (single field, no hidden cols)
       h = ""
-      if (show_group) h = h sprintf("%-*s  ", wp, "Group")
-      if (show_mode)  h = h sprintf("%-*s  ", wm, "Mode")
-      h = h sprintf("%-*s  ", wk, "Keys")
-      h = h sprintf("%-*s  ", wd, "Description")
+      if (show_group) h = h sprintf("%-*s   ", wp, "Group")
+      if (show_mode)  h = h sprintf("%-*s   ", wm, "Mode")
+      h = h sprintf("%-*s   ", wk, "Keys")
+      h = h sprintf("%-*s   ", wd, "Description")
       h = h "Tags"
       print h
       # Rows: display \t group \t description
       for (i = 1; i <= n; i++) {
         line = ""
-        if (show_group) line = line sprintf("%-*s  ", wp, prog[i])
-        if (show_mode)  line = line sprintf("%-*s  ", wm, mode[i])
-        line = line sprintf("%-*s  ", wk, keys[i])
-        line = line sprintf("%-*s  ", wd, desc[i])
+        if (show_group) line = line sprintf("%-*s │ ", wp, prog[i])
+        if (show_mode)  line = line sprintf("%-*s │ ", wm, mode[i])
+        line = line sprintf("%-*s │ ", wk, keys[i])
+        line = line sprintf("%-*s │ ", wd, desc[i])
         line = line tags[i]
         printf "%s\t%s\t%s\n", line, (cheatdir "/" prog[i] ".json"), desc[i]
       }

@@ -4,575 +4,356 @@
     "group": "tmux",
     "mode": "Normal",
     "description": "Create new window",
-    "tags": [
-      "window",
-      "create",
-      "new"
-    ]
+    "tags": ["window", "create", "new"]
   },
   {
     "keys": "'leader', 'Ctrl-q'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Kill current window",
-    "tags": [
-      "window",
-      "kill",
-      "close"
-    ]
+    "tags": ["window", "kill", "close"]
   },
   {
     "keys": "'leader', 'Ctrl-h'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select previous window",
-    "tags": [
-      "window",
-      "navigate",
-      "previous",
-      "prev"
-    ]
+    "tags": ["window", "navigate", "previous", "prev"]
   },
   {
     "keys": "'leader', 'Ctrl-l'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select next window",
-    "tags": [
-      "window",
-      "navigate",
-      "next"
-    ]
+    "tags": ["window", "navigate", "next"]
   },
   {
     "keys": "'leader', 'Ctrl-j'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Swap window with next and select it",
-    "tags": [
-      "window",
-      "swap",
-      "move",
-      "reorder"
-    ]
+    "tags": ["window", "swap", "move", "reorder"]
   },
   {
     "keys": "'leader', 'Ctrl-k'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Swap window with previous and select it",
-    "tags": [
-      "window",
-      "swap",
-      "move",
-      "reorder"
-    ]
+    "tags": ["window", "swap", "move", "reorder"]
   },
   {
     "keys": "'leader', '0'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 0",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '1'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 1",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '2'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 2",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '3'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 3",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '4'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 4",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '5'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 5",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '6'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 6",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '7'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 7",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '8'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 8",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '9'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select window 9",
-    "tags": [
-      "window",
-      "select",
-      "jump",
-      "number"
-    ]
+    "tags": ["window", "select", "jump", "number"]
   },
   {
     "keys": "'leader', '<'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Display window menu",
-    "tags": [
-      "window",
-      "menu"
-    ]
+    "tags": ["window", "menu"]
   },
   {
     "keys": "'leader', 't'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Create new pane vertically",
-    "tags": [
-      "pane",
-      "split",
-      "create",
-      "new"
-    ]
+    "tags": ["pane", "split", "create", "new"]
+  },
+  {
+    "keys": "'leader', 'T'",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Create new pane horizontally",
+    "tags": ["pane", "split", "create", "new"]
   },
   {
     "keys": "'leader', 'v'",
     "group": "tmux",
     "mode": "Normal",
-    "description": "Create new pane horizontally",
-    "tags": [
-      "pane",
-      "split",
-      "create",
-      "new"
-    ]
+    "description": "Set pane layout horizontally",
+    "tags": ["pane", "layout"]
+  },
+  {
+    "keys": "'leader', 'v'",
+    "group": "tmux",
+    "mode": "Normal",
+    "description": "Set pane layout vertically",
+    "tags": ["pane", "layout"]
   },
   {
     "keys": "'leader', 'q'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Kill current pane",
-    "tags": [
-      "pane",
-      "kill",
-      "close"
-    ]
+    "tags": ["pane", "kill", "close"]
   },
   {
     "keys": "'leader', 'h'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select previous pane",
-    "tags": [
-      "pane",
-      "navigate",
-      "previous",
-      "prev",
-      "focus"
-    ]
+    "tags": ["pane", "navigate", "previous", "prev", "focus"]
   },
   {
     "keys": "'leader', 'l'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Select next pane",
-    "tags": [
-      "pane",
-      "navigate",
-      "next",
-      "focus"
-    ]
+    "tags": ["pane", "navigate", "next", "focus"]
   },
   {
     "keys": "'leader', 'j'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Resize pane left by 5",
-    "tags": [
-      "pane",
-      "resize",
-      "width",
-      "left"
-    ]
+    "tags": ["pane", "resize", "width", "left"]
   },
   {
     "keys": "'leader', 'k'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Resize pane right by 5",
-    "tags": [
-      "pane",
-      "resize",
-      "width",
-      "right"
-    ]
+    "tags": ["pane", "resize", "width", "right"]
   },
   {
     "keys": "'leader', 'p'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Move pane to window (prompted)",
-    "tags": [
-      "pane",
-      "move",
-      "join",
-      "window"
-    ]
+    "tags": ["pane", "move", "join", "window"]
   },
   {
     "keys": "'leader', 'Ctrl-p'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Break pane into a new window",
-    "tags": [
-      "pane",
-      "break",
-      "move",
-      "window"
-    ]
+    "tags": ["pane", "break", "move", "window"]
   },
   {
     "keys": "'leader', 'z'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Zoom the active pane",
-    "tags": [
-      "pane",
-      "zoom",
-      "fullscreen",
-      "maximize"
-    ]
+    "tags": ["pane", "zoom", "fullscreen", "maximize"]
   },
   {
     "keys": "'leader', 'space'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Rotate selected pane",
-    "tags": [
-      "pane",
-      "rotate",
-      "reorder"
-    ]
+    "tags": ["pane", "rotate", "reorder"]
   },
   {
     "keys": "'leader', '>'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Display pane menu",
-    "tags": [
-      "pane",
-      "menu"
-    ]
+    "tags": ["pane", "menu"]
   },
   {
     "keys": "'leader', 'n'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Create new session",
-    "tags": [
-      "session",
-      "create",
-      "new"
-    ]
+    "tags": ["session", "create", "new"]
   },
   {
     "keys": "'leader', 's'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Save tmux environment",
-    "tags": [
-      "session",
-      "save",
-      "resurrect",
-      "persist",
-      "backup"
-    ]
+    "tags": ["session", "save", "resurrect", "persist", "backup"]
   },
   {
     "keys": "'leader', 'r'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Restore tmux environment",
-    "tags": [
-      "session",
-      "restore",
-      "resurrect",
-      "persist",
-      "backup"
-    ]
+    "tags": ["session", "restore", "resurrect", "persist", "backup"]
   },
   {
     "keys": "'leader', 'R'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Rename current session",
-    "tags": [
-      "session",
-      "rename"
-    ]
+    "tags": ["session", "rename"]
   },
   {
     "keys": "'leader', 'Q'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Detach client",
-    "tags": [
-      "session",
-      "detach",
-      "client",
-      "exit"
-    ]
+    "tags": ["session", "detach", "client", "exit"]
   },
   {
     "keys": "'leader', 'Ctrl-w'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Open session tree",
-    "tags": [
-      "session",
-      "tree",
-      "switch",
-      "navigate",
-      "picker"
-    ]
+    "tags": ["session", "tree", "switch", "navigate", "picker"]
   },
   {
     "keys": "'leader', 'Ctrl-escape'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Kill tmux server",
-    "tags": [
-      "session",
-      "kill",
-      "server",
-      "quit",
-      "exit"
-    ]
+    "tags": ["session", "kill", "server", "quit", "exit"]
   },
   {
     "keys": "'leader', ':'",
     "group": "tmux",
     "mode": "Normal",
     "description": "Prompt for a command",
-    "tags": [
-      "command",
-      "prompt"
-    ]
+    "tags": ["command", "prompt"]
   },
   {
     "keys": "'leader', '?'",
     "group": "tmux",
     "mode": "Normal",
     "description": "List key bindings",
-    "tags": [
-      "help",
-      "keybind",
-      "list",
-      "bindings"
-    ]
+    "tags": ["help", "keybind", "list", "bindings"]
   },
   {
     "keys": "'leader', 'j'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move up in list",
-    "tags": [
-      "session",
-      "tree",
-      "navigate",
-      "up"
-    ]
+    "tags": ["session", "tree", "navigate", "up"]
   },
   {
     "keys": "'leader', '↑'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move up in list",
-    "tags": [
-      "session",
-      "tree",
-      "navigate",
-      "up"
-    ]
+    "tags": ["session", "tree", "navigate", "up"]
   },
   {
     "keys": "'leader', 'k'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move down in list",
-    "tags": [
-      "session",
-      "tree",
-      "navigate",
-      "down"
-    ]
+    "tags": ["session", "tree", "navigate", "down"]
   },
   {
     "keys": "'leader', '↓'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Move down in list",
-    "tags": [
-      "session",
-      "tree",
-      "navigate",
-      "down"
-    ]
+    "tags": ["session", "tree", "navigate", "down"]
   },
   {
     "keys": "'leader', 'h'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Collapse selected item",
-    "tags": [
-      "session",
-      "tree",
-      "collapse"
-    ]
+    "tags": ["session", "tree", "collapse"]
   },
   {
     "keys": "'leader', '←'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Collapse selected item",
-    "tags": [
-      "session",
-      "tree",
-      "collapse"
-    ]
+    "tags": ["session", "tree", "collapse"]
   },
   {
     "keys": "'leader', 'l'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Expand selected item",
-    "tags": [
-      "session",
-      "tree",
-      "expand"
-    ]
+    "tags": ["session", "tree", "expand"]
   },
   {
     "keys": "'leader', '→'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Expand selected item",
-    "tags": [
-      "session",
-      "tree",
-      "expand"
-    ]
+    "tags": ["session", "tree", "expand"]
   },
   {
     "keys": "'leader', 'Enter'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Execute item",
-    "tags": [
-      "session",
-      "tree",
-      "select",
-      "execute",
-      "open"
-    ]
+    "tags": ["session", "tree", "select", "execute", "open"]
   },
   {
     "keys": "'leader', 'x'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Kill selected item",
-    "tags": [
-      "session",
-      "tree",
-      "kill",
-      "close",
-      "delete"
-    ]
+    "tags": ["session", "tree", "kill", "close", "delete"]
   },
   {
     "keys": "'leader', 'Escape'",
     "group": "tmux",
     "mode": "Session Tree",
     "description": "Execute session tree",
-    "tags": [
-      "session",
-      "tree",
-      "escape"
-    ]
+    "tags": ["session", "tree", "escape"]
   }
 ]
