@@ -107,7 +107,7 @@
                 sharedModules = extraHomeModules;
                 users.${username} = homeProfile;
                 extraSpecialArgs = sharedArgs // {
-                  inherit hostname username;
+                  inherit hostname username inputs;
                 };
               };
             }
@@ -141,8 +141,8 @@
           username = "huedeane";
           hostModule = ./hosts/profiles/desktop/configuration.nix;
           homeProfile = ./home/profiles/main.nix;
-          extraSystemModules = [ 
-            sops-nix.nixosModules.sops 
+          extraSystemModules = [
+            sops-nix.nixosModules.sops
             waydroidModule
           ];
           extraHomeModules = [
@@ -156,8 +156,8 @@
           username = "huedeane";
           hostModule = ./hosts/profiles/laptop/configuration.nix;
           homeProfile = ./home/profiles/main.nix;
-          extraSystemModules = [ 
-            sops-nix.nixosModules.sops 
+          extraSystemModules = [
+            sops-nix.nixosModules.sops
             waydroidModule
           ];
           extraHomeModules = [

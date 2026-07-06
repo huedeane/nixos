@@ -1,6 +1,8 @@
 ---@diagnostic disable: undefined-global
 require("plugins")
 require("monitors")
+local smw = hl.plugin.split_monitor_workspaces
+
 -- https://wiki.hyprland.org/Configuring/
 -----------------
 --- Variables ---
@@ -54,6 +56,22 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
 end)
+
+---------------
+--- Plugins ---
+---------------
+hl.config({
+  plugin = {
+    split_monitor_workspaces = {
+      count                        = 5,
+      keep_focused                 = 1,
+      enable_notifications         = 0,
+      enable_persistent_workspaces = 1,
+      enable_wrapping              = 0,
+      link_monitors                = 0,
+    },
+  },
+})
 
 ------------------
 ---- MONITORS ----
@@ -285,20 +303,20 @@ hl.bind(mainMod .. " + CTRL + LEFT", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + RIGHT", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + UP", hl.dsp.exec_raw("split-cycleworkspaces +1"))
-hl.bind(mainMod .. " + CTRL + DOWN", hl.dsp.exec_raw("split-cycleworkspaces -1"))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.exec_raw("split-cycleworkspaces +1"))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_raw("split-cycleworkspaces -1"))
+hl.bind(mainMod .. " + CTRL + UP", function() smw.cycle_workspaces("+1") end)
+hl.bind(mainMod .. " + CTRL + DOWN", function() smw.cycle_workspaces("-1") end)
+hl.bind(mainMod .. " + CTRL + J", function() smw.cycle_workspaces("+1") end)
+hl.bind(mainMod .. " + CTRL + K", function() smw.cycle_workspaces("-1") end)
 
 -- Move active window to another monitor
 hl.bind(mainMod .. " + CTRL + SHIFT + LEFT", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + RIGHT", hl.dsp.window.move({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + SHIFT + UP", hl.dsp.exec_raw("split-movetoworkspace +1"))
-hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", hl.dsp.exec_raw("split-movetoworkspace -1"))
-hl.bind(mainMod .. " + CTRL + SHIFT + J", hl.dsp.exec_raw("split-movetoworkspace +1"))
-hl.bind(mainMod .. " + CTRL + SHIFT + K", hl.dsp.exec_raw("split-movetoworkspace -1"))
+hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace("+1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace("-1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + J", function() smw.move_to_workspace("+1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + K", function() smw.move_to_workspace("-1") end)
 
 -- Adjust active window width
 hl.bind(mainMod .. " + J", hl.dsp.layout("colresize -conf"))
@@ -314,26 +332,16 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + SHIFT + LEFT", hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + SHIFT + RIGHT", hl.dsp.layout("swapcol r"))
 
--- Switch workspaces on active monitor
-hl.bind(mainMod .. " + 1", hl.dsp.exec_raw("split-workspace 1"))
-hl.bind(mainMod .. " + 2", hl.dsp.exec_raw("split-workspace 2"))
-hl.bind(mainMod .. " + 3", hl.dsp.exec_raw("split-workspace 3"))
-hl.bind(mainMod .. " + 4", hl.dsp.exec_raw("split-workspace 4"))
-hl.bind(mainMod .. " + 5", hl.dsp.exec_raw("split-workspace 5"))
+for i = 1, 5 do
+  local n = tostring(i)
 
--- Move active window to a workspace on active monitor silently
-hl.bind(mainMod .. " + CTRL + 1", hl.dsp.exec_raw("split-movetoworkspacesilent 1"))
-hl.bind(mainMod .. " + CTRL + 2", hl.dsp.exec_raw("split-movetoworkspacesilent 2"))
-hl.bind(mainMod .. " + CTRL + 3", hl.dsp.exec_raw("split-movetoworkspacesilent 3"))
-hl.bind(mainMod .. " + CTRL + 4", hl.dsp.exec_raw("split-movetoworkspacesilent 4"))
-hl.bind(mainMod .. " + CTRL + 5", hl.dsp.exec_raw("split-movetoworkspacesilent 5"))
-
--- Move active window to a workspace on active monitor and focus
-hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.exec_raw("split-movetoworkspace 1"))
-hl.bind(mainMod .. " + SHIFT + 2", hl.dsp.exec_raw("split-movetoworkspace 2"))
-hl.bind(mainMod .. " + SHIFT + 3", hl.dsp.exec_raw("split-movetoworkspace 3"))
-hl.bind(mainMod .. " + SHIFT + 4", hl.dsp.exec_raw("split-movetoworkspace 4"))
-hl.bind(mainMod .. " + SHIFT + 5", hl.dsp.exec_raw("split-movetoworkspace 5"))
+  -- Switch workspaces on active monitor
+  hl.bind(mainMod .. " + " .. n, function() smw.workspace(n) end)
+  -- Move active window to a workspace on active monitor silently
+  hl.bind(mainMod .. " + CTRL + " .. n, function() smw.move_to_workspace_silent(n) end)
+  -- Move active window to a workspace on active monitor and focus
+  hl.bind(mainMod .. " + SHIFT + " .. n, function() smw.move_to_workspace(n) end)
+end
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
@@ -445,13 +453,13 @@ hl.window_rule({
 
 hl.window_rule({
   name  = "windowrule-evolution",
-  match = { title = "Inbox", class = "org.gnome.Evolution" },
+  match = { initial_title = "Mail", class = "org.gnome.Evolution" },
   float = false,
 })
 
 hl.window_rule({
   name  = "windowrule-evolution-popup",
-  match = { title = "negative:Inbox", class = "org.gnome.Evolution" },
+  match = { initial_title = "negative:Mail", class = "org.gnome.Evolution" },
   float = true,
   size  = { "monitor_w*0.80", "monitor_h*0.70" },
 })
