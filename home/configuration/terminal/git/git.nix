@@ -3,13 +3,20 @@
 {
   programs.git = {
     enable = true;
+
+    lfs = {
+      enable = true;
+    };
+
     ignores = [
       ".direnv"
       "*.swp"
       "*~"
       ".DS_Store"
     ];
+
     signing.format = null;
+
     settings = {
       init.defaultBranch = "main";
       pull.rebase = true;
@@ -27,6 +34,7 @@
       core.autocrlf = "input";
       submodule.recurse = true;
     };
+
     includes = [
       { path = "${config.xdg.configHome}/git/identity"; }
     ];

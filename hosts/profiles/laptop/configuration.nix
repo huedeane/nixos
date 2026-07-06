@@ -18,12 +18,14 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
-      theme = pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "grub";
-        rev = "main";
-        sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-      } + "/src/catppuccin-mocha-grub-theme";
+      theme =
+        pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "grub";
+          rev = "main";
+          sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
+        }
+        + "/src/catppuccin-mocha-grub-theme";
     };
     efi.canTouchEfiVariables = true;
   };
@@ -79,6 +81,14 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+  };
+
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main.capslock = "leftcontrol";
+    };
   };
 
   # Mount

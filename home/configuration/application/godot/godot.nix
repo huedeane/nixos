@@ -4,11 +4,11 @@
 
 {
   programs.godot = {
-    enable  = true;
+    enable = true;
 
     settings = {
       version = "4.6.3";
-      flavor  = "stable";
+      flavor = "stable";
       type = "mono";
       sha256 = "17hap8g6prnx0xqmss5cfz1z1v468n3dyfip8vyh60h6hmkqlakh";
     };
@@ -21,7 +21,10 @@
     icon = "${pkgs.godot_4}/share/icons/hicolor/scalable/apps/godot.svg";
     type = "Application";
     terminal = false;
-    categories = [ "Development" "IDE" ];
+    categories = [
+      "Development"
+      "IDE"
+    ];
     settings = {
       Keywords = "game;engine;2d;3d;gdscript;csharp;";
     };

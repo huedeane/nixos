@@ -25,8 +25,8 @@ keymap = [
   { on = "<PageUp>", run = "arrow -100%", desc = "Move cursor up one page" },
   { on = "<PageDown>", run = "arrow 100%", desc = "Move cursor down one page" },
 
-  { on = ["g", "g"], run = "arrow top", desc = "Go to top" },
-  { on = "G", run = "arrow bot", desc = "Go to bottom" },
+  # { on = ["g", "g"], run = "arrow top", desc = "Go to top" },
+  # { on = "G", run = "arrow bot", desc = "Go to bottom" },
 
   # Navigation
   { on = "h", run = "leave", desc = "Back to the parent directory" },
@@ -132,6 +132,7 @@ keymap = [
   { on = ["g", "H"], run = "cd ~/.config/nixos/home/configuration/", desc = "Go ~/.config/nixos/home/configuration/" },
   { on = ["g", "V"], run = "cd ~/.config/nixos/home/configuration/terminal/nixcats/", desc = "Go ~/.config/nixos/home/configuration/terminal/nixcats/" },
   { on = ["g", "t"], run = "cd ~/.local/share/Trash", desc = "Go ~/.local/share/Trash" },
+  { on = ["g", "g"], run = "cd ~/Documents/Github/", desc = "Go ~/Documents/Github/" },
 
   # Tabs
   { on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },

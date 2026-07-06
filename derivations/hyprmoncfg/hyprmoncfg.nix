@@ -8,7 +8,7 @@ pkgs.buildGoModule {
     owner = "crmne";
     repo = "hyprmoncfg";
     rev = "main";
-    hash = "sha256-omdfR2D5Z1cs8EpQ4ssxdL/Kft5JThqx7irGHDSqGLc=";
+    hash = "sha256-jAqLowsG024L16nDK4Vmb9sioVGB4zYU+CHO56IiSx0=";
   };
 
   vendorHash = "sha256-gQbjvdKtO0hCXrs9RnWo1s0YeHf5W9t+8AgS2ELXlPo=";

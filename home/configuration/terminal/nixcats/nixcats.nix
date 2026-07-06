@@ -26,6 +26,9 @@ in
       { pkgs, ... }:
       {
         lspsAndRuntimeDeps = {
+          general = with pkgs; [
+            tree-sitter
+          ];
           lsp = with pkgs; [
             # C#
             roslyn-ls
@@ -66,6 +69,7 @@ in
             catppuccin-nvim
             nui-nvim
             nvim-notify
+            nvim-web-devicons
           ];
 
           lsp = with pkgs.vimPlugins; [
@@ -82,7 +86,6 @@ in
             blink-cmp
             nvim-treesitter.withAllGrammars
             neo-tree-nvim
-            nvim-web-devicons
             edgy-nvim
             which-key-nvim
             fzf-lua
@@ -112,7 +115,11 @@ in
             suffix-path = true;
             suffix-LD = true;
             wrapRc = if editMode then false else true;
-            unwrappedCfgPath = if editMode then "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/nixcats/nvim" else null;
+            unwrappedCfgPath =
+              if editMode then
+                "${config.home.homeDirectory}/.config/nixos/home/configuration/terminal/nixcats/nvim"
+              else
+                null;
             aliases = [ "vim" ];
           };
           categories = {

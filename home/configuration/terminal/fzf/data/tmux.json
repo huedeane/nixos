@@ -234,8 +234,8 @@
     "keys": "'leader', 'r'",
     "group": "tmux",
     "mode": "Normal",
-    "description": "Restore tmux environment",
-    "tags": ["session", "restore", "resurrect", "persist", "backup"]
+    "description": "Rename current window",
+    "tags": ["window", "rename"]
   },
   {
     "keys": "'leader', 'R'",

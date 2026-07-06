@@ -15,7 +15,7 @@ return {
         width = 30,
         mappings = {
           ["<space>"] = "none",
-          ["<cr>"] = "open",
+          ["<cr>"] = { "open", config = { focus = false } },
           ["s"] = "open_vsplit",
           ["S"] = "open_split",
           ["t"] = "open_tabnew",
@@ -28,6 +28,7 @@ return {
           ["x"] = "cut_to_clipboard",
           ["p"] = "paste_from_clipboard",
           ["m"] = "move",
+          ["P"] = { "toggle_preview", config = { use_float = true } },
         },
         border = "rounded",
       },
