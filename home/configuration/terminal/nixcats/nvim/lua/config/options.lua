@@ -35,6 +35,7 @@ vim.opt.foldlevel = 99 -- start with all folds open
 vim.opt.fillchars = { -- characters used to fill ui elements
   eob = " ",
   vertleft = "│",
+  vertright = "│",
   horiz = "⎯",
 }
 vim.opt.winborder = "rounded"

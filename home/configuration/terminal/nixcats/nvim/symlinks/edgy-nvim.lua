@@ -1,1 +1,1 @@
-/home/huedeane/.config/nixos/home/configuration/terminal/nixcats/nvim/lua/plugins/functionality/edgy-nvim.lua
+/home/huedeane/.config/nixos/home/configuration/terminal/nixcats/nvim/lua/plugins/visual/edgy-nvim.lua

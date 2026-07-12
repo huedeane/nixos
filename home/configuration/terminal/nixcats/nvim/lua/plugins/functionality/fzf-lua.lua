@@ -6,8 +6,8 @@ return {
 
     keymap({
       { "n", "<leader>fb", function() fzf_lua.buffers() end,   desc = "Buffer (fzf-lua)" },
-      { "n", "<leader>ff", function() fzf_lua.live_grep() end, desc = "Find Files (fzf-lua)" },
-      { "n", "<leader>fg", function() fzf_lua.buffers() end,   desc = "Live Grep (fzf-lua)" },
+      { "n", "<leader>ff", function() fzf_lua.files() end,     desc = "File (fzf-lua)" },
+      { "n", "<leader>fF", function() fzf_lua.live_grep() end, desc = "Grep File (fzf-lua)" },
     })
 
     fzf_lua.setup({

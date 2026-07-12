@@ -31,10 +31,14 @@ local crust     = colors.crust
 
 
 style.setup = function()
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = lavender })
+
   -- neo-tree
   vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = lavender })
-  vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = mantle })
-  vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = base })
+
+  -- edgy
+  vim.api.nvim_set_hl(0, "EdgyNormal", { bg = colors.mantle })
+  vim.api.nvim_set_hl(0, "EdgyNormalNC", { bg = colors.base })
 end
 
 return style

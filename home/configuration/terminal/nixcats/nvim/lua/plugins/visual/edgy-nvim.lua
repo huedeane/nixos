@@ -14,13 +14,23 @@ return {
     local edgy = require("edgy")
     local keymap = require("config.utils").keymap
 
-    local function toggle_left()
-      edgy.toggle("left")
-      vim.defer_fn(edgy.goto_main, 50)
+    local function toggle_edgy(dir)
+      return function()
+        if dir == nil then
+          edgy.toggle()
+        else
+          edgy.toggle(dir)
+        end
+        vim.defer_fn(edgy.goto_main, 50)
+      end
     end
 
     keymap({
-      { "n", "<leader>en", toggle_left, desc = "(Edgy) Toggle Neotree" },
+      { "n", "<leader>e<left>", toggle_edgy("left"),   hide = true },
+      { "n", "<leader>e<down>", toggle_edgy("bottom"), hide = true },
+      { "n", "<leader>eh",      toggle_edgy("left"),   desc = "(Edgy) Toggle Neotree" },
+      { "n", "<leader>ej",      toggle_edgy("bottom"), desc = "(Edgy) Toggle Terminal" },
+      { "n", "<leader>ea",      toggle_edgy(),         desc = "(Edgy) Toggle All" },
     })
 
     edgy.setup({
@@ -52,6 +62,18 @@ return {
           },
         },
       },
+      bottom = {
+        {
+          title = center("Terminal", 40),
+          ft = "toggleterm",
+          size = { height = 0.3 },
+          open = "ToggleTerm",
+          pinned = true,
+          filter = function(buf, win)
+            return vim.api.nvim_win_get_config(win).relative == ""
+          end,
+        },
+      },
       icons = {
         open = "",
         closed = "",
@@ -71,14 +93,16 @@ return {
         winfixheight = false,
         spell = false,
         signcolumn = "no",
+        winhighlight = "Normal:EdgyNormal,NormalNC:EdgyNormalNC",
       },
     })
 
     local arg = vim.fn.argv(0)
     if arg and arg ~= "" and vim.fn.isdirectory(arg) == 1 then
-      vim.defer_fn(function()
-        require("edgy").open("left")
-      end, 200)
+      vim.schedule(function()
+        edgy.open("left")
+        vim.cmd("Neotree filesystem focus")
+      end)
     end
   end,
 }

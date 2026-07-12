@@ -11,7 +11,7 @@ in
 
   programs.ags = {
     enable = true;
-    configDir = ./src;
+    # configDir = ./src;
     extraPackages = [
       astal.hyprland
       astal.apps

@@ -74,7 +74,7 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'filesize' , 'diff', 'diagnostics' },
+        lualine_b = { 'branch', 'filesize', 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
         lualine_x = { '' },
         lualine_y = { 'progress' },
@@ -100,6 +100,8 @@ return {
                 return "%=File System%="
               elseif bufname:match("neo%-tree buffers") then
                 return "%=Buffers%="
+              elseif bufname:match("^term://") then
+                return "%=Terminal%="
               end
               return "%=Editor%="
             end
@@ -120,6 +122,8 @@ return {
                 return "%=File System%="
               elseif bufname:match("neo%-tree buffers") then
                 return "%=Buffers%="
+              elseif bufname:match("^term://") then
+                return "%=Terminal%="
               end
               return "%=Editor%="
             end

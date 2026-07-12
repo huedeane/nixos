@@ -91,6 +91,7 @@ in
             fzf-lua
             noice-nvim
             conform-nvim
+            toggleterm-nvim
           ];
 
           lsp = with pkgs.vimPlugins; [
