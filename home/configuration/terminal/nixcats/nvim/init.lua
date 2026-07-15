@@ -2,12 +2,8 @@ require('config.options')
 require('config.keymaps')
 require('config.autocmds')
 
-vim.o.background = "dark"
 vim.cmd.colorscheme('catppuccin-frappe')
 
--- require("snacks").setup({ ... })
--- -- snacks keymaps ...
---
 require('lze').register_handlers(require('lzextras').lsp)
 require('lze').h.lsp.set_ft_fallback(function(name)
   return dofile(nixCats.pawsible({ "allPlugins", "opt", "nvim-lspconfig" }) .. "/lsp/" .. name .. ".lua").filetypes or {}
@@ -35,6 +31,10 @@ require('lze').load({
   { import = "plugins.visual.noice-nvim" },
   { import = "plugins.visual.toggleterm-nvim" },
   { import = "plugins.visual.which-key-nvim" },
+  { import = "plugins.visual.statuscol-nvim" },
+  { import = "plugins.visual.indent-blankline-nvim" },
+  { import = "plugins.visual.nvim-navic" },
+  { import = "plugins.visual.nvim-navbuddy" },
 
   { import = "plugins.lsp.emmet-language-server" },
   { import = "plugins.lsp.lua-language-server" },

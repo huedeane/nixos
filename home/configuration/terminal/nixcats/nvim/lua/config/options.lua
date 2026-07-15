@@ -24,19 +24,27 @@ vim.o.smartcase = true  -- override ignorecase if search contains uppercase
 vim.opt.list = true -- show invisible characters
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- define how invisible chars look
 vim.opt.number = true -- show absolute line numbers
-vim.opt.relativenumber = false -- show relative line numbers (combined with above: hybrid mode)
+vim.opt.relativenumber = false -- show relative line numbers
 vim.opt.signcolumn = "yes" -- always show the sign column
 vim.opt.termguicolors = true -- enable 24-bit rgb color in the terminal
 vim.opt.scrolloff = 10 -- keep 10 lines visible above/below cursor when scrolling
 vim.opt.conceallevel = 0 -- don't hide * markup for bold and italic but not substitution markers
 vim.opt.cursorline = true -- highlight the line the cursor is on
 vim.opt.smoothscroll = true -- scroll by screen lines rather than file lines
+vim.opt.foldcolumn = "1" -- needed for builtin.foldfunc to show fold arrows
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr" -- fold based on indentation
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99 -- start with all folds open
 vim.opt.fillchars = { -- characters used to fill ui elements
   eob = " ",
   vertleft = "│",
   vertright = "│",
   horiz = "⎯",
+  foldopen = "",
+  foldclose = "",
+  foldsep = " ",
+  fold = "-",
 }
 vim.opt.winborder = "rounded"
 vim.opt.showtabline = 0
@@ -44,6 +52,7 @@ vim.opt.splitkeep = "screen" -- keep text on screen when splitting
 vim.opt.laststatus = 3       -- single global statusline instead of one per window
 vim.opt.title = true
 vim.opt.titlestring = "nvim [%t]"
+vim.opt.background = "dark"
 
 ------------
 -- search --
@@ -51,7 +60,6 @@ vim.opt.titlestring = "nvim [%t]"
 vim.opt.hlsearch = true      -- highlight all search matches
 vim.opt.inccommand = 'split' -- show live preview of substitutions in a split
 -- vim.opt.inccommand = "nosplit" -- same as yours but preview stays inline instead of a split
-
 
 -------------------
 -- functionality --
@@ -70,13 +78,10 @@ vim.opt.undolevels = 10000 -- maximum number of undo steps
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-
--- vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')          -- clear search highlights on esc
 -- -- =====================
 -- -- only in lazyvim
 -- -- =====================
 -- opt.autowrite = true           -- automatically save before commands like :next and :make
--- opt.foldmethod = "indent"      -- fold based on indentation
 -- opt.foldtext = ""              -- use default text for closed folds
 -- opt.formatoptions = "jcroqlnt" -- control auto-formatting: join comments, wrap, insert comment leader etc
 -- opt.grepformat = "%f:%l:%c:%m" -- format string for grep output

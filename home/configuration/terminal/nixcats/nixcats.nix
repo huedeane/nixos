@@ -92,6 +92,10 @@ in
             noice-nvim
             conform-nvim
             toggleterm-nvim
+            statuscol-nvim
+            indent-blankline-nvim
+            nvim-navic
+            nvim-navbuddy
           ];
 
           lsp = with pkgs.vimPlugins; [

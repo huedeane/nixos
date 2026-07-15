@@ -5,6 +5,7 @@ vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
 -- Global
 vim.keymap.set("n", "<leader><leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<cr>", { desc = "Save change" })
+vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 
 -- Buffer
 vim.keymap.set("n", "<leader>b<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
