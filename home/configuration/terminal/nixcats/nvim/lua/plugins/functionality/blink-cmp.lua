@@ -3,16 +3,16 @@ return {
   enabled = nixCats('general') or false,
   event = "DeferredUIEnter",
   on_require = "blink",
-  after = function ()
+  after = function()
     require("blink.cmp").setup({
       cmdline = {
         keymap = {
           preset = 'cmdline',
-            ['<Up>'] = { 'select_prev', 'fallback' },
-            ['<Down>'] = { 'select_next', 'fallback' },
-            ['<Tab>'] = { 'accept', 'fallback' },
-            ['<Esc>'] = { 'hide', 'fallback' },
-            ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+          ['<Up>'] = { 'select_prev', 'fallback' },
+          ['<Down>'] = { 'select_next', 'fallback' },
+          ['<Tab>'] = { 'accept', 'fallback' },
+          ['<Esc>'] = { 'hide', 'fallback' },
+          ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
         },
         completion = {
           menu = { auto_show = true },
@@ -21,11 +21,11 @@ return {
       },
       keymap = {
         preset = 'none',
-          ['<Up>'] = { 'select_prev', 'fallback' },
-          ['<Down>'] = { 'select_next', 'fallback' },
-          ['<Tab>'] = { 'accept', 'fallback' },
-          ['<Esc>'] = { 'hide', 'fallback' },
-          ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<Tab>'] = { 'accept', 'fallback' },
+        ['<Esc>'] = { 'hide', 'fallback' },
+        ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       },
       completion = {
         trigger = {
