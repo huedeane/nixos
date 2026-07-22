@@ -35,6 +35,6 @@ clipvault list | fzf \
   --preview-label=" Preview " \
   --preview="$PREVIEW" \
   --bind="esc:become(true)" \
-  --bind="enter:execute-silent(printf %s {} | clipvault get | $COPY)" \
+  --bind="enter:execute-silent(printf %s {} | clipvault get | $COPY)+accept" \
   --bind='ctrl-d:execute-silent(printf %s {} | clipvault delete)+reload(clipvault list)' \
   --bind="ctrl-x:execute($CLEAR)+reload(clipvault list)"

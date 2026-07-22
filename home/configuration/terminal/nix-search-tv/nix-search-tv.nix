@@ -34,4 +34,22 @@ in
           builtins.readFile ./scripts/nixpkgs.sh;
     })
   ];
+
+  home.file.".local/bin/nixpkgs-add.sh" = {
+    source = ./scripts/nixpkgs-add.sh;
+    executable = true;
+  };
+
+  xdg.desktopEntries."ns" = {
+    name = "Nix Package Manager";
+    genericName = "Package Manager";
+    exec = "kitty --class tui-ns -e ns";
+    icon = "kitty";
+    type = "Application";
+    terminal = false;
+    categories = [ "X-TUI" ];
+    settings = {
+      Keywords = "Git;Tui;Kitty;";
+    };
+  };
 }

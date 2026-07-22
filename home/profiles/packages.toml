@@ -1,0 +1,7 @@
+[packages]
+caligula = true
+evolution = true
+impala = true
+mongodb-compass = true
+nodejs = true
+steam = true

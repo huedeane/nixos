@@ -14,6 +14,8 @@
     (configHomeDir + "/terminal/gitui/gitui.nix")
     (configHomeDir + "/terminal/fastfetch/fastfetch.nix")
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
+    (configHomeDir + "/terminal/tmux/tmux.nix")
+    (configHomeDir + "/terminal/fzf/fzf.nix")
   ];
 
   home = {
@@ -35,17 +37,7 @@
 
     packages = with pkgs; [
       # Terminal
-      tmux
       caligula
-      tree
-
-      # Formatter
-      nixfmt
-
-      # Find
-      fzf
-      fd
-      ripgrep
     ];
   };
 

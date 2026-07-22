@@ -20,14 +20,18 @@ declare -a INDEXES=(
     # you can add any indexes combination here,
     # like `nixpkgs,nixos`
 
-    "all ctrl-a"
+    "all ctrl-f"
 )
 
+
+FILE="${HM_FILE:-$HOME/.config/nixos/home/profiles/packages.toml}"
 SEARCH_SNIPPET_KEY="ctrl-w"
 OPEN_SOURCE_KEY="ctrl-s"
 OPEN_HOMEPAGE_KEY="ctrl-o"
 NIX_SHELL_KEY="ctrl-i"
 PRINT_PREVIEW_KEY="ctrl-p"
+ADD_PACKAGE_KEY="ctrl-a"
+EDIT_FILE_KEY="ctrl-e"
 
 OPENER="xdg-open"
 
@@ -37,6 +41,8 @@ if [[ "$(uname)" == 'Darwin' ]]; then
     OPEN_HOMEPAGE_KEY="alt-o"
     NIX_SHELL_KEY="alt-i"
     PRINT_PREVIEW_KEY="alt-p"
+    ADD_PACKAGE_KEY="alt-a"
+    EDIT_FILE_KEY="alt-e"
 
     OPENER="open"
 fi
@@ -85,6 +91,8 @@ $OPEN_SOURCE_KEY - open source
 $SEARCH_SNIPPET_KEY - search github for snippets
 $NIX_SHELL_KEY - nix-shell
 $PRINT_PREVIEW_KEY - print preview
+$ADD_PACKAGE_KEY - add package
+$EDIT_FILE_KEY - edit package list
 "
 
 FZF_BINDS=""
@@ -114,17 +122,21 @@ SEARCH_SNIPPET_CMD="$SEARCH_SNIPPET_CMD | xargs printf \"https://github.com/sear
 NIX_SHELL_CMD='nix-shell --run $SHELL -p $(echo "{}" | sed "s:nixpkgs/::g"'
 NIX_SHELL_CMD="$NIX_SHELL_CMD | tr -d \"\'\")"
 
+ADD_SCRIPT="nixpkgs-add.sh"
+
 HEADER="${HEADER%$'\n'}"
 
 eval "$CMD print | fzf \
     --preview '$CMD preview \$(cat $STATE_FILE) {}' \
-    --bind '$OPEN_SOURCE_KEY:execute($CMD source \$(cat $STATE_FILE) {} | xargs $OPENER)' \
-    --bind '$OPEN_HOMEPAGE_KEY:execute($CMD homepage \$(cat $STATE_FILE) {} | xargs $OPENER)' \
+    --bind $'$OPEN_SOURCE_KEY:execute($CMD source \$(cat $STATE_FILE) {} | xargs $OPENER)' \
+    --bind $'$OPEN_HOMEPAGE_KEY:execute($CMD homepage \$(cat $STATE_FILE) {} | xargs $OPENER)' \
     --bind $'$SEARCH_SNIPPET_KEY:execute($SEARCH_SNIPPET_CMD | xargs $OPENER)' \
     --bind $'$NIX_SHELL_KEY:become($NIX_SHELL_CMD)' \
     --bind $'$PRINT_PREVIEW_KEY:execute($CMD preview \$(cat $STATE_FILE) {} | less)' \
+    --bind $'$ADD_PACKAGE_KEY:execute-silent($ADD_SCRIPT {})' \
+    --bind $'$EDIT_FILE_KEY:execute(\${EDITOR:-nvim} $FILE)' \
     --bind 'focus:transform-header(echo \"$HEADER\")' \
-    --scheme history \
+    --scheme default \
     --header '$HEADER' \
     --header-border \
     --header-label \"Help\" \

@@ -4,6 +4,7 @@
   configHomeDir,
   hostname,
   username,
+  lib,
   ...
 }:
 
@@ -54,18 +55,9 @@
       "$HOME/.local/bin"
     ];
 
-    packages = with pkgs; [
-      # Terminal
-      caligula
-
-      # Application
-      steam
-
-      impala
-      evolution
-      mongodb-compass
-      nodejs
-    ];
+    packages = map (n: lib.getAttrFromPath (lib.splitString "." n) pkgs) (
+      lib.attrNames (fromTOML (builtins.readFile ./packages.toml)).packages
+    );
   };
 
   programs.home-manager.enable = true;

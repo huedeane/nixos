@@ -9,6 +9,7 @@ return {
       { "<leader>e",       group = " (Plugin) edgy" },
       { "<leader>b",       group = " buffer" },
       { "<leader><space>", group = " global" },
+      { "<leader>l",       group = " (Plugin) lsp" },
     })
 
     vim.keymap.set("n", "<leader>bb", function()

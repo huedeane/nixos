@@ -53,7 +53,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd(
     "uwsm app -- wl-paste --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
-  hl.exec_cmd("uwsm app -- ags run")
+  -- hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
 end)
 
@@ -251,7 +251,7 @@ hl.config({
 
     follow_mouse = 1,
 
-    sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
+    sensitivity  = 0,
 
     touchpad     = {
       natural_scroll = false,
@@ -298,13 +298,13 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.layout("move -col"))
 hl.bind(mainMod .. " + mouse_down", hl.dsp.layout("move +col"))
 hl.bind(mainMod .. " + Tab", hl.dsp.window.cycle_next())
 
--- Switch active monitor  -- TODO: focusmonitor / split-cycleworkspaces
+-- Switch active monitor
 hl.bind(mainMod .. " + CTRL + LEFT", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + RIGHT", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + UP", function() smw.cycle_workspaces("+1") end)
-hl.bind(mainMod .. " + CTRL + DOWN", function() smw.cycle_workspaces("-1") end)
+hl.bind(mainMod .. " + CTRL + DOWN", function() smw.cycle_workspaces("+1") end)
+hl.bind(mainMod .. " + CTRL + UP", function() smw.cycle_workspaces("-1") end)
 hl.bind(mainMod .. " + CTRL + J", function() smw.cycle_workspaces("+1") end)
 hl.bind(mainMod .. " + CTRL + K", function() smw.cycle_workspaces("-1") end)
 
@@ -313,8 +313,8 @@ hl.bind(mainMod .. " + CTRL + SHIFT + LEFT", hl.dsp.window.move({ monitor = "-1"
 hl.bind(mainMod .. " + CTRL + SHIFT + RIGHT", hl.dsp.window.move({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace("+1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace("-1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace("+1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace("-1") end)
 hl.bind(mainMod .. " + CTRL + SHIFT + J", function() smw.move_to_workspace("+1") end)
 hl.bind(mainMod .. " + CTRL + SHIFT + K", function() smw.move_to_workspace("-1") end)
 
