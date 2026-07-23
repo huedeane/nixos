@@ -12,9 +12,22 @@ Item {
   property color  propTextColor:        config.ColorText
   property string propFontFamily:       config.Font
   property int    propRoundCorners:    config.RoundCorners !== "" ? parseInt(config.RoundCorners) : 10
+  property Item   propReturnFocusItem: null
 
   // Signals
   signal sessionSelected(int index)
+  signal closed()
+
+  enabled: propOpen
+
+  onPropOpenChanged: {
+    if (propOpen) {
+      idSessionList.currentIndex = propCurrentIndex
+      idSessionList.forceActiveFocus()
+    } else if (propReturnFocusItem) {
+      propReturnFocusItem.forceActiveFocus()
+    }
+  }
 
   Rectangle {
     // Position
@@ -48,6 +61,7 @@ Item {
     Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutBack } }
 
     ListView {
+      id: idSessionList
 
       // Position
       anchors {
@@ -61,12 +75,39 @@ Item {
       // Other
       clip: true
 
+      // Keyboard
+      focus: true
+      keyNavigationEnabled: true
+      keyNavigationWraps: true
+      highlightMoveDuration: 150
+
+      Keys.onReturnPressed: idSessionPopupComponent.sessionSelected(currentIndex)
+      Keys.onEnterPressed:  idSessionPopupComponent.sessionSelected(currentIndex)
+      Keys.onEscapePressed: idSessionPopupComponent.closed()
+      Keys.onTabPressed:    incrementCurrentIndex()
+      Keys.onBacktabPressed: decrementCurrentIndex()
+
       // List Item
       delegate: Item {
-        
+        id: idDelegate
+
         // Size
-        width: parent.width
+        width: ListView.view.width
         height: 45 * propScale
+
+        readonly property bool isHighlighted: ListView.isCurrentItem
+
+        // Focus border
+        Rectangle {
+          anchors.fill: parent
+          anchors.margins: 2 * propScale
+          color: "transparent"
+          border {
+            color: propAccentColor
+            width: 1
+          }
+          visible: idDelegate.isHighlighted && idSessionList.activeFocus
+        }
 
         Text {
           text: (model.name || "UNNAMED").toUpperCase()
@@ -93,6 +134,7 @@ Item {
           cursorShape: Qt.PointingHandCursor
 
           // Action
+          onEntered: idSessionList.currentIndex = index
           onClicked: idSessionPopupComponent.sessionSelected(index)
         }
       }

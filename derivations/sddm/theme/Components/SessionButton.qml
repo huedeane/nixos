@@ -9,9 +9,29 @@ Item {
   property color  propAccentColor:  config.ColorGreen
   property string propFontFamily:   config.Font
   property int    propSessionIndex: 0
+  property Item   propNextFocusItem: null
+
+  // Tab Functionality
+  activeFocusOnTab: true
+  Keys.onReturnPressed: idSessionButtonComponent.clicked()
+  Keys.onEnterPressed:  idSessionButtonComponent.clicked()  
+  KeyNavigation.tab:    propNextFocusItem
+
   
   // Signal
   signal clicked()
+
+  // Focus border
+  Rectangle {
+    anchors.fill: idSessionButton
+    anchors.margins: -6 * propScale
+    color: "transparent"
+    border {
+      color: propAccentColor
+      width: 1
+    }
+    visible: idSessionButtonComponent.activeFocus
+  }
 
   // Helper
   ListView {

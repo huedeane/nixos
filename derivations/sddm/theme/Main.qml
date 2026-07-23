@@ -96,6 +96,7 @@ Item {
       propScale:     s
       propUserIndex: root.propStateUserIndex
       propSessionIndex: root.propStateSessionIndex
+      propNextFocusItem: idSessionButton  
       // propErrorColor:
       // propBackgroundColor:
       // propAccentColor:
@@ -124,6 +125,7 @@ Item {
       }
 
       SessionButton {
+        id: idSessionButton
         
         // Position
         anchors {
@@ -140,10 +142,14 @@ Item {
  
         // Action
         onClicked: root.propStateSessionMenuOpen = !root.propStateSessionMenuOpen
+
+        // Focus
+        propNextFocusItem: idPowerButton.propFirstFocusItem
       }
       
       PowerButton {
-
+        id: idPowerButton
+        
         // Position
         anchors {
           right: parent.right
@@ -156,6 +162,9 @@ Item {
         // propRebootTextColor:
         // propPowerTextColor:
         // propFontFamily:
+
+        // Focus
+        propNextFocusItem: idLoginForm.propFirstFocusItem
       }
     }
     
@@ -167,6 +176,7 @@ Item {
       propScale:        s
       propOpen:         root.propStateSessionMenuOpen
       propCurrentIndex: root.propStateSessionIndex
+      propReturnFocusItem: idSessionButton
 
       // Override Prop
       // propAccentColor:
@@ -179,6 +189,7 @@ Item {
         root.propStateSessionIndex   = index
         root.propStateSessionMenuOpen = false
       }
+      onClosed: root.propStateSessionMenuOpen = false
     }
   }
 }

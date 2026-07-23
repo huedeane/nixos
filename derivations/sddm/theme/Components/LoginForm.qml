@@ -14,6 +14,8 @@ Item {
   property int    propUserIndex:        0
   property int    propSessionIndex:        0
   property int    propRoundCorners:    config.RoundCorners !== "" ? parseInt(config.RoundCorners) : 10
+  property Item   propNextFocusItem: null
+  property alias  propFirstFocusItem: idPasswordInput
 
   // Signals
   signal userSwitched()
@@ -235,6 +237,8 @@ Item {
           // Action
           onTextEdited: idError.text = ""
           onActiveFocusChanged: if (!activeFocus && text.length === 0) wasClicked = false
+          activeFocusOnTab: true
+          KeyNavigation.tab: propNextFocusItem
           Keys.onReturnPressed: login()
           Keys.onEnterPressed: login()
         }
