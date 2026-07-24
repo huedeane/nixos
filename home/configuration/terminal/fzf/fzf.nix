@@ -43,4 +43,9 @@ in
     source = ./scripts/fzf-clipvault.sh;
     executable = true;
   };
+
+  home.file.".local/bin/fzf-command.sh" = {
+    source = ./scripts/fzf-command.sh;
+    executable = true;
+  };
 }

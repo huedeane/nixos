@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -eu
-CHEAT_DIR="$HOME/.config/nixos/home/configuration/terminal/fzf/data"
+CHEAT_DIR="$HOME/.config/nixos/home/configuration/terminal/fzf/data/keybinds"
 export CHEAT_DIR          # so the fzf ctrl-e child process can see it
 
 CMD="${1:-${CALLER_TTY:-}}"

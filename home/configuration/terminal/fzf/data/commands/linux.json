@@ -1,0 +1,32 @@
+[
+  {
+    "command": "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p steam-run --run 'steam-run ./\"Atlas Conquest.x86_64\"'",
+    "description": "Start Atlas Conquest",
+    "tags": ["game", "nix", "steam"]
+  },
+  {
+    "command": "poweroff",
+    "description": "Shutdown Computer",
+    "tags": ["system", "power"]
+  },
+  {
+    "command": "upower --battery",
+    "description": "(Laptop) Check Power",
+    "tags": ["system", "power", "laptop"]
+  },
+  {
+    "command": "sddm-greeter-qt6 --test-mode --theme $HOME/.config/nixos/derivations/sddm/theme",
+    "description": "Open Login Manager In Test Mode",
+    "tags": ["sddm", "theme"]
+  },
+  {
+    "command": "nix-collect-garbage",
+    "description": "Nix Garbage Collection",
+    "tags": ["nix", "maintenance", "cleanup"]
+  },
+  {
+    "command": "nix-store --optimise --verbose",
+    "description": "Nix Store Optimise",
+    "tags": ["nix", "maintenance", "storage"]
+  }
+]
