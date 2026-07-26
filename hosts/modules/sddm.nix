@@ -7,6 +7,8 @@ in
     sddm-theme
   ];
 
+  systemd.services.display-manager.environment.QML_DISABLE_DISK_CACHE = "1";
+
   services.displayManager = {
     sddm = {
       wayland.enable = true;

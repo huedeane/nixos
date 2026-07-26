@@ -8,3 +8,6 @@ steam = true
 wiremix = true
 inxi = true
 watchexec = true
+kooha = true
+ffmpeg = true
+gifsicle = true
