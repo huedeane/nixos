@@ -10,6 +10,8 @@ vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 -- Buffer
 vim.keymap.set("n", "<leader>b<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>b<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.set("n", "<leader>b<up>", "<cmd>bnext<cr>", { desc = "which_key_ignore" })
+vim.keymap.set("n", "<leader>b<down>", "<cmd>bprevious<cr>", { desc = "which_key_ignore" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 
 -- Terminal

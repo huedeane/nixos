@@ -8,7 +8,9 @@ return {
   after = function()
     require("toggleterm").setup({
       direction = "horizontal",
-      shade_terminals = false, -- edgy handles the visuals
+      start_in_insert = true,
+      persist_mode = false,
+      shade_terminals = false,
     })
   end,
 }

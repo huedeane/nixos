@@ -243,17 +243,18 @@ hl.config({
 -- https://wiki.hyprland.org/Configuring/Variables/#input
 hl.config({
   input = {
-    kb_layout    = "us",
-    kb_variant   = "",
-    kb_model     = "",
-    kb_options   = "",
-    kb_rules     = "",
+    kb_layout     = "us",
+    kb_variant    = "",
+    kb_model      = "",
+    kb_options    = "",
+    kb_rules      = "",
 
-    follow_mouse = 1,
+    follow_mouse  = 2,
+    mouse_refocus = false,
 
-    sensitivity  = 0,
+    sensitivity   = 0,
 
-    touchpad     = {
+    touchpad      = {
       natural_scroll = false,
     },
   },
@@ -281,11 +282,11 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("grimblast --freeze save area - | satty -f -"))
-hl.bind(mainMod .. " + m", hl.dsp.exec_cmd("kitty --class tui-rmpc rmpc"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("kitty --class tui-rmpc rmpc"))
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("rmpc prev"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rmpc next"))
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("rmpc togglepause"))
-hl.bind(mainMod .. " + c", hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
 
 -- Switch active window
 hl.bind(mainMod .. " + H", hl.dsp.layout("move -col"))

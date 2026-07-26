@@ -28,5 +28,15 @@
     "command": "nix-store --optimise --verbose",
     "description": "Nix Store Optimise",
     "tags": ["nix", "maintenance", "storage"]
+  },
+  {
+    "command": "watchexec -e tsx,ts,scss -w . --restart --stop-timeout 10s -- ags run .",
+    "description": "Hotreload AGS",
+    "tags": ["nix", "ags"]
+  },
+  {
+    "command": "GTK_THEME=Adwaita:dark GTK_DEBUG=interactive ags run .",
+    "description": "Debug AGS",
+    "tags": ["nix", "ags", "debug"]
   }
 ]

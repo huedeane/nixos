@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 
--- autocmds.lua: just the cleanup, no plugin dependency
+-- New buffer on directory start
 vim.api.nvim_create_autocmd("UIEnter", {
   once = true,
   callback = function()

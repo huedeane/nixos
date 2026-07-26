@@ -1,0 +1,10 @@
+@use "../../../style" as *;
+
+.datetime-component {
+  font-family: "ComicShannsMono Nerd Font Mono";
+  font-weight: bold;
+
+  button {
+    background: $green;
+  }
+}

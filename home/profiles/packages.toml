@@ -5,3 +5,6 @@ impala = true
 mongodb-compass = true
 nodejs = true
 steam = true
+wiremix = true
+inxi = true
+watchexec = true

@@ -1,0 +1,31 @@
+@use "../../../style" as *;
+
+.workspace-component {
+  border: none;
+  border-radius: 0px;
+  padding: 0px 0px 0px 0px;
+  background-color: $blue;
+  color: $crust;
+
+  .workspace-navigator {
+    .ws {
+      padding-right: 10px;
+    }
+  }
+
+  .window-navigator {
+    padding: 0px;
+    padding-right: 5px;
+  }
+
+  button {
+    background: transparent; 
+    font-size: $font-size;
+    padding: 5px 5px 5px 5px;
+    min-width: 25px;
+
+    label {
+      border: none;
+    }
+  } 
+}
