@@ -1,24 +1,24 @@
-import Hyprland from "gi://AstalHyprland"
-import style from "./workspace.scss"
-import app from "ags/gtk4/app"
-import { createBinding, For } from "ags"
+import { createBinding, createComputed, For } from "ags"
 import { Gtk, Gdk } from "ags/gtk4"
 import { execAsync } from "ags/process"
+import { MonitorFocusContext } from "../../../lib/context"
+import style from "./workspace.scss"
+import app from "ags/gtk4/app"
+import Hyprland from "gi://AstalHyprland"
 
 app.apply_css(style)
 
-const NUM_WORKSPACES = 5
-
 export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
+  const NUM_WORKSPACES = 5
   const hypr = Hyprland.get_default()
   const workspaces = createBinding(hypr, "workspaces")
-  const focused = createBinding(hypr, "focusedWorkspace")
+  const focusedWs = createBinding(hypr, "focusedWorkspace")
+  const isFocused = MonitorFocusContext.use()
 
-  const monitorList = workspaces(
-    (all) =>
-      all
-        .filter((ws) => ws.monitor?.name === gdkmonitor.connector) // only this monitor
-        .sort((a, b) => a.id - b.id), // fix the scrambled order
+  const monitorList = workspaces((all) =>
+    all
+      .filter((ws) => ws.monitor?.name === gdkmonitor.connector)
+      .sort((a, b) => a.id - b.id),
   )
 
   const focusWorkspace = (workspaceID) =>
@@ -36,20 +36,28 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
     ]).catch(console.error)
 
   return (
-    <box cssClasses={["workspace-component", "left"]}>
+    <box
+      cssClasses={isFocused((f) =>
+        f ? ["workspace", "component", "focused"] : ["workspace", "component"],
+      )}
+    >
       <button
-        cssClasses={["window-navigator"]}
+        cssClasses={["window-navigator", "left"]}
         onClicked={() => focusWindow("-")}
       >
         <label label="" />
       </button>
-      <box cssClasses={["workspace-navigator"]}>
+      <box cssClasses={["workspace-navigator"]} spacing={5}>
         <For each={monitorList}>
           {(ws) => {
             const local = ((ws.id - 1) % NUM_WORKSPACES) + 1
 
-            const glyph = focused((f) => {
-              if (f?.id === ws.id) return ""
+            const isActive = createComputed(
+              () => isFocused() && focusedWs()?.id === ws.id,
+            )
+
+            const glyph = createComputed(() => {
+              if (isActive()) return ""
               const occupied = (ws.clients?.length ?? 0) > 0
               return occupied ? "" : ""
             })
@@ -57,9 +65,7 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
             return (
               <button
                 onClicked={() => focusWorkspace(local)}
-                cssClasses={focused((f) =>
-                  f?.id === ws.id ? ["ws", "active"] : ["ws"],
-                )}
+                cssClasses={isActive((a) => (a ? ["ws", "active"] : ["ws"]))}
               >
                 <label label={glyph} />
               </button>

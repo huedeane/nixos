@@ -1,10 +1,12 @@
 @use "../../../style" as *;
 
-.datetime-component {
+.datetime.component {
   font-family: "ComicShannsMono Nerd Font Mono";
   font-weight: bold;
 
   button {
-    background: $green;
+    background: transparent;
+    color: $lavender;
+    border: none;
   }
 }

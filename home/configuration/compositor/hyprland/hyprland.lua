@@ -95,7 +95,7 @@ hl.config({
   general = {
     gaps_in = 10,
     gaps_out = 20,
-    border_size = 2,
+    border_size = 3,
     col = {
       inactive_border = colors.overlay0,
       active_border = { colors = { colors.lavender, colors.lavender }, angle = 45 },
@@ -126,8 +126,8 @@ hl.config({
 
   -- https://wiki.hyprland.org/Configuring/Basics/Variables/#decoration
   decoration = {
-    rounding = 1,
-    rounding_power = 2.0,
+    rounding = 10,
+    rounding_power = 4.0,
     active_opacity = 1.0,
     inactive_opacity = 0.98,
     fullscreen_opacity = 1.0,
@@ -161,7 +161,7 @@ hl.config({
 
     -- https://wiki.hyprland.org/Configuring/Variables/#shadow
     shadow = {
-      enabled = true,
+      enabled = false,
       range = 5,
       render_power = 1,
       sharp = false,
@@ -217,9 +217,10 @@ hl.animation({ leaf = "fadeLayers", enabled = true, speed = 3, bezier = "softSna
 hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "softSnap", style = "slidevert 100%" })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "overshot", style = "slidefadevert 30%" })
 
+-- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/#config
 hl.config({
   scrolling = {
-    fullscreen_on_one_column = true,
+    fullscreen_on_one_column = false,
     column_width = 1,
     focus_fit_method = 1,
     follow_focus = true,
@@ -353,9 +354,9 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Volume / brightness (locked + repeating)
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"),
   { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"),
   { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
   { locked = true, repeating = true })

@@ -35,7 +35,7 @@
     "tags": ["nix", "ags"]
   },
   {
-    "command": "GTK_THEME=Adwaita:dark GTK_DEBUG=interactive ags run .",
+    "command": "GTK_THEME=Adwaita:dark GTK_DEBUG=interactive ags run ~/.config/ags",
     "description": "Debug AGS",
     "tags": ["nix", "ags", "debug"]
   }

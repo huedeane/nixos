@@ -42,13 +42,42 @@ $lavender: #babbf1;
 $bg: #1e1e2e;
 $fg: #cdd6f4;
 $accent: $lavender;
-$radius: 6px;
+$radius: 10px;
+$border-width: 2.5px;
 $font-family: "ComicShannsMono Nerd Font Mono";
-$font-size: 18px;
+$font-size: 16px;
 
 
 button {
   border: none;
   border-radius: 0;
   font-size: $font-size;
+}
+
+label {
+  color: $text;
+}
+
+.component {
+  border: $border-width solid $surface0;
+  border-radius: $radius;
+  background: $crust;
+
+  &.focused {
+    border: $border-width solid $lavender;
+
+    label {
+      color: $lavender;
+    }
+  }
+
+  &:hover {
+    border: $border-width solid $yellow;
+
+    label {
+      color: $yellow;
+    }
+  }
+
+
 }
