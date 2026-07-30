@@ -29,6 +29,7 @@
     ),
     progress_bar: (
       symbols: ["", "█", "", "█", "" ],
+      use_track_when_empty: false,
       track_style: (fg: "#626880", bg: None),
       elapsed_style: (fg: "#babbf1", bg: None),
       thumb_style: (fg: "#babbf1", bg: "#626880"),
@@ -84,10 +85,10 @@
     ],
     layout: Split(
       direction: Vertical, panes: [
-        (size: "3", borders: "ALL", pane: Pane(Tabs)),
+        (size: "3", borders: "ALL", border_symbols: Rounded, pane: Pane(Tabs)),
         (size: "100%", borders: "NONE", pane: Pane(TabContent)),
-        (size: "4", borders: "ALL", pane: Pane(Header)),
-        (size: "3", borders: "ALL", pane: Component("custom-progressbar")),
+        (size: "4", borders: "ALL", border_symbols: Rounded, pane: Pane(Header)),
+        (size: "3", borders: "ALL", border_symbols: Rounded, pane: Component("custom-progressbar")),
       ]),
     header: (rows: [
       (
@@ -212,12 +213,12 @@
       ]),
       "custom-home": Split(direction: Horizontal, panes: [
         (size: "100%", borders: "NONE", pane: Split(direction: Horizontal, panes: [
-          (size: "100%", borders: "ALL", pane: Pane(Queue)),
+          (size: "100%", borders: "ALL", border_symbols: Rounded, pane: Pane(Queue)),
         ])),
         (size: "1", borders: "NONE", pane: Pane(Property(content : [(kind: Text(" "))]))),
         (size: "30%", borders: "NONE", pane: Split(direction: Vertical, panes: [
-            (size: "0.45r", borders: "ALL", pane: Pane(AlbumArt)),
-            (size: "100%", borders: "ALL", pane: Pane(Cava)),
+            (size: "0.45r", borders: "ALL", border_symbols: Rounded, pane: Pane(AlbumArt)),
+            (size: "100%", borders: "ALL", border_symbols: Rounded, pane: Pane(Cava)),
         ])),
       ]),
     },

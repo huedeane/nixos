@@ -25,34 +25,33 @@
   base: #303446;
   mantle: #292c3c;
   crust: #232634;
-  
-active-background:           @background;
-active-foreground:           @blue;
-alternate-active-background: @lightbg;
-alternate-active-foreground: @yellow;
-alternate-normal-background: inherit;
-alternate-normal-foreground: @foreground;
-alternate-urgent-background: @lightbg;
-alternate-urgent-foreground: @red;
-background:                  @surface0;
-background-color:            transparent;
-border-color:                @lavender;
-foreground:                  @text;
-lightbg:                     @crust;
-lightfg:                     @text;
-normal-background:           inherit;
-normal-foreground:           @foreground;
-selected-active-background:  @lavender;
-selected-active-foreground:  @crust;
-selected-normal-background:  @lavender;
-selected-normal-foreground:  @crust;
-selected-urgent-background:  @red;
-selected-urgent-foreground:  @background;
-separatorcolor:              @foreground;
-spacing:                     10;
-urgent-background:           @background;
-urgent-foreground:           @red;
 
+  active-background:           @background;
+  active-foreground:           @blue;
+  alternate-active-background: @lightbg;
+  alternate-active-foreground: @yellow;
+  alternate-normal-background: inherit;
+  alternate-normal-foreground: @foreground;
+  alternate-urgent-background: @lightbg;
+  alternate-urgent-foreground: @red;
+  background:                  @surface0;
+  background-color:            transparent;
+  border-color:                @lavender;
+  foreground:                  @text;
+  lightbg:                     @crust;
+  lightfg:                     @text;
+  normal-background:           inherit;
+  normal-foreground:           @foreground;
+  selected-active-background:  @lavender;
+  selected-active-foreground:  @crust;
+  selected-normal-background:  @lavender;
+  selected-normal-foreground:  @crust;
+  selected-urgent-background:  @red;
+  selected-urgent-foreground:  @background;
+  separatorcolor:              @foreground;
+  spacing:                     10;
+  urgent-background:           @background;
+  urgent-foreground:           @red;
 }
 element {
     padding: 10px ;
@@ -114,8 +113,9 @@ element-icon {
 window {
     padding:          0;
     background-color: @background;
-    border:           2;
+    border:           3;
     border-color:     @border-color;
+    border-radius:    12px;
 }
 mainbox {
     padding: 0;

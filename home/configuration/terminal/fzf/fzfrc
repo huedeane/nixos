@@ -13,12 +13,12 @@
 
 # --- Border ---
 --border-label=" Search "
---border=bold
+--border=rounded
 --color=border:#BABBF1,label:#E5C890
 
 # --- List ---
 --list-label=" Results "
---list-border=sharp
+--list-border=rounded
 --bind 'result:transform-list-label:
   if [[ -z $FZF_QUERY ]]; then
     echo " $FZF_MATCH_COUNT items "
@@ -31,7 +31,7 @@
 
 # --- Input ---
 --input-label " Input "
---input-border=sharp
+--input-border=rounded
 --prompt=" > "
 --color 'input-border:#737994,input-label:#BABBF1,input:#BABBF1'
 --color=prompt:#BABBF1

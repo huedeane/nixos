@@ -95,5 +95,5 @@ end, 1000, Status.LEFT)
 
 require("git"):setup()
 require("full-border"):setup({
-  type = ui.Border.PLAIN,
+  type = ui.Border.ROUND,
 })

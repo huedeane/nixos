@@ -53,7 +53,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd(
     "uwsm app -- wl-paste --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
-  -- hl.exec_cmd("uwsm app -- ags run")
+  hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
 end)
 
