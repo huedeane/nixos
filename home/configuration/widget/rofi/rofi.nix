@@ -29,7 +29,7 @@
       eh = 1;
       fixed-num-lines = true;
       sidebar-mode = false;
-      scroll-method = 1;
+      scroll-method = 0;
       m = "-1";
       # dpi = -1;
       # xoffset = 0;

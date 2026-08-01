@@ -53,6 +53,7 @@
   urgent-background:           @background;
   urgent-foreground:           @red;
 }
+
 element {
     padding: 10px ;
     cursor:  pointer;
@@ -61,42 +62,52 @@ element {
 
     children: ["element-icon","element-text"];
 }
+
 element normal.normal {
     background-color: @normal-background;
     text-color:       @normal-foreground;
 }
+
 element normal.urgent {
     background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
+
 element normal.active {
     background-color: @active-background;
     text-color:       @active-foreground;
 }
+
 element selected.normal {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
+
 element selected.urgent {
     background-color: @selected-urgent-background;
     text-color:       @selected-urgent-foreground;
 }
+
 element selected.active {
     background-color: @selected-active-background;
     text-color:       @selected-active-foreground;
 }
+
 element alternate.normal {
     background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
+
 element alternate.urgent {
     background-color: @alternate-urgent-background;
     text-color:       @alternate-urgent-foreground;
 }
+
 element alternate.active {
     background-color: @alternate-active-background;
     text-color:       @alternate-active-foreground;
 }
+
 element-text {
     background-color: transparent;
     cursor:           inherit;
@@ -104,12 +115,19 @@ element-text {
     text-color:       inherit;
     padding:          5px 0px 0px 5px;
 }
+
 element-icon {
     background-color: transparent;
     size:             1.0000em ;
     cursor:           inherit;
     text-color:       inherit;
 }
+
+configuration {
+  kb-cancel: "Escape,MousePrimary";
+  hover-select: true;
+}
+
 window {
     padding:          0;
     background-color: @background;
@@ -117,18 +135,22 @@ window {
     border-color:     @border-color;
     border-radius:    12px;
 }
+
 mainbox {
     padding: 0;
     border:  0;
 }
+
 message {
     padding:      10px 5px 0px 10px;
     border-color: @separatorcolor;
     border:       2px dash 0px 0px ;
 }
+
 textbox {
     text-color: @foreground;
 }
+
 listview {
     padding:      10px;
     scrollbar:    true;
@@ -138,6 +160,7 @@ listview {
     columns:      1;
     border:       2px solid 0px 0px ;
 }
+
 scrollbar {
     width:        4px ;
     padding:      0;
@@ -145,54 +168,65 @@ scrollbar {
     border:       0;
     handle-color: @normal-foreground;
 }
+
 sidebar {
     border-color: @separatorcolor;
     border:       2px dash 0px 0px ;
 }
+
 button {
     cursor:     pointer;
     spacing:    0;
     text-color: @normal-foreground;
 }
+
 button selected {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
+
 inputbar {
     padding:    10px 0px 0px 10px ;
     spacing:    0px ;
     text-color: @normal-foreground;
     children:   [ "prompt","textbox-prompt-colon","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
 }
+
 prompt {
     spacing:    0;
     text-color: @yellow;
 }
+
 textbox-prompt-colon {
     margin:     0px 0.3000em 0.0000em 0.0000em ;
     expand:     false;
     str:        ":";
     text-color: @yellow;
 }
+
 entry {
     text-color:        @normal-foreground;
     cursor:            text;
     spacing:           0;
     placeholder-color: Gray;
 }
+
 num-filtered-rows {
     expand:     false;
     text-color: Gray;
 }
+
 textbox-num-sep {
     expand:     false;
     str:        "/";
     text-color: Gray;
 }
+
 case-indicator {
     spacing:    0;
     text-color: @normal-foreground;
 }
+
 num-rows {
     expand:     false;
     text-color: Gray;

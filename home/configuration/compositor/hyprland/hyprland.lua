@@ -55,6 +55,7 @@ hl.on("hyprland.start", function()
     "uwsm app -- wl-paste --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
   hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
+  hl.exec_cmd("uwsm app -- ags-reload.sh")
 end)
 
 ---------------

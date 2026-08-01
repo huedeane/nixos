@@ -17,6 +17,7 @@ in
     grimblast
     satty
     wl-clipboard
+    socat
   ];
 
   imports = [
@@ -93,6 +94,11 @@ in
 
   home.file.".local/bin/nix-log.sh" = {
     source = ./scripts/nix-log.sh;
+    executable = true;
+  };
+
+  home.file.".local/bin/ags-reload.sh" = {
+    source = ./scripts/ags-reload.sh;
     executable = true;
   };
 

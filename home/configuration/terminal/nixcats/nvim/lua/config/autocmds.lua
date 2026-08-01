@@ -27,21 +27,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
   end,
 })
 
--- Evoke callback for kitty to resize
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    io.write("\x1b]723;nvim-enter\x07")
-    io.flush()
-  end,
-})
-
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function()
-    io.write("\x1b]723;nvim-leave\x07")
-    io.flush()
-  end,
-})
-
 -- New buffer on directory start
 vim.api.nvim_create_autocmd("UIEnter", {
   once = true,
