@@ -43,7 +43,7 @@ $bg: #1e1e2e;
 $fg: #cdd6f4;
 $accent: $lavender;
 $radius: 10px;
-$border-width: 2.5px;
+$border-width: 3px;
 $font-family: "ComicShannsMono Nerd Font Mono";
 $font-size: 16px;
 
@@ -59,9 +59,9 @@ label {
 }
 
 .component {
-  border: $border-width solid $surface0;
+  border: $border-width solid $overlay1;
   border-radius: $radius;
-  background: $crust;
+  background: $base;
 
   &.focused {
     border: $border-width solid $lavender;

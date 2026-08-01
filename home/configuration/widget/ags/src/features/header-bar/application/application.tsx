@@ -15,7 +15,7 @@ export default function Application() {
           ? ["application", "component", "focused"]
           : ["application", "component"],
       )}
-      onClicked={() => execAsync("echo hello").then(console.log)}
+      onClicked={() => execAsync("rofi -show drun").then(console.log)}
     >
       <label label="" />
     </button>
