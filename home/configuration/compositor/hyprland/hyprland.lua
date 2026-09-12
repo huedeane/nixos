@@ -269,7 +269,7 @@ hl.config({
 -- See https://wiki.hyprland.org/Configuring/Keywords/
 local mainMod = "ALT"
 
--- https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+-- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- General
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal .. " -o shell=bash"))
@@ -316,10 +316,10 @@ hl.bind(mainMod .. " + CTRL + SHIFT + LEFT", hl.dsp.window.move({ monitor = "-1"
 hl.bind(mainMod .. " + CTRL + SHIFT + RIGHT", hl.dsp.window.move({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace("+1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace("-1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + J", function() smw.move_to_workspace("+1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + K", function() smw.move_to_workspace("-1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace_silent("+1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace_silent("-1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + J", function() return smw.move_to_workspace_silent("+1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + K", function() return smw.move_to_workspace_silent("-1") end)
 
 -- Adjust active window width
 hl.bind(mainMod .. " + J", hl.dsp.layout("colresize -conf"))
@@ -348,7 +348,9 @@ end
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic", silent = true, follow = false }))
+hl.bind(mainMod .. " + CTRL + SHIFT + S",
+  hl.dsp.window.move({ workspace = hl.get_active_workspace().id, silent = true, follow = false }))
 
 -- Move/resize with mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

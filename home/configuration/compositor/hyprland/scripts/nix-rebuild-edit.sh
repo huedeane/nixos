@@ -10,9 +10,9 @@ for s in nixos-build nixos-build-edit; do
     esac
     notify-send "NixOS (Edit Mode)" "A build is already running ($running)" \
       --urgency=critical \
-      --action="view=View Output" \
+      --action="close=Close Session" \
     | while read -r action; do
-        [ "$action" = "view" ] && kitty --class tui-tmux -e tmux attach -t "$s"
+        [ "$action" = "close" ] && tmux kill-session -t "=$s" 2>/dev/null
       done
     exit 1
   fi

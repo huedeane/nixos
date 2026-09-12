@@ -6,9 +6,9 @@ while [ ! -S "$SOCK" ]; do sleep 0.5; done
 socat -U - "UNIX-CONNECT:$SOCK" | while read -r line; do
   case "$line" in
     monitoradded*|monitorremoved*)
-      sleep 2
+      sleep 3
       ags quit 2>/dev/null
-      sleep 2
+      sleep 3
       uwsm app -- ags run
       ;;
   esac

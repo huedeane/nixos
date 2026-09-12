@@ -32,11 +32,16 @@
   {
     "command": "watchexec -e tsx,ts,scss -w . --restart --stop-timeout 10s -- ags run .",
     "description": "Hotreload AGS",
-    "tags": ["nix", "ags"]
+    "tags": ["ags", "hotreload"]
   },
   {
     "command": "GTK_THEME=Adwaita:dark GTK_DEBUG=interactive ags run ~/.config/ags",
     "description": "Debug AGS",
-    "tags": ["nix", "ags", "debug"]
+    "tags": ["ags", "debug"]
+  },
+  {
+    "command": "sudo systemctl restart waydroid-container",
+    "description": "Restart Waydroid",
+    "tags": ["waydroid"]
   }
 ]

@@ -94,8 +94,16 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "uinput"
     ];
   };
+
+  hardware.uinput.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
 
   # Desktop Environment: Hyprland
   programs.hyprland = {

@@ -6,5 +6,9 @@
     "splashBackground": "rgb(48, 52, 70)",
     "enableMenu": true,
     "customTitleBar": true,
-    "autoStartMinimized": true
+    "autoStartMinimized": true,
+    "spellCheckLanguages": [
+        "en-US",
+        "en"
+    ]
 }
