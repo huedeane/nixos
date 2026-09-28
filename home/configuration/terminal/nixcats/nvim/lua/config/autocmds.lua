@@ -27,6 +27,29 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
   end,
 })
 
+-- Compile SCSS to CSS on save (needs `sass`/dart-sass on PATH)
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.scss",
+  callback = function(args)
+    if vim.fn.executable("sass") == 0 then
+      return
+    end
+    local input = args.file
+    local output = input:gsub("%.scss$", ".css")
+    vim.system(
+      { "sass", "--no-source-map", input, output },
+      { text = true },
+      function(result)
+        if result.code ~= 0 then
+          vim.schedule(function()
+            vim.notify("sass: " .. (result.stderr or "compile failed"), vim.log.levels.ERROR)
+          end)
+        end
+      end
+    )
+  end,
+})
+
 -- New buffer on directory start
 vim.api.nvim_create_autocmd("UIEnter", {
   once = true,

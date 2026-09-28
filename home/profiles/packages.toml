@@ -1,5 +1,7 @@
 [packages]
 caligula = true
+dart-sass = true
+drawing = true
 evolution = true
 impala = true
 mongodb-compass = true
@@ -11,3 +13,5 @@ watchexec = true
 kooha = true
 ffmpeg = true
 gifsicle = true
+qmk = true
+r2modman = true

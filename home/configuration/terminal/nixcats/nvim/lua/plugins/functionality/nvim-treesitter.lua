@@ -3,6 +3,10 @@ return {
   enabled = nixCats('general') or false,
   event = "DeferredUIEnter",
   after = function()
+    -- Treesitter's experimental indentexpr over-indents these; keep Neovim's
+    -- built-in indent for them instead.
+    local skip_ts_indent = { css = true, scss = true, sass = true, less = true }
+
     local function treesitter_try_attach(buf, language)
       if not vim.treesitter.language.add(language) then
         return false
@@ -11,7 +15,9 @@ return {
       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
       vim.wo.foldmethod = "expr"
       vim.o.foldlevel = 99
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      if not skip_ts_indent[vim.bo[buf].filetype] then
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
       return true
     end
 
