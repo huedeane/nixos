@@ -1,4 +1,4 @@
-/* browser.css */ 
+/* browser.css */
 #tabbrowser-tabbox {
   margin: var(--tf-tabbrowser-tabbox-margin) !important;
   margin-left: 20px !important;
@@ -21,7 +21,8 @@
 
 /* config.css */
 :root {
-  --tf-font-family: "ComicShannsMono Nerd Font Mono", Consolas, monospace; /* Font family of config */
+  --tf-font-family:
+    "ComicShannsMono Nerd Font Mono", Consolas, monospace; /* Font family of config */
   --tf-font-size: 14px; /* Font size of config */
   --tf-browser-outer-margin: 20px;
   --tf-browser-inner-margin: 10px;
@@ -35,30 +36,31 @@
   --tf-text-transform: none; /* Text transform to use */
   --tf-window-control: #c6d0f5;
   --tf-display-horizontal-tabs: none; /* If horizontal tabs should be shown, none = hidden, block = shown */
-  --tf-display-window-controls: flex; /* If the window controls should be shown (won't work with sidebery and hidden horizontal tabs), none = hidden, flex = shown */ 
+  --tf-display-window-controls: flex; /* If the window controls should be shown (won't work with sidebery and hidden horizontal tabs), none = hidden, flex = shown */
   --tf-display-nav-buttons: flex; /* If the navigation buttons (back, forward) should be shown, none = hidden, flex = shown */
   --tf-display-urlbar-icons: none; /* If the icons inside the url bar should be shown, none = hidden, flex = shown */
-  --tf-display-sidebar-tools: flex; /* If the "Customize sidebar" button on the sidebar should be shown, none = hidden, flex = shown */ 
+  --tf-display-sidebar-tools: flex; /* If the "Customize sidebar" button on the sidebar should be shown, none = hidden, flex = shown */
   --tf-display-titles: none; /* If titles (tabs, navbar, main etc.) should be shown, none = hidden, flex = shown */
   --tf-newtab-logo: "   __            __  ____          \A   / /____  _  __/ /_/ __/___  _  __\A  / __/ _ \\| |/_/ __/ /_/ __ \\| |/_/\A / /_/  __/>  </ /_/ __/ /_/ />  <  \A \\__/\\___/_/|_|\\__/_/  \\____/_/|_|  ";
-  --tf-navbar-margin: 20px 20px 10px 20px  ; /* navbar margin */
+  --tf-navbar-margin: 20px 20px 10px 20px; /* navbar margin */
   --tf-navbar-padding: 7px 0px; /* navbar padding */
   --tf-bookmarks-alignment: center; /* alignment of bookmarks in the bookmarks toolbar (if you have many bookmarks, left is recommended) */
-  --tf-personal-toolbar-margin: var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-inner-margin) var(--tf-browser-outer-margin);
-  --tf-sidebar-box-margin: var(--tf-browser-inner-margin) var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-outer-margin);
-  --tf-tabbrowser-tabbox-margin: var(--tf-browser-inner-margin) var(--tf-browser-outer-margin) var(--tf-browser-outer-margin) var(--tf-browser-inner-margin);
+  --tf-personal-toolbar-margin: var(--tf-browser-inner-margin)
+    var(--tf-browser-outer-margin) var(--tf-browser-inner-margin)
+    var(--tf-browser-outer-margin);
+  --tf-sidebar-box-margin: var(--tf-browser-inner-margin)
+    var(--tf-browser-inner-margin) var(--tf-browser-outer-margin)
+    var(--tf-browser-outer-margin);
+  --tf-tabbrowser-tabbox-margin: var(--tf-browser-inner-margin)
+    var(--tf-browser-outer-margin) var(--tf-browser-outer-margin)
+    var(--tf-browser-inner-margin);
 }
-
 
 /* menu.css */
 
-:is(
-  menupopup,
-  panel
-):not(.autoscroller) {
+:is(menupopup, panel):not(.autoscroller) {
   --panel-color: white !important;
 }
-
 
 /* navbar.css */
 #navigator-toolbox {
@@ -89,7 +91,7 @@
 
 @media (-moz-bool-pref: "sidebar.revamp") {
   #nav-bar::before {
-    margin: -1.35rem .75rem;
+    margin: -1.35rem 0.75rem;
   }
 }
 
@@ -112,8 +114,18 @@
   margin-right: 0px;
 
   &::before {
-    content: "tabs";
+    content: "Tabs";
     margin: -0.85rem 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 15px;
+    top: 0px;
+    color: #e5c890;
+    font-size: 16px;
+  }
+  &:hover::before {
+    background-color: var(--tf-bg);
+    color: #e5c890;
   }
 }
 
@@ -154,7 +166,7 @@
       content: "tools";
       color: var(--lwt-text-color);
       background-color: var(--tf-bg);
-      margin: -1rem .75rem 0rem;
+      margin: -1rem 0.75rem 0rem;
       padding: 0 4px;
     }
 
@@ -165,7 +177,8 @@
 
   #tabbrowser-tabs[orient="vertical"] {
     &:not([expanded]) {
-      #vertical-pinned-tabs-container, .tab-stack {
+      #vertical-pinned-tabs-container,
+      .tab-stack {
         width: 100% !important;
       }
     }
@@ -231,7 +244,7 @@
   text-align: center;
 }
 
-.titlebar-buttonbox-container .titlebar-restore::before { 
+.titlebar-buttonbox-container .titlebar-restore::before {
   content: "";
 }
 
@@ -245,4 +258,57 @@
 
 .titlebar-buttonbox-container .titlebar-close::before {
   content: "";
+}
+
+#nav-bar {
+  &::before {
+    content: "Navbar";
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 15px;
+    top: 6px;
+    color: #e5c890;
+    font-size: 16px;
+  }
+  &:hover::before {
+    background-color: var(--tf-bg);
+    color: #e5c890;
+  }
+}
+
+#PersonalToolbar {
+  position: relative;
+  overflow: inherit !important;
+
+  &::before {
+    content: "Bookmarks";
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 15px;
+    top: 6px;
+    color: #e5c890;
+    font-size: 16px;
+  }
+  &:hover::before {
+    background-color: var(--tf-bg);
+    color: #e5c890;
+  }
+}
+
+#tabbrowser-tabbox {
+  &::before {
+    content: "Browser";
+    position: absolute;
+    margin: -1.75rem 0rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 15px;
+    top: 14px;
+    color: #e5c890;
+    font-size: 16px;
+  }
+  &:hover::before {
+    background-color: var(--tf-bg);
+    color: #e5c890;
+  }
 }
