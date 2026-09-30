@@ -281,7 +281,6 @@ $surface0: #414559;
 
     .page__5e434 {
 
-
       .chat_f75fb0 {
         padding-top: 5px;
 
@@ -362,7 +361,7 @@ $surface0: #414559;
       }
 
       .container__133bf {
-        overflow: unset;
+        padding-top: 5px;
 
         .container__9293f {
 
@@ -380,10 +379,10 @@ $surface0: #414559;
         }
 
         .tabBody__133bf {
-          overflow: unset;
 
           .peopleColumn__133bf {
             overflow: unset;
+            margin-top: 5px;
 
             &:before {
               content: "Friend List";
@@ -397,10 +396,12 @@ $surface0: #414559;
               padding: 0px 15px;
             }
 
+
           }
 
           .nowPlayingColumn__133bf {
             position: relative;
+            margin-top: 5px;
 
             &:before {
               content: "Activity";
@@ -412,6 +413,15 @@ $surface0: #414559;
               background-color: $base;
               color: var(--yellow-3);
               padding: 0px 15px;
+            }
+
+            .itemCard__7e549 {
+              border-width: 3px;
+              border-radius: 10px;
+
+              .section__00943 {
+                border: none;
+              }
             }
           }
         }

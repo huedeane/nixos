@@ -290,7 +290,7 @@
   width: fit-content;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf {
-  overflow: unset;
+  padding-top: 5px;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .container__9293f:before {
   content: "Header";
@@ -303,11 +303,9 @@
   color: var(--yellow-3);
   padding: 0px 15px;
 }
-#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf {
-  overflow: unset;
-}
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .peopleColumn__133bf {
   overflow: unset;
+  margin-top: 5px;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .peopleColumn__133bf:before {
   content: "Friend List";
@@ -322,6 +320,7 @@
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .nowPlayingColumn__133bf {
   position: relative;
+  margin-top: 5px;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .nowPlayingColumn__133bf:before {
   content: "Activity";
@@ -333,6 +332,13 @@
   background-color: #303446;
   color: var(--yellow-3);
   padding: 0px 15px;
+}
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .nowPlayingColumn__133bf .itemCard__7e549 {
+  border-width: 3px;
+  border-radius: 10px;
+}
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .nowPlayingColumn__133bf .itemCard__7e549 .section__00943 {
+  border: none;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .chatContent_f75fb0 {
   overflow: unset;
