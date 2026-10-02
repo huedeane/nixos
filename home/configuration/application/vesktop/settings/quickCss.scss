@@ -275,6 +275,29 @@ $surface0: #414559;
         }
       }
 
+      .outer_c0bea0 {
+        background: #303446;
+        padding: 15px;
+
+        &:before {
+          content: "User";
+          display: block;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -9px;
+          background-color: $base;
+          color: var(--yellow-3);
+          padding: 0px 15px;
+          width: fit-content;
+        }
+
+        .redesignFooter__272c7 {
+          padding: 0px;
+          height: auto;
+        }
+      }
+
       .container_c8ffbb {
         overflow: unset;
 
