@@ -1,0 +1,9 @@
+{
+  "id": "sidebar-header-toggles",
+  "name": "Sidebar Header Toggles",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Adds left/right sidebar toggle buttons to the view header.",
+  "author": "huedeane",
+  "isDesktopOnly": false
+}

@@ -43,5 +43,10 @@
     "command": "sudo systemctl restart waydroid-container",
     "description": "Restart Waydroid",
     "tags": ["waydroid"]
+  },
+  {
+    "command": "hyprctl reload",
+    "description": "Reload Hyprland",
+    "tags": ["hyprland"]
   }
 ]

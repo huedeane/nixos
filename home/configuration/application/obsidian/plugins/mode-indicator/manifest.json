@@ -1,0 +1,9 @@
+{
+  "id": "mode-indicator",
+  "name": "Mode Indicator",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Vim-style mode text in the status bar (Reading / Editing / Web / Command).",
+  "author": "huedeane",
+  "isDesktopOnly": false
+}

@@ -10,6 +10,7 @@
 
 {
   imports = [
+    (configHomeDir + "/terminal/claude-code/claude-code.nix")
     (configHomeDir + "/terminal/bash/bash.nix")
     (configHomeDir + "/terminal/kitty/kitty.nix")
     (configHomeDir + "/terminal/yazi/yazi.nix")
