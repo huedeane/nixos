@@ -163,11 +163,28 @@ $surface0: #414559;
 }
 
 /* Setting Container */
-.container__8a031 .modal_e44912 {
-  border-color: var(--purple-3);
+.layerContainer__59d0d .modal_e44912 {
+  border-color: var(--purple-3) !important;
+
+  .sidebar__409aa {
+    border-radius: 10px 0px 0px 10px;
+    border-right: 3px solid var(--purple-3);
+  }
+
+  .content_e9e3ed {
+    border-radius: 10px;
+
+    .contentHeader_e9e3ed {
+      border-bottom: 3px solid var(--purple-3);
+
+      .breadcrumbText__6989f {
+        color: var(--yellow-3) !important;
+      }
+    }
+  }
 }
 
-.appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 {
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 {
 
   &.baseLayer__960e4 {
     padding-top: 27px;
@@ -200,9 +217,10 @@ $surface0: #414559;
         margin-top: 5px;
         position: relative;
         overflow: unset;
+        border: 3px solid var(--border-subtle);
 
         &:before {
-          content: "Channel";
+          content: "Channels";
           display: block;
           position: absolute;
           left: 50%;
@@ -211,6 +229,37 @@ $surface0: #414559;
           background-color: $base;
           color: var(--yellow-3);
           padding: 0px 15px;
+        }
+
+        .headerEllipseBackdrop_f37cb1,
+        .headerEllipseForeground_f37cb1,
+        .animatedBannerHoverLayer_f37cb1 {
+          display: none;
+        }
+
+        .animatedContainer_f37cb1 {
+          height: 90px;
+          top: 50px;
+
+          .bannerImg_f37cb1 {
+            object-fit: fill;
+            height: 90px;
+          }
+        }
+
+        .bannerVisible_f37cb1 .header_f37cb1 {
+          border: none;
+          border-bottom: 3px solid var(--border-subtle);
+        }
+
+        .inviteButton_f37cb1,
+        .headerChildren_f37cb1,
+        .name_f37cb1 {
+          color: var(--yellow-3);
+        }
+
+        .guildIconV2Container__85d16 {
+          display: none;
         }
       }
 
@@ -230,12 +279,152 @@ $surface0: #414559;
       }
     }
 
-
     .page__5e434 {
-      padding-top: 5px;
 
       .chat_f75fb0 {
-        overflow: unset;
+        padding-top: 5px;
+
+        &.container_f391e3 {
+          overflow: unset;
+
+          .container__9293f.themed__9293f {
+            border-bottom: 3px solid var(--border-subtle);
+
+            &:before {
+              content: "Header";
+              display: block;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              top: -11px;
+              background-color: $base;
+              color: var(--yellow-3);
+              padding: 0px 15px;
+            }
+
+          }
+
+          .tabBar__0b563 {
+            &:before {
+              content: "Customization";
+              display: block;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              top: -11px;
+              background-color: $base;
+              color: var(--yellow-3);
+              padding: 0px 15px;
+              width: fit-content;
+            }
+          }
+
+          .content_f75fb0 {
+            border-left: 3px solid var(--border-subtle);
+            position: relative;
+
+            .emptyStateContainer__65428 {
+              &:before {
+                content: "Request";
+                display: block;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: -11px;
+                background-color: $base;
+                color: var(--yellow-3);
+                padding: 0px 15px;
+                width: fit-content;
+              }
+            }
+
+            .list_dcc822 {
+              overflow: unset !important;
+
+              &:before {
+                content: "Spam";
+                display: block;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: -11px;
+                background-color: $base;
+                color: var(--yellow-3);
+                padding: 0px 15px;
+                width: fit-content;
+              }
+
+            }
+
+          }
+        }
+      }
+
+      .container__133bf {
+        padding-top: 5px;
+
+        .container__9293f {
+
+          &:before {
+            content: "Header";
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -11px;
+            background-color: $base;
+            color: var(--yellow-3);
+            padding: 0px 15px;
+          }
+        }
+
+        .tabBody__133bf {
+
+          .peopleColumn__133bf {
+            overflow: unset;
+            margin-top: 5px;
+
+            &:before {
+              content: "Friend List";
+              display: block;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              top: -10px;
+              background-color: $base;
+              color: var(--yellow-3);
+              padding: 0px 15px;
+            }
+
+
+          }
+
+          .nowPlayingColumn__133bf {
+            position: relative;
+            margin-top: 5px;
+
+            &:before {
+              content: "Activity";
+              display: block;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              top: -10px;
+              background-color: $base;
+              color: var(--yellow-3);
+              padding: 0px 15px;
+            }
+
+            .itemCard__7e549 {
+              border-width: 3px;
+              border-radius: 10px;
+
+              .section__00943 {
+                border: none;
+              }
+            }
+          }
+        }
       }
 
       .chatContent_f75fb0 {
@@ -254,6 +443,10 @@ $surface0: #414559;
             background-color: $base;
             color: var(--yellow-3);
             padding: 0px 15px;
+          }
+
+          .chatGradient__36d07 {
+            border-radius: 10px;
           }
         }
 
@@ -304,7 +497,7 @@ $surface0: #414559;
         .membersWrap_c8ffbb {
 
           &:before {
-            content: "Member";
+            content: "Members";
             display: block;
             position: absolute;
             left: 50%;
@@ -334,6 +527,17 @@ $surface0: #414559;
     }
   }
 }
+
+.sectionDivider_e6b769,
+.sectionDivider__629e4 {
+  border-top: 3px dotted var(--border-subtle);
+  background-color: unset;
+}
+
+.label__409aa {
+  color: var(--yellow-3) !important;
+}
+
 
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4.layers__160d8>div .content__5e434 .page__5e434 main section {
   border-bottom: 3px solid var(--border-subtle);

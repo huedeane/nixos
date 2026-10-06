@@ -1,6 +1,8 @@
 {
+  config,
   lib,
   username,
+  editMode,
   ...
 }:
 
@@ -26,6 +28,10 @@
 
   home.file.".config/mozilla/firefox/${username}/wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d".source =
     ./wallpaper/e3aa32e0-9a30-49ed-aa30-bd460a29149d;
-  home.file.".config/mozilla/firefox/${username}/chrome".source = ./chrome;
+  home.file.".config/mozilla/firefox/${username}/chrome".source =
+    if editMode then
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/home/configuration/application/firefox/chrome"
+    else
+      ./chrome;
   home.file."Downloads/vimium-options.json".source = ./vimium-options.json;
 }
