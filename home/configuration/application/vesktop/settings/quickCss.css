@@ -372,7 +372,31 @@
   padding: 0px 15px;
   width: fit-content;
 }
+<<<<<<< HEAD
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container_c8ffbb {
+=======
+.appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .outer_c0bea0 {
+  background: #303446;
+  padding: 15px;
+}
+.appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .outer_c0bea0:before {
+  content: "User";
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -9px;
+  background-color: #303446;
+  color: var(--yellow-3);
+  padding: 0px 15px;
+  width: fit-content;
+}
+.appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .outer_c0bea0 .redesignFooter__272c7 {
+  padding: 0px;
+  height: auto;
+}
+.appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container_c8ffbb {
+>>>>>>> main
   overflow: unset;
 }
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container_c8ffbb .membersWrap_c8ffbb:before {

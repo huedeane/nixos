@@ -312,3 +312,13 @@
     color: #e5c890;
   }
 }
+.sidebar-browser-stack {
+  browser {
+    padding: 2px;
+  }
+}
+.browserSidebarContainer {
+  browser {
+    padding: 5px;
+  }
+}
