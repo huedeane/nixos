@@ -312,7 +312,9 @@
     color: #e5c890;
   }
 }
+#webext-panels-stack,
 .sidebar-browser-stack {
+  background-color: var(--tf-bg);
   browser {
     padding: 2px;
   }

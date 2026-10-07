@@ -1,0 +1,398 @@
+.theme-dark {
+  --ctp-rosewater: #f2d5cf;
+  --ctp-flamingo: #eebebe;
+  --ctp-pink: #f4b8e4;
+  --ctp-mauve: #ca9ee6;
+  --ctp-red: #e78284;
+  --ctp-maroon: #ea999c;
+  --ctp-peach: #ef9f76;
+  --ctp-yellow: #e5c890;
+  --ctp-green: #a6d189;
+  --ctp-teal: #81c8be;
+  --ctp-sky: #99d1db;
+  --ctp-sapphire: #85c1dc;
+  --ctp-blue: #8caaee;
+  --ctp-lavender: #babbf1;
+  --ctp-text: #c6d0f5;
+  --ctp-subtext1: #b5bfe2;
+  --ctp-subtext0: #a5adce;
+  --ctp-overlay2: #949cbb;
+  --ctp-overlay1: #838ba7;
+  --ctp-overlay0: #737994;
+  --ctp-surface2: #626880;
+  --ctp-surface1: #51576d;
+  --ctp-surface0: #414559;
+  --ctp-base: #303446;
+  --ctp-mantle: #292c3c;
+  --ctp-crust: #232634;
+  --color-base-00: #303446;
+  --color-base-05: #414559;
+  --color-base-10: #414559;
+  --color-base-20: #414559;
+  --color-base-25: #51576d;
+  --color-base-30: #51576d;
+  --color-base-35: #626880;
+  --color-base-40: #626880;
+  --color-base-50: #737994;
+  --color-base-60: #838ba7;
+  --color-base-70: #a5adce;
+  --color-base-100: #c6d0f5;
+  --color-red: #e78284;
+  --color-red-rgb: 231, 130, 132;
+  --color-orange: #ef9f76;
+  --color-orange-rgb: 239, 159, 118;
+  --color-yellow: #e5c890;
+  --color-yellow-rgb: 229, 200, 144;
+  --color-green: #a6d189;
+  --color-green-rgb: 166, 209, 137;
+  --color-cyan: #81c8be;
+  --color-cyan-rgb: 129, 200, 190;
+  --color-blue: #8caaee;
+  --color-blue-rgb: 140, 170, 238;
+  --color-purple: #ca9ee6;
+  --color-purple-rgb: 202, 158, 230;
+  --color-pink: #f4b8e4;
+  --color-pink-rgb: 244, 184, 228;
+  --accent-h: 239;
+  --accent-s: 66%;
+  --accent-l: 84%;
+  --background-primary: var(--ctp-base);
+  --background-primary-alt: var(--ctp-mantle);
+  --background-secondary: var(--ctp-mantle);
+  --background-secondary-alt: var(--ctp-crust);
+  --status-bar-position: relative;
+  --text-error: var(--ctp-red);
+  --tab-outline-width: 3px;
+  --background-modifier-hover: var(--ctp-lavender);
+  --icon-color-focused: var(--ctp-mantle);
+  --nav-item-color-active: var(--ctp-mantle);
+  --tab-text-color-focused-active-current: var(--ctp-mantle);
+  --text-on-accent: var(--ctp-mantle);
+  --icon-color-hover: var(--ctp-mantle);
+  --interactive-accent-hover: var(--ctp-yellow);
+  --tab-container-background: var(--ctp-base);
+  --titlebar-background-focused: var(--ctp-base);
+  --tab-outline-color: var(--ctp-overlay0);
+  --nav-item-color-hover: var(--ctp-mantle);
+  --vault-profile-color-hover: var(--ctp-mantle);
+  --border-width: 3px;
+  --background-modifier-active-hover: var(--ctp-lavender);
+  --status-bar-background: var(--ctp-mantle);
+}
+
+.workspace-split.mod-root .sidebar-toggle-button {
+  display: none;
+}
+
+.workspace-ribbon .sidebar-toggle-button {
+  display: none;
+}
+
+.workspace.is-left-sidedock-open .hdr-sidebar-toggle.mod-left {
+  display: none;
+}
+
+.workspace.is-right-sidedock-open .hdr-sidebar-toggle.mod-right {
+  display: none;
+}
+
+.app-container {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 30px;
+  gap: 20px;
+}
+.app-container .horizontal-main-container {
+  overflow: visible;
+  min-height: 0;
+}
+.app-container .horizontal-main-container .workspace {
+  display: flex;
+  gap: 20px;
+  overflow: visible;
+}
+.app-container .horizontal-main-container .workspace .workspace-ribbon {
+  overflow: visible;
+  margin: 0px;
+  border: 3px solid var(--ctp-overlay0);
+  border-radius: 10px;
+  background-color: var(--ctp-base);
+  position: relative;
+  min-width: 55px;
+}
+.app-container .horizontal-main-container .workspace .workspace-ribbon.mod-left:before {
+  content: "Nav";
+  top: -11px;
+  height: auto;
+  width: auto;
+  color: var(--ctp-yellow);
+  padding: 0px 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  background-color: var(--ctp-base);
+  font-size: 16px;
+}
+.app-container .horizontal-main-container .workspace .workspace-ribbon .side-dock-actions {
+  padding-top: 8px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split {
+  border: 3px solid var(--ctp-overlay0);
+  border-radius: 10px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-left-split {
+  position: relative;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-left-split:before {
+  content: "File System";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  background: var(--ctp-base);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root:before {
+  content: "Editor";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  background: var(--ctp-base);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-tab-header-container {
+  display: none;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header {
+  height: 55px;
+  border-bottom: 3px dotted var(--ctp-overlay0);
+  padding: 18px 10px 12px 10px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-header-nav-buttons,
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-actions {
+  gap: 10px;
+  --icon-size: var(--icon-l);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-header-title {
+  color: var(--ctp-yellow);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .mod-header,
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .inline-title {
+  color: var(--ctp-yellow);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .el-hr hr {
+  margin: 0px 0px 10px 0px;
+  border: none;
+  border-bottom: 3px dotted var(--ctp-overlay0);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-right-split:before {
+  content: "Side Bar";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  background: var(--ctp-base);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-right-split .workspace-tab-header-container {
+  flex-direction: row-reverse;
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-right-split .workspace-tab-header-container .workspace-tab-header-container-inner {
+  flex-direction: row-reverse;
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs:not(.vt-mod-top-space) .workspace-tab-header-container {
+  padding-top: 5px;
+  border-top: 3px dotted var(--tab-outline-color);
+  border-radius: 0px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-leaf-resize-handle {
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-leaf {
+  background-color: var(--ctp-base);
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-leaf .workspace-leaf-content .nav-files-container .tree-item-self.is-being-renamed:focus-within {
+  color: var(--ctp-text);
+  box-shadow: 0 0 0 2px var(--ctp-lavender);
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs .workspace-tab-header-container {
+  background-color: var(--ctp-base);
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px 10px 5px 10px;
+  border-bottom-style: dotted;
+  height: 55px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs .workspace-tab-container {
+  border-radius: 10px;
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-sidedock-vault-profile {
+  border-radius: 0px 0px 10px 10px;
+  border-top-style: dotted;
+  background-color: var(--ctp-base);
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher .workspace-drawer-vault-name {
+  color: var(--ctp-yellow);
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher.has-active-menu .workspace-drawer-vault-switcher-icon,
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher.has-active-menu .workspace-drawer-vault-name {
+  color: var(--ctp-mantle);
+}
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher:hover .workspace-drawer-vault-switcher-icon {
+  color: var(--ctp-mantle);
+}
+.app-container .status-bar {
+  height: 100%;
+  border: none;
+  padding: 0px !important;
+}
+.app-container .status-bar .status-bar-item.mod-clickable:hover {
+  color: var(--ctp-mantle);
+}
+.app-container .status-bar .status-bar-item.plugin-sync:hover .sync-status-icon {
+  color: var(--ctp-mantle);
+}
+.app-container .status-bar .status-bar-item.plugin-sync {
+  margin-left: auto;
+}
+.app-container .status-bar .status-bar-item.plugin-mode-indicator {
+  margin-right: 5px;
+  font-weight: bold;
+  color: var(--ctp-mantle);
+  border-radius: 0px;
+  padding: 0 16px 0 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+.app-container .status-bar .status-bar-item.plugin-obsidian-grandfather {
+  margin-left: 5px;
+  font-weight: bold;
+  color: var(--ctp-mantle);
+  border-radius: 0px;
+  padding: 0 10px 0 16px;
+  font-size: 15px;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  word-spacing: -3px;
+}
+.app-container .status-bar .status-bar-item .editor-width-slider-value {
+  color: var(--ctp-mantle) !important;
+  margin-right: 0px !important;
+}
+.app-container .status-bar .status-bar-item .editor-width-slider-value:hover {
+  background-color: var(--ctp-yellow) !important;
+}
+.app-container .status-bar[data-mode=obsidian] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=obsidian] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=obsidian] .editor-width-slider-value {
+  background: var(--ctp-blue) !important;
+}
+.app-container .status-bar[data-mode=obsidian] {
+  color: var(--ctp-blue);
+}
+.app-container .status-bar[data-mode=reading] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=reading] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=reading] .editor-width-slider-value {
+  background: var(--ctp-lavender) !important;
+}
+.app-container .status-bar[data-mode=reading] {
+  color: var(--ctp-lavender);
+}
+.app-container .status-bar[data-mode=editing] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=editing] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=editing] .editor-width-slider-value {
+  background: var(--ctp-green) !important;
+}
+.app-container .status-bar[data-mode=editing] {
+  color: var(--ctp-green);
+}
+.app-container .status-bar[data-mode=webview] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=webview] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=webview] .editor-width-slider-value {
+  background: var(--ctp-yellow) !important;
+}
+.app-container .status-bar[data-mode=webview] {
+  color: var(--ctp-yellow);
+}
+.app-container .status-bar[data-mode=command] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=command] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=command] .editor-width-slider-value {
+  background: var(--ctp-peach) !important;
+}
+.app-container .status-bar[data-mode=command] {
+  color: var(--ctp-peach);
+}
+
+.menu {
+  border: 3px solid var(--ctp-overlay0);
+  border-radius: 10px;
+}
+.menu .menu-scroll .menu-group .menu-item.selected .menu-item-icon,
+.menu .menu-scroll .menu-group .menu-item.selected .menu-item-title {
+  color: var(--ctp-mantle);
+}
+
+.modal-container .modal {
+  border: 3px solid var(--ctp-lavender);
+  border-radius: 10px;
+}
+.modal-container .modal .modal-content .vertical-tab-header {
+  border-inline-end: 3px solid var(--ctp-lavender);
+}
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group .vertical-tab-header-group-title {
+  color: var(--ctp-yellow);
+  border-bottom: 3px solid var(--ctp-yellow);
+  margin-bottom: 10px;
+}
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group-items .vertical-tab-nav-item:hover {
+  background-color: var(--ctp-lavender);
+}
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group-items .vertical-tab-nav-item:hover .vertical-tab-nav-item-icon,
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group-items .vertical-tab-nav-item:hover .vertical-tab-nav-item-title {
+  color: var(--ctp-mantle);
+}
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group-items .vertical-tab-nav-item.is-active .vertical-tab-nav-item-icon,
+.modal-container .modal .modal-content .vertical-tab-header .vertical-tab-header-group-items .vertical-tab-nav-item.is-active .vertical-tab-nav-item-title {
+  color: var(--ctp-mantle);
+}
+.modal-container .modal .modal-content .vertical-tab-content-container .vertical-tab-content .setting-group .setting-item .setting-hotkey {
+  color: var(--ctp-mantle);
+}
+.modal-container .prompt .suggestion-item.is-selected {
+  color: var(--ctp-mantle);
+}
+
+.tree-item-self.is-active .tree-item-icon {
+  color: var(--ctp-mantle);
+}
+.tree-item-self:hover .tree-item-icon {
+  color: var(--ctp-mantle);
+}
+
+.suggestion-container .suggestion-item.is-selected .suggestion-flair-left,
+.suggestion-container .suggestion-item.is-selected .suggestion-title,
+.suggestion-container .suggestion-item.is-selected .suggestion-url {
+  color: var(--ctp-mantle);
+}
+
+.setting-hotkey {
+  color: var(--ctp-mantle);
+}
