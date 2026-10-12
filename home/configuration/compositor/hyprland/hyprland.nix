@@ -102,6 +102,11 @@ in
     executable = true;
   };
 
+  home.file.".local/bin/ags-restart.sh" = {
+    source = ./scripts/ags-restart.sh;
+    executable = true;
+  };
+
   home.activation.ensureMonitorsLua = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     target="${config.xdg.configHome}/hypr/monitors.lua"
     if [ ! -e "$target" ]; then

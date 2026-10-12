@@ -312,6 +312,33 @@
     color: #e5c890;
   }
 }
+
+findbar {
+  margin-top: 10px !important;
+
+  &::before {
+    content: "Find";
+    position: absolute;
+    margin: -1.75rem 0rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 15px;
+    color: #e5c890;
+    font-size: 16px;
+    margin-top: -19px;
+  }
+  &:hover::before {
+    background-color: var(--tf-bg);
+    color: #e5c890;
+  }
+  .findbar-container {
+    margin-top: 4px;
+  }
+  .findbar-closebutton {
+    margin-top: 4px;
+  }
+}
+
 #webext-panels-stack,
 .sidebar-browser-stack {
   background-color: var(--tf-bg);
