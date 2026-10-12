@@ -277,6 +277,7 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(rofi_drun))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
 hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(mainMod .. " + 0", hl.dsp.exec_cmd("pkill waybar && waybar &"))
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("ags-restart.sh"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("nix-rebuild-edit.sh"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nix-log.sh"))
 hl.bind(mainMod .. " + CTRL + SHIFT + R", hl.dsp.exec_cmd("nix-rebuild.sh"))
@@ -467,6 +468,13 @@ hl.window_rule({
   match = { initial_title = "negative:Mail", class = "org.gnome.Evolution" },
   float = true,
   size  = { "monitor_w*0.80", "monitor_h*0.70" },
+})
+
+hl.window_rule({
+  name  = "windowrule-firefox-connection",
+  match = { initial_title = "Incoming Connection", initial_class = "firefox" },
+  float = true,
+  size  = { "monitor_w*0.31", "monitor_h*0.55" },
 })
 
 local fx_prev, fx_cur = nil, nil
