@@ -40,6 +40,7 @@ module.exports = class ModeIndicator extends Plugin {
       const mode = view.getMode && view.getMode();
       return mode === "preview" ? "Reading" : "Editing";
     }
+    if (/terminal/i.test(type)) return "Terminal";
     if (/web|surfing|browser/i.test(type)) return "Web View";
     return "";
   }

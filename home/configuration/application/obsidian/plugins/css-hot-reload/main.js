@@ -2,6 +2,8 @@ const { Plugin, Notice } = require("obsidian");
 const fs = require("fs");
 const path = require("path");
 
+const STYLE_ID = "css-hot-reload-theme";
+
 module.exports = class CssHotReload extends Plugin {
   onload() {
     this.addCommand({
@@ -24,6 +26,24 @@ module.exports = class CssHotReload extends Plugin {
     }
   }
 
+  targetEl(css) {
+    if (this.el && this.el.isConnected) return this.el;
+    for (const el of document.head.querySelectorAll("style")) {
+      if (el.textContent === css) {
+        this.el = el;
+        return el;
+      }
+    }
+    let own = document.getElementById(STYLE_ID);
+    if (!own) {
+      own = document.createElement("style");
+      own.id = STYLE_ID;
+      document.head.appendChild(own);
+    }
+    this.el = own;
+    return own;
+  }
+
   watch() {
     const file = this.themeCssPath();
     if (!file) {
@@ -41,19 +61,20 @@ module.exports = class CssHotReload extends Plugin {
   }
 
   reload(notify) {
-    const cc = this.app.customCss;
-    if (!cc) return;
-    if (typeof cc.loadCss === "function") {
-      cc.loadCss();
-    } else {
-      const t = cc.theme;
-      cc.setTheme("");
-      cc.setTheme(t);
+    if (!this.file) return;
+    try {
+      const css = fs.readFileSync(this.file, "utf8");
+      this.targetEl(css).textContent = css;
+      if (notify) new Notice("Theme CSS reloaded");
+    } catch (e) {
+      console.error("css-hot-reload: failed to reload", e);
+      if (notify) new Notice("Theme CSS reload failed (see console)");
     }
-    if (notify) new Notice("Theme CSS reloaded");
   }
 
   onunload() {
     if (this.file) fs.unwatchFile(this.file);
+    const own = document.getElementById(STYLE_ID);
+    if (own) own.remove();
   }
 };

@@ -87,6 +87,9 @@
   # Mount
   services.udisks2.enable = true;
 
+  # Android MTP (Pixel / phones over USB); systemd uaccess handles permissions
+  services.gvfs.enable = true;
+
   # User
   users.users.${username} = {
     isNormalUser = true;

@@ -454,13 +454,3 @@
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4.layers__160d8 > div .content__5e434 .page__5e434 main section {
   border-bottom: 3px solid var(--border-subtle);
 }
-
-.virtual-footer-custom {
-  background-color: red;
-}
-.virtual-footer-custom .info-module {
-  display: flex;
-  gap: 20px;
-  font-size: 0.8rem;
-  justify-content: end;
-}

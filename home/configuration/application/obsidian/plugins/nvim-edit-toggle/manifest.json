@@ -1,0 +1,9 @@
+{
+  "id": "nvim-edit-toggle",
+  "name": "Neovim Edit Toggle",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "View-header button that opens the current note in an nvim terminal tab and closes it on re-click.",
+  "author": "huedeane",
+  "isDesktopOnly": true
+}

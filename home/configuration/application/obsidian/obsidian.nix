@@ -27,6 +27,7 @@ let
     "sidebar-header-toggles"
     "css-hot-reload"
     "mode-indicator"
+    "nvim-edit-toggle"
   ];
 
   mkPluginPkg =

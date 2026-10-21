@@ -15,3 +15,7 @@ ffmpeg = true
 gifsicle = true
 qmk = true
 r2modman = true
+python3 = true
+google-chrome = true
+android-file-transfer = true
+usbutils = true
