@@ -1,6 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    android-tools
+  ];
+
   xdg.desktopEntries.android = {
     name = "Android";
     comment = "Launch Waydroid";
