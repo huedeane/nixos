@@ -1,0 +1,177 @@
+body.is-mobile .app-container {
+  padding-top: 60px;
+}
+
+.is-mobile .workspace > .mod-root {
+  padding-top: 0px;
+}
+.is-mobile .view-header {
+  height: 60px;
+}
+.is-mobile .view-header-title-container {
+  height: auto;
+}
+.is-mobile .view-header .view-action {
+  --icon-size: var(--icon-m);
+  padding: 0px;
+}
+.is-mobile .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-actions {
+  padding: 0px;
+  gap: 20px;
+}
+.is-mobile .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-header-title {
+  display: none;
+}
+.is-mobile .workspace-drawer {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  max-height: calc(100vh - var(--keyboard-height) - 155px);
+  border: 3px solid var(--ctp-overlay0);
+  margin-top: 60px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: visible;
+  contain: unset;
+}
+.is-mobile .workspace-drawer-inner {
+  border-radius: 10px;
+}
+.is-mobile .status-bar {
+  display: none;
+}
+.is-mobile .app-container {
+  grid-template-rows: 1fr 55px;
+}
+.is-mobile .menu {
+  border: 3px solid var(--ctp-overlay0) !important;
+}
+.is-mobile .mod-root .workspace-leaf-content {
+  --view-top-spacing-markdown: 70px;
+}
+.is-mobile .is-hidden-nav .mobile-navbar {
+  opacity: unset;
+  transform: unset;
+}
+.is-mobile .workspace-tabs .workspace-leaf .view-content {
+  padding-top: 10px;
+}
+.is-mobile .view-header-title-parent .view-header-breadcrumb-separator.is-last-separator {
+  display: none;
+}
+
+body.is-tablet .mobile-navbar {
+  display: flex;
+  border: 3px solid var(--ctp-overlay0) !important;
+}
+
+.is-tablet .menu {
+  transform: translate(-10px, -65px);
+}
+.is-tablet .workspace-drawer.mod-left {
+  margin-left: 20px;
+}
+.is-tablet .workspace-drawer.mod-right {
+  margin-right: 20px;
+}
+
+.is-phone.is-floating-nav {
+  --view-bottom-fade-mask: none;
+  --view-top-fade-mask: none;
+}
+.is-phone .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header {
+  margin-top: 10px;
+  padding: 0px 10px;
+  align-items: center;
+  background-color: var(--ctp-base);
+}
+.is-phone .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header .view-actions {
+  border: none;
+  background: unset;
+  box-shadow: unset;
+  backdrop-filter: none;
+  gap: 0px;
+}
+.is-phone .mod-root .workspace-leaf-content .view-content .markdown-reading-view > .markdown-preview-view {
+  padding-top: 70px;
+}
+.is-phone .workspace-drawer.mod-left {
+  margin-left: 17px;
+}
+.is-phone .workspace-drawer.mod-right {
+  margin-right: 17px;
+}
+.is-phone .workspace-drawer-inner {
+  padding-top: 0px;
+  border-radius: 10px;
+}
+.is-phone .workspace.is-left-sidedock-open .workspace-split {
+  margin-left: 20px;
+}
+.is-phone .workspace.is-right-sidedock-open .workspace-split {
+  margin-right: 20px;
+}
+.is-phone .mobile-tab-preivew {
+  --tab-switcher-preview-radius: 10px;
+}
+.is-phone .menu {
+  border-radius: 0px;
+  border: unset !important;
+  border-top: 3px solid var(--ctp-overlay0) !important;
+}
+.is-phone.show-inline-title .workspace-leaf-content[data-type=markdown] .view-header-title-container {
+  display: flex;
+  justify-content: left;
+}
+.is-phone .mobile-navbar {
+  transform: unset !important;
+}
+
+.status-bar {
+  border-radius: 0px;
+}
+
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root:before {
+  z-index: 1;
+}
+
+.view-header-title-container {
+  justify-content: center;
+  grid-template-rows: 1fr 55px;
+}
+
+.workspace-drawer-tab-options .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+  color: var(--ctp-mantle);
+}
+.workspace-drawer-tab-options .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--ctp-mantle);
+}
+
+.app-container .workspace-drawer.mod-left:before {
+  content: "File";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  text-align: center;
+  background-color: var(--mobile-sidebar-background);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}
+.app-container .workspace-drawer.mod-right:before {
+  content: "Sidebar";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  text-align: center;
+  background-color: var(--mobile-sidebar-background);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}

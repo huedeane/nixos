@@ -48,5 +48,15 @@
     "command": "hyprctl reload",
     "description": "Reload Hyprland",
     "tags": ["hyprland"]
+  },
+  {
+    "command": "uri=$(gio mount -li 2>/dev/null | grep -oE 'activation_root=mtp://[^[:space:]]+' | sed 's/^activation_root=//' | head -1); if [ -z \"$uri\" ]; then echo \"No phone detected - plug in and choose File transfer on the device\"; else gio mount \"$uri\" >/dev/null 2>&1; mp=$(find /run/user/$(id -u)/gvfs -maxdepth 1 -name 'mtp:host=*' | head -1); echo \"Phone mounted at: $mp\"; cd \"$mp\" 2>/dev/null && ls; fi",
+    "description": "Mount phone over MTP (file transfer)",
+    "tags": ["android", "phone", "mtp", "mount", "files"]
+  },
+  {
+    "command": "uri=$(gio mount -li 2>/dev/null | grep -oE 'activation_root=mtp://[^[:space:]]+' | sed 's/^activation_root=//' | head -1); [ -n \"$uri\" ] && gio mount -u \"$uri\" && echo \"Phone unmounted.\" || echo \"No phone mounted.\"",
+    "description": "Unmount phone (MTP)",
+    "tags": ["android", "phone", "mtp", "unmount"]
   }
 ]

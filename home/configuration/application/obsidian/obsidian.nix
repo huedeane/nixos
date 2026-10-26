@@ -13,6 +13,15 @@ let
     cp ${./themes/catppuccin-custom/theme.css} "$out/theme.css"
   '';
 
+  # The Comic Shanns Mono (Nerd Font) weights referenced by the theme CSS,
+  # bundled so the vault can carry its own font when synced to mobile.
+  comicFont = pkgs.runCommandLocal "obsidian-comic-font" { } ''
+    src=${pkgs.nerd-fonts.comic-shanns-mono}/share/fonts/opentype/NerdFonts/ComicShannsMono
+    mkdir -p "$out"
+    cp "$src/ComicShannsMonoNerdFontMono-Regular.otf" "$out/"
+    cp "$src/ComicShannsMonoNerdFontMono-Bold.otf" "$out/"
+  '';
+
   themeName = "Catppuccin Custom";
   vaultsBaseDir = "Documents/github/obsidian-vault";
 
@@ -22,6 +31,31 @@ let
 
   themeSource =
     if editMode then "${repoDir}/themes/catppuccin-custom" else "${catppuccin-custom}";
+
+  # Edit mode: live symlink to the repo. Non-edit mode: wipe and copy real files
+  # into the vault (so it syncs to mobile and isn't a dangling store symlink).
+  themeInstall =
+    if editMode then ''
+      ln -sfn "$themeSrc" "$obs/themes/$themeName"
+    ''
+    else ''
+      rm -rf "$obs/themes/$themeName"
+      mkdir -p "$obs/themes/$themeName"
+      cp -RL "$themeSrc"/. "$obs/themes/$themeName/"
+      chmod -R u+w "$obs/themes/$themeName"
+    '';
+
+  # Only bundle the font in non-edit mode (the copy that syncs to mobile); in
+  # edit mode the theme dir is a live symlink to the repo and the desktop
+  # already resolves the font via fontconfig, so there's nothing to copy.
+  fontInstall =
+    if editMode then ""
+    else ''
+      rm -rf "$obs/themes/$themeName/fonts"
+      mkdir -p "$obs/themes/$themeName/fonts"
+      cp -RL "${comicFont}"/. "$obs/themes/$themeName/fonts/"
+      chmod -R u+w "$obs/themes/$themeName/fonts"
+    '';
 
   pluginIds = [
     "sidebar-header-toggles"
@@ -72,7 +106,8 @@ in
         [ -d "$obs" ] || continue
 
         mkdir -p "$obs/themes"
-        ln -sfn "$themeSrc" "$obs/themes/$themeName"
+        ${themeInstall}
+        ${fontInstall}
 
         appearance="$obs/appearance.json"
         base_json="{}"

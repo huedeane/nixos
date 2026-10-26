@@ -15,20 +15,24 @@ build() {
 }
 
 display() {
-  build | awk -F'\t' '
+  build | awk -F'\t' -v cap=50 '
+    function trunc(s) {
+      return (length(s) > cap) ? substr(s, 1, cap - 1) "…" : s
+    }
     BEGIN {
       wd = length("Description"); wc = length("Command")
     }
     {
       n++
-      cmd[n]=$1; desc[n]=$2; tags[n]=$3
-      if (length($1) > wc) wc = length($1)
-      if (length($2) > wd) wd = length($2)
+      full[n]=$1; desc[n]=$2; tags[n]=$3
+      disp[n]=trunc($1)
+      if (length(disp[n]) > wc) wc = length(disp[n])
+      if (length($2)     > wd) wd = length($2)
     }
     END {
       printf "%-*s   %-*s   %s\n", wd, "Description", wc, "Command", "Tags"
       for (i = 1; i <= n; i++) {
-        printf "%-*s │ %-*s │ %s\t%s\n", wd, desc[i], wc, cmd[i], tags[i], cmd[i]
+        printf "%-*s │ %-*s │ %s\t%s\n", wd, desc[i], wc, disp[i], tags[i], full[i]
       }
     }
   '

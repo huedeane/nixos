@@ -1,0 +1,20 @@
+// Bundled theme font. `local(...)` is tried first so desktop uses the
+// system-installed font; the relative `url(...)` points at the copies placed
+// in this theme's `fonts/` folder (non-edit mode) so mobile is self-contained.
+@font-face {
+  font-family: "ComicShannsMono Nerd Font Mono";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("ComicShannsMono Nerd Font Mono"),
+    url("fonts/ComicShannsMonoNerdFontMono-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "ComicShannsMono Nerd Font Mono";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("ComicShannsMono Nerd Font Mono"),
+    url("fonts/ComicShannsMonoNerdFontMono-Bold.otf") format("opentype");
+}
