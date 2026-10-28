@@ -10,6 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/sddm.nix
+    ../../modules/qnap-nas.nix
   ];
 
   # Bootloader
