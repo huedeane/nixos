@@ -165,7 +165,7 @@ $border-width: 3px;
         position: relative;
         min-width: 55px;
 
-        &.mod-left:before {
+        &.side-dock-ribbon:before {
           content: "Nav";
           top: -11px;
           height: auto;

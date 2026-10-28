@@ -35,7 +35,10 @@ let
   # Edit mode: live symlink to the repo. Non-edit mode: wipe and copy real files
   # into the vault (so it syncs to mobile and isn't a dangling store symlink).
   themeInstall =
+    # rm first: if a previous non-edit build left a real dir here, `ln -sfn`
+    # would nest the link inside it instead of replacing it.
     if editMode then ''
+      rm -rf "$obs/themes/$themeName"
       ln -sfn "$themeSrc" "$obs/themes/$themeName"
     ''
     else ''
@@ -79,6 +82,7 @@ let
   pluginInstall =
     id:
     if editMode then ''
+      rm -rf "$obs/plugins/${id}"
       ln -sfn "${pluginSource id}" "$obs/plugins/${id}"
     ''
     else ''

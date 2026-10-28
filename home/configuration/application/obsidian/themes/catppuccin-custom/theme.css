@@ -133,7 +133,7 @@
   position: relative;
   min-width: 55px;
 }
-.app-container .horizontal-main-container .workspace .workspace-ribbon.mod-left:before {
+.app-container .horizontal-main-container .workspace .workspace-ribbon.side-dock-ribbon:before {
   content: "Nav";
   top: -11px;
   height: auto;
