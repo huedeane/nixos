@@ -4,7 +4,7 @@
   ...
 }:
 let
-  astal = inputs.astal.packages.${pkgs.system};
+  astal = inputs.astal.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [ inputs.ags.homeManagerModules.default ];

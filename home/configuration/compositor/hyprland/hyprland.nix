@@ -10,7 +10,6 @@
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/compositor/hyprland";
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
-  smwPkgs = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   home.packages = with pkgs; [
@@ -33,6 +32,20 @@ in
     package = hyprlandPkgs.hyprland;
     portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
     extraConfig = if editMode then "" else builtins.readFile ./hyprland.lua;
+    extraLuaFiles."smw" = {
+      autoLoad = true;
+      content = ''
+        smw = require("plugins.split-monitor-workspaces")
+        smw.setup({
+          workspace_count              = 5,
+          keep_focused                 = true,
+          enable_notifications         = false,
+          enable_persistent_workspaces = true,
+          enable_wrapping              = false,
+          link_monitors                = false,
+        })
+      '';
+    };
   };
 
   xdg.portal = {
@@ -72,11 +85,7 @@ in
     export HYPRCURSOR_SIZE=36
   '';
 
-  xdg.configFile."hypr/plugins.lua".text = ''
-    hl.on("hyprland.start", function()
-      hl.exec_cmd("${hyprlandPkgs.hyprland}/bin/hyprctl plugin load ${smwPkgs.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so")
-    end)
-  '';
+  xdg.configFile."hypr/plugins/split-monitor-workspaces".source = inputs.split-monitor-workspaces;
 
   xdg.configFile."hypr/hyprland.lua".source = lib.mkIf editMode (
     lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${dirPath}/hyprland.lua")

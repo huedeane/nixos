@@ -112,6 +112,7 @@
 #sidebar-box {
   margin: var(--tf-sidebar-box-margin);
   margin-right: 0px;
+  border: var(--border-width) solid var(--tf-border) !important;
 
   &::before {
     content: "Tabs";
@@ -278,7 +279,7 @@
 
 #PersonalToolbar {
   position: relative;
-  overflow: inherit !important;
+  overflow: visible !important;
 
   &::before {
     content: "Bookmarks";
@@ -350,4 +351,7 @@ findbar {
   browser {
     padding: 5px;
   }
+}
+#sidebar-panel-header {
+  display: none;
 }

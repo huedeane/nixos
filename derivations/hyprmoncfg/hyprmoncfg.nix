@@ -2,13 +2,13 @@
 
 pkgs.buildGoModule {
   pname = "hyprmoncfg";
-  version = "1.8.0";
+  version = "1.25.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "crmne";
     repo = "hyprmoncfg";
-    rev = "main";
-    hash = "sha256-jAqLowsG024L16nDK4Vmb9sioVGB4zYU+CHO56IiSx0=";
+    rev = "v1.25.0";
+    hash = "sha256-d3UJm9EmfgmNplePs4V4v4WB4ptPNO1e4nmeO676PY8=";
   };
 
   vendorHash = "sha256-gQbjvdKtO0hCXrs9RnWo1s0YeHf5W9t+8AgS2ELXlPo=";

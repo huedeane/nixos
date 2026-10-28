@@ -1,7 +1,6 @@
 ---@diagnostic disable: undefined-global
-require("plugins")
+require("smw")
 require("monitors")
-local smw = hl.plugin.split_monitor_workspaces
 
 -- https://wiki.hyprland.org/Configuring/
 -----------------
@@ -58,21 +57,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- ags-reload.sh")
 end)
 
----------------
---- Plugins ---
----------------
-hl.config({
-  plugin = {
-    split_monitor_workspaces = {
-      count                        = 5,
-      keep_focused                 = 1,
-      enable_notifications         = 0,
-      enable_persistent_workspaces = 1,
-      enable_wrapping              = 0,
-      link_monitors                = 0,
-    },
-  },
-})
 
 ------------------
 ---- MONITORS ----
@@ -307,20 +291,20 @@ hl.bind(mainMod .. " + CTRL + LEFT", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + RIGHT", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + DOWN", function() smw.cycle_workspaces("+1") end)
-hl.bind(mainMod .. " + CTRL + UP", function() smw.cycle_workspaces("-1") end)
-hl.bind(mainMod .. " + CTRL + J", function() smw.cycle_workspaces("+1") end)
-hl.bind(mainMod .. " + CTRL + K", function() smw.cycle_workspaces("-1") end)
+hl.bind(mainMod .. " + CTRL + DOWN", smw.cycle_workspaces("+1"))
+hl.bind(mainMod .. " + CTRL + UP", smw.cycle_workspaces("-1"))
+hl.bind(mainMod .. " + CTRL + J", smw.cycle_workspaces("+1"))
+hl.bind(mainMod .. " + CTRL + K", smw.cycle_workspaces("-1"))
 
 -- Move active window to another monitor
 hl.bind(mainMod .. " + CTRL + SHIFT + LEFT", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + RIGHT", hl.dsp.window.move({ monitor = "+1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ monitor = "-1" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ monitor = "+1" }))
-hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", function() smw.move_to_workspace_silent("+1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + UP", function() smw.move_to_workspace_silent("-1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + J", function() return smw.move_to_workspace_silent("+1") end)
-hl.bind(mainMod .. " + CTRL + SHIFT + K", function() return smw.move_to_workspace_silent("-1") end)
+hl.bind(mainMod .. " + CTRL + SHIFT + DOWN", smw.move_to_workspace_silent("+1"))
+hl.bind(mainMod .. " + CTRL + SHIFT + UP", smw.move_to_workspace_silent("-1"))
+hl.bind(mainMod .. " + CTRL + SHIFT + J", smw.move_to_workspace_silent("+1"))
+hl.bind(mainMod .. " + CTRL + SHIFT + K", smw.move_to_workspace_silent("-1"))
 
 -- Adjust active window width
 hl.bind(mainMod .. " + J", hl.dsp.layout("colresize -conf"))
@@ -336,15 +320,15 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + SHIFT + LEFT", hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + SHIFT + RIGHT", hl.dsp.layout("swapcol r"))
 
-for i = 1, 5 do
+for i = 1, smw.get_amount_of_workspaces() do
   local n = tostring(i)
 
   -- Switch workspaces on active monitor
-  hl.bind(mainMod .. " + " .. n, function() smw.workspace(n) end)
+  hl.bind(mainMod .. " + " .. n, smw.workspace(n))
   -- Move active window to a workspace on active monitor silently
-  hl.bind(mainMod .. " + CTRL + " .. n, function() smw.move_to_workspace_silent(n) end)
+  hl.bind(mainMod .. " + CTRL + " .. n, smw.move_to_workspace_silent(n))
   -- Move active window to a workspace on active monitor and focus
-  hl.bind(mainMod .. " + SHIFT + " .. n, function() smw.move_to_workspace(n) end)
+  hl.bind(mainMod .. " + SHIFT + " .. n, smw.move_to_workspace(n))
 end
 
 -- Special workspace (scratchpad)
@@ -509,3 +493,6 @@ hl.config({
     focus_on_activate = true,
   },
 })
+
+-- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
+do local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file = io.open(path, "r"); if file then file:close(); dofile(path) end end

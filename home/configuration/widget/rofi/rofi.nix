@@ -9,10 +9,11 @@
 
   programs.rofi = {
     enable = true;
-    font = "ComicShannsMono Nerd Font Mono 14";
-    terminal = "kitty";
 
-    extraConfig = {
+    settings = {
+      font = "ComicShannsMono Nerd Font Mono 14";
+      terminal = "kitty";
+
       # General
       modes = "drun,run,window";
       show-icons = true;
