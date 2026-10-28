@@ -68,14 +68,28 @@ let
     id:
     pkgs.runCommandLocal "obsidian-plugin-${id}" { } ''
       mkdir -p "$out"
-      cp ${./plugins}/${id}/manifest.json "$out/manifest.json"
-      cp ${./plugins}/${id}/main.js "$out/main.js"
+      cp -r ${./plugins}/${id}/. "$out/"
     '';
 
   pluginSource = id: if editMode then "${repoDir}/plugins/${id}" else "${mkPluginPkg id}";
 
+  # Edit mode: live symlink to the repo. Non-edit mode: wipe and copy real files
+  # into the vault, so the plugin isn't a dangling nix-store symlink off-NixOS
+  # (Windows / mobile) — it syncs as a standalone folder.
+  pluginInstall =
+    id:
+    if editMode then ''
+      ln -sfn "${pluginSource id}" "$obs/plugins/${id}"
+    ''
+    else ''
+      rm -rf "$obs/plugins/${id}"
+      mkdir -p "$obs/plugins/${id}"
+      cp -RL "${pluginSource id}"/. "$obs/plugins/${id}/"
+      chmod -R u+w "$obs/plugins/${id}"
+    '';
+
   installPlugins = lib.concatMapStringsSep "\n" (id: ''
-    ln -sfn "${pluginSource id}" "$obs/plugins/${id}"
+    ${pluginInstall id}
     cpj="$obs/community-plugins.json"
     cp_base="[]"
     [ -s "$cpj" ] && cp_base="$(cat "$cpj")"
