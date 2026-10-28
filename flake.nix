@@ -16,8 +16,9 @@
 
     # Hyprland Plugin: Workspaces Enhancement
     split-monitor-workspaces = {
+      # Lua package (main tracks Hyprland git); linked into ~/.config/hypr/plugins
       url = "github:zjeffer/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland";
+      flake = false;
     };
 
     # Encryption
