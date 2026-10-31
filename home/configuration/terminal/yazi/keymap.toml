@@ -123,17 +123,19 @@ keymap = [
   { on = [",", "r"], run = "sort random --reverse=no", desc = "Sort randomly" },
 
   # Goto
-  { on = ["g", "h"], run = "cd ~", desc = "Go home" },
-  { on = ["g", "c"], run = "cd ~/.config", desc = "Go ~/.config" },
-  { on = ["g", "d"], run = "cd ~/Downloads", desc = "Go ~/Downloads" },
+  { on = ["g", "h"], run = "cd ~", desc = "Home" },
+  { on = ["g", "c"], run = "cd config", desc = ".config" },
+  { on = ["g", "d"], run = "cd ~/Downloads", desc = "Downloads" },
   { on = ["g", "<Space>"], run = "cd --interactive", desc = "Jump interactively" },
   { on = ["g", "f"], run = "follow", desc = "Follow hovered symlink" },
-  { on = ["g", "N"], run = "cd ~/.config/nixos/", desc = "Go ~/.config/nixos/" },
-  { on = ["g", "H"], run = "cd ~/.config/nixos/home/configuration/", desc = "Go ~/.config/nixos/home/configuration/" },
-  { on = ["g", "V"], run = "cd ~/.config/nixos/home/configuration/terminal/nixcats/", desc = "Go ~/.config/nixos/home/configuration/terminal/nixcats/" },
-  { on = ["g", "t"], run = "cd ~/.local/share/Trash", desc = "Go ~/.local/share/Trash" },
-  { on = ["g", "g"], run = "cd ~/Documents/Github/", desc = "Go ~/Documents/Github/" },
-  { on = ["g", "m"], run = "cd /run/media/$USER", desc = "Go external drive mount (/run/media)" },
+  { on = ["g", "N"], run = "cd ~/.config/nixos/", desc = "Nixos Config" },
+  { on = ["g", "H"], run = "cd ~/.config/nixos/home/configuration/", desc = "Nixos Home Config" },
+  { on = ["g", "V"], run = "cd ~/.config/nixos/home/configuration/terminal/nixcats/", desc = "NixCats" },
+  { on = ["g", "t"], run = "cd ~/.local/share/Trash", desc = "Trash" },
+  { on = ["g", "g"], run = "cd ~/Documents/Github/", desc = "Github" },
+  { on = ["g", "m"], run = "cd /run/media/$USER", desc = "External Drive Mount" },
+  { on = ["g", "m"], run = "cd /", desc = "Root" },
+  { on = ["g", "p"], run = "cd /run/user/1000/gvfs", desc = "Phone Mount" },
 
   # Tabs
   { on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },

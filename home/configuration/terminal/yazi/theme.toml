@@ -1,2 +1,7 @@
 [flavor]
 dark = "catppuccin-frappe"
+
+[status]
+progress_label  = { fg = "#303446", bold = true }
+progress_normal = { fg = "#a6d189", bg = "#838ba7" }
+progress_error  = { fg = "#e78284", bg = "#838ba7" }
