@@ -1,4 +1,11 @@
 @charset "UTF-8";
+/* Discord Variable Overrides */
+:root,
+.theme-dark,
+.theme-light {
+  --status-warning-text: black !important;
+}
+
 /* Profile Name */
 .panelTitleContainer__37e49 .title_b6c092 {
   color: var(--yellow-3);
