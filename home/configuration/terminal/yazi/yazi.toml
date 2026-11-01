@@ -38,6 +38,9 @@ play = [
   { run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix" },
   { run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
 ]
+music = [
+  { run = "rmpc-open.sh %s", desc = "Play in rmpc", for = "linux", orphan = true },
+]
 open = [
   { run = "xdg-open %s1", desc = "Open", for = "linux" },
   { run = "open %s", desc = "Open", for = "macos" },
@@ -76,7 +79,12 @@ rules = [
     "reveal",
   ] },
   # Media
-  { mime = "{audio,video}/*", use = [
+  { mime = "audio/*", use = [
+    "music",
+    "play",
+    "reveal",
+  ] },
+  { mime = "video/*", use = [
     "play",
     "reveal",
   ] },

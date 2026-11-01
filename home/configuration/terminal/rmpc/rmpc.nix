@@ -50,10 +50,15 @@ in
         "rmpc/script".source = ./script;
       };
 
+  home.file.".local/bin/rmpc-open.sh" = {
+    source = ./rmpc-open.sh;
+    executable = true;
+  };
+
   xdg.desktopEntries."rmpc" = {
     name = "Rmpc";
     genericName = "Audio Player";
-    exec = "kitty --class tui-rmpc rmpc";
+    exec = "${config.home.homeDirectory}/.local/bin/rmpc-open.sh %F";
     icon = "kitty";
     terminal = false;
     categories = [
