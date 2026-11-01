@@ -77,6 +77,21 @@ in
     executable = true;
   };
 
+  xdg.dataFile."dbus-1/services/org.freedesktop.FileManager1.service".text = ''
+    [D-BUS Service]
+    Name=org.freedesktop.FileManager1
+    Exec=${
+      pkgs.writers.writePython3 "yazi-dbus" {
+        libraries = [ pkgs.python3Packages.dbus-next ];
+        flakeIgnore = [
+          "E501"
+          "F722"
+          "F821"
+        ];
+      } (builtins.readFile ./scripts/yazi-dbus.py)
+    }
+  '';
+
   xdg.desktopEntries.yazi = {
     name = "Yazi";
     genericName = "File Manager";
