@@ -269,7 +269,14 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("grimblast --freeze save area - | satty -f -"))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("kitty --class tui-rmpc rmpc"))
+hl.bind(mainMod .. " + M", function()
+  local rmpc = hl.get_windows({ class = "tui-rmpc" })[1]
+  if rmpc then
+    hl.dispatch(hl.dsp.window.close({ window = "address:" .. tostring(rmpc.address) }))
+  else
+    hl.dispatch(hl.dsp.exec_cmd("kitty --class tui-rmpc -o confirm_os_window_close=0 rmpc"))
+  end
+end)
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("rmpc prev"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rmpc next"))
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("rmpc togglepause"))
