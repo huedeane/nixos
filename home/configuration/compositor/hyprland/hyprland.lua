@@ -51,7 +51,7 @@ hl.on("hyprland.start", function()
     "uwsm app -- wl-paste --watch clipvault store --ignore-pattern '^<meta http-equiv=' --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd(
-    "uwsm app -- wl-paste --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
+    "uwsm app -- wl-paste --type text --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
   hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
   hl.exec_cmd("uwsm app -- ags-reload.sh")
@@ -255,7 +255,14 @@ local mainMod = "ALT"
 
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- General
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + T", function()
+  local window = hl.get_windows({ class = terminal })[1]
+  if window then
+    hl.dispatch(hl.dsp.focus({ window = "address:" .. tostring(window.address) }))
+  else
+    hl.dispatch(hl.dsp.exec_cmd(terminal))
+  end
+end)
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal .. " -o shell=bash"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(rofi_drun))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
@@ -406,7 +413,6 @@ hl.window_rule({
   name    = "windowrule-screen-capture",
   match   = { class = "com.gabm.satty" },
   float   = true,
-  no_anim = true,
 })
 
 hl.window_rule({
