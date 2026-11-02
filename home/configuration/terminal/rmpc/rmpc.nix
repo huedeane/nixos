@@ -28,27 +28,25 @@ in
     );
 
   xdg.configFile =
-    if editMode then
-      lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "rmpc/themes/${name}" {
-          source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/themes/${name}";
-        }
-      ) (lib.filterAttrs (_: type: type == "regular") (builtins.readDir ./themes))
-      // lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "rmpc/script/${name}" {
-          source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/script/${name}";
-        }
-      ) (lib.filterAttrs (_: type: type == "regular") (builtins.readDir ./script))
-      // {
-        "rmpc/config.ron".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/config.ron";
-      }
-    else
-      {
-        "rmpc/themes".source = ./themes;
-        "rmpc/script".source = ./script;
-      };
+    let
+      link =
+        dir:
+        lib.mapAttrs' (
+          name: _:
+          lib.nameValuePair "rmpc/${dir}/${name}" {
+            source =
+              if editMode then
+                config.lib.file.mkOutOfStoreSymlink "${dirPath}/${dir}/${name}"
+              else
+                ./. + "/${dir}/${name}";
+          }
+        ) (lib.filterAttrs (_: type: type == "regular") (builtins.readDir (./. + "/${dir}")));
+    in
+    link "themes"
+    // link "script"
+    // lib.optionalAttrs editMode {
+      "rmpc/config.ron".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/config.ron";
+    };
 
   home.file.".local/bin/rmpc-open.sh" = {
     source = ./rmpc-open.sh;

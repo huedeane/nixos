@@ -11,6 +11,11 @@ in
     enable = true;
   };
 
+  systemd.user.services.dunst.Service = {
+    Restart = "on-failure";
+    RestartSec = 1;
+  };
+
   xdg.configFile =
     if editMode then
       {
