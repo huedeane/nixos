@@ -31,6 +31,8 @@
     (configHomeDir + "/application/firefox/firefox.nix")
     (configHomeDir + "/application/obsidian/obsidian.nix")
     (configHomeDir + "/application/godot/godot.nix")
+    (configHomeDir + "/application/mpv/mpv.nix")
+    (configHomeDir + "/application/satty/satty.nix")
     (configHomeDir + "/widget/rofi/rofi.nix")
     (configHomeDir + "/widget/ags/ags.nix")
     (configHomeDir + "/security/sops/sops.nix")
