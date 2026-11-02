@@ -372,10 +372,10 @@
           source: "/tmp/mpd.fifo",
           sample_rate: 44100,
           channels: 2,
-          samble_bits: 16,
+          sample_bits: 16,
       ),
       smoothing: (
-          noise_reduction: 35,
+          noise_reduction: 20,
       ),
       eq: []
     ),

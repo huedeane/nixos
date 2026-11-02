@@ -96,3 +96,9 @@ frame_color = "#babbf1"
 [urgency_critical]
 foreground = "#e78284"
 frame_color = "#e78284"
+
+[now_playing]
+appname = rmpc
+format = "%b"
+word_wrap = no
+ellipsize = end
