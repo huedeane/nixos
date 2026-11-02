@@ -5,6 +5,7 @@ import { MonitorFocusContext } from "../../../lib/context"
 import style from "./workspace.scss"
 import app from "ags/gtk4/app"
 import Hyprland from "gi://AstalHyprland"
+import { pointer } from "../../../lib/utils"
 
 app.apply_css(style)
 
@@ -42,6 +43,7 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
       )}
     >
       <button
+        cursor={pointer}
         cssClasses={["window-navigator", "left"]}
         onClicked={() => focusWindow("-")}
       >
@@ -64,6 +66,7 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 
             return (
               <button
+                cursor={pointer}
                 onClicked={() => focusWorkspace(local)}
                 cssClasses={isActive((a) => (a ? ["ws", "active"] : ["ws"]))}
               >
@@ -74,6 +77,7 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
         </For>
       </box>
       <button
+        cursor={pointer}
         cssClasses={["window-navigator", "right"]}
         onClicked={() => focusWindow("+")}
       >

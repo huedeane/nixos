@@ -3,6 +3,7 @@ import { MonitorFocusContext } from "../../../lib/context"
 import style from "./volume.scss"
 import app from "ags/gtk4/app"
 import AstalWp from "gi://AstalWp"
+import { pointer } from "../../../lib/utils"
 
 app.apply_css(style)
 
@@ -23,6 +24,7 @@ export default function Volume() {
 
   return (
     <button
+      cursor={pointer}
       cssClasses={isFocused((f) =>
         f ? ["volume", "component", "focused"] : ["volume", "component"],
       )}

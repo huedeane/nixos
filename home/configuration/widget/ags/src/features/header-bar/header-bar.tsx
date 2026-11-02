@@ -9,6 +9,8 @@ import Workspace from "./workspace/workspace"
 import DateTime from "./datetime/datetime"
 import Volume from "./volume/volume"
 import Battery from "./battery/battery"
+import Microphone from "./microphone/microphone"
+import Media from "./media/media"
 
 app.apply_css(style)
 
@@ -42,12 +44,14 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <box $type="start" halign={Gtk.Align.START} spacing={10}>
               <Application />
               <Workspace gdkmonitor={gdkmonitor} />
+              <Media />
             </box>
-            <box $type="center" halign={Gtk.Align.CENTER}>
+            <box $type="center" halign={Gtk.Align.CENTER} spacing={10}>
               <DateTime />
             </box>
             <box $type="end" halign={Gtk.Align.END} spacing={10}>
               <Battery />
+              <Microphone />
               <Volume />
               <Application />
             </box>

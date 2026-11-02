@@ -1,0 +1,108 @@
+@use "../../../style" as *;
+
+.media.component {
+  font-family: $font-family;
+  padding: 0px 8px 0px 8px;
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0px;
+    min-height: 0px;
+  }
+
+  button.info {
+    padding: 2px 4px 0px 4px;
+
+    label.title {
+      padding-bottom: 2px;
+
+      &.repaint-a {
+        background: rgba(48, 52, 70, 0.02);
+      }
+
+      &.repaint-b {
+        background: rgba(48, 52, 70, 0.03);
+      }
+    }
+  }
+
+  label.music-icon {
+    font-size: 20px;
+    margin: 0px 4px;
+  }
+
+  .controls button {
+    .icon-bg {
+      min-width: 24px;
+      min-height: 22px;
+      border-radius: 6px;
+    }
+
+    &:hover .icon-bg {
+      background: $yellow;
+    }
+  }
+
+  .divider {
+    margin: 0px 8px;
+
+    .dot {
+      min-width: 2px;
+      min-height: 2px;
+      border-radius: 1px;
+      background: $overlay1;
+    }
+  }
+
+  &:hover .divider .dot {
+    background: $yellow;
+  }
+
+  .cava {
+    margin: 0px 4px;
+
+    .bar-0 { color: $red; }
+    .bar-1 { color: $peach; }
+    .bar-2 { color: $yellow; }
+    .bar-3 { color: $green; }
+    .bar-4 { color: $blue; }
+  }
+
+  progressbar {
+    margin: 0px -8px;
+
+    trough {
+      min-height: $border-width;
+      background: transparent;
+      border: none;
+    }
+
+    progress {
+      margin: 0px;
+      min-width: 0px;
+      min-height: $border-width;
+      background: $green;
+      border: none;
+      border-radius: 0px;
+    }
+  }
+
+  &.paused {
+    > * {
+      opacity: 0.6;
+    }
+
+    progressbar progress {
+      background: $overlay1;
+    }
+
+    .cava .bar {
+      color: $overlay1;
+    }
+  }
+
+  &.empty {
+    padding: 2px 12px;
+  }
+}
