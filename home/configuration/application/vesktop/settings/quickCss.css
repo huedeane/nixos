@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* Discord Variable Overrides */
 :root,
 .theme-dark,
@@ -87,23 +86,24 @@
   color: var(--yellow-3);
 }
 
-/* Channel Selected — comma groups kept verbatim (original also colors .link) */
-.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32,
-.modeSelected__2ea32 .link__2ea32 {
+/* Channel Selected */
+.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32 {
+  background-color: var(--purple-3) !important;
+  color: #303446;
+}
+.containerDefault_c69b6d.selected_c69b6d .modeSelected__2ea32 .link__2ea32 {
   background-color: var(--purple-3) !important;
 }
 
-.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32,
+.modeSelected__2ea32 .link__2ea32 {
+  background-color: var(--purple-3) !important;
+}
 .modeSelected__2ea32 .link__2ea32 .icon__2ea32 {
   color: #303446;
 }
-
-.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32,
 .modeSelected__2ea32 .link__2ea32 .name__2ea32 {
   color: #303446;
 }
-
-.containerDefault_c69b6d .modeSelected__2ea32 .link__2ea32,
 .modeSelected__2ea32 .link__2ea32 .actionIcon_c69b6d {
   color: #303446;
 }
@@ -120,6 +120,17 @@
 }
 .containerDefault_c69b6d .iconVisibility_c69b6d:hover .link__2ea32 .actionIcon_c69b6d {
   color: #303446;
+}
+
+/* Channel Voice */
+.containerDefault_c69b6d div:not([class]) .selectedChannel_c69b6d .link__2ea32 {
+  background-color: #414559 !important;
+}
+.containerDefault_c69b6d div:not([class]) .selectedChannel_c69b6d .link__2ea32:hover .actionIcon_c69b6d {
+  color: var(--green-3) !important;
+}
+.containerDefault_c69b6d div:not([class]) .selectedChannel_c69b6d .link__2ea32 .name__2ea32 {
+  color: var(--green-3) !important;
 }
 
 /* Member category Color */
