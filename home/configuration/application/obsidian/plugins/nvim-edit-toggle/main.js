@@ -5,6 +5,7 @@ const os = require("os");
 
 const TERMINAL_PLUGIN_ID = "terminal";
 const TARGET_FILE = path.join(process.env.XDG_RUNTIME_DIR || os.tmpdir(), "obsidian-nvim-target");
+const CLAUDE_FILE = path.join(process.env.XDG_RUNTIME_DIR || os.tmpdir(), "obsidian-claude-target");
 const NVIM_VIEW_TYPE = "nvim-edit-redirect";
 
 // Text/code extensions that Obsidian can't display natively (so it would hand
@@ -110,23 +111,35 @@ module.exports = class NvimEditToggle extends Plugin {
   addNoteButton(view) {
     const actions = view.containerEl && view.containerEl.querySelector(".view-header .view-actions");
     if (!actions) return;
-    let btn = actions.querySelector(".nvim-edit-toggle");
-    if (!btn) {
-      btn = createEl("button", { cls: "clickable-icon view-action nvim-edit-toggle" });
-      setIcon(btn, "terminal");
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.toggle(view);
-      });
-      actions.prepend(btn);
-    }
+    const btn = this.addToggleButton(view, actions, "nvim-edit-toggle", "terminal", "nvim");
+    const claudeBtn = this.addToggleButton(view, actions, "claude-code-toggle", "square-terminal", "claude");
     const rightToggle = actions.querySelector(".hdr-sidebar-toggle.mod-right");
     if (rightToggle && rightToggle.nextElementSibling !== btn) {
       rightToggle.insertAdjacentElement("afterend", btn);
     }
-    const open = view.file && this.sessions.has(view.file.path);
-    btn.toggleClass("is-active", !!open);
-    btn.setAttribute("aria-label", open ? "Close Neovim" : "Edit in Neovim");
+    if (btn.nextElementSibling !== claudeBtn) {
+      btn.insertAdjacentElement("afterend", claudeBtn);
+    }
+    const nvimOpen = view.file && this.sessions.has(this.sessionKey(view.file, "nvim"));
+    btn.toggleClass("is-active", !!nvimOpen);
+    btn.setAttribute("aria-label", nvimOpen ? "Close Neovim" : "Edit in Neovim");
+    const claudeOpen = view.file && this.sessions.has(this.sessionKey(view.file, "claude"));
+    claudeBtn.toggleClass("is-active", !!claudeOpen);
+    claudeBtn.setAttribute("aria-label", claudeOpen ? "Close Claude Code" : "Open Claude Code");
+  }
+
+  addToggleButton(view, actions, cls, icon, mode) {
+    let btn = actions.querySelector(`.${cls}`);
+    if (!btn) {
+      btn = createEl("button", { cls: `clickable-icon view-action ${cls}` });
+      setIcon(btn, icon);
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.toggle(view, mode);
+      });
+      actions.prepend(btn);
+    }
+    return btn;
   }
 
   // --- Terminal side: "return to note" button -------------------------------
@@ -137,7 +150,7 @@ module.exports = class NvimEditToggle extends Plugin {
       if (actions.querySelector(".nvim-edit-back")) return;
       const btn = createEl("button", { cls: "clickable-icon view-action nvim-edit-back" });
       setIcon(btn, "corner-up-left");
-      btn.setAttribute("aria-label", "Close Neovim & return to note");
+      btn.setAttribute("aria-label", "Close terminal & return to note");
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         this.closeSession(key);
@@ -149,7 +162,7 @@ module.exports = class NvimEditToggle extends Plugin {
     if (!host || host.querySelector(".nvim-edit-back-float")) return;
     const fb = createEl("button", { cls: "clickable-icon nvim-edit-back-float" });
     setIcon(fb, "corner-up-left");
-    fb.setAttribute("aria-label", "Close Neovim & return to note");
+    fb.setAttribute("aria-label", "Close terminal & return to note");
     fb.style.cssText =
       "position:absolute;top:8px;right:8px;z-index:50;background:var(--background-secondary);";
     fb.addEventListener("click", (e) => {
@@ -161,17 +174,22 @@ module.exports = class NvimEditToggle extends Plugin {
 
   // --- Toggle / launch logic ------------------------------------------------
 
-  async toggle(view) {
+  async toggle(view, mode = "nvim") {
     const file = view.file;
     if (!file) return;
-    if (this.sessions.has(file.path)) {
-      this.closeSession(file.path);
+    const key = this.sessionKey(file, mode);
+    if (this.sessions.has(key)) {
+      this.closeSession(key);
     } else {
-      await this.launchNvim(file, this.app.workspace.activeLeaf);
+      await this.launchNvim(file, this.app.workspace.activeLeaf, mode);
     }
   }
 
-  async launchNvim(file, sourceLeaf) {
+  sessionKey(file, mode) {
+    return mode === "claude" ? `claude:${file.path}` : file.path;
+  }
+
+  async launchNvim(file, sourceLeaf, mode = "nvim") {
     if (!this.app.plugins.plugins[TERMINAL_PLUGIN_ID]) {
       new Notice("Terminal plugin is not enabled in this vault");
       return false;
@@ -184,6 +202,11 @@ module.exports = class NvimEditToggle extends Plugin {
 
     try {
       fs.writeFileSync(TARGET_FILE, this.absPath(file.path));
+      if (mode === "claude") {
+        fs.writeFileSync(CLAUDE_FILE, this.absPath(""));
+      } else {
+        fs.rmSync(CLAUDE_FILE, { force: true });
+      }
     } catch (e) {
       console.error("nvim-edit-toggle: cannot write target file", e);
       new Notice("nvim-edit: cannot write target file");
@@ -213,7 +236,7 @@ module.exports = class NvimEditToggle extends Plugin {
       return false;
     }
 
-    this.sessions.set(file.path, { termLeaf, sourceLeaf: sourceLeaf || null });
+    this.sessions.set(this.sessionKey(file, mode), { termLeaf, sourceLeaf: sourceLeaf || null });
     [0, 100, 300, 600].forEach((d) => setTimeout(() => this.apply(), d));
     return true;
   }
@@ -276,7 +299,7 @@ module.exports = class NvimEditToggle extends Plugin {
 
   onunload() {
     document
-      .querySelectorAll(".nvim-edit-toggle, .nvim-edit-back, .nvim-edit-back-float")
+      .querySelectorAll(".nvim-edit-toggle, .claude-code-toggle, .nvim-edit-back, .nvim-edit-back-float")
       .forEach((el) => el.remove());
   }
 };

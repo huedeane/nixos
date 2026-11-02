@@ -1,0 +1,48 @@
+.spacekeys-modal-container {
+  .modal-bg {
+    background-color: unset;
+  }
+
+  .spacekeys-modal {
+    position: fixed;
+    position-anchor: --editor;
+    top: auto;
+    bottom: calc(anchor(bottom) + 15px);
+    left: calc(anchor(left) + 15px);
+    right: calc(anchor(right) + 15px);
+    width: auto;
+    overflow: visible;
+    padding-top: 20px;
+
+    &:before {
+      content: "Space Key";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      background: var(--ctp-base);
+      width: fit-content;
+      color: var(--ctp-yellow);
+      padding: 0px 15px;
+      font-size: 16px;
+    }
+
+    &.modal {
+      box-shadow:
+        0 0 0 0px var(--ctp-base), 0 0px 0 8px var(--ctp-base)
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: calc(100% + 11px);
+      left: -11px;
+      right: -11px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--ctp-base));
+      pointer-events: none;
+    }
+  }
+}

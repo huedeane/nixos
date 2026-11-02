@@ -30,7 +30,7 @@ module.exports = class ModeIndicator extends Plugin {
   }
 
   currentMode() {
-    if (document.body.querySelector(".modal-container .prompt")) return "Command";
+    if (document.body.querySelector(".modal-container .prompt, .spacekeys-modal-container")) return "Command";
 
     const view = this.app.workspace.activeLeaf && this.app.workspace.activeLeaf.view;
     if (!view) return "";

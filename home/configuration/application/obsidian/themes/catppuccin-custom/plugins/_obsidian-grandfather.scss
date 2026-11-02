@@ -1,0 +1,14 @@
+.app-container .status-bar .status-bar-item {
+  &.plugin-obsidian-grandfather {
+    margin-left: 5px;
+    font-weight: bold;
+    color: var(--ctp-mantle);
+    border-radius: 0px;
+    padding: 0 10px 0 16px;
+    font-size: 15px;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+    word-spacing: -3px;
+    height: 100%;
+  }
+}

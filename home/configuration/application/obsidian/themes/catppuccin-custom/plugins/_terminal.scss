@@ -1,0 +1,7 @@
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content {
+  &[data-type="terminal:terminal"] {
+    .view-content {
+      padding: 15px 0px 10px 15px;
+    }
+  }
+}

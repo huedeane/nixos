@@ -29,7 +29,8 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
 
 -- Compile SCSS to CSS on save (needs `sass`/dart-sass on PATH)
 -- Saving a partial (`_name.scss`) recompiles the entry files (non-`_` .scss)
--- in the same directory instead, since partials are only meant to be @use'd.
+-- in the nearest directory (walking up) that has any, since partials are only
+-- meant to be @use'd.
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.scss",
   callback = function(args)
@@ -39,9 +40,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     local input = vim.fn.fnamemodify(args.file, ":p")
     local inputs = { input }
     if vim.fn.fnamemodify(input, ":t"):sub(1, 1) == "_" then
-      inputs = vim.tbl_filter(function(f)
-        return vim.fn.fnamemodify(f, ":t"):sub(1, 1) ~= "_"
-      end, vim.fn.glob(vim.fn.fnamemodify(input, ":h") .. "/*.scss", false, true))
+      inputs = {}
+      local dir = vim.fn.fnamemodify(input, ":h")
+      while #inputs == 0 and dir ~= vim.fn.fnamemodify(dir, ":h") and dir ~= vim.env.HOME do
+        inputs = vim.tbl_filter(function(f)
+          return vim.fn.fnamemodify(f, ":t"):sub(1, 1) ~= "_"
+        end, vim.fn.glob(dir .. "/*.scss", false, true))
+        dir = vim.fn.fnamemodify(dir, ":h")
+      end
     end
     for _, file in ipairs(inputs) do
       vim.system(

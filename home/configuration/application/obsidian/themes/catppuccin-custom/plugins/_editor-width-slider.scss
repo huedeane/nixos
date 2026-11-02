@@ -1,0 +1,10 @@
+.app-container .status-bar .status-bar-item {
+  .editor-width-slider-value {
+    color: var(--ctp-mantle) !important;
+    margin-right: 0px !important;
+
+    &:hover {
+      background-color: var(--ctp-yellow) !important;
+    }
+  }
+}

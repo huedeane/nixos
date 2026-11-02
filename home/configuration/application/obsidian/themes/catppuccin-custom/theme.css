@@ -90,6 +90,7 @@
   --border-width: 3px;
   --background-modifier-active-hover: var(--ctp-lavender);
   --status-bar-background: var(--ctp-mantle);
+  --prompt-border-color: var(--ctp-lavender);
 }
 
 .workspace-split.mod-root .sidebar-toggle-button {
@@ -97,14 +98,6 @@
 }
 
 .workspace-ribbon .sidebar-toggle-button {
-  display: none;
-}
-
-.workspace.is-left-sidedock-open .hdr-sidebar-toggle.mod-left {
-  display: none;
-}
-
-.workspace.is-right-sidedock-open .hdr-sidebar-toggle.mod-right {
   display: none;
 }
 
@@ -170,6 +163,9 @@
   padding: 0px 15px;
   font-size: 16px;
 }
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root {
+  anchor-name: --editor;
+}
 .app-container .horizontal-main-container .workspace .workspace-split.mod-root:before {
   content: "Editor";
   position: absolute;
@@ -186,9 +182,6 @@
 }
 .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-tab-header-container {
   display: none;
-}
-.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content[data-type="terminal:terminal"] .view-content {
-  padding: 15px 0px 10px 15px;
 }
 .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-header {
   height: 55px;
@@ -224,6 +217,18 @@
 .app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .markdown-preview-sizer .mod-footer {
   margin-top: auto;
 }
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .empty-state .empty-state-action-list .empty-state-action:hover .text-button-icon,
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .empty-state .empty-state-action-list .empty-state-action:hover .text-button-label {
+  color: var(--ctp-mantle);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .empty-state .empty-state-action-list .empty-state-action:hover .empty-state-hotkey {
+  border: 1px solid var(--ctp-mantle);
+  color: var(--ctp-mantle);
+}
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content .view-content .empty-state .empty-state-action-list .empty-state-action .empty-state-hotkey {
+  border: 1px solid transparent;
+  color: var(--ctp-mantle);
+}
 .app-container .horizontal-main-container .workspace .workspace-split.mod-right-split:before {
   content: "Side Bar";
   position: absolute;
@@ -243,11 +248,6 @@
 }
 .app-container .horizontal-main-container .workspace .workspace-split.mod-right-split .workspace-tab-header-container .workspace-tab-header-container-inner {
   flex-direction: row-reverse;
-}
-.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs:not(.vt-mod-top-space) .workspace-tab-header-container {
-  padding-top: 5px;
-  border-top: 3px dotted var(--tab-outline-color);
-  border-radius: 0px;
 }
 .app-container .horizontal-main-container .workspace .workspace-split .workspace-leaf-resize-handle {
   border-color: transparent !important;
@@ -335,89 +335,6 @@
 .app-container .status-bar .status-bar-item.plugin-sync {
   margin-left: auto;
 }
-.app-container .status-bar .status-bar-item.plugin-mode-indicator {
-  margin-right: 5px;
-  font-weight: bold;
-  color: var(--ctp-mantle);
-  border-radius: 0px;
-  padding: 0 16px 0 10px;
-  font-size: 15px;
-  text-transform: uppercase;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
-  height: 100%;
-}
-.app-container .status-bar .status-bar-item.plugin-obsidian-grandfather {
-  margin-left: 5px;
-  font-weight: bold;
-  color: var(--ctp-mantle);
-  border-radius: 0px;
-  padding: 0 10px 0 16px;
-  font-size: 15px;
-  text-transform: uppercase;
-  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
-  word-spacing: -3px;
-  height: 100%;
-}
-.app-container .status-bar .status-bar-item.plugin-obsidian-show-file-path {
-  padding: 6px 8px;
-  height: 5px;
-  box-sizing: content-box;
-}
-.app-container .status-bar .status-bar-item .editor-width-slider-value {
-  color: var(--ctp-mantle) !important;
-  margin-right: 0px !important;
-}
-.app-container .status-bar .status-bar-item .editor-width-slider-value:hover {
-  background-color: var(--ctp-yellow) !important;
-}
-.app-container .status-bar[data-mode=obsidian] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=obsidian] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=obsidian] .editor-width-slider-value {
-  background: var(--ctp-blue) !important;
-}
-.app-container .status-bar[data-mode=obsidian] {
-  color: var(--ctp-blue);
-}
-.app-container .status-bar[data-mode=reading] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=reading] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=reading] .editor-width-slider-value {
-  background: var(--ctp-lavender) !important;
-}
-.app-container .status-bar[data-mode=reading] {
-  color: var(--ctp-lavender);
-}
-.app-container .status-bar[data-mode=editing] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=editing] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=editing] .editor-width-slider-value {
-  background: var(--ctp-green) !important;
-}
-.app-container .status-bar[data-mode=editing] {
-  color: var(--ctp-green);
-}
-.app-container .status-bar[data-mode=webview] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=webview] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=webview] .editor-width-slider-value {
-  background: var(--ctp-yellow) !important;
-}
-.app-container .status-bar[data-mode=webview] {
-  color: var(--ctp-yellow);
-}
-.app-container .status-bar[data-mode=command] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=command] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=command] .editor-width-slider-value {
-  background: var(--ctp-peach) !important;
-}
-.app-container .status-bar[data-mode=command] {
-  color: var(--ctp-peach);
-}
-.app-container .status-bar[data-mode=terminal] .plugin-mode-indicator,
-.app-container .status-bar[data-mode=terminal] .plugin-obsidian-grandfather,
-.app-container .status-bar[data-mode=terminal] .editor-width-slider-value {
-  background: var(--ctp-mauve) !important;
-}
-.app-container .status-bar[data-mode=terminal] {
-  color: var(--ctp-mauve);
-}
 
 .menu {
   border: 3px solid var(--ctp-overlay0);
@@ -454,8 +371,28 @@
 .modal-container .modal .modal-content .vertical-tab-content-container .vertical-tab-content .setting-group .setting-item .setting-hotkey {
   color: var(--ctp-mantle);
 }
+.modal-container .prompt .prompt-instructions {
+  border-top: 3px dotted var(--ctp-overlay0);
+}
+.modal-container .prompt .prompt-input {
+  border-bottom: 3px dotted var(--ctp-overlay0);
+}
+.modal-container .prompt .suggestion-item {
+  align-items: center;
+}
 .modal-container .prompt .suggestion-item.is-selected {
   color: var(--ctp-mantle);
+}
+.modal-container .prompt .suggestion-item.is-selected .suggestion-aux .suggestion-hotkey {
+  border: 1px solid var(--ctp-mantle);
+}
+.modal-container .prompt .suggestion-item .suggestion-aux .suggestion-hotkey {
+  color: var(--ctp-mantle);
+  border: 1px solid transparent;
+}
+
+.nav-files-container .tree-item-children {
+  overflow: clip;
 }
 
 .tree-item-self.is-active .tree-item-icon {
@@ -473,66 +410,6 @@
 
 .setting-hotkey {
   color: var(--ctp-mantle);
-}
-
-.virtual-footer-footer-group {
-  padding-bottom: 40px;
-}
-
-.plugin-virtual-footer .pagination-module {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.plugin-virtual-footer .pagination-module .pagination-previous {
-  grid-column: 1;
-  padding-right: 40px;
-}
-.plugin-virtual-footer .pagination-module .pagination-home,
-.plugin-virtual-footer .pagination-module .pagination-begin {
-  grid-column: 2;
-}
-.plugin-virtual-footer .pagination-module .pagination-next {
-  grid-column: 3;
-  padding-left: 40px;
-}
-.plugin-virtual-footer .pagination-module .pagination-icon {
-  padding: 0px 10px;
-  font-size: 20px;
-  padding-bottom: 3px;
-}
-.plugin-virtual-footer .pagination-module .pagination-button {
-  background-color: unset;
-  height: 50px;
-  border: 3px solid var(--ctp-lavender);
-  color: var(--ctp-text);
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-}
-.plugin-virtual-footer .pagination-module .pagination-button:hover {
-  border: 3px solid var(--ctp-lavender);
-  background-color: var(--ctp-lavender);
-  color: var(--ctp-mantle);
-}
-.plugin-virtual-footer .horizontal-module {
-  border: none;
-  border-top: 3px solid var(--ctp-overlay0);
-  margin: 20px 0px;
-}
-.plugin-virtual-footer .info-module {
-  display: flex;
-  gap: 20px;
-  font-size: 0.8rem;
-  justify-content: end;
-  padding: 0px 20px;
-}
-.plugin-virtual-footer .info-module > div {
-  display: flex;
-}
-.plugin-virtual-footer .info-module .info-heading {
-  color: var(--ctp-yellow);
-  padding-right: 5px;
 }
 
 .callout[data-callout=custom-md-header] {
@@ -607,6 +484,213 @@
   border: 3px dotted var(--ctp-lavender);
   border-top: unset;
   border-radius: 0px 0px 10px 10px;
+}
+
+.app-container .status-bar .status-bar-item .editor-width-slider-value {
+  color: var(--ctp-mantle) !important;
+  margin-right: 0px !important;
+}
+.app-container .status-bar .status-bar-item .editor-width-slider-value:hover {
+  background-color: var(--ctp-yellow) !important;
+}
+
+.app-container .status-bar .status-bar-item.plugin-mode-indicator {
+  margin-right: 5px;
+  font-weight: bold;
+  color: var(--ctp-mantle);
+  border-radius: 0px;
+  padding: 0 16px 0 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+  height: 100%;
+}
+.app-container .status-bar[data-mode=obsidian] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=obsidian] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=obsidian] .editor-width-slider-value {
+  background: var(--ctp-blue) !important;
+}
+.app-container .status-bar[data-mode=obsidian] {
+  color: var(--ctp-blue);
+}
+.app-container .status-bar[data-mode=reading] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=reading] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=reading] .editor-width-slider-value {
+  background: var(--ctp-lavender) !important;
+}
+.app-container .status-bar[data-mode=reading] {
+  color: var(--ctp-lavender);
+}
+.app-container .status-bar[data-mode=editing] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=editing] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=editing] .editor-width-slider-value {
+  background: var(--ctp-green) !important;
+}
+.app-container .status-bar[data-mode=editing] {
+  color: var(--ctp-green);
+}
+.app-container .status-bar[data-mode=webview] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=webview] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=webview] .editor-width-slider-value {
+  background: var(--ctp-yellow) !important;
+}
+.app-container .status-bar[data-mode=webview] {
+  color: var(--ctp-yellow);
+}
+.app-container .status-bar[data-mode=command] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=command] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=command] .editor-width-slider-value {
+  background: var(--ctp-peach) !important;
+}
+.app-container .status-bar[data-mode=command] {
+  color: var(--ctp-peach);
+}
+.app-container .status-bar[data-mode=terminal] .plugin-mode-indicator,
+.app-container .status-bar[data-mode=terminal] .plugin-obsidian-grandfather,
+.app-container .status-bar[data-mode=terminal] .editor-width-slider-value {
+  background: var(--ctp-mauve) !important;
+}
+.app-container .status-bar[data-mode=terminal] {
+  color: var(--ctp-mauve);
+}
+
+.app-container .status-bar .status-bar-item.plugin-obsidian-grandfather {
+  margin-left: 5px;
+  font-weight: bold;
+  color: var(--ctp-mantle);
+  border-radius: 0px;
+  padding: 0 10px 0 16px;
+  font-size: 15px;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  word-spacing: -3px;
+  height: 100%;
+}
+
+.app-container .status-bar .status-bar-item.plugin-obsidian-show-file-path {
+  padding: 6px 8px;
+  height: 5px;
+  box-sizing: content-box;
+}
+
+.workspace.is-left-sidedock-open .hdr-sidebar-toggle.mod-left {
+  display: none;
+}
+
+.workspace.is-right-sidedock-open .hdr-sidebar-toggle.mod-right {
+  display: none;
+}
+
+.spacekeys-modal-container .modal-bg {
+  background-color: unset;
+}
+.spacekeys-modal-container .spacekeys-modal {
+  position: fixed;
+  position-anchor: --editor;
+  top: auto;
+  bottom: calc(anchor(bottom) + 15px);
+  left: calc(anchor(left) + 15px);
+  right: calc(anchor(right) + 15px);
+  width: auto;
+  overflow: visible;
+  padding-top: 20px;
+}
+.spacekeys-modal-container .spacekeys-modal:before {
+  content: "Space Key";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  background: var(--ctp-base);
+  width: fit-content;
+  color: var(--ctp-yellow);
+  padding: 0px 15px;
+  font-size: 16px;
+}
+.spacekeys-modal-container .spacekeys-modal.modal {
+  box-shadow: 0 0 0 0px var(--ctp-base), 0 0px 0 8px var(--ctp-base);
+}
+.spacekeys-modal-container .spacekeys-modal:after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 11px);
+  left: -11px;
+  right: -11px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--ctp-base));
+  pointer-events: none;
+}
+
+.app-container .horizontal-main-container .workspace .workspace-split.mod-root .workspace-leaf-content[data-type="terminal:terminal"] .view-content {
+  padding: 15px 0px 10px 15px;
+}
+
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs:not(.vt-mod-top-space) .workspace-tab-header-container {
+  padding-top: 5px;
+  border-top: 3px dotted var(--tab-outline-color);
+  border-radius: 0px;
+}
+
+.virtual-footer-footer-group {
+  padding-bottom: 40px;
+}
+
+.plugin-virtual-footer .pagination-module {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.plugin-virtual-footer .pagination-module .pagination-previous {
+  grid-column: 1;
+  padding-right: 40px;
+}
+.plugin-virtual-footer .pagination-module .pagination-home,
+.plugin-virtual-footer .pagination-module .pagination-begin {
+  grid-column: 2;
+}
+.plugin-virtual-footer .pagination-module .pagination-next {
+  grid-column: 3;
+  padding-left: 40px;
+}
+.plugin-virtual-footer .pagination-module .pagination-icon {
+  padding: 0px 10px;
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+.plugin-virtual-footer .pagination-module .pagination-button {
+  background-color: unset;
+  height: 50px;
+  border: 3px solid var(--ctp-lavender);
+  color: var(--ctp-text);
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+.plugin-virtual-footer .pagination-module .pagination-button:hover {
+  border: 3px solid var(--ctp-lavender);
+  background-color: var(--ctp-lavender);
+  color: var(--ctp-mantle);
+}
+.plugin-virtual-footer .horizontal-module {
+  border: none;
+  border-top: 3px solid var(--ctp-overlay0);
+  margin: 20px 0px;
+}
+.plugin-virtual-footer .info-module {
+  display: flex;
+  gap: 20px;
+  font-size: 0.8rem;
+  justify-content: end;
+  padding: 0px 20px;
+}
+.plugin-virtual-footer .info-module > div {
+  display: flex;
+}
+.plugin-virtual-footer .info-module .info-heading {
+  color: var(--ctp-yellow);
+  padding-right: 5px;
 }
 
 body.is-mobile .app-container {

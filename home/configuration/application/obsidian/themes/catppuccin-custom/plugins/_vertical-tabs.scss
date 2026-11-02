@@ -1,0 +1,9 @@
+.app-container .horizontal-main-container .workspace .workspace-split .workspace-tabs {
+  &:not(.vt-mod-top-space) {
+    .workspace-tab-header-container {
+      padding-top: 5px;
+      border-top: 3px dotted var(--tab-outline-color);
+      border-radius: 0px;
+    }
+  }
+}

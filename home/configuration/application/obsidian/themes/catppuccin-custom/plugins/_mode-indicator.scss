@@ -1,0 +1,75 @@
+.app-container .status-bar {
+  .status-bar-item {
+    &.plugin-mode-indicator {
+      margin-right: 5px;
+      font-weight: bold;
+      color: var(--ctp-mantle);
+      border-radius: 0px;
+      padding: 0 16px 0 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+      height: 100%;
+    }
+  }
+
+  &[data-mode="obsidian"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-blue) !important;
+    }
+
+    color: var(--ctp-blue);
+  }
+
+  &[data-mode="reading"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-lavender) !important;
+    }
+
+    color: var(--ctp-lavender);
+  }
+
+  &[data-mode="editing"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-green) !important;
+    }
+
+    color: var(--ctp-green);
+  }
+
+  &[data-mode="webview"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-yellow) !important;
+    }
+
+    color: var(--ctp-yellow);
+  }
+
+  &[data-mode="command"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-peach) !important;
+    }
+
+    color: var(--ctp-peach);
+  }
+
+  &[data-mode="terminal"] {
+    .plugin-mode-indicator,
+    .plugin-obsidian-grandfather,
+    .editor-width-slider-value {
+      background: var(--ctp-mauve) !important;
+    }
+
+    color: var(--ctp-mauve);
+  }
+}
