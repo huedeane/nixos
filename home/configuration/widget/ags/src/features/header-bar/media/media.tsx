@@ -28,7 +28,7 @@ const DIM = "#838ba7"
 const TEXT = "#c6d0f5"
 const YELLOW = "#e5c890"
 
-const MAX_TEXT = 36
+const MAX_TEXT = 26
 const MARQUEE_GAP = "   ·   "
 const MARQUEE_STEP_MS = 90
 const MARQUEE_PAUSE_MS = 5000
@@ -66,22 +66,31 @@ const DIVIDER_GAP = 3
 const isMpd = (p: AstalMpris.Player) =>
   p.busName.startsWith("org.mpris.MediaPlayer2.mpd")
 
+// Songs rated this low are skipped automatically; the cap stops a queue of
+// only skippable songs from looping forever
+const SKIP_RATING = "1"
+const MAX_SKIPS = 25
+
+const currentRating = () =>
+  execAsync(["rmpc", "song"])
+    .then((out) => JSON.parse(out).file as string)
+    .then((file) => execAsync(["rmpc", "sticker", "get", file, "rating"]))
+    .then((out) => JSON.parse(out).value as string)
+    .catch(() => null)
+
 function notifySongChanges() {
   const mpris = AstalMpris.get_default()
   let last: string | null = null
+  let skips = 0
   const watched = new Map<AstalMpris.Player, number[]>()
 
-  const check = (p: AstalMpris.Player) => {
-    const key = `${p.title}\n${p.artist}\n${p.album}`
-    if (last === null) return void (last = key)
-    if (!p.title || key === last) return
-    if (p.playbackStatus !== AstalMpris.PlaybackStatus.PLAYING) return
-    last = key
+  const notify = (p: AstalMpris.Player, skipped: boolean) => {
     const extra = p.album || p.artist
+    const label = skipped ? "Skipped" : "Now Playing"
     const body = [
-      colored("Now Playing", YELLOW),
+      colored(label, skipped ? DIM : YELLOW),
       colored("⋮", DIM),
-      `<b>${colored(p.title, TEXT)}</b>`,
+      skipped ? colored(p.title, DIM) : `<b>${colored(p.title, TEXT)}</b>`,
       ...(extra ? [colored("-", DIM), colored(extra, DIM)] : []),
     ].join(" ")
     execAsync([
@@ -90,9 +99,25 @@ function notifySongChanges() {
       "rmpc",
       "-h",
       "string:x-dunst-stack-tag:rmpc",
-      "Now Playing",
+      ...(skipped ? ["-u", "low"] : []),
+      label,
       body,
     ]).catch(console.error)
+  }
+
+  const check = (p: AstalMpris.Player) => {
+    const key = `${p.title}\n${p.artist}\n${p.album}`
+    if (last === null) return void (last = key)
+    if (!p.title || key === last) return
+    if (p.playbackStatus !== AstalMpris.PlaybackStatus.PLAYING) return
+    last = key
+    currentRating().then((rating) => {
+      if (key !== last) return
+      const skip = rating === SKIP_RATING && skips < MAX_SKIPS
+      skips = skip ? skips + 1 : 0
+      notify(p, skip)
+      if (skip) execAsync(["rmpc", "next"]).catch(console.error)
+    })
   }
 
   const watch = () => {
