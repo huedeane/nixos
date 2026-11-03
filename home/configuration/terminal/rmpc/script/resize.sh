@@ -1,7 +1,3 @@
 #!/usr/bin/env sh
 
-if [ "$COLS" -gt 170 ]; then
-  rmpc remote set theme ~/.config/rmpc/themes/catppuccin_frappe.ron
-else
-  rmpc remote set theme ~/.config/rmpc/themes/catppuccin_frappe_mobile.ron
-fi
+rmpc remote set theme "$("$(dirname "$0")/theme.sh")"

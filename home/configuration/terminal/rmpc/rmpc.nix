@@ -48,6 +48,18 @@ in
       "rmpc/config.ron".source = config.lib.file.mkOutOfStoreSymlink "${dirPath}/config.ron";
     };
 
+  # on_resize doesn't fire at startup, so plain `rmpc` starts with the theme that fits the window
+  home.file.".local/bin/rmpc" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env sh
+      if [ "$#" -eq 0 ] && [ -t 1 ]; then
+        exec ${lib.getExe config.programs.rmpc.package} --theme "$(${config.xdg.configHome}/rmpc/script/theme.sh)"
+      fi
+      exec ${lib.getExe config.programs.rmpc.package} "$@"
+    '';
+  };
+
   home.file.".local/bin/rmpc-open.sh" = {
     source = ./rmpc-open.sh;
     executable = true;

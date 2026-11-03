@@ -135,7 +135,7 @@
     First element is the command, rest are arguments.
     Nothing executed if left empty.
     */
-    on_song_change: ["~/.config/rmpc/script/playcount.sh"],
+    on_song_change: ["~/.config/rmpc/script/song-change.sh"],
 
     /*
     Execute the command provided to on_song_change at rmpc startup.
