@@ -1,0 +1,219 @@
+@use "../../style" as *;
+
+.notification-panel {
+  min-width: 640px;
+  padding: 20px 20px 16px 20px;
+  font-family: $font-family;
+  font-size: 13px;
+
+  button {
+    background: transparent;
+    padding: 0px;
+    min-height: 0px;
+  }
+
+  .dnd > .inner,
+  .clear > .inner,
+  .chip > .inner {
+    font-size: 12px;
+  }
+
+  button:focus-visible > .inner {
+    outline: 2px solid $text;
+    outline-offset: 2px;
+  }
+
+  .header {
+    padding-bottom: 16px;
+    border-bottom: 2px dashed $surface1;
+
+    .dnd > .inner {
+      padding: 5px 10px;
+      border: 2px solid $surface2;
+      border-radius: 6px;
+
+      .track {
+        min-width: 22px;
+        min-height: 10px;
+        border-radius: 5px;
+        background: $surface1;
+        padding: 1px;
+      }
+
+      .knob {
+        min-width: 10px;
+        min-height: 10px;
+        border-radius: 5px;
+        background: $overlay1;
+      }
+    }
+
+    .dnd.on > .inner {
+      border-color: $lavender;
+
+      .track {
+        background: $lavender;
+      }
+
+      .knob {
+        background: $mantle;
+      }
+    }
+
+    .dnd:hover > .inner {
+      border-color: $yellow;
+    }
+
+    .clear > .inner {
+      padding: 7px 12px;
+      border-radius: 6px;
+      background: $lavender;
+    }
+
+    .clear:hover > .inner {
+      background: $yellow;
+    }
+  }
+
+  .filters {
+    padding: 16px 0px 4px 0px;
+
+    .chip > .inner {
+      padding: 5px 10px;
+      border: 2px solid $surface2;
+      border-radius: 6px;
+    }
+
+    .chip.active > .inner {
+      background: $lavender;
+      border-color: $lavender;
+    }
+
+    .chip:hover:not(.active) > .inner {
+      border-color: $yellow;
+    }
+  }
+
+  .list overshoot,
+  .list undershoot {
+    background: none;
+    box-shadow: none;
+  }
+
+  .empty {
+    padding: 24px 0px;
+  }
+
+  .group-label {
+    font-size: 12px;
+    padding: 16px 0px 8px 0px;
+  }
+
+  .row {
+    min-height: 56px;
+
+    .rail {
+      min-width: 22px;
+      margin-right: 8px;
+
+      .line {
+        min-width: 0px;
+        border-left: 2px dotted $surface2;
+      }
+
+      .dot {
+        min-width: 9px;
+        min-height: 9px;
+        border-radius: 5px;
+        background: $green;
+      }
+    }
+
+    .card {
+      padding: 8px 12px;
+      margin: 3px 0px;
+      border-radius: 6px;
+      border-left: 3px solid transparent;
+
+      &:hover {
+        background: $surface0;
+      }
+
+      &:focus-visible {
+        background: $surface0;
+        outline: 2px solid $text;
+        outline-offset: 2px;
+      }
+    }
+
+    .icon {
+      min-width: 46px;
+      min-height: 32px;
+      border-radius: 6px;
+      background: $mantle;
+      border: 1px solid $surface1;
+      font-size: 17px;
+
+      &.file {
+        font-size: 10px;
+      }
+    }
+
+    .avatar {
+      min-width: 30px;
+      min-height: 30px;
+      margin: 0px 8px;
+      border-radius: 15px;
+      background: $blue;
+    }
+
+    .stack {
+      font-size: 10px;
+      padding: 0px 4px;
+      border-radius: 3px;
+      background: $surface1;
+    }
+
+    .meta {
+      font-size: 12px;
+    }
+
+    .dismiss > .inner {
+      padding: 2px 8px;
+      border-radius: 5px;
+      background: $red;
+      font-size: 11px;
+    }
+
+    .dismiss:hover > .inner,
+    .dismiss:focus-visible > .inner {
+      background: $maroon;
+    }
+
+    &.low .dot {
+      background: $overlay0;
+    }
+
+    &.success .dot {
+      background: $green;
+    }
+
+    &.critical {
+      .dot {
+        background: $red;
+      }
+
+      .card {
+        background: rgba(231, 130, 132, 0.12);
+        border-left-color: $red;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 2px dashed $surface1;
+    font-size: 12px;
+  }
+}

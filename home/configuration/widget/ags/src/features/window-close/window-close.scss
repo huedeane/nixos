@@ -1,0 +1,17 @@
+@use "../../style" as *;
+
+window.window-close {
+  background: transparent;
+
+  .dot {
+    border: $border-width solid $lavender;
+    border-radius: 999px;
+    background: $base;
+    font-size: 15px;
+    font-weight: bold;
+
+    &.hover {
+      border-color: $red;
+    }
+  }
+}

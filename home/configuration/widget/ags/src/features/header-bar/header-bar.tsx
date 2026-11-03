@@ -11,6 +11,7 @@ import Volume from "./volume/volume"
 import Battery from "./battery/battery"
 import Microphone from "./microphone/microphone"
 import Media from "./media/media"
+import Notification from "./notification/notification"
 
 app.apply_css(style)
 
@@ -47,7 +48,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               <Media />
             </box>
             <box $type="center" halign={Gtk.Align.CENTER} spacing={10}>
+              <Notification />
               <DateTime />
+              <Notification />
             </box>
             <box $type="end" halign={Gtk.Align.END} spacing={10}>
               <Battery />

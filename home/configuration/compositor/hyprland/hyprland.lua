@@ -401,6 +401,12 @@ hl.window_rule({
 })
 
 hl.layer_rule({
+  name    = "layerrule-window-close",
+  match   = { namespace = "^(window-close)$" },
+  no_anim = true,
+})
+
+hl.layer_rule({
   name        = "layerrule-rofi",
   match       = { namespace = "^(rofi)$" },
   order       = 2,
