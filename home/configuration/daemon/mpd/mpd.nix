@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/daemon/mpd";
   mpdPartition = pkgs.writers.writePython3Bin "mpd-partition" {
@@ -17,6 +22,11 @@ in
       sticker_file "${dirPath}/etc/sticker.sql"
     '';
   };
+
+  services.mpd-mpris.enable = true;
+
+  # mpd-mpris exits cleanly when mpd restarts, so on-failure never brings it back
+  systemd.user.services.mpd-mpris.Service.Restart = lib.mkForce "always";
 
   systemd.user.services.mpd-partition = {
     Unit = {
