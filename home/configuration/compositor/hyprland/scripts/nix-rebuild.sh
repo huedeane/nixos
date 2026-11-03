@@ -72,6 +72,7 @@ rm -f "$status_file"
 if [ "$exit_code" -eq 0 ]; then
   notify-send "NixOS" "Build successful" \
     --urgency=low \
+    --category=x-success \
     --replace-id="$id" \
     --action="view=View Output"
 else
