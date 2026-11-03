@@ -54,6 +54,15 @@ reveal = [
   { run = "termux-open %d1", desc = "Reveal", for = "android" },
   { run = "clear; exiftool %s1; echo 'Press enter to exit'; read _", desc = "Show EXIF", for = "unix", block = true },
 ]
+database = [
+  { run = "sqlitebrowser %s1", desc = "DB Browser", for = "linux", orphan = true },
+  { run = "sqlitebrowser -R %s1", desc = "DB Browser (read-only)", for = "linux", orphan = true },
+]
+sql = [
+  { run = "if file -bL --mime-type %s1 | grep -q sqlite; then setsid -f sqlitebrowser %s1 >/dev/null 2>&1; else ${EDITOR:-vi} %s1; fi", desc = "DB Browser / $EDITOR", for = "linux", block = true },
+  { run = "sqlitebrowser -R %s1", desc = "DB Browser (read-only)", for = "linux", orphan = true },
+  { run = "${EDITOR:-vi} %s", desc = "$EDITOR", for = "unix", block = true },
+]
 extract = [{ run = "ya pub extract --list %s", desc = "Extract here" }]
 download = [
   { run = "ya emit download --open %S", desc = "Download and open" },
@@ -66,6 +75,15 @@ rules = [
   { url = "*/", use = [
     "edit",
     "open",
+    "reveal",
+  ] },
+  # Database (yazi guesses mime from the extension, so match SQLite files by name)
+  { url = "*.{db,sqlite,sqlite3}", use = [
+    "database",
+    "reveal",
+  ] },
+  { url = "*.sql", use = [
+    "sql",
     "reveal",
   ] },
   # Text
@@ -91,6 +109,11 @@ rules = [
   # Archive
   { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [
     "extract",
+    "reveal",
+  ] },
+  # Database
+  { mime = "application/{vnd.sqlite3,x-sqlite3}", use = [
+    "database",
     "reveal",
   ] },
   # JSON

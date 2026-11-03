@@ -19,3 +19,5 @@ python3 = true
 google-chrome = true
 android-file-transfer = true
 usbutils = true
+puddletag = true
+sqlitebrowser = true
