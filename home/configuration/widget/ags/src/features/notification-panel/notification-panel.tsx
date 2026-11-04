@@ -192,7 +192,8 @@ function ItemIcon({ item }: { item: Item }) {
       </box>
     )
 
-  if (item.icon && GLib.file_test(item.icon, GLib.FileTest.EXISTS))
+  // GIF recordings can be tens of MB, so they get the file-type label instead of a preview
+  if (item.icon && !item.icon.endsWith(".gif") && GLib.file_test(item.icon, GLib.FileTest.EXISTS))
     return (
       <box cssClasses={["icon", "image"]} hexpand={false} valign={Gtk.Align.CENTER}>
         <Gtk.Picture
@@ -293,7 +294,8 @@ function Row({ item, src }: { item: Item; src: Source }) {
             const card = ctl.get_widget()!
             if (keyval === Gdk.KEY_Down) return moveFocus(card, 1), true
             if (keyval === Gdk.KEY_Up) return moveFocus(card, -1), true
-            if (keyval === Gdk.KEY_Delete || keyval === Gdk.KEY_BackSpace) {
+            const dismissKeys = [Gdk.KEY_Delete, Gdk.KEY_BackSpace, Gdk.KEY_Return, Gdk.KEY_KP_Enter]
+            if (dismissKeys.includes(keyval)) {
               moveFocus(card, 1)
               src.remove(item)
               return true
@@ -330,6 +332,7 @@ function Row({ item, src }: { item: Item; src: Source }) {
             />
             <button
               cursor={pointer}
+              focusable={false}
               cssClasses={["dismiss"]}
               visible={active}
               valign={Gtk.Align.END}
@@ -420,6 +423,7 @@ export function NotificationPanel({ src }: { src: Source }) {
       <Gtk.ScrolledWindow
         cssClasses={["list"]}
         hscrollbarPolicy={Gtk.PolicyType.NEVER}
+        overlayScrolling={false}
         propagateNaturalHeight
         maxContentHeight={420}
       >

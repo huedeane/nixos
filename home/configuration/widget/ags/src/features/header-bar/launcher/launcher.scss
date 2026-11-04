@@ -1,0 +1,21 @@
+@use "../../../style" as *;
+
+.launcher.component {
+  padding: 0px;
+
+  > button {
+    background: transparent;
+    border: none;
+    padding: 0px 2px 0px 0px;
+    min-width: 30px;
+  }
+
+  popover > contents {
+    background: $base;
+    border: $border-width solid $lavender;
+    border-radius: $radius;
+    padding: 0px;
+    margin: 40px 24px 24px 24px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.45);
+  }
+}

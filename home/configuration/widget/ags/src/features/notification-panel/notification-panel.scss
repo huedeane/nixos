@@ -76,7 +76,7 @@
   }
 
   .filters {
-    padding: 16px 0px 4px 0px;
+    padding: 16px 0px 12px 0px;
 
     .chip > .inner {
       padding: 5px 10px;
@@ -139,10 +139,11 @@
         background: $surface0;
       }
 
+      // Inset ring: a ring outside the card runs past the list edge and gets clipped
       &:focus-visible {
         background: $surface0;
         outline: 2px solid $text;
-        outline-offset: 2px;
+        outline-offset: -2px;
       }
     }
 

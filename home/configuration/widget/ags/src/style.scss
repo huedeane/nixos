@@ -79,5 +79,42 @@ label {
     }
   }
 
+  // The pointer inside an open popover still counts as hovering its button
+  &.open {
+    border: $border-width solid $lavender;
 
+    label {
+      color: $lavender;
+    }
+  }
+
+
+}
+
+// Slim scrollbar for the panel lists: no track, padding or stepper space
+.list scrollbar {
+  margin-left: 8px;
+  padding: 0px;
+  min-width: 0px;
+  border: none;
+  background: none;
+
+  trough,
+  button {
+    min-width: 0px;
+    min-height: 0px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background: none;
+  }
+
+  slider {
+    min-width: 3px;
+    min-height: 24px;
+    margin: 0px;
+    border: none;
+    border-radius: 2px;
+    background: $surface2;
+  }
 }

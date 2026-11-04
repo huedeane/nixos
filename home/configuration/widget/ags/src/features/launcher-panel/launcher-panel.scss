@@ -1,0 +1,179 @@
+@use "../../style" as *;
+
+.launcher-panel {
+  min-width: 640px;
+  padding: 20px 20px 16px 20px;
+  font-family: $font-family;
+  font-size: 13px;
+
+  button {
+    background: transparent;
+    padding: 0px;
+    min-height: 0px;
+    font-size: 13px;
+    outline: none;
+  }
+
+  .header {
+    padding-bottom: 16px;
+    border-bottom: 2px dashed $surface1;
+  }
+
+  .search {
+    margin-top: 16px;
+    padding: 8px 12px;
+    border: 2px solid $surface2;
+    border-radius: 6px;
+
+    // Same white as the notification panel's focus ring
+    &:focus-within {
+      border-color: $text;
+    }
+
+    &.navigating {
+      border-color: $surface2;
+
+      entry {
+        caret-color: transparent;
+      }
+    }
+
+    entry {
+      background: none;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      min-height: 0px;
+      padding: 0px;
+      color: $text;
+      caret-color: $text;
+      font-size: 13px;
+    }
+  }
+
+  .section-label {
+    font-size: 12px;
+    padding: 14px 0px 8px 0px;
+  }
+
+  .tile {
+    min-width: 22px;
+    min-height: 22px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    font-size: 12px;
+
+    &.big {
+      min-width: 30px;
+      min-height: 30px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    &.c0 { background: $peach; }
+    &.c1 { background: $blue; }
+    &.c2 { background: $mauve; }
+    &.c3 { background: $sky; }
+    &.c4 { background: $red; }
+    &.c5 { background: $yellow; }
+    &.c6 { background: $teal; }
+    &.c7 { background: $green; }
+  }
+
+  .card > .inner {
+    padding: 12px 6px;
+    border-radius: 6px;
+    background: $mantle;
+    border: 2px solid transparent;
+    font-size: 12px;
+  }
+
+  .card:hover > .inner {
+    background: $surface0;
+  }
+
+  .card.selected > .inner {
+    border-color: $lavender;
+  }
+
+  .list overshoot,
+  .list undershoot {
+    background: none;
+    box-shadow: none;
+  }
+
+  .empty {
+    padding: 24px 0px;
+  }
+
+  .row > .inner {
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+
+  .row:hover:not(.selected) > .inner {
+    background: $surface0;
+  }
+
+  .row.selected > .inner {
+    background: $lavender;
+
+    .tile {
+      border-color: $mantle;
+    }
+  }
+
+  .open-hint {
+    font-size: 11px;
+  }
+
+  .badge {
+    padding: 0px 6px;
+    border-radius: 3px;
+    background: $surface1;
+    font-size: 10px;
+  }
+
+  .also {
+    margin-top: 10px;
+    border-top: 2px dashed $surface1;
+
+    .also-row > .inner {
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    .also-row:hover:not(.selected) > .inner {
+      background: $surface0;
+    }
+
+    .also-row.selected > .inner {
+      background: $lavender;
+
+      .glyph {
+        border-color: $mantle;
+      }
+    }
+
+    .glyph {
+      min-width: 26px;
+      min-height: 26px;
+      border: 1px solid $surface2;
+      border-radius: 6px;
+    }
+  }
+
+  .footer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 2px dashed $surface1;
+    font-size: 12px;
+
+    .key {
+      padding: 0px 5px;
+      border: 1px solid $surface2;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+  }
+}
