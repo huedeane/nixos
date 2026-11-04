@@ -70,7 +70,7 @@
     ],
     layout: Split(
       direction: Vertical, panes: [
-        (size: "3", borders: "ALL", border_symbols: Rounded, pane: Pane(Tabs)),
+        (size: "3", borders: "ALL", border_symbols: Rounded, pane: Component("tabs")),
         (size: "100%", pane: Pane(TabContent)),
         (size: "8", borders: "ALL", border_symbols: Rounded, pane: Split(direction: Horizontal, panes: [
           (size: "1", pane: Pane(Property(content: [(kind: Text(""))]))),
@@ -98,6 +98,17 @@
       trace: (fg: "#f4b8e4", bg: "#626880"),
     ),
     components: {
+      "tabs": Pane(Property(content: [
+        (kind: Transform(Replace(content: (kind: Property(Status(ActiveTab))), replacements: [
+          (match: "Home", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5"))]))),
+          (match: "Directories", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5"))]))),
+          (match: "Playlists", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold"))]))),
+          (match: "Albums", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Albums "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold"))]))),
+          (match: "Album Artists", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Album Artists "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold"))]))),
+          (match: "Genre", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Genre "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold"))]))),
+          (match: "Search", replace: (kind: Group([(kind: Text(" Home "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Directories "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Playlists "), style: (fg: "#c6d0f5")), (kind: Text("   "), style: (fg: "#c6d0f5")), (kind: Text(" Search "), style: (fg: "#303446", bg: "#babbf1", modifiers: "Bold"))]))),
+        ])), default: (kind: Text(""))),
+      ], align: Center)),
       "progress": Split(direction: Horizontal, panes: [
         (size: "3", pane: Pane(Property(content: [
           (kind: Property(Status(StateV2(playing_label: "  ", paused_label: "  ", stopped_label: "  "))), style: (fg: "#c6d0f5")),
@@ -204,6 +215,7 @@
             (kind: Text(" 󰴍"), style: (fg: "#838ba7")),
             (kind: Text(" │ "), style: (fg: "#626880")),
             (kind: Property(Status(QueueTimeTotal(separator: " "))), style: (fg: "#c6d0f5")),
+            (kind: Text(" 󱎫"), style: (fg: "#838ba7")),
           ], align: Left))),
         (size: "22", pane: Pane(Property(content: [
             (kind: Property(Status(RepeatV2(on_label: "", off_label: "", on_style: (fg: "#e5c890"), off_style: (fg: "#626880"))))),

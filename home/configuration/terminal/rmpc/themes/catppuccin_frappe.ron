@@ -220,6 +220,7 @@
             (kind: Text(" 󰴍"), style: (fg: "#838ba7")),
             (kind: Text(" │ "), style: (fg: "#626880")),
             (kind: Property(Status(QueueTimeTotal(separator: " "))), style: (fg: "#c6d0f5")),
+            (kind: Text(" 󱎫"), style: (fg: "#838ba7")),
           ], align: Left))),
         (size: "26", pane: Pane(Property(content: [
             (kind: Property(Status(RepeatV2(on_label: "", off_label: "", on_style: (fg: "#e5c890"), off_style: (fg: "#626880"))))),
@@ -243,7 +244,7 @@
         ])),
         (size: "1", pane: Pane(Property(content: [(kind: Text(" "))]))),
         (size: "30%", pane: Split(direction: Vertical, panes: [
-          (size: "0.40r", borders: "ALL", border_symbols: Rounded, pane: Pane(AlbumArt)),
+          (size: "0.33r", borders: "ALL", border_symbols: Rounded, pane: Pane(AlbumArt)),
           (size: "100%", borders: "ALL", border_symbols: Rounded, pane: Pane(Cava)),
         ])),
       ]),
