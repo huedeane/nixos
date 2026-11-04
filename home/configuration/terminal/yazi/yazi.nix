@@ -16,6 +16,8 @@ in
 {
   home.packages = with pkgs; [
     tree
+    # database opener in yazi.toml
+    sqlitebrowser
   ];
 
   programs.yazi =
