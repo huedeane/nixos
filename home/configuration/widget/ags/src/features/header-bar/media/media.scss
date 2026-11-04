@@ -32,6 +32,13 @@
     margin: 0px 4px;
   }
 
+  // Shown while auto-skip of low-rated songs is turned off (right-click toggles)
+  label.skip-off {
+    color: $overlay1;
+    font-size: 14px;
+    margin: 0px 2px 0px 4px;
+  }
+
   .controls button {
     .icon-bg {
       min-width: 24px;

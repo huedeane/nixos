@@ -66,10 +66,37 @@ const DIVIDER_GAP = 3
 const isMpd = (p: AstalMpris.Player) =>
   p.busName.startsWith("org.mpris.MediaPlayer2.mpd")
 
-// Songs rated this low are skipped automatically; the cap stops a queue of
+// Songs rated below this are skipped automatically; the cap stops a queue of
 // only skippable songs from looping forever
-const SKIP_RATING = "1"
+const SKIP_BELOW = 3
 const MAX_SKIPS = 25
+const ICON_SKIP_OFF = "\u{f517}"
+
+// Right-click the music widget to turn skipping off/on. The flag file is shared with
+// rmpc's song-change.sh so low-rated songs count as played while skipping is off
+const SKIP_OFF_FILE = `${GLib.get_user_state_dir()}/ags/skip-low-rated-off`
+const [skipping, setSkipping] = createState(!GLib.file_test(SKIP_OFF_FILE, GLib.FileTest.EXISTS))
+
+const toggleSkipping = () => {
+  const on = !skipping.get()
+  if (on) GLib.unlink(SKIP_OFF_FILE)
+  else {
+    GLib.mkdir_with_parents(GLib.path_get_dirname(SKIP_OFF_FILE), 0o755)
+    GLib.file_set_contents(SKIP_OFF_FILE, "")
+  }
+  setSkipping(on)
+  execAsync([
+    "notify-send",
+    "-a",
+    "rmpc",
+    "-h",
+    "string:x-dunst-stack-tag:rmpc-skip",
+    "-u",
+    "low",
+    "Auto-skip",
+    on ? `Skipping songs rated below ${SKIP_BELOW}★` : "Playing every song",
+  ]).catch(console.error)
+}
 
 const currentRating = () =>
   execAsync(["rmpc", "song"])
@@ -113,7 +140,7 @@ function notifySongChanges() {
     last = key
     currentRating().then((rating) => {
       if (key !== last) return
-      const skip = rating === SKIP_RATING && skips < MAX_SKIPS
+      const skip = skipping.get() && rating !== null && Number(rating) < SKIP_BELOW && skips < MAX_SKIPS
       skips = skip ? skips + 1 : 0
       notify(p, skip)
       if (skip) execAsync(["rmpc", "next"]).catch(console.error)
@@ -312,7 +339,9 @@ function Pill({
         onEnter={() => setHovered(true)}
         onLeave={() => setHovered(false)}
       />
+      <Gtk.GestureClick button={3} onPressed={toggleSkipping} />
       <box>
+        <label cssClasses={["skip-off"]} visible={skipping((s) => !s)} label={ICON_SKIP_OFF} />
         <revealer
           revealChild={hovered((h) => !h)}
           transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
@@ -406,6 +435,8 @@ function NoMusic({ isFocused }: { isFocused: Accessor<boolean> }) {
       )}
       spacing={8}
     >
+      <Gtk.GestureClick button={3} onPressed={toggleSkipping} />
+      <label cssClasses={["skip-off"]} visible={skipping((s) => !s)} label={ICON_SKIP_OFF} />
       <label cssClasses={["music-icon"]} label={ICON_MUSIC} />
       <label label="Nothing playing" />
     </box>
