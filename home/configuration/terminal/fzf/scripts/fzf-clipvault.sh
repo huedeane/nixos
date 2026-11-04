@@ -5,7 +5,15 @@ EDITOR_CMD=${EDITOR:-nvim}
 PREVIEW='
     f=$(mktemp) || exit
     printf %s {} | clipvault get >"$f" 2>/dev/null
-    fzf-preview.sh "$f"
+    # A copied file (e.g. a screen-gif.sh recording) is stored as a file:// link; preview the file itself
+    t=$(head -n 1 "$f" | tr -d "\r")
+    case $t in
+        file://*) p=$(printf "%b" "$(printf %s "${t#file://}" | sed "s/%/\\\\x/g")") ;;
+        /*) p=$t ;;
+        *) p= ;;
+    esac
+    [ -n "$p" ] && [ -f "$p" ] && [ "$(sed -n "\$=" "$f")" -le 1 ] && f2=$p || f2=$f
+    fzf-preview.sh "$f2"
     rm -f "$f"
 '
 EDIT='

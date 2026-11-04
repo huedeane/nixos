@@ -1,0 +1,10 @@
+@use "../../style" as *;
+
+window.record-border-window {
+  background: transparent;
+
+  .record-border {
+    border: 3px solid $red;
+    border-radius: 2px;
+  }
+}

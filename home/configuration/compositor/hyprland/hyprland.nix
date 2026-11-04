@@ -16,6 +16,10 @@ in
     grimblast
     wl-clipboard
     socat
+    # screen-gif.sh
+    slurp
+    wf-recorder
+    ffmpeg
   ];
 
   imports = [
@@ -112,6 +116,11 @@ in
 
   home.file.".local/bin/ags-restart.sh" = {
     source = ./scripts/ags-restart.sh;
+    executable = true;
+  };
+
+  home.file.".local/bin/screen-gif.sh" = {
+    source = ./scripts/screen-gif.sh;
     executable = true;
   };
 
