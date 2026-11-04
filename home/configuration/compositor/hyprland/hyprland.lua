@@ -8,7 +8,6 @@ require("monitors")
 -----------------
 
 local terminal = "kitty"
-local rofi_drun = "rofi -show drun"
 local rofi_window = "rofi -show window"
 
 local colors = {
@@ -255,6 +254,8 @@ local mainMod = "ALT"
 
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- General
+
+-- Terminal w/Tmux
 hl.bind(mainMod .. " + T", function()
   local window = hl.get_windows({ class = terminal })[1]
   if window then
@@ -263,19 +264,33 @@ hl.bind(mainMod .. " + T", function()
     hl.dispatch(hl.dsp.exec_cmd(terminal))
   end
 end)
+-- Terminal
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal .. " -o shell=bash"))
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(rofi_drun))
+-- App Launcher
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("ags request launcher"))
+-- Notification History
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("ags request notifications"))
+-- Window Manager
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
+-- Log Out
 hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("uwsm stop"))
-hl.bind(mainMod .. " + 0", hl.dsp.exec_cmd("pkill waybar && waybar &"))
-hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("ags-restart.sh"))
+-- Nix Rebuild (Edit Mode)
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("nix-rebuild-edit.sh"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nix-log.sh"))
+-- Nix Rebuild
 hl.bind(mainMod .. " + CTRL + SHIFT + R", hl.dsp.exec_cmd("nix-rebuild.sh"))
+-- Nix Build Log
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nix-log.sh"))
+-- Close Window
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+-- Kill Window
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
+-- Toggle Window Float
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+-- Screenshoot
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("grimblast --freeze save area - | satty -f -"))
+-- Screen Capture
+hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd("screen-gif.sh"))
+-- Music Player
 hl.bind(mainMod .. " + M", function()
   local rmpc = hl.get_windows({ class = "tui-rmpc" })[1]
   if rmpc then
@@ -284,9 +299,13 @@ hl.bind(mainMod .. " + M", function()
     hl.dispatch(hl.dsp.exec_cmd("kitty --class tui-rmpc -o confirm_os_window_close=0 rmpc"))
   end
 end)
+-- Music Player Command Previous
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("rmpc prev"))
+-- Music Player Command Next
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rmpc next"))
+-- Music Player Command Pause
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("rmpc togglepause"))
+-- Clipboard History
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
 
 -- Switch active window
@@ -373,6 +392,71 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+-- Focus a floating window on this monitor (repeat to cycle) and park the cursor in its
+-- middle, hidden until the mouse actually moves
+local cursor_timer = nil
+
+local function floating_windows(monitor)
+  local windows = {}
+  for _, w in ipairs(hl.get_windows({ floating = true, mapped = true })) do
+    local on_screen = w.workspace and w.workspace.id == monitor.active_workspace.id
+    local pinned_here = w.pinned and w.monitor and w.monitor.id == monitor.id
+    if not w.hidden and (on_screen or pinned_here) then windows[#windows + 1] = w end
+  end
+  table.sort(windows, function(a, b) return a.address < b.address end)
+  return windows
+end
+
+hl.bind("CTRL + SHIFT + F", function()
+  local monitor = hl.get_active_monitor()
+  if not monitor or not monitor.active_workspace then return end
+  local windows = floating_windows(monitor)
+  if #windows == 0 then return end
+
+  local active = hl.get_active_window()
+  local target = windows[1]
+  for i, w in ipairs(windows) do
+    if active and w.address == active.address then target = windows[i % #windows + 1] end
+  end
+
+  local center = { x = target.at.x + target.size.x / 2, y = target.at.y + target.size.y / 2 }
+  hl.dispatch(hl.dsp.focus({ window = "address:" .. target.address }))
+  hl.config({ cursor = { invisible = true } })
+  hl.dispatch(hl.dsp.cursor.move(center))
+
+  if cursor_timer then cursor_timer:set_enabled(false) end
+  cursor_timer = hl.timer(function()
+    local pos = hl.get_cursor_pos()
+    if pos and (math.abs(pos.x - center.x) > 1 or math.abs(pos.y - center.y) > 1) then
+      hl.config({ cursor = { invisible = false } })
+      cursor_timer:set_enabled(false)
+    end
+  end, { timeout = 100, type = "repeat" })
+end)
+
+-- Screen recording: only active while screen-gif.sh is recording, keys still reach apps
+local function recording()
+  local pidfile = io.open((os.getenv("XDG_RUNTIME_DIR") or "/tmp") .. "/screen-gif/pid")
+  if not pidfile then return false end
+  local pid = pidfile:read("*l")
+  pidfile:close()
+  local comm = pid and io.open("/proc/" .. pid .. "/comm")
+  if not comm then return false end
+  local name = comm:read("*l")
+  comm:close()
+  return name == "wf-recorder"
+end
+
+hl.bind("CTRL + S", function()
+  if recording() then hl.dispatch(hl.dsp.exec_cmd("screen-gif.sh save")) end
+end, { non_consuming = true })
+hl.bind("CTRL + C", function()
+  if recording() then hl.dispatch(hl.dsp.exec_cmd("screen-gif.sh copy")) end
+end, { non_consuming = true })
+hl.bind("Escape", function()
+  if recording() then hl.dispatch(hl.dsp.exec_cmd("screen-gif.sh cancel")) end
+end, { non_consuming = true })
+
 ------------------------------
 --- WINDOWS AND WORKSPACES ---
 ------------------------------
@@ -407,6 +491,12 @@ hl.layer_rule({
 })
 
 hl.layer_rule({
+  name    = "layerrule-record-border",
+  match   = { namespace = "^(record-border)$" },
+  no_anim = true,
+})
+
+hl.layer_rule({
   name        = "layerrule-rofi",
   match       = { namespace = "^(rofi)$" },
   order       = 2,
@@ -416,9 +506,9 @@ hl.layer_rule({
 })
 
 hl.window_rule({
-  name    = "windowrule-screen-capture",
-  match   = { class = "com.gabm.satty" },
-  float   = true,
+  name  = "windowrule-screen-capture",
+  match = { class = "com.gabm.satty" },
+  float = true,
 })
 
 hl.window_rule({
@@ -514,4 +604,9 @@ hl.config({
 })
 
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
-do local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file = io.open(path, "r"); if file then file:close(); dofile(path) end end
+do
+  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
+      io.open(path, "r"); if file then
+    file:close(); dofile(path)
+  end
+end
