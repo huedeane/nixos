@@ -5,7 +5,7 @@ sort_sensitive = false
 sort_reverse = false
 sort_dir_first = true
 sort_translit = false
-linemode = "mtime"
+linemode = "details"
 show_hidden = true
 show_symlink = true
 scrolloff = 5
@@ -146,16 +146,6 @@ bizarre_retry = 3
 image_alloc = 536870912      # 512MB
 image_bound = [10000, 10000]
 suppress_preload = false
-
-[[plugin.prepend_fetchers]]
-group = "git"
-url = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-group = "git"
-url = "*/"
-run = "git"
 
 [input]
 cursor_blink = true

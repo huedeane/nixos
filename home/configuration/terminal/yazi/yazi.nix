@@ -31,8 +31,8 @@ in
           theme = fromTOML (builtins.readFile ./theme.toml);
           plugins = {
             full-border = ./plugins/full-border.yazi;
-            git = ./plugins/git.yazi;
             custom-mode = ./plugins/custom-mode.yazi;
+            column-header = ./plugins/column-header.yazi;
           };
           flavors = {
             catppuccin-frappe = ./flavors/catppuccin-frappe.yazi;

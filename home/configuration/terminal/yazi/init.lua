@@ -1,21 +1,3 @@
-th.git = th.git or {}
-
--- Git Style
-th.git.modified = ui.Style():fg("#e5c890")
-th.git.added = ui.Style():fg("#a6d189")
-th.git.untracked = ui.Style():fg("#e78284")
-th.git.ignored = ui.Style():fg("black")
-th.git.deleted = ui.Style():fg("black")
-th.git.updated = ui.Style():fg("#a6d189")
-
--- Status Sign
-th.git.modified_sign = "M"
-th.git.added_sign = "A"
-th.git.untracked_sign = "+"
-th.git.ignored_sign = ""
-th.git.deleted_sign = "?"
-th.git.updated_sign = "U"
-
 local mode_colors = {
   NORMAL  = "#babbf1",
   SELECT  = "#ca9ee6",
@@ -93,7 +75,7 @@ Status:children_add(function(self)
   return ui.Line({ ui.Span("  " .. branch .. " "):fg(color):bg("#414559") })
 end, 1000, Status.LEFT)
 
-require("git"):setup()
 require("full-border"):setup({
   set = "rounded",
 })
+require("column-header"):setup()
