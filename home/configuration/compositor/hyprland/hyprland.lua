@@ -305,6 +305,12 @@ hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("rmpc prev"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("rmpc next"))
 -- Music Player Command Pause
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("rmpc togglepause"))
+-- Music Player Volume Down / Up (hold to repeat)
+hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.exec_cmd("rmpc volume -5"), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + period", hl.dsp.exec_cmd("rmpc volume +5"), { repeating = true })
+-- Music Player Seek Back / Forward 5s (hold to repeat)
+hl.bind(mainMod .. " + SHIFT + CTRL + comma", hl.dsp.exec_cmd("rmpc seek -5"), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + CTRL + period", hl.dsp.exec_cmd("rmpc seek +5"), { repeating = true })
 -- Clipboard History
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("kitty --class tui-clipvault fzf-clipvault.sh"))
 
@@ -392,35 +398,13 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
--- Focus a floating window on this monitor (repeat to cycle) and park the cursor in its
--- middle, hidden until the mouse actually moves
+-- Super+Shift+F: an open ags popup (launcher, notifications) wins, otherwise focus the
+-- topmost floating window on this monitor (repeat to cycle). Either way the cursor is parked
+-- in its middle, hidden until the mouse actually moves
 local cursor_timer = nil
 
-local function floating_windows(monitor)
-  local windows = {}
-  for _, w in ipairs(hl.get_windows({ floating = true, mapped = true })) do
-    local on_screen = w.workspace and w.workspace.id == monitor.active_workspace.id
-    local pinned_here = w.pinned and w.monitor and w.monitor.id == monitor.id
-    if not w.hidden and (on_screen or pinned_here) then windows[#windows + 1] = w end
-  end
-  table.sort(windows, function(a, b) return a.address < b.address end)
-  return windows
-end
-
-hl.bind("CTRL + SHIFT + F", function()
-  local monitor = hl.get_active_monitor()
-  if not monitor or not monitor.active_workspace then return end
-  local windows = floating_windows(monitor)
-  if #windows == 0 then return end
-
-  local active = hl.get_active_window()
-  local target = windows[1]
-  for i, w in ipairs(windows) do
-    if active and w.address == active.address then target = windows[i % #windows + 1] end
-  end
-
-  local center = { x = target.at.x + target.size.x / 2, y = target.at.y + target.size.y / 2 }
-  hl.dispatch(hl.dsp.focus({ window = "address:" .. target.address }))
+-- Global so ags can call it through `hyprctl dispatch` for its popups
+function park_cursor(center)
   hl.config({ cursor = { invisible = true } })
   hl.dispatch(hl.dsp.cursor.move(center))
 
@@ -432,7 +416,41 @@ hl.bind("CTRL + SHIFT + F", function()
       cursor_timer:set_enabled(false)
     end
   end, { timeout = 100, type = "repeat" })
-end)
+end
+
+local function floating_windows(monitor)
+  local windows = {}
+  for _, w in ipairs(hl.get_windows({ floating = true, mapped = true })) do
+    local on_screen = w.workspace and w.workspace.id == monitor.active_workspace.id
+    local pinned_here = w.pinned and w.monitor and w.monitor.id == monitor.id
+    if not w.hidden and (on_screen or pinned_here) then windows[#windows + 1] = w end
+  end
+  -- Most recently focused first; focusing raises a float, so that's also the topmost
+  table.sort(windows, function(a, b) return a.focus_history_id < b.focus_history_id end)
+  return windows
+end
+
+-- Global so ags can fall back to it when no popup is open
+function focus_topmost_float()
+  local monitor = hl.get_active_monitor()
+  if not monitor or not monitor.active_workspace then return end
+  local windows = floating_windows(monitor)
+  if #windows == 0 then return end
+
+  -- Already on the topmost float: go to the one focused longest ago, which walks through
+  -- all of them on repeated presses
+  local active = hl.get_active_window()
+  local target = windows[1]
+  if active and target.address == active.address then target = windows[#windows] end
+
+  hl.dispatch(hl.dsp.focus({ window = "address:" .. target.address }))
+  park_cursor({ x = target.at.x + target.size.x / 2, y = target.at.y + target.size.y / 2 })
+end
+
+-- ags answers for its popups and calls focus_topmost_float itself when none is open; the
+-- fallback covers ags not running
+hl.bind(mainMod .. " + SHIFT + F",
+  hl.dsp.exec_cmd("ags request focus-popup || hyprctl dispatch 'function() focus_topmost_float() end'"))
 
 -- Screen recording: only active while screen-gif.sh is recording, keys still reach apps
 local function recording()
@@ -611,4 +629,9 @@ do
 end
 
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
-do local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file = io.open(path, "r"); if file then file:close(); dofile(path) end end
+do
+  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
+      io.open(path, "r"); if file then
+    file:close(); dofile(path)
+  end
+end

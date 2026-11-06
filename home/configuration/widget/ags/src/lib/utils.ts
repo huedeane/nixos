@@ -1,4 +1,4 @@
-import { Gdk, Gtk } from "ags/gtk4"
+import { Astal, Gdk, Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import Graphene from "gi://Graphene"
 
@@ -21,19 +21,37 @@ export const centerOnScreen = (popover: Gtk.Popover) => {
   )
 }
 
+// Open bar popovers, most recently opened last
+const openPopovers = new Set<Gtk.Popover>()
+
 // Hyprland's damage tracking misses parts of bar popovers and leaves stale borders behind,
 // so it redraws the whole screen only while one of them is open
-let openPopovers = 0
 export const trackFullRedraw = (popover: Gtk.Popover) => {
-  const update = (step: number) => {
-    openPopovers = Math.max(0, openPopovers + step)
-    const mode = openPopovers > 0 ? 0 : 2
+  const update = () => {
+    const mode = openPopovers.size > 0 ? 0 : 2
     execAsync(["hyprctl", "dispatch", `function() hl.config({ debug = { damage_tracking = ${mode} } }) end`]).catch(
       console.error,
     )
   }
-  popover.connect("show", () => update(1))
-  popover.connect("closed", () => update(-1))
+  popover.connect("show", () => (openPopovers.add(popover), update()))
+  popover.connect("closed", () => (openPopovers.delete(popover), update()))
+}
+
+const hyprLua = (code: string) => execAsync(["hyprctl", "dispatch", `function() ${code} end`]).catch(console.error)
+
+// Super+Shift+F (`ags request focus-popup`): park the cursor in the middle of the newest open
+// popover, or hand over to Hyprland's focus_topmost_float when none is open
+export const focusPopup = () => {
+  const popover = [...openPopovers].at(-1)
+  const popup = popover?.get_surface() as Gdk.Popup | null | undefined
+  const bar = popover?.get_parent()?.get_root() as Astal.Window | null | undefined
+  const monitor = bar?.gdkmonitor?.get_geometry()
+  if (!popup || !monitor) return hyprLua("focus_topmost_float()"), "float"
+  // The popup's position is relative to the bar, which sits at the monitor's top-left
+  const x = Math.round(monitor.x + popup.get_position_x() + popup.get_width() / 2)
+  const y = Math.round(monitor.y + popup.get_position_y() + popup.get_height() / 2)
+  hyprLua(`park_cursor({ x = ${x}, y = ${y} })`)
+  return "popup"
 }
 
 // A closed popover leaves its button stuck in the hover state
