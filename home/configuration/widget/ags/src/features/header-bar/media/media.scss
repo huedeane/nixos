@@ -95,8 +95,10 @@
     }
   }
 
+  // Paused dims everything except the music icon
   &.paused {
-    > * {
+    > box > *:not(.music-icon-revealer),
+    > progressbar {
       opacity: 0.6;
     }
 

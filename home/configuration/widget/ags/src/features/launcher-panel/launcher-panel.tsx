@@ -14,7 +14,6 @@ app.apply_css(style)
 const RECENT_MAX = 5
 const RECENT_FILE = `${GLib.get_user_cache_dir()}/ags/launcher-recent.json`
 const TILE_COLORS = 8
-const CARD_WIDTH = 97
 
 const ICON_SEARCH = "\u{f002}"
 const ICON_TERMINAL = "\u{f120}"
@@ -119,7 +118,7 @@ function Key({ label }: { label: string }) {
   )
 }
 
-function Hint({ keys, label }: { keys: string[]; label: string }) {
+export function Hint({ keys, label }: { keys: string[]; label: string }) {
   return (
     <box spacing={4}>
       {keys.map((k) => (
@@ -156,8 +155,9 @@ export function LauncherPanel() {
   const offset = recent((r) => r.length)
   const flat = createComputed(() => [...recent(), ...results()])
   const current = createComputed(() => flat()[selected()] ?? null)
-  // Before typing or moving, the search box has focus and nothing is selected
-  const showSelection = createComputed(() => navigating() || searching())
+  // Before typing or moving, the search box has focus and nothing is selected; typing moves
+  // the focus to the first result (the entry keeps the keyboard, so typing still works)
+  const showSelection = navigating
   // While searching, the two "Also try" rows follow the results in the selection
   const alsoStart = createComputed(() => flat().length)
   const total = createComputed(() => flat().length + (searching() ? 2 : 0))
@@ -165,7 +165,10 @@ export function LauncherPanel() {
   const close = () => (root?.get_ancestor(Gtk.Popover.$gtype) as Gtk.Popover | null)?.popdown()
 
   const launch = (a: App) => {
-    execAsync(["uwsm", "app", "--", a.entry]).catch(console.error)
+    // uwsm warns about desktop IDs with spaces (Steam shortcuts), even given the file path, so
+    // those go through gio, which uwsm only sees as a plain command
+    const file = a.entry.includes(" ") ? a.app.get_filename() : null
+    execAsync(["uwsm", "app", "--", ...(file ? ["gio", "launch", file] : [a.entry])]).catch(console.error)
     const ids = [a.entry, ...recentIds.get().filter((e) => e !== a.entry)].slice(0, RECENT_MAX)
     setRecentIds(ids)
     saveRecent(ids)
@@ -281,7 +284,7 @@ export function LauncherPanel() {
         <box cssClasses={["inner"]} spacing={10}>
           <Tile app={app} />
           <label hexpand xalign={0} useMarkup label={markup} ellipsize={Pango.EllipsizeMode.END} />
-          <box visible={createComputed(() => !(isSel() && searching()))}>
+          <box visible={createComputed(() => !isSel())}>
             <box cssClasses={["badge"]} visible={searching((s) => !s && category !== "")}>
               <label useMarkup label={paint(category, SUBTEXT)} />
             </box>
@@ -289,7 +292,7 @@ export function LauncherPanel() {
           </box>
           <label
             cssClasses={["open-hint"]}
-            visible={createComputed(() => isSel() && searching())}
+            visible={createComputed(() => isSel())}
             useMarkup
             label={paint("⏎ open", SURFACE)}
           />
@@ -304,7 +307,7 @@ export function LauncherPanel() {
       <button
         cursor={pointer}
         focusable={false}
-        widthRequest={CARD_WIDTH}
+        hexpand
         cssClasses={isSel((s) => (s ? ["card", "selected"] : ["card"]))}
         onClicked={() => launch(app)}
       >
@@ -332,7 +335,7 @@ export function LauncherPanel() {
     label: (q: string, sel: boolean) => string
     onClicked: () => void
   }) {
-    const isSel = createComputed(() => searching() && selected() === alsoStart() + index)
+    const isSel = createComputed(() => showSelection() && selected() === alsoStart() + index)
     return (
       <button
         cursor={pointer}
@@ -380,7 +383,7 @@ export function LauncherPanel() {
             entry = self
             self.connect("changed", () => {
               setQuery(self.text)
-              setNavigating(false)
+              setNavigating(self.text.trim() !== "")
               setSelected(0)
             })
           }}
@@ -398,8 +401,12 @@ export function LauncherPanel() {
 
       <box orientation={Gtk.Orientation.VERTICAL} visible={offset((n) => n > 0)}>
         <label cssClasses={["section-label"]} xalign={0} useMarkup label={paint("Recent", YELLOW)} />
-        <box cssClasses={["grid"]} spacing={8} homogeneous halign={Gtk.Align.START}>
+        {/* Always RECENT_MAX equal slots across the full width; empty ones pad short lists */}
+        <box cssClasses={["grid"]} spacing={8} homogeneous>
           <For each={recent}>{(a, index) => <Card app={a} index={index} />}</For>
+          <For each={recent((r) => Array.from({ length: RECENT_MAX - r.length }, (_, i) => i))}>
+            {() => <box hexpand />}
+          </For>
         </box>
       </box>
 
@@ -461,7 +468,7 @@ export function LauncherPanel() {
         </box>
         <box hexpand />
         <label
-          visible={searching}
+          visible={showSelection}
           useMarkup
           label={current((a) =>
             a ? `${paint("exec", DIM)} ${paint("│", SURFACE)} ${paint(GLib.path_get_basename(a.executable.split(" ")[0] ?? ""), YELLOW)}` : "",

@@ -221,5 +221,12 @@
     padding-top: 14px;
     border-top: 2px dashed $surface1;
     font-size: 12px;
+
+    .key {
+      padding: 0px 5px;
+      border: 1px solid $surface2;
+      border-radius: 3px;
+      font-size: 11px;
+    }
   }
 }

@@ -7,6 +7,7 @@ import GLib from "gi://GLib"
 import Pango from "gi://Pango"
 import app from "ags/gtk4/app"
 import { pointer } from "../../lib/utils"
+import { Hint } from "../launcher-panel/launcher-panel"
 import style from "./notification-panel.scss"
 
 app.apply_css(style)
@@ -461,7 +462,11 @@ export function NotificationPanel({ src }: { src: Source }) {
         </box>
       </Gtk.ScrolledWindow>
 
-      <box cssClasses={["footer"]}>
+      <box cssClasses={["footer"]} spacing={14}>
+        <Hint keys={["↑↓"]} label="move" />
+        <Hint keys={["⏎", "del"]} label="dismiss" />
+        <Hint keys={["tab"]} label="filters / list" />
+        <Hint keys={["esc"]} label="close" />
         <label
           hexpand
           xalign={1}

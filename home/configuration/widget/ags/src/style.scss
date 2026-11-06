@@ -79,12 +79,14 @@ label {
     }
   }
 
-  // The pointer inside an open popover still counts as hovering its button
+  // Filled while its popover is open (by click or keybind), so it reads as toggled even on
+  // the focused monitor; the pointer inside the popover still counts as hovering the button
   &.open {
     border: $border-width solid $lavender;
+    background: $lavender;
 
     label {
-      color: $lavender;
+      color: $mantle;
     }
   }
 

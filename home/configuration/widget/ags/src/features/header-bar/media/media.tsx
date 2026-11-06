@@ -343,6 +343,7 @@ function Pill({
       <box>
         <label cssClasses={["skip-off"]} visible={skipping((s) => !s)} label={ICON_SKIP_OFF} />
         <revealer
+          cssClasses={["music-icon-revealer"]}
           revealChild={hovered((h) => !h)}
           transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
           transitionDuration={200}
