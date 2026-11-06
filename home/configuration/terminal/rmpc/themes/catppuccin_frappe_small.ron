@@ -128,7 +128,7 @@
             (kind: Property(Song(Title)), style: (fg: "#e5c890", modifiers: "Bold"), default: (kind: Text("No Song"), style: (fg: "#c6d0f5"))),
           ], align: Left))),
         (size: "15", pane: Pane(Property(content: [
-            (kind: Text("song "), style: (fg: "#838ba7")),
+            (kind: Text("Song "), style: (fg: "#838ba7")),
             (kind: Transform(Replace(content: (kind: Sticker("rating")), replacements: [
               (match: "0", replace: (kind: Group([(kind: Text("    "), style: (fg: "#626880"))]))),
               (match: "1", replace: (kind: Group([(kind: Text(" "), style: (fg: "#e5c890")), (kind: Text("   "), style: (fg: "#626880"))]))),
@@ -147,7 +147,7 @@
             (kind: Property(Song(Album)), style: (fg: "#a5adce"), default: (kind: Text("Unknown Album"), style: (fg: "#a5adce"))),
           ], align: Left))),
         (size: "16", pane: Pane(Property(content: [
-            (kind: Text("album "), style: (fg: "#838ba7")),
+            (kind: Text("Album "), style: (fg: "#838ba7")),
             (kind: Transform(Replace(content: (kind: Sticker("albumRating")), replacements: [
               (match: "1", replace: (kind: Group([(kind: Text(" "), style: (fg: "#e5c890")), (kind: Text("   "), style: (fg: "#626880"))]))),
               (match: "1.1", replace: (kind: Group([(kind: Text(" "), style: (fg: "#e5c890")), (kind: Text("   "), style: (fg: "#626880"))]))),
@@ -198,9 +198,10 @@
             (kind: Text(" │ "), style: (fg: "#626880")),
             (kind: Property(Song(Other("date"))), style: (fg: "#838ba7"), default: (kind: Text("-"), style: (fg: "#838ba7"))),
             (kind: Text(" │ "), style: (fg: "#626880")),
+            (kind: Text("Track "), style: (fg: "#838ba7")),
             (kind: Property(Song(Disc)), style: (fg: "#838ba7"), default: (kind: Text(""))),
             (kind: Text("-"), style: (fg: "#838ba7")),
-            (kind: Property(Song(Track)), style: (fg: "#838ba7"), default: (kind: Text("-"), style: (fg: "#838ba7"))),
+            (kind: Property(Song(Track)), style: (fg: "#838ba7"), default: (kind: Text("XX"), style: (fg: "#838ba7"))),
             (kind: Text(" │ "), style: (fg: "#626880")),
             (kind: Property(Status(Bitrate)), style: (fg: "#838ba7"), default: (kind: Text("0"), style: (fg: "#838ba7"))),
             (kind: Text(" kbps"), style: (fg: "#838ba7")),
@@ -226,6 +227,7 @@
             (kind: Text("  "), style: (fg: "#626880")),
             (kind: Property(Status(SingleV2(on_label: "󰎤", off_label: "󰎦", oneshot_label: "󰇊", off_oneshot_label: "󱅊", oneshot_style: (fg: "#e5c890"), off_oneshot_style: (fg: "#626880"), on_style: (fg: "#e5c890"), off_style: (fg: "#626880"))))),
             (kind: Text(" │ "), style: (fg: "#626880")),
+            (kind: Text("Volume "), style: (fg: "#838ba7")),
             (kind: Property(Status(Volume)), style: (fg: "#e5c890")),
             (kind: Text("%"), style: (fg: "#e5c890")),
           ], align: Right))),
