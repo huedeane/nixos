@@ -12,6 +12,7 @@ import style from "./notification-panel.scss"
 app.apply_css(style)
 
 const HISTORY_MAX = 20
+const CHAT_LINES = 3
 const POLL_MS = 2000
 const CLOCK_MS = 30_000
 const JUST_NOW_US = 10 * 60 * 1_000_000
@@ -43,6 +44,8 @@ export type Item = {
   app: string
   summary: string
   body: string
+  // Chat notifications from the same person are merged; newest message first
+  messages: string[]
   icon: string
   urgency: Urgency
   success: boolean
@@ -105,19 +108,23 @@ export function parseHistory(stdout: string): { items: Item[]; total: number } {
 
   for (const e of entries) {
     const get = (k: string) => (e[k]?.data ?? "") as string
-    const stack = get("stack_tag")
+    const summary = get("summary")
+    const app = get("appname")
+    const chat = categoryOf(app) === "chat"
+    const stack = get("stack_tag") || (chat ? `chat:${app}:${summary}` : "")
     const existing = stack ? stacks.get(stack) : undefined
     const id = e.id.data as number
     if (existing) {
       existing.ids.push(id)
+      if (chat) existing.messages.push(cleanBody(get("body"), summary))
       continue
     }
-    const summary = get("summary")
     const item: Item = {
       ids: [id],
-      app: get("appname"),
+      app,
       summary,
       body: cleanBody(get("body"), summary),
+      messages: [cleanBody(get("body"), summary)],
       icon: get("icon_path"),
       urgency: (get("urgency") || "NORMAL") as Urgency,
       success: get("category") === "x-success",
@@ -321,20 +328,27 @@ function Row({ item, src }: { item: Item; src: Source }) {
             />
           </box>
           <box spacing={12}>
-            <label
-              hexpand
-              visible={item.body !== ""}
-              useMarkup
-              label={`<span foreground="${bodyColor}">${item.body}</span>`}
-              xalign={0}
-              maxWidthChars={72}
-              ellipsize={Pango.EllipsizeMode.END}
-            />
+            <box hexpand orientation={Gtk.Orientation.VERTICAL} visible={item.body !== ""}>
+              {item.messages
+                .filter((m) => m !== "")
+                .slice(0, CHAT_LINES)
+                .map((message) => (
+                  <label
+                    useMarkup
+                    label={`<span foreground="${bodyColor}">${message}</span>`}
+                    xalign={0}
+                    maxWidthChars={72}
+                    ellipsize={Pango.EllipsizeMode.END}
+                  />
+                ))}
+            </box>
             <button
               cursor={pointer}
               focusable={false}
               cssClasses={["dismiss"]}
-              visible={active}
+              // Always laid out (just invisible) so hovering doesn't change the card height
+              opacity={active((a) => (a ? 1 : 0))}
+              canTarget={active}
               valign={Gtk.Align.END}
               onClicked={() => src.remove(item)}
             >
@@ -427,7 +441,7 @@ export function NotificationPanel({ src }: { src: Source }) {
         propagateNaturalHeight
         maxContentHeight={420}
       >
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box cssClasses={["rows"]} orientation={Gtk.Orientation.VERTICAL}>
           <label
             cssClasses={["empty"]}
             visible={shown((s) => s.length === 0)}

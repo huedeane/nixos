@@ -100,6 +100,11 @@
     box-shadow: none;
   }
 
+  // Room above the first and below the last card so a focused card's ring isn't cut off
+  .rows {
+    padding: 4px 0px;
+  }
+
   .empty {
     padding: 24px 0px;
   }

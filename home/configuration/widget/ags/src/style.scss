@@ -91,7 +91,7 @@ label {
 
 }
 
-// Slim scrollbar for the panel lists: no track, padding or stepper space
+// Slim scrollbar for the panel lists: faint track, no padding or stepper space
 .list scrollbar {
   margin-left: 8px;
   padding: 0px;
@@ -99,7 +99,6 @@ label {
   border: none;
   background: none;
 
-  trough,
   button {
     min-width: 0px;
     min-height: 0px;
@@ -107,6 +106,16 @@ label {
     padding: 0px;
     border: none;
     background: none;
+  }
+
+  // Faint track so the length of the list is visible next to the slider
+  trough {
+    min-width: 3px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 2px;
+    background: $surface0;
   }
 
   slider {
