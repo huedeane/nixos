@@ -357,6 +357,23 @@
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .container__133bf .tabBody__133bf .nowPlayingColumn__133bf .itemCard__7e549 .section__00943 {
   border: none;
 }
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .searchResultsWrap_a98f3b {
+  overflow: unset;
+}
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .searchResultsWrap_a98f3b:before {
+  content: "Search";
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -9px;
+  background-color: #303446;
+  color: var(--yellow-3);
+  padding: 0px 15px;
+}
+#app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .searchResultsWrap_a98f3b .searchHeader_ae7890 {
+  padding-top: 15px;
+}
 #app-mount .appAsidePanelWrapper_a3002d .app_a3002d .layers__960e4 .content__5e434 .page__5e434 .chatContent_f75fb0 {
   overflow: unset;
 }

@@ -455,6 +455,26 @@ $surface0: #414559;
         }
       }
 
+      .searchResultsWrap_a98f3b {
+        overflow: unset;
+
+        &:before {
+          content: "Search";
+          display: block;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -9px;
+          background-color: $base;
+          color: var(--yellow-3);
+          padding: 0px 15px;
+        }
+
+        .searchHeader_ae7890 {
+          padding-top: 15px;
+        }
+      }
+
       .chatContent_f75fb0 {
         overflow: unset;
 
