@@ -9,12 +9,20 @@ check_paths() {
   done
 }
 
+# Ask for the sudo password before a build (nh only needs it at the end) and keep the cached
+# login alive while nh runs, so a long build doesn't ask again
+_sudo_upfront() {
+  sudo -v || return 1
+  (while sleep 60 && pgrep -u "$USER" -f "nh os switch" >/dev/null; do sudo -n -v; done &)
+}
+
 nix-rebuild() {
   local host="${1:-$NIXOS_HOST}"
   check_paths \
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
-  sudo nixos-rebuild switch --flake "$NIXOS_CONFIG#$host"
+  _sudo_upfront || return 1
+  nh os switch "$NIXOS_CONFIG" -H "$host"
 }
 
 nix-rebuild-edit() {
@@ -22,7 +30,8 @@ nix-rebuild-edit() {
   check_paths \
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
-  EDIT_MODE=1 sudo -E nixos-rebuild switch --flake "$NIXOS_CONFIG#$host" --impure
+  _sudo_upfront || return 1
+  EDIT_MODE=1 nh os switch "$NIXOS_CONFIG" -H "$host" --impure
 }
 
 nix-edit() {

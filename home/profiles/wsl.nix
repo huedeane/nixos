@@ -16,6 +16,7 @@
     (configHomeDir + "/terminal/nixcats/nixcats.nix")
     (configHomeDir + "/terminal/tmux/tmux.nix")
     (configHomeDir + "/terminal/fzf/fzf.nix")
+    (configHomeDir + "/terminal/nh/nh.nix")
   ];
 
   home = {

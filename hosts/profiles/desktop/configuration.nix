@@ -109,6 +109,9 @@
     KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
+  # Phone Integration: KDE Connect (opens TCP/UDP 1714-1764)
+  programs.kdeconnect.enable = true;
+
   # Desktop Environment: Hyprland
   programs.hyprland = {
     enable = true;

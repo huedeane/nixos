@@ -109,6 +109,9 @@
     ];
   };
 
+  # Phone Integration: KDE Connect (opens TCP/UDP 1714-1764)
+  programs.kdeconnect.enable = true;
+
   # Desktop Environment: Hyprland
   programs.hyprland = {
     enable = true;

@@ -31,8 +31,11 @@ touch "$active_file"
 
 old_limit=$(tmux show-options -gv history-limit 2>/dev/null || echo 2000)
 tmux set-option -g history-limit 100000
+# Ask for the password before building (nh only needs sudo at the end), and keep sudo's
+# cached login alive so a long build doesn't ask again; cancelling the prompt fails the build
+auth="SUDO_ASKPASS='$SUDO_ASKPASS' SUDO_PROMPT='NixOS' sudo -A -v || { echo 1 > '$status_file'; exit; }; while sleep 60; do sudo -n -v; done &"
 tmux new-session -d -s "$session" -x 220 -y 50 \
-  "SUDO_PROMPT='NixOS' EDIT_MODE=1 sudo -E -A nixos-rebuild switch --flake '$NIXOS_CONFIG#$NIXOS_HOST' --impure 2>&1; echo \$? > '$status_file'"
+  "$auth SUDO_PROMPT='NixOS' NH_SUDO_ASKPASS='$SUDO_ASKPASS' EDIT_MODE=1 nh os switch '$NIXOS_CONFIG' -H '$NIXOS_HOST' --impure 2>&1; echo \$? > '$status_file'; kill \$!"
 tmux set-option -g history-limit "$old_limit"
 tmux set-option -w -t "$session" remain-on-exit on
 tmux set-option -w -t "$session" automatic-rename off
