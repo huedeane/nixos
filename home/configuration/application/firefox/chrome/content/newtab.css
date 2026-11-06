@@ -1,8 +1,9 @@
 @-moz-document url("about:home"), url("about:newtab") {
   body {
-    &.lightWallpaper {
-      color-scheme: light !important;
-    }
+    /* The wallpaper is always dark, so keep light text even if Firefox calls it a light
+       image; Firefox also switches single elements (logo, shortcuts) to light, hence the * */
+    &.lightWallpaper,
+    &.lightWallpaper *,
     &.darkWallpaper {
       color-scheme: dark !important;
     }

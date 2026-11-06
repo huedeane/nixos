@@ -163,9 +163,6 @@
   "browser.newtabpage.activity-stream.showWeather" = false;
   "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = true;
   "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = true;
-  "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.uuid" =
-    "e3aa32e0-9a30-49ed-aa30-bd460a29149d";
-  "browser.newtabpage.activity-stream.newtabWallpapers.wallpaper" = "custom";
 
   # Downloads
   "browser.download.manager.addToRecentDocs" = false;
