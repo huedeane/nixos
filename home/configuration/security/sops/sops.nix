@@ -1,11 +1,18 @@
-{ config, inputs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  withSecrets,
+  ...
+}:
 
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  sops = {
+  # withSecrets = false (flake.nix) disables sops-nix entirely: no service, no activation
+  sops = lib.mkIf withSecrets {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     defaultSopsFile = ./secrets.yaml;

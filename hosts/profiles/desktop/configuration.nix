@@ -1,8 +1,10 @@
 {
+  lib,
   pkgs,
   hostname,
   username,
   inputs,
+  withSecrets,
   ...
 }:
 
@@ -10,8 +12,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/sddm.nix
-    ../../modules/qnap-nas.nix
-  ];
+  ]
+  ++ lib.optional withSecrets ../../modules/qnap-nas.nix;
 
   # Bootloader
   boot.loader = {

@@ -16,13 +16,18 @@ _sudo_upfront() {
   (while sleep 60 && pgrep -u "$USER" -f "nh os switch" >/dev/null; do sudo -n -v; done &)
 }
 
+# Enable sops secrets only once the age key is in place (fresh installs build without them)
+_with_secrets() {
+  if [ -f "$HOME/.config/sops/age/keys.txt" ]; then echo 1; else echo 0; fi
+}
+
 nix-rebuild() {
   local host="${1:-$NIXOS_HOST}"
   check_paths \
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
   _sudo_upfront || return 1
-  nh os switch "$NIXOS_CONFIG" -H "$host"
+  WITH_SECRETS=$(_with_secrets) nh os switch "$NIXOS_CONFIG" -H "$host" --impure
 }
 
 nix-rebuild-edit() {
@@ -31,7 +36,7 @@ nix-rebuild-edit() {
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
   _sudo_upfront || return 1
-  EDIT_MODE=1 nh os switch "$NIXOS_CONFIG" -H "$host" --impure
+  WITH_SECRETS=$(_with_secrets) EDIT_MODE=1 nh os switch "$NIXOS_CONFIG" -H "$host" --impure
 }
 
 nix-edit() {

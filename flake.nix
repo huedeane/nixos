@@ -67,6 +67,9 @@
       configDir = self.outPath;
       configHomeDir = "${self.outPath}/home/configuration";
       editMode = builtins.getEnv "EDIT_MODE" == "1";
+      # sops-nix secrets (and the NAS mount that needs them); off unless WITH_SECRETS=1 with
+      # --impure, which the rebuild scripts set when ~/.config/sops/age/keys.txt exists
+      withSecrets = builtins.getEnv "WITH_SECRETS" == "1";
       waydroidModule = {
         environment.systemPackages = [
           waydroid-script.packages.${system}.default
@@ -79,6 +82,7 @@
           configDir
           configHomeDir
           editMode
+          withSecrets
           ;
       };
 
