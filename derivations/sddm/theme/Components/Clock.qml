@@ -6,6 +6,7 @@ Column {
 
   property real   propScale:      1
   property color  propTextColor:  config.ColorText !== "" ? config.ColorText : "#ffffff"
+  property color  propDateColor:  "#ffffff"
   property string propTimeFormat: config.TimeFormat !== "" ? config.TimeFormat : "HH:mm"
   property string propDateFormat: config.DateFormat !== "" ? config.DateFormat : "dddd, MMMM d"
   property string propFontFamily: config.Font !== "" ? config.Font : ""
@@ -67,22 +68,21 @@ Column {
       family: propFontFamily
       pixelSize: 22  * propScale
       letterSpacing: 12  * propScale
-      weight: Font.DemiBold
+      weight: Font.Normal
     }
-    color: propTextColor
-    opacity: 0.95
+    color: propDateColor
     style: Text.Outline
     styleColor: "#000000"
-    
-    // Effect
+
+    // Effect: small, crisp shadow so it reads over the background without a heavy glow
     layer {
       enabled: true
       effect: DropShadow {
-        color: "#000000"
-        radius: 40  * propScale
-        samples: 41
-        spread: 0.3
-        verticalOffset: 6  * propScale
+        color: "#b3000000"
+        radius: 6  * propScale
+        samples: 13
+        spread: 0.2
+        verticalOffset: 2  * propScale
         transparentBorder: true
       }
     }

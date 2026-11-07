@@ -1,0 +1,13 @@
+window.startup-fade-window {
+  background: transparent;
+
+  .startup-fade {
+    background: black;
+    opacity: 1;
+    transition: opacity 3000ms ease-in-out;
+  }
+
+  &.faded .startup-fade {
+    opacity: 0;
+  }
+}

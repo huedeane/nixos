@@ -9,13 +9,29 @@ Item {
   property color  propErrorColor:       config.ColorRed
   property color  propBackgroundColor:  config.ColorBase
   property color  propAccentColor:      config.ColorGreen
+  property color  propTitleColor:       config.ColorYellow
   property color  propTextColor:        config.ColorText
+  property color  propDimTextColor:     config.ColorOverlay1
   property string propFontFamily:       config.Font
   property int    propUserIndex:        0
-  property int    propSessionIndex:        0
-  property int    propRoundCorners:    config.RoundCorners !== "" ? parseInt(config.RoundCorners) : 10
-  property Item   propNextFocusItem: null
-  property alias  propFirstFocusItem: idPasswordInput
+  property int    propSessionIndex:     0
+  property int    propRoundCorners:     config.RoundCorners !== "" ? parseInt(config.RoundCorners) : 10
+  property Item   propNextFocusItem:    null
+  property alias  propFirstFocusItem:   idPasswordInput
+  property int    propLoginDelay:       0
+
+  // State
+  property bool   propStateShowPassword: false
+  property bool   propStateLoggingIn:    false
+  property bool   propStateFailed:       false
+  readonly property bool propStateCapsLock: typeof keyboard !== "undefined" && keyboard.capsLock
+
+  // Icons (Nerd Font)
+  readonly property string propIconEye:      "\uf06e"
+  readonly property string propIconEyeOff:   "\uf070"
+  readonly property string propIconCaps:     String.fromCodePoint(0xf0632)
+  readonly property string propIconReturn:   String.fromCodePoint(0xf0311)
+  readonly property string propIconDot:      "\uf111"
 
   // Signals
   signal userSwitched()
@@ -24,23 +40,33 @@ Item {
   function showError(message) { idError.text = message }
   function clearPassword() { idPasswordInput.text = ""; idPasswordInput.forceActiveFocus() }
   function getPassword() { return idPasswordInput.text }
-  function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(word) {
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    })
-  }
+  function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a) }
   function login() {
+    if (propStateLoggingIn) return
     var n = (idUserHelper.currentItem && idUserHelper.currentItem.uLogin !== "")
       ? idUserHelper.currentItem.uLogin
       : (typeof userModel !== "undefined" ? userModel.lastUser : "")
-    if (typeof sddm !== "undefined") sddm.login(n, idPasswordInput.text, propSessionIndex)
+    propStateFailed = false
+    propStateLoggingIn = true
+    idLoginTimer.propUser = n
+    idLoginTimer.start()
   }
+
+  // Delay login so the fade-out can finish before the greeter is torn down
+  Timer {
+    id: idLoginTimer
+    property string propUser: ""
+    interval: Math.max(1, propLoginDelay)
+    onTriggered: if (typeof sddm !== "undefined") sddm.login(propUser, idPasswordInput.text, propSessionIndex)
+  }
+
   // Callback
   Connections {
     target: typeof sddm !== "undefined" ? sddm : null
-    
+
     function onLoginFailed() {
-      idError.text = "ACCESS DENIED"
+      propStateLoggingIn = false
+      propStateFailed = true
       idPasswordInput.text = ""
       idPasswordInput.forceActiveFocus()
     }
@@ -57,107 +83,123 @@ Item {
       property string uLogin: model.name || ""
     }
   }
-  
+
   Timer { interval: 300; running: true; onTriggered: idPasswordInput.forceActiveFocus() }
 
-  Item {
+  // Card
+  Rectangle {
+    id: idCard
 
     // Size
-    width: 400 * propScale
-    height: 120 * propScale
+    width: 330 * propScale
+    height: idCardColumn.implicitHeight + 28 * propScale
 
     // Position
     anchors {
       centerIn: parent
-      verticalCenterOffset: 160 * propScale
+      verticalCenterOffset: 150 * propScale
+    }
+
+    // Modification
+    color: withAlpha(propBackgroundColor, 0.72)
+
+    // Accent bar
+    Rectangle {
+      // Size
+      width: 3 * propScale
+      height: parent.height
+
+      // Modification
+      color: propStateFailed ? propErrorColor : propAccentColor
+
+      // Animation
+      Behavior on color { ColorAnimation { duration: 200 } }
     }
 
     Column {
+      id: idCardColumn
 
       // Size
-      width: 280 * propScale
-      spacing: 20 * propScale
-      
+      spacing: 12 * propScale
+
       // Position
       anchors {
-        horizontalCenter: parent.horizontalCenter
-        bottom: parent.bottom
+        top: parent.top
+        topMargin: 14 * propScale
+        left: parent.left
+        leftMargin: 20 * propScale
+        right: parent.right
+        rightMargin: 14 * propScale
       }
 
-      // Username
+      // Header: title + username
       Item {
 
         // Size
-        width: idUsername.implicitWidth
-        height: idUsername.implicitHeight
+        width: parent.width
+        height: idTitle.implicitHeight
 
-        // Position
-        anchors.horizontalCenter: parent.horizontalCenter
-        
         Text {
-          text: idUsername.text
-          color: "#80000000"
-          font: idUsername.font
-          x: 2 * propScale
-          y: 2 * propScale
+          id: idTitle
+          text: "Login"
+
+          // Position
+          anchors.left: parent.left
+
+          // Modification
+          color: propTitleColor
+          font {
+            family: propFontFamily
+            pixelSize: 13 * propScale
+          }
         }
 
         Text {
           id: idUsername
-          
-          text: toTitleCase((idUserHelper.currentItem && idUserHelper.currentItem.uName)
-            ? idUserHelper.currentItem.uName
-            : (typeof userModel !== "undefined" ? userModel.lastUser : "User") || "User")
-            
+          text: (idUserHelper.currentItem && idUserHelper.currentItem.uLogin)
+            ? idUserHelper.currentItem.uLogin
+            : (typeof userModel !== "undefined" ? userModel.lastUser : "user") || "user"
+
+          // Position
+          anchors.right: parent.right
+
           // Modification
           color: propAccentColor
-          style: Text.Normal
           font {
             italic: true
             family: propFontFamily
-            pixelSize: 22 * propScale
-            letterSpacing: 2 * propScale
-            weight: Font.Bold;
+            pixelSize: 13 * propScale
+            weight: Font.Bold
           }
-          
-          // Effect
-          layer {
-            enabled: true
-            effect: DropShadow {
-              color: propBackgroundColor
-              radius: 25 * propScale
-              samples: 31
-              verticalOffset: 6 * propScale
-              transparentBorder: true
-            }
+
+          MouseArea {
+
+            // Position
+            anchors.fill: parent
+
+            // Behavior
+            cursorShape: Qt.PointingHandCursor
+
+            // Action
+            onClicked: idLoginFormComponent.userSwitched()
           }
-        }
-
-        MouseArea {
-
-          // Position
-          anchors.fill: parent
-          
-          // Behavior
-          cursorShape: Qt.PointingHandCursor
-          
-          // Action
-          onClicked: idLoginFormComponent.userSwitched()
         }
       }
 
       // Password field
       Item {
+        id: idPasswordField
 
         // Size
         width: parent.width
-        height: 36 * propScale
+        height: 34 * propScale
 
+        // Underline
         Rectangle {
 
           // Size
           width: parent.width
-          height: 1 * propScale
+          height: (idPasswordInput.activeFocus || propStateFailed) ? 2 * propScale : 1 * propScale
 
           // Position
           anchors {
@@ -166,246 +208,394 @@ Item {
           }
 
           // Modification
-          color: propTextColor
-          opacity: idPasswordInput.activeFocus ? 1.0 : 0.3
+          color: propStateFailed ? propErrorColor
+            : idPasswordInput.activeFocus ? propAccentColor
+            : propTextColor
+          opacity: (idPasswordInput.activeFocus || propStateFailed) ? 1.0 : 0.35
 
           // Animation
-          Behavior on opacity { NumberAnimation { duration: 300 } }
-        }
-
-        Rectangle {
-          // Size
-          width: idPasswordInput.activeFocus ? parent.width : 0
-          height: 2 * propScale
-          
-          // Position
-          anchors {
-            bottom: parent.bottom
-            left: parent.left
-          }
-
-          // Modification
-          color: propAccentColor
-          radius: 20 * propScale
-          
-          // Animation
-          Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutExpo } }
-          
-          // Effect
-          layer {
-            enabled: true
-            effect: Glow { color: propBackgroundColor; radius: 2; spread: 0.2 }
-          }
+          Behavior on color { ColorAnimation { duration: 200 } }
+          Behavior on opacity { NumberAnimation { duration: 200 } }
         }
 
         TextInput {
           id: idPasswordInput
-          
+
           // Position
-          anchors.fill: parent
-          
+          anchors {
+            left: parent.left
+            right: idEyeButton.left
+            rightMargin: 8 * propScale
+            top: parent.top
+            bottom: parent.bottom
+          }
+
           // Modification
-          color: propBackgroundColor
+          color: propTextColor
           font {
             family: propFontFamily
-            pixelSize: 20 * propScale
-            letterSpacing: 4 * propScale
+            pixelSize: (propStateShowPassword ? 15 : 12) * propScale
+            letterSpacing: (propStateShowPassword ? 1 : 5) * propScale
           }
-          selectionColor: propBackgroundColor
+          selectionColor: propAccentColor
+          selectedTextColor: propBackgroundColor
 
           // Password Setting
-          echoMode: TextInput.Password
-          passwordCharacter: "─"
+          echoMode: propStateShowPassword ? TextInput.Normal : TextInput.Password
+          passwordCharacter: propIconDot
 
           // Behavior
           focus: true
           clip: true
-          horizontalAlignment: TextInput.AlignHCenter
+          readOnly: propStateLoggingIn
           verticalAlignment: TextInput.AlignVCenter
-          cursorVisible: false
-          cursorDelegate: Item { width: 0; height: 0 }
-          
-          // Effect
-          layer {
-            enabled: true
-            effect: Glow { color: propBackgroundColor; radius: 2; spread: 0.2 }
+          cursorDelegate: Rectangle {
+            width: 2 * propScale
+            color: propTextColor
+            visible: idPasswordInput.activeFocus && !propStateLoggingIn
+
+            // Animation
+            SequentialAnimation on opacity {
+              loops: Animation.Infinite
+              NumberAnimation { from: 1;   to: 0.2; duration: 450 }
+              NumberAnimation { from: 0.2; to: 1;   duration: 450 }
+            }
           }
 
-          // State
-          property bool wasClicked: false
-
           // Action
-          onTextEdited: idError.text = ""
-          onActiveFocusChanged: if (!activeFocus && text.length === 0) wasClicked = false
+          onTextEdited: propStateFailed = false
           activeFocusOnTab: true
-          KeyNavigation.tab: propNextFocusItem
+          KeyNavigation.tab: idLoginButton
           Keys.onReturnPressed: login()
           Keys.onEnterPressed: login()
         }
 
+        // Placeholder
         Text {
-          
-          text: "Password"
-          
+          text: "password"
+
           // Position
-          anchors.centerIn: parent
-          
-          
+          anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+          }
+
           // Modification
-          color: propAccentColor
+          color: propDimTextColor
           font {
             family: propFontFamily
             pixelSize: 14 * propScale
-            letterSpacing: 4 * propScale
           }
-          opacity: idPasswordInput.text.length === 0 ? 0.8 : 0
-          
-          // Effect
-          layer {
-            enabled: true
-            effect: DropShadow {
-              color: "#000000"
-              radius: 40  * propScale
-              samples: 41
-              spread: 0.4
-              transparentBorder: true
+          visible: idPasswordInput.text.length === 0 && !propStateLoggingIn
+        }
+
+        // Eye (show password) / spinner while logging in
+        Item {
+          id: idEyeButton
+
+          // Size
+          width: 26 * propScale
+          height: 26 * propScale
+
+          // Position
+          anchors {
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+          }
+
+          Rectangle {
+
+            // Position
+            anchors.fill: parent
+
+            // Modification
+            radius: width / 2
+            color: withAlpha(propBackgroundColor, 0.85)
+            opacity: idEyeArea.containsMouse && !propStateLoggingIn ? 1 : 0
+
+            // Animation
+            Behavior on opacity { NumberAnimation { duration: 150 } }
+          }
+
+          Text {
+            text: propStateShowPassword ? propIconEyeOff : propIconEye
+
+            // Position
+            anchors.centerIn: parent
+
+            // Modification
+            color: propStateShowPassword ? propAccentColor : propTextColor
+            opacity: propStateShowPassword || idEyeArea.containsMouse ? 1 : 0.7
+            font {
+              family: propFontFamily
+              pixelSize: 14 * propScale
+            }
+            visible: !propStateLoggingIn
+          }
+
+          // Spinner
+          Canvas {
+            id: idSpinner
+
+            // Size
+            width: 14 * propScale
+            height: 14 * propScale
+
+            // Position
+            anchors.centerIn: parent
+
+            // Modification
+            visible: propStateLoggingIn
+            onPaint: {
+              var ctx = getContext("2d")
+              ctx.reset()
+              ctx.lineWidth = 2 * propScale
+              ctx.strokeStyle = propAccentColor
+              ctx.beginPath()
+              ctx.arc(width / 2, height / 2, width / 2 - ctx.lineWidth, 0, Math.PI * 1.5)
+              ctx.stroke()
+            }
+
+            // Animation
+            RotationAnimation on rotation {
+              running: idSpinner.visible
+              loops: Animation.Infinite
+              from: 0; to: 360; duration: 800
             }
           }
 
-          // Animation
-          Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.InOutSine } }
-        }
+          MouseArea {
+            id: idEyeArea
 
-        Rectangle {
-          id: idCustomCursor
-          
-          // Size
-          width: 5 * propScale
-          height: 20 * propScale
-          
-          // Position
-          anchors.verticalCenter: parent.verticalCenter
-          x: idPasswordInput.cursorRectangle.x
-          
-          // Modification
-          color: propBackgroundColor
-          visible: idPasswordInput.focus && (idPasswordInput.text.length > 0 || idPasswordInput.wasClicked)
-          
-          // Animation
-          SequentialAnimation {
-            loops: Animation.Infinite
-            running: idCustomCursor.visible
-            NumberAnimation { target: idCustomCursor; property: "opacity"; from: 1;    to: 0.2; duration: 450 }
-            NumberAnimation { target: idCustomCursor; property: "opacity"; from: 0.2;  to: 1;   duration: 450 }
+            // Position
+            anchors.fill: parent
+
+            // Behavior
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            enabled: !propStateLoggingIn
+
+            // Action
+            onClicked: {
+              propStateShowPassword = !propStateShowPassword
+              idPasswordInput.forceActiveFocus()
+            }
           }
         }
 
         MouseArea {
 
           // Position
-          anchors.fill: parent
-          
-          // Action
-          onClicked: {
-            idPasswordInput.forceActiveFocus()
-            idPasswordInput.wasClicked = true
+          anchors {
+            fill: parent
+            rightMargin: idEyeButton.width
           }
+
+          // Behavior
+          cursorShape: Qt.IBeamCursor
+
+          // Action
+          onClicked: idPasswordInput.forceActiveFocus()
         }
       }
 
-      // Login button
+      // Caps lock / error / login button
       Item {
 
         // Size
-        width: 140 * propScale
-        height: 36 * propScale
-        
-        // Position
-        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width
+        height: 24 * propScale
 
+        // Caps lock badge
         Rectangle {
-          
+
+          // Size
+          width: idCapsRow.implicitWidth + 12 * propScale
+          height: 18 * propScale
+
           // Position
-          anchors.fill: parent
+          anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+          }
 
           // Modification
-          color: idLoginMouseArea.containsMouse ? propAccentColor : propBackgroundColor
-          radius: propRoundCorners * propScale
+          color: "transparent"
           border {
-            color: propAccentColor
-            width: 2
+            color: propTitleColor
+            width: 1
           }
-          opacity: idLoginMouseArea.containsMouse ? 1 : 0.8
-          
-          // Animation
-          Behavior on color { ColorAnimation { duration: 150 } }
+          visible: propStateCapsLock && !propStateFailed
+
+          Row {
+            id: idCapsRow
+            spacing: 5 * propScale
+
+            // Position
+            anchors.centerIn: parent
+
+            Text {
+              text: propIconCaps
+              color: propTitleColor
+              font { family: propFontFamily; pixelSize: 11 * propScale }
+            }
+            Text {
+              text: "caps on"
+              color: propTitleColor
+              font { family: propFontFamily; pixelSize: 11 * propScale }
+            }
+          }
         }
 
+        // Error text
         Text {
-          text: "LOGIN"
-          
+          id: idError
+          text: "wrong password, try again"
+
           // Position
-          anchors.centerIn: parent
-          
+          anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+          }
+
           // Modification
-          color: idLoginMouseArea.containsMouse ? "#000" : propAccentColor
+          color: propErrorColor
           font {
             family: propFontFamily
-            pixelSize: 12 * propScale
-            letterSpacing: 4 * propScale
+            pixelSize: 11 * propScale
           }
+          visible: propStateFailed
+        }
+
+        // Login button
+        Rectangle {
+          id: idLoginButton
+
+          // Size
+          width: idLoginRow.implicitWidth + 16 * propScale
+          height: 24 * propScale
+
+          // Position
+          anchors {
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+          }
+
+          // Modification
+          color: idLoginMouseArea.pressed ? withAlpha(propAccentColor, 0.25)
+            : idLoginMouseArea.containsMouse ? withAlpha(propBackgroundColor, 0.9)
+            : "transparent"
+          border {
+            color: propAccentColor
+            width: idLoginMouseArea.containsMouse ? 2 : 1
+          }
+          opacity: propStateLoggingIn ? 0.5 : 1
 
           // Animation
           Behavior on color { ColorAnimation { duration: 150 } }
-        }
 
-        MouseArea {
-          id: idLoginMouseArea
-          
-          // Position
-          anchors.fill: parent
- 
-          // Behavior
-          hoverEnabled: true
-          cursorShape: Qt.PointingHandCursor
+          // Focus
+          activeFocusOnTab: true
+          KeyNavigation.tab: propNextFocusItem
+          Keys.onReturnPressed: login()
+          Keys.onEnterPressed:  login()
+          Keys.onSpacePressed:  login()
 
-          // Action
-          onClicked: login()
-        }
-      }
+          Row {
+            id: idLoginRow
+            spacing: 8 * propScale
 
-      // Error text
-      Text {
-        id: idError
-        
-        // Text
-        text: ""
-        
-        // Position
-        anchors.horizontalCenter: parent.horizontalCenter
-        
-        // Size
-        height: 20 * propScale
-        
-        // Modification
-        color: propErrorColor
-        verticalAlignment: Text.AlignBottom
-        font {
-          family: propFontFamily
-          pixelSize: 16 * propScale
-        }
+            // Position
+            anchors.centerIn: parent
 
-        // Effect
-        layer {
-          enabled: true
-          effect: DropShadow {
-            color: "#000000"
-            radius: 40  * propScale
-            samples: 41
-            spread: 0.6
-            transparentBorder: true
+            Text {
+              text: "Login"
+
+              // Position
+              anchors.verticalCenter: parent.verticalCenter
+
+              // Modification
+              color: idLoginMouseArea.containsMouse ? propTextColor : propAccentColor
+              font {
+                family: propFontFamily
+                pixelSize: 12 * propScale
+              }
+            }
+
+            // Return key
+            Rectangle {
+
+              // Size
+              width: 16 * propScale
+              height: 14 * propScale
+
+              // Position
+              anchors.verticalCenter: parent.verticalCenter
+
+              // Modification
+              color: withAlpha(propAccentColor, 0.35)
+              radius: 2 * propScale
+
+              Text {
+                text: propIconReturn
+
+                // Position
+                anchors.centerIn: parent
+
+                // Modification
+                color: propTextColor
+                font {
+                  family: propFontFamily
+                  pixelSize: 10 * propScale
+                }
+              }
+            }
+          }
+
+          // Focus ring: offset outside the control, rounded
+          Rectangle {
+            // Position
+            anchors {
+              fill: parent
+              margins: -6 * propScale
+            }
+
+            // Modification
+            color: "transparent"
+            radius: 6 * propScale
+            border {
+              color: propAccentColor
+              width: 2 * propScale
+            }
+            visible: idLoginButton.activeFocus
+          }
+
+          MouseArea {
+            id: idLoginMouseArea
+
+            // Position
+            anchors.fill: parent
+
+            // Behavior
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+
+            // Action
+            onClicked: login()
           }
         }
+      }
+    }
+
+    // Shadow
+    layer {
+      enabled: true
+      effect: DropShadow {
+        color: "#80000000"
+        radius: 24 * propScale
+        samples: 33
+        verticalOffset: 6 * propScale
+        transparentBorder: true
       }
     }
   }

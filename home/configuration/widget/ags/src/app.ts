@@ -3,6 +3,7 @@ import style from "./style.scss"
 import HeaderBar from "./features/header-bar/header-bar"
 import WindowClose from "./features/window-close/window-close"
 import RecordBorder, { handleRecordBorder } from "./features/record-border/record-border"
+import StartupFade from "./features/startup-fade/startup-fade"
 import { toggleLauncher } from "./features/header-bar/launcher/launcher"
 import { toggleNotifications } from "./features/header-bar/notification/notification"
 import { focusPopup } from "./lib/utils"
@@ -20,5 +21,6 @@ app.start({
     app.get_monitors().map(HeaderBar)
     app.get_monitors().map(WindowClose)
     app.get_monitors().map(RecordBorder)
+    app.get_monitors().map(StartupFade)
   },
 })

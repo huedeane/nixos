@@ -90,13 +90,15 @@ Item {
     }
 
     LoginForm {
+      id: idLoginForm
 
       // Position
       anchors.fill: parent
       propScale:     s
       propUserIndex: root.propStateUserIndex
       propSessionIndex: root.propStateSessionIndex
-      propNextFocusItem: idSessionButton  
+      propNextFocusItem: idSessionButton
+      propLoginDelay: 3000
       // propErrorColor:
       // propBackgroundColor:
       // propAccentColor:
@@ -136,6 +138,7 @@ Item {
         // Properties
         propScale:       s 
         propSessionIndex: root.propStateSessionIndex
+        propOpen:        root.propStateSessionMenuOpen
         // propTextColor:
         // propAccentColor:
         // propFontFamily:
@@ -191,5 +194,40 @@ Item {
       }
       onClosed: root.propStateSessionMenuOpen = false
     }
+  }
+
+  // Login Fade 1000
+  Rectangle {
+    anchors.fill: parent
+    z: 1000
+    color: "black"
+    opacity: 0
+    visible: opacity > 0
+
+    // Slow fade out on login, quick fade back if login fails
+    NumberAnimation on opacity { id: idLoginFadeOut; running: false; to: 1; duration: 3000; easing.type: Easing.InOutQuad }
+    NumberAnimation on opacity { id: idLoginFadeIn;  running: false; to: 0; duration: 400;  easing.type: Easing.InOutQuad }
+    Connections {
+      target: idLoginForm
+      function onPropStateLoggingInChanged() {
+        idLoginFadeOut.stop(); idLoginFadeIn.stop()
+        if (idLoginForm.propStateLoggingIn) idLoginFadeOut.start()
+        else idLoginFadeIn.start()
+      }
+    }
+
+    // Swallow input while fading
+    MouseArea { anchors.fill: parent }
+  }
+
+  // Boot Fade 1001
+  Rectangle {
+    anchors.fill: parent
+    z: 1001
+    color: "black"
+    opacity: 1
+    visible: opacity > 0
+
+    NumberAnimation on opacity { from: 1; to: 0; duration: 1500; easing.type: Easing.InOutQuad }
   }
 }

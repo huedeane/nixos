@@ -9,123 +9,173 @@ Item {
 
   // Properties
   property real   propScale:            1
-  property color  propRebootTextColor:  config.ColorYellow
+  property color  propRebootTextColor:  config.ColorGreen
   property color  propPowerTextColor:   config.ColorRed
   property color  propTextColor:        config.ColorText
+  property color  propBackgroundColor:  config.ColorBase
   property string propFontFamily:       config.Font
 
   // Focus chain
-  property alias propFirstFocusItem: idRebootText
-  property Item  propNextFocusItem: null
+  property alias propFirstFocusItem: idRebootButton
+  property Item  propNextFocusItem:  null
 
-  Row {
-    id: idPowerRow
-    spacing: 25 * propScale
+  function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a) }
+  function reboot()   { if (typeof sddm !== "undefined") sddm.reboot() }
+  function powerOff() { if (typeof sddm !== "undefined") sddm.powerOff() }
 
-    Text {
-      id: idRebootText
-      text: "REBOOT"
+  // Pill with an accent bar, icon and label (shared by reboot and shutdown)
+  component PowerPill: Rectangle {
+    id: idPill
 
-      // Position
-      anchors.verticalCenter: parent.verticalCenter
+    // Properties
+    property string propIcon:        ""
+    property string propLabel:       ""
+    property color  propAccent:      propTextColor
+    property bool   propTintOnHover: false
+
+    // Signal
+    signal activated()
+
+    readonly property bool hovered: idPillArea.containsMouse
+
+    // Size
+    width: idPillRow.implicitWidth + 30 * propScale
+    height: 34 * propScale
+
+    // Modification
+    color: idPillArea.pressed ? withAlpha(propBackgroundColor, 0.95)
+      : hovered ? withAlpha(propBackgroundColor, 0.85)
+      : withAlpha(propBackgroundColor, 0.6)
+
+    // Animation
+    Behavior on color { ColorAnimation { duration: 150 } }
+
+    // Focus
+    activeFocusOnTab: true
+    Keys.onReturnPressed: activated()
+    Keys.onEnterPressed:  activated()
+    Keys.onSpacePressed:  activated()
+
+    // Accent bar
+    Rectangle {
+      // Size
+      width: 3 * propScale
+      height: parent.height
 
       // Modification
-      font {
-        family: propFontFamily
-        pixelSize: 14 * propScale
-        // letterSpacing: 2 * propScale
+      color: idPill.propAccent
+    }
+
+    Row {
+      id: idPillRow
+      spacing: 10 * propScale
+
+      // Position
+      anchors {
+        left: parent.left
+        leftMargin: 15 * propScale
+        verticalCenter: parent.verticalCenter
       }
-      color: idRebootArea.containsMouse ? propRebootTextColor : propTextColor
-      scale: idRebootArea.containsMouse ? 1.12 : 1.0
 
-      // Animation
-      Behavior on color { ColorAnimation { duration: 200 } }
-      Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutBack } }
+      Text {
+        text: idPill.propIcon
 
-      // Focus
-      activeFocusOnTab: true
-      KeyNavigation.tab: idShutdownText
-      Keys.onReturnPressed: { if (typeof sddm !== "undefined") sddm.reboot() }
-      Keys.onEnterPressed:  { if (typeof sddm !== "undefined") sddm.reboot() }
-
-      Rectangle {
         // Position
-        anchors.fill: parent
-        anchors.margins: -6 * propScale
+        anchors.verticalCenter: parent.verticalCenter
 
         // Modification
-        color: "transparent"
-        border {
-          color: propRebootTextColor
-          width: 1
+        font {
+          family: propFontFamily
+          pixelSize: 13 * propScale
         }
-        visible: idRebootText.activeFocus
+        color: idPill.propTintOnHover ? idPill.propAccent : propTextColor
       }
 
-      // Action
-      MouseArea {
-        id: idRebootArea
-        anchors.fill: parent
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-        onClicked: { if (typeof sddm !== "undefined") sddm.reboot() }
+      Text {
+        text: idPill.propLabel
+
+        // Position
+        anchors.verticalCenter: parent.verticalCenter
+
+        // Modification
+        font {
+          family: propFontFamily
+          pixelSize: 12 * propScale
+          letterSpacing: 2 * propScale
+        }
+        color: idPill.propTintOnHover && idPill.hovered && !idPillArea.pressed ? idPill.propAccent : propTextColor
+
+        // Animation
+        Behavior on color { ColorAnimation { duration: 150 } }
       }
     }
 
-    Text {
-      id: idShutdownText
-      text: "SHUTDOWN"
-
+    // Focus ring: offset outside the control, rounded
+    Rectangle {
       // Position
-      anchors.verticalCenter: parent.verticalCenter
+      anchors {
+        fill: parent
+        margins: -6 * propScale
+      }
 
       // Modification
-      font {
-        family: propFontFamily
-        pixelSize: 14 * propScale
-        // letterSpacing: 2 * propScale
+      color: "transparent"
+      radius: 6 * propScale
+      border {
+        color: config.ColorGreen
+        width: 2 * propScale
       }
-      color: idShutdownArea.containsMouse ? propPowerTextColor : propTextColor
-      scale: idShutdownArea.containsMouse ? 1.12 : 1.0
+      visible: idPill.activeFocus
+    }
 
-      // Animation
-      Behavior on color { ColorAnimation { duration: 200 } }
-      Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutBack } }
+    MouseArea {
+      id: idPillArea
 
-      // Focus
-      activeFocusOnTab: true
-      KeyNavigation.tab: propNextFocusItem
-      Keys.onReturnPressed: { if (typeof sddm !== "undefined") sddm.powerOff() }
-      Keys.onEnterPressed:  { if (typeof sddm !== "undefined") sddm.powerOff() }
+      // Position
+      anchors.fill: parent
 
-      Rectangle {
-        // Position
-        anchors.fill: parent
-        anchors.margins: -6 * propScale
-
-        // Modification
-        color: "transparent"
-        border {
-          color: propPowerTextColor
-          width: 1
-        }
-        visible: idShutdownText.activeFocus
-      }
+      // Behavior
+      hoverEnabled: true
+      cursorShape: Qt.PointingHandCursor
 
       // Action
-      MouseArea {
-        id: idShutdownArea
+      onClicked: idPill.activated()
+    }
+  }
 
-        // Position
-        anchors.fill: parent
+  Row {
+    id: idPowerRow
+    spacing: 10 * propScale
 
-        // Behavior
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
+    PowerPill {
+      id: idRebootButton
 
-        // Action
-        onClicked: { if (typeof sddm !== "undefined") sddm.powerOff() }
-      }
+      // Properties
+      propIcon:   "\uf01e"
+      propLabel:  "REBOOT"
+      propAccent: propRebootTextColor
+
+      // Focus
+      KeyNavigation.tab: idShutdownButton
+
+      // Action
+      onActivated: reboot()
+    }
+
+    PowerPill {
+      id: idShutdownButton
+
+      // Properties
+      propIcon:        "\uf011"
+      propLabel:       "SHUTDOWN"
+      propAccent:      propPowerTextColor
+      propTintOnHover: true
+
+      // Focus
+      KeyNavigation.tab: propNextFocusItem
+
+      // Action
+      onActivated: powerOff()
     }
   }
 }

@@ -218,6 +218,8 @@ hl.config({
   misc = {
     force_default_wallpaper = 0,
     disable_hyprland_logo   = true,
+    -- Black until the startup fade overlay maps, matching SDDM's fade-out
+    background_color        = "#000000",
   },
 })
 
@@ -511,6 +513,12 @@ hl.layer_rule({
 hl.layer_rule({
   name    = "layerrule-record-border",
   match   = { namespace = "^(record-border)$" },
+  no_anim = true,
+})
+
+hl.layer_rule({
+  name    = "layerrule-startup-fade",
+  match   = { namespace = "^(startup-fade)$" },
   no_anim = true,
 })
 
