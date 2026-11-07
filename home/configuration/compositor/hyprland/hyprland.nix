@@ -88,6 +88,14 @@ in
     export HYPRCURSOR_SIZE=36
   '';
 
+  # GNOME's ibus autostart entry warns under Hyprland; GNOME starts ibus itself anyway
+  xdg.configFile."autostart/ibus-daemon.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=IBus
+    Hidden=true
+  '';
+
   xdg.configFile."hypr/plugins/split-monitor-workspaces".source = inputs.split-monitor-workspaces;
 
   xdg.configFile."hypr/hyprland.lua".source = lib.mkIf editMode (

@@ -77,7 +77,7 @@ hl.monitor({
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 hl.config({
   general = {
-    gaps_in = 10,
+    gaps_in = 15,
     gaps_out = 20,
     border_size = 3,
     col = {
@@ -204,9 +204,9 @@ hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "o
 -- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/#config
 hl.config({
   scrolling = {
-    fullscreen_on_one_column = false,
-    column_width = 1,
-    focus_fit_method = 1,
+    fullscreen_on_one_column = true,
+    column_width = 0.98,
+    focus_fit_method = 0,
     follow_focus = true,
     follow_min_visible = 0.5,
     direction = "right",
@@ -596,30 +596,42 @@ hl.window_rule({
   size  = { "monitor_w*0.31", "monitor_h*0.55" },
 })
 
-local fx_prev, fx_cur = nil, nil
+-- Float firefox extension popups. They open titled "Mozilla Firefox", so float every new
+-- firefox window up front (keeps it out of the scrolling columns), then once the real
+-- title arrives keep extensions floating and send anything else back to tiling
+-- https://wiki.hypr.land/configuring/code-snippets/#float-browsers-extension-windows
+hl.on("window.open", function(w)
+  if w.class ~= "firefox" then return end
+  if w.initial_title ~= "Mozilla Firefox" then return end
+  if #hl.get_windows({ class = "firefox" }) <= 1 then return end
 
-hl.on("window.active", function(w)
-  if w and w.class == "firefox" then
-    local a = "address:" .. tostring(w.address)
-    if a ~= fx_cur then fx_prev, fx_cur = fx_cur, a end
-  end
-end)
+  hl.dispatch(hl.dsp.window.float({ action = "set", window = w }))
 
-hl.on("window.title", function(w)
-  if w.title and w.title:match("^Extension:") and w.class == "firefox" then
-    local popup  = "address:" .. tostring(w.address)
-    local parent = (fx_cur == popup) and fx_prev or fx_cur
-    local mon    = hl.get_active_monitor()
+  local sub
+  sub = hl.on("window.title", function(tw)
+    if tw.address ~= w.address then return end
+    if tw.title == ""
+        or tw.title == "Mozilla Firefox"
+        or tw.title == "about:blank"
+        or tw.title:match("^about:.*Mozilla Firefox$") then
+      return
+    end
 
-    hl.dispatch(hl.dsp.window.float({ window = popup, action = "on" }))
-    hl.dispatch(hl.dsp.window.resize({
-      window = popup,
-      x = math.floor(mon.width * 0.31),
-      y = math.floor(mon.height * 0.55)
-    }))
-    hl.dispatch(hl.dsp.focus({ window = parent }))
-    hl.dispatch(hl.dsp.focus({ window = popup }))
-  end
+    sub:remove()
+
+    if tw.title:match("^Extension:") then
+      local mon = hl.get_active_monitor()
+      hl.dispatch(hl.dsp.window.resize({
+        window = tw,
+        x = math.floor(mon.width * 0.31),
+        y = math.floor(mon.height * 0.55),
+      }))
+      hl.dispatch(hl.dsp.window.center({ window = tw }))
+      hl.dispatch(hl.dsp.focus({ window = tw }))
+    else
+      hl.dispatch(hl.dsp.window.float({ action = "unset", window = tw }))
+    end
+  end)
 end)
 
 -- Focus browser when link open
@@ -628,6 +640,13 @@ hl.config({
     focus_on_activate = true,
   },
 })
+
+do
+  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
+      io.open(path, "r"); if file then
+    file:close(); dofile(path)
+  end
+end
 
 do
   local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
