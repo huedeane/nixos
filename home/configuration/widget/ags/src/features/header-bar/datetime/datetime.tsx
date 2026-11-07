@@ -3,7 +3,7 @@ import { createPoll } from "ags/time"
 import { MonitorFocusContext } from "../../../lib/context"
 import app from "ags/gtk4/app"
 import style from "./datetime.scss"
-import { pointer } from "../../../lib/utils"
+import { closeOnFocusLoss, pointer } from "../../../lib/utils"
 
 app.apply_css(style)
 
@@ -24,7 +24,7 @@ export default function DateTime() {
         <label label={"-"} />
         <label label={time} />
       </box>
-      <popover>
+      <popover $={closeOnFocusLoss}>
         <Gtk.Calendar />
       </popover>
     </menubutton>

@@ -3,7 +3,7 @@ import type { Accessor } from "ags"
 import { Gtk } from "ags/gtk4"
 import { MonitorFocusContext } from "../../../lib/context"
 import app from "ags/gtk4/app"
-import { centerOnScreen, clearHover, pointer, trackFullRedraw } from "../../../lib/utils"
+import { centerOnScreen, clearHover, closeOnFocusLoss, pointer, trackFullRedraw } from "../../../lib/utils"
 import { NotificationPanel, getSource, paint, DIM } from "../../notification-panel/notification-panel"
 import type { Source } from "../../notification-panel/notification-panel"
 import style from "./notification.scss"
@@ -45,6 +45,7 @@ export default function Notification({ src = getSource() }: { src?: Source } = {
           panels.push(entry)
           onCleanup(() => panels.splice(panels.indexOf(entry), 1))
           trackFullRedraw(self)
+          closeOnFocusLoss(self)
           self.connect("show", () => {
             centerOnScreen(self)
             self.get_parent()?.add_css_class("open")

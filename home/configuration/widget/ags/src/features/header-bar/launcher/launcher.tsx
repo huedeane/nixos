@@ -3,7 +3,7 @@ import type { Accessor } from "ags"
 import { Gtk } from "ags/gtk4"
 import { MonitorFocusContext } from "../../../lib/context"
 import app from "ags/gtk4/app"
-import { centerOnScreen, clearHover, pointer, trackFullRedraw } from "../../../lib/utils"
+import { centerOnScreen, clearHover, closeOnFocusLoss, pointer, trackFullRedraw } from "../../../lib/utils"
 import { LauncherPanel } from "../../launcher-panel/launcher-panel"
 import style from "./launcher.scss"
 
@@ -38,6 +38,7 @@ export default function Launcher() {
           launchers.push(entry)
           onCleanup(() => launchers.splice(launchers.indexOf(entry), 1))
           trackFullRedraw(self)
+          closeOnFocusLoss(self)
           self.connect("show", () => {
             centerOnScreen(self)
             self.get_parent()?.add_css_class("open")

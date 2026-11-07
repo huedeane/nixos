@@ -1,6 +1,8 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import Graphene from "gi://Graphene"
+import GLib from "gi://GLib"
+import Hyprland from "gi://AstalHyprland"
 
 export const pointer = Gdk.Cursor.new_from_name("pointer", null)
 
@@ -53,6 +55,28 @@ export const focusPopup = () => {
   hyprLua(`park_cursor({ x = ${x}, y = ${y} })`)
   return "popup"
 }
+
+// Bar popovers close as soon as Hyprland moves focus somewhere else. Otherwise one can lose
+// its input grab but stay on screen, ignoring every click and key until it's toggled again
+const autoClose = new Map<Gtk.Popover, number>()
+// Opening a popover can itself shuffle focus, so ignore events right after it shows
+const OPEN_GRACE_MS = 300
+
+export const closeOnFocusLoss = (popover: Gtk.Popover) => {
+  popover.connect("show", () => autoClose.set(popover, GLib.get_monotonic_time()))
+  popover.connect("closed", () => autoClose.delete(popover))
+}
+
+Hyprland.get_default().connect("event", (_, event, data) => {
+  if (autoClose.size === 0) return
+  const movedFocus =
+    (event === "activewindowv2" && data !== "") || event === "workspacev2" || event === "focusedmonv2"
+  if (!movedFocus) return
+  const now = GLib.get_monotonic_time()
+  for (const [popover, shownAt] of autoClose) {
+    if ((now - shownAt) / 1000 > OPEN_GRACE_MS) popover.popdown()
+  }
+})
 
 // A closed popover leaves its button stuck in the hover state
 export const clearHover = (widget: Gtk.Widget) => {

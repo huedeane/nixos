@@ -1,0 +1,50 @@
+@use "../../style" as *;
+
+window.column-peek {
+  background: transparent;
+
+  .strip {
+    // Not fully transparent: a surface that draws nothing never gets mapped by Hyprland
+    background: rgba($lavender, 0.01);
+    border: $border-width solid transparent;
+    transition:
+      background 150ms ease,
+      border-color 150ms ease;
+
+    .chevron {
+      color: $lavender;
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 150ms ease;
+    }
+
+    // Lavender border on the inner edge previews the neighbour as the active window,
+    // brightest where it meets the focused window
+    &.left {
+      border-left-width: 0;
+      border-radius: 0 10px 10px 0;
+
+      &.hover {
+        background: linear-gradient(to left, rgba($lavender, 0.3), rgba($lavender, 0.08));
+      }
+    }
+
+    &.right {
+      border-right-width: 0;
+      border-radius: 10px 0 0 10px;
+
+      &.hover {
+        background: linear-gradient(to right, rgba($lavender, 0.3), rgba($lavender, 0.08));
+      }
+    }
+
+    &.hover {
+      border-color: $lavender;
+
+      .chevron {
+        opacity: 1;
+      }
+    }
+  }
+}
