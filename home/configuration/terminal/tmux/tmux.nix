@@ -18,6 +18,7 @@ in
 
   programs.tmux = {
     enable = true;
+    terminal = "tmux-256color";
     plugins = with pkgs.tmuxPlugins; [
       yank
       {
