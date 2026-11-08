@@ -5,7 +5,6 @@
   ...
 }:
 let
-  dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/daemon/mpd";
   mpdPartition = pkgs.writers.writePython3Bin "mpd-partition" {
     flakeIgnore = [ "E501" ];
   } (builtins.readFile ./scripts/mpd-partition.py);
@@ -19,7 +18,7 @@ in
     musicDirectory = "${config.home.homeDirectory}/Music";
     extraConfig = ''
       ${builtins.readFile ./mpd.conf}
-      sticker_file "${dirPath}/etc/sticker.sql"
+      sticker_file "${config.services.mpd.musicDirectory}/sticker.sql"
     '';
   };
 

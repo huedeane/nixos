@@ -25,6 +25,7 @@
     (configHomeDir + "/terminal/nh/nh.nix")
     (configHomeDir + "/compositor/hyprland/hyprland.nix")
     (configHomeDir + "/daemon/mpd/mpd.nix")
+    (configHomeDir + "/daemon/music-sync/music-sync.nix")
     (configHomeDir + "/daemon/dunst/dunst.nix")
     (configHomeDir + "/daemon/udiskie/udiskie.nix")
     (configHomeDir + "/daemon/clipvault/clipvault.nix")
