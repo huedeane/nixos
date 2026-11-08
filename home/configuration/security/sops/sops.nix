@@ -11,6 +11,16 @@
     inputs.sops-nix.homeManagerModules.sops
   ];
 
+  # Blank age key placeholder; fill it in and rebuild to enable secrets
+  home.activation.ensureSopsKeyFile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    target="${config.home.homeDirectory}/.config/sops/age/keys.txt"
+    if [ ! -e "$target" ]; then
+      mkdir -p -m 700 "$(dirname "$target")"
+      touch "$target"
+      chmod 600 "$target"
+    fi
+  '';
+
   # withSecrets = false (flake.nix) disables sops-nix entirely: no service, no activation
   sops = lib.mkIf withSecrets {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";

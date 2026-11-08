@@ -36,7 +36,7 @@ tmux set-option -g history-limit 100000
 auth="SUDO_ASKPASS='$SUDO_ASKPASS' SUDO_PROMPT='NixOS' sudo -A -v || { echo 1 > '$status_file'; exit; }; while sleep 60; do sudo -n -v; done &"
 # Enable sops secrets only once the age key is in place (fresh installs build without them)
 secrets=""
-[ -f "$HOME/.config/sops/age/keys.txt" ] && secrets="WITH_SECRETS=1"
+grep -qs AGE-SECRET-KEY "$HOME/.config/sops/age/keys.txt" && secrets="WITH_SECRETS=1"
 tmux new-session -d -s "$session" -x 220 -y 50 \
   "$auth SUDO_PROMPT='NixOS' NH_SUDO_ASKPASS='$SUDO_ASKPASS' $secrets nh os switch '$NIXOS_CONFIG' -H '$NIXOS_HOST' --impure 2>&1; echo \$? > '$status_file'; kill \$!"
 tmux set-option -g history-limit "$old_limit"

@@ -18,7 +18,7 @@ _sudo_upfront() {
 
 # Enable sops secrets only once the age key is in place (fresh installs build without them)
 _with_secrets() {
-  if [ -f "$HOME/.config/sops/age/keys.txt" ]; then echo 1; else echo 0; fi
+  if grep -qs AGE-SECRET-KEY "$HOME/.config/sops/age/keys.txt"; then echo 1; else echo 0; fi
 }
 
 nix-rebuild() {
@@ -117,7 +117,7 @@ help() {
   echo "  f --> yazi file manager"
   echo "  m --> rmpc music player"
   echo "  bash-update --> reload bashrc"
-  echo "  secret-update --> edit secrets.json"
+  echo "  secret-edit --> edit sops age key (keys.txt)"
   echo "  hypr-update --> edit hyprland.conf"
   echo ""
   echo "Mount"
