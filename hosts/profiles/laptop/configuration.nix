@@ -38,6 +38,7 @@
   networking = {
     hostName = "${hostname}";
     networkmanager.enable = true;
+    networkmanager.wifi.powersave = false;
   };
 
   # Time zone
