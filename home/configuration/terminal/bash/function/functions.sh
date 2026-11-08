@@ -106,6 +106,17 @@ phone() {
   cd "$mp" 2>/dev/null && ls
 }
 
+nas() {
+  if [ "$1" = "-u" ] || [ "$1" = "unmount" ]; then
+    systemctl stop mount-nas && echo "NAS unmounted."
+    return
+  fi
+
+  echo "Mounting NAS ..."
+  systemctl start mount-nas || { echo "Failed: check 'journalctl -u mount-nas'"; return 1; }
+  echo "NAS mounted at: /mnt/nas"
+}
+
 help() {
   echo ""
   echo "Nix"
@@ -124,5 +135,6 @@ help() {
   echo "  mount-all --> mount all external / secondary drives"
   echo "  unmount-all --> unmount all external drives"
   echo "  phone / phone -u --> mount / unmount a connected phone (MTP)"
+  echo "  nas / nas -u --> mount / unmount the QNAP NAS at /mnt/nas"
   echo ""
 }

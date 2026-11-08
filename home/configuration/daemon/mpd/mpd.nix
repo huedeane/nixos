@@ -23,6 +23,9 @@ in
     '';
   };
 
+  # Socket clients can add files outside music_directory (e.g. /mnt/nas)
+  home.sessionVariables.MPD_HOST = lib.mkForce "/run/user/1000/mpd/socket";
+
   services.mpd-mpris.enable = true;
 
   # mpd-mpris exits cleanly when mpd restarts, so on-failure never brings it back

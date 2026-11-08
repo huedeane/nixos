@@ -58,5 +58,15 @@
     "command": "uri=$(gio mount -li 2>/dev/null | grep -oE 'activation_root=mtp://[^[:space:]]+' | sed 's/^activation_root=//' | head -1); [ -n \"$uri\" ] && gio mount -u \"$uri\" && echo \"Phone unmounted.\" || echo \"No phone mounted.\"",
     "description": "Unmount phone (MTP)",
     "tags": ["android", "phone", "mtp", "unmount"]
+  },
+  {
+    "command": "systemctl start mount-nas && echo \"NAS mounted at: /mnt/nas\"",
+    "description": "Mount QNAP NAS at /mnt/nas",
+    "tags": ["nas", "qnap", "cifs", "mount", "files"]
+  },
+  {
+    "command": "systemctl stop mount-nas && echo \"NAS unmounted.\"",
+    "description": "Unmount QNAP NAS",
+    "tags": ["nas", "qnap", "cifs", "unmount"]
   }
 ]
