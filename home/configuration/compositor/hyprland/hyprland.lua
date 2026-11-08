@@ -54,7 +54,42 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
   hl.exec_cmd("uwsm app -- ags-reload.sh")
+  -- Fallback if the ags startup fade never starts hyprpaper
+  hl.exec_cmd("sh -c 'sleep 5 && systemctl --user start hyprpaper.service'")
 end)
+
+-- Blank cursor theme until the ags startup fade calls show_startup_cursor() (top level so it survives reloads)
+do
+  local sig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE") or ""
+  local marker = (os.getenv("XDG_RUNTIME_DIR") or "/tmp") .. "/hypr-startup-cursor-" .. sig
+  local remaining = 12 - (os.time() - (tonumber(sig:match("_(%d+)_%d+$")) or os.time()))
+  local hypr_theme = os.getenv("STARTUP_HYPRCURSOR_THEME") or os.getenv("HYPRCURSOR_THEME") or "default"
+  local x_theme = os.getenv("STARTUP_XCURSOR_THEME") or os.getenv("XCURSOR_THEME") or "default"
+
+  function show_startup_cursor()
+    local f = io.open(marker, "w"); if f then f:close() end
+    hl.env("HYPRCURSOR_THEME", hypr_theme)
+    hl.env("XCURSOR_THEME", x_theme)
+    hl.config({ cursor = { invisible = false, enable_hyprcursor = true } })
+    hl.exec_cmd("hyprctl setcursor " .. hypr_theme .. " " .. (os.getenv("HYPRCURSOR_SIZE") or "24"))
+  end
+
+  local file = io.open(marker, "r")
+  if file then
+    file:close()
+  elseif remaining > 0 then
+    hl.env("STARTUP_HYPRCURSOR_THEME", hypr_theme)
+    hl.env("STARTUP_XCURSOR_THEME", x_theme)
+    hl.env("HYPRCURSOR_THEME", "startup-blank-cursor")
+    hl.env("XCURSOR_THEME", "startup-blank-cursor")
+    hl.config({ cursor = { invisible = true, enable_hyprcursor = false } })
+    local timer
+    timer = hl.timer(function()
+      show_startup_cursor()
+      timer:set_enabled(false)
+    end, { timeout = remaining * 1000, type = "repeat" })
+  end
+end
 
 
 ------------------
@@ -218,6 +253,7 @@ hl.config({
   misc = {
     force_default_wallpaper = 0,
     disable_hyprland_logo   = true,
+    disable_splash_rendering = true,
     -- Black until the startup fade overlay maps, matching SDDM's fade-out
     background_color        = "#000000",
   },
@@ -520,6 +556,12 @@ hl.layer_rule({
   name    = "layerrule-startup-fade",
   match   = { namespace = "^(startup-fade)$" },
   no_anim = true,
+})
+
+hl.layer_rule({
+  name      = "layerrule-hyprpaper",
+  match     = { namespace = "^(hyprpaper)$" },
+  animation = "fade",
 })
 
 hl.layer_rule({

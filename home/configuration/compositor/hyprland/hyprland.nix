@@ -10,6 +10,22 @@
 let
   dirPath = "${config.home.homeDirectory}/.config/nixos/home/configuration/compositor/hyprland";
   hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+  startupBlankCursor =
+    pkgs.runCommand "startup-blank-cursor"
+      {
+        nativeBuildInputs = [
+          pkgs.imagemagick
+          pkgs.xcursorgen
+        ];
+      }
+      ''
+        dir=$out/share/icons/startup-blank-cursor
+        mkdir -p $dir/cursors
+        magick -size 1x1 xc:none blank.png
+        echo "1 0 0 blank.png" > blank.cfg
+        xcursorgen blank.cfg $dir/cursors/left_ptr
+        printf '[Icon Theme]\nName=startup-blank-cursor\n' > $dir/index.theme
+      '';
 in
 {
   home.packages = with pkgs; [
@@ -20,6 +36,7 @@ in
     slurp
     wf-recorder
     ffmpeg
+    startupBlankCursor
   ];
 
   imports = [

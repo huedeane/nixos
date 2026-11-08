@@ -1,4 +1,4 @@
-{ config, configDir, ... }:
+{ config, configDir, lib, ... }:
 let
   wallpaper = "${configDir}/resources/wallpaper.png";
 in
@@ -18,4 +18,7 @@ in
       ];
     };
   };
+
+  # Started by the ags startup fade instead
+  systemd.user.services.hyprpaper.Install.WantedBy = lib.mkForce [ ];
 }
