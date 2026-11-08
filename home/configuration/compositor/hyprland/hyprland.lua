@@ -49,8 +49,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd(
     "uwsm app -- wl-paste --watch clipvault store --ignore-pattern '^<meta http-equiv=' --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
-  hl.exec_cmd(
-    "uwsm app -- wl-paste --type text --watch notify-send -a clipboard -h string:x-dunst-stack-tag:clipboard 'System' 'Copied to Clipboard' --expire-time=1500")
+  hl.exec_cmd("uwsm app -- clip-notify.sh")
   hl.exec_cmd("uwsm app -- ags run")
   hl.exec_cmd("uwsm finalize HYPRLAND_INSTANCE_SIGNATURE")
   hl.exec_cmd("uwsm app -- ags-reload.sh")
@@ -411,8 +410,9 @@ end
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic", silent = true, follow = false }))
-hl.bind(mainMod .. " + CTRL + SHIFT + S",
-  hl.dsp.window.move({ workspace = hl.get_active_workspace().id, silent = true, follow = false }))
+hl.bind(mainMod .. " + CTRL + SHIFT + S", function()
+  hl.dispatch(hl.dsp.window.move({ workspace = hl.get_active_workspace().id, silent = true, follow = false }))
+end)
 
 -- Move/resize with mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -511,6 +511,7 @@ hl.bind("CTRL + C", function()
 end, { non_consuming = true })
 hl.bind("Escape", function()
   if recording() then hl.dispatch(hl.dsp.exec_cmd("screen-gif.sh cancel")) end
+  hl.dispatch(hl.dsp.exec_cmd("ags request close-popups"))
 end, { non_consuming = true })
 
 ------------------------------
@@ -683,24 +684,7 @@ hl.config({
   },
 })
 
-do
-  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
-      io.open(path, "r"); if file then
-    file:close(); dofile(path)
-  end
-end
-
-do
-  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
-      io.open(path, "r"); if file then
-    file:close(); dofile(path)
-  end
-end
+---@format disable-next
 
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
-do
-  local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file =
-      io.open(path, "r"); if file then
-    file:close(); dofile(path)
-  end
-end
+do local path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua"; local file = io.open(path, "r"); if file then file:close(); dofile(path) end end

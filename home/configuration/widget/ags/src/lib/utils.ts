@@ -78,6 +78,12 @@ Hyprland.get_default().connect("event", (_, event, data) => {
   }
 })
 
+export const closePopups = () => {
+  const count = autoClose.size
+  for (const popover of [...autoClose.keys()]) popover.popdown()
+  return `${count}`
+}
+
 // A closed popover leaves its button stuck in the hover state
 export const clearHover = (widget: Gtk.Widget) => {
   widget.unset_state_flags(Gtk.StateFlags.PRELIGHT)

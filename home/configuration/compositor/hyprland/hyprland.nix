@@ -36,6 +36,7 @@ in
     slurp
     wf-recorder
     ffmpeg
+    brightnessctl
     startupBlankCursor
   ];
 
@@ -141,6 +142,11 @@ in
 
   home.file.".local/bin/ags-restart.sh" = {
     source = ./scripts/ags-restart.sh;
+    executable = true;
+  };
+
+  home.file.".local/bin/clip-notify.sh" = {
+    source = ./scripts/clip-notify.sh;
     executable = true;
   };
 
