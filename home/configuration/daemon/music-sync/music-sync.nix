@@ -1,8 +1,15 @@
 { pkgs, ... }:
 let
+  # Writes rating stickers into the mp3s' POPM tags
+  musicSyncPopm = pkgs.writers.writePython3Bin "music-sync-popm" {
+    libraries = [ pkgs.python3Packages.mutagen ];
+    flakeIgnore = [ "E501" ];
+  } (builtins.readFile ./music-sync-popm.py);
+
   musicSync = pkgs.writeShellApplication {
     name = "music-sync";
     runtimeInputs = with pkgs; [
+      musicSyncPopm
       unison
       sqlite
       socat
