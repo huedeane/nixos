@@ -31,7 +31,7 @@ keymap = [
   # Navigation
   { on = "h", run = "leave", desc = "Back to the parent directory" },
   { on = "l", run = "enter", desc = "Enter the child directory" },
-  { on = "R", run = ["leave", "enter"], desc = "Refresh the current directory" },
+  { on = "R", run = ["leave", "enter", "plugin column-header clear"], desc = "Refresh the current directory" },
 
   { on = "<Left>", run = "leave", desc = "Back to the parent directory" },
   { on = "<Right>", run = "enter", desc = "Enter the child directory" },
@@ -84,6 +84,7 @@ keymap = [
 
   { on = ["<space>", "t"], run = "shell 'tree-directory.sh Yazi'", desc = "Get directory tree output" },
   { on = ["<space>", "v"], run = "shell 'nvim .' --block", desc = "Open nvim at this directory" },
+  { on = ["<space>", "s"], run = "plugin column-header", desc = "Calculate folder size" },
 
   # Linemode
   { on = ["m", "s"], run = "linemode size", desc = "Linemode: size" },
@@ -109,18 +110,18 @@ keymap = [
   { on = "N", run = "find_arrow --previous", desc = "Previous found" },
 
   # Sorting
-  { on = [",", "m"], run = ["sort mtime --reverse=no", "linemode mtime"], desc = "Sort by modified time" },
-  { on = [",", "M"], run = ["sort mtime --reverse", "linemode mtime"], desc = "Sort by modified time (reverse)" },
-  { on = [",", "b"], run = ["sort btime --reverse=no", "linemode btime"], desc = "Sort by birth time" },
-  { on = [",", "B"], run = ["sort btime --reverse", "linemode btime"], desc = "Sort by birth time (reverse)" },
+  { on = [",", "m"], run = "sort mtime --reverse=no", desc = "Sort by modified time" },
+  { on = [",", "M"], run = "sort mtime --reverse", desc = "Sort by modified time (reverse)" },
+  { on = [",", "b"], run = "sort btime --reverse=no", desc = "Sort by birth time" },
+  { on = [",", "B"], run = "sort btime --reverse", desc = "Sort by birth time (reverse)" },
   { on = [",", "e"], run = "sort extension --reverse=no", desc = "Sort by extension" },
   { on = [",", "E"], run = "sort extension --reverse", desc = "Sort by extension (reverse)" },
   { on = [",", "a"], run = "sort alphabetical --reverse=no", desc = "Sort alphabetically" },
   { on = [",", "A"], run = "sort alphabetical --reverse", desc = "Sort alphabetically (reverse)" },
   { on = [",", "n"], run = "sort natural --reverse=no", desc = "Sort naturally" },
   { on = [",", "N"], run = "sort natural --reverse", desc = "Sort naturally (reverse)" },
-  { on = [",", "s"], run = ["sort size --reverse=no", "linemode size"], desc = "Sort by size" },
-  { on = [",", "S"], run = ["sort size --reverse", "linemode size"], desc = "Sort by size (reverse)" },
+  { on = [",", "s"], run = "sort size --reverse=no", desc = "Sort by size" },
+  { on = [",", "S"], run = "sort size --reverse", desc = "Sort by size (reverse)" },
   { on = [",", "r"], run = "sort random --reverse=no", desc = "Sort randomly" },
 
   # Goto

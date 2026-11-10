@@ -6,8 +6,11 @@
 -- Setup (after full-border, since it wraps its layout):
 --   require("column-header"):setup()
 -- and in yazi.toml: linemode = "details"
+--
+-- Running the plugin (`plugin column-header`) calculates the total size of the selected
+-- folders, or the hovered one, as a task; the Size column spins and counts up meanwhile.
 
-local TYPE_W, SIZE_W, TIME_W = 10, 6, 19
+local TYPE_W, SIZE_W, TIME_W = 10, 9, 19
 local GAP = "  "
 local HEADER_ROWS = 2
 
@@ -49,9 +52,57 @@ local function file_type(file)
   return ext and (TYPES[ext] or ext) or "file"
 end
 
-local function file_size(file)
-  local size = file:size()
-  return size and ya.readable_size(size) or "—"
+local UNITS = { "B", "KB", "MB", "GB", "TB" }
+local SPINNER = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+
+-- "512 B", "4.2 KB", "38 MB": one decimal under 10, whole numbers above
+local function readable(size)
+  local unit = 1
+  while size >= 1024 and unit < #UNITS do
+    size = size / 1024
+    unit = unit + 1
+  end
+  local num = (unit == 1 or size >= 10) and string.format("%d", math.floor(size + 0.5))
+    or string.format("%.1f", size)
+  return num .. " " .. UNITS[unit]
+end
+
+-- Title of the task calculating a folder, also used to spot when it was cancelled
+local function task_title(key)
+  return "Size of " .. key
+end
+
+-- A folder whose size task was seen in the task list, then left it without the plugin
+-- finishing it, was cancelled (cancelling stops the plugin outright, so it can't report that
+-- itself). A new task takes a moment to show up, so not having seen it yet doesn't count.
+local function was_cancelled(st, key)
+  local title = task_title(key)
+  for _, snap in ipairs(cx.tasks.snaps) do
+    if snap.title == title then
+      st.seen[key] = true
+      return false
+    end
+  end
+  return st.seen[key] == true
+end
+
+-- Folders being calculated show a spinner and the running total; cancelled ones ERROR until
+-- calculated again. A no-break space follows the symbols: kitty stretches a symbol over a
+-- following plain space, and yazi then leaves that half behind on screen
+local function file_size(st, file)
+  local key = tostring(file.url)
+  if st.busy[key] and was_cancelled(st, key) then
+    st.busy[key], st.seen[key], st.cancelled[key] = nil, nil, true
+  end
+  if st.cancelled[key] then
+    return "ERROR"
+  end
+  local busy = st.busy[key]
+  if busy then
+    return SPINNER[st.frame] .. "\u{a0}" .. readable(busy)
+  end
+  local size = st.sizes[key] or file:size()
+  return size and readable(size) or "—"
 end
 
 local function file_time(file)
@@ -104,15 +155,17 @@ local function header(area)
   }
 end
 
-local function setup(_, opts)
+local function setup(st, opts)
+  st.busy, st.seen, st.cancelled, st.sizes, st.frame = {}, {}, {}, {}, 1
+
   function Linemode:details()
     local f = self._file
-    return table.concat({
-      fit(file_type(f), TYPE_W, true),
-      GAP,
-      fit(file_size(f), SIZE_W, true),
-      GAP,
-      fit(file_time(f), TIME_W, true),
+    local size, color = file_size(st, f)
+    local size_span = ui.Span(fit(size, SIZE_W, true))
+    return ui.Line({
+      ui.Span(fit(file_type(f), TYPE_W, true) .. GAP),
+      color and size_span:fg(color) or size_span,
+      ui.Span(GAP .. fit(file_time(f), TIME_W, true)),
     })
   end
 
@@ -146,4 +199,107 @@ local function setup(_, opts)
   end
 end
 
-return { setup = setup }
+-- Selected folders, or the hovered one, that aren't already being calculated
+local start = ya.sync(function(st)
+  local urls = {}
+  local function add(url)
+    local key = tostring(url)
+    if not st.busy[key] then
+      st.busy[key], st.cancelled[key] = 0, nil
+      urls[#urls + 1] = url
+    end
+  end
+  local files = cx.active.current.files
+  for i = 1, #files do
+    local f = files[i]
+    if f.cha.is_dir and f:is_selected() then
+      add(f.url)
+    end
+  end
+  local h = cx.active.current.hovered
+  if #urls == 0 and h and h.cha.is_dir then
+    add(h.url)
+  end
+  return urls
+end)
+
+-- Only plain values cross into these sync blocks (folders by their path string), and a
+-- failed redraw only costs a frame of the spinner
+local function redraw()
+  pcall(ui.render)
+end
+
+local progress = ya.sync(function(st, key, size)
+  st.busy[key] = size
+  st.frame = (st.frame or 1) % #SPINNER + 1
+  redraw()
+end)
+
+local finish = ya.sync(function(st, key, size)
+  st.busy[key], st.seen[key], st.sizes[key] = nil, nil, size
+  redraw()
+end)
+
+-- Forget the sizes and cancel marks (ERROR) of the current folder's entries (Shift+R)
+local clear = ya.sync(function(st)
+  local cwd = tostring(cx.active.current.cwd)
+  for _, t in ipairs({ st.sizes, st.cancelled }) do
+    for key in pairs(t) do
+      if key:match("^(.*)/[^/]+$") == cwd then
+        t[key] = nil
+      end
+    end
+  end
+  redraw()
+end)
+
+local function measure(url)
+  local it = fs.calc_size(url)
+  if not it then
+    error("can't read it")
+  end
+  local size, last = 0, 0
+  while true do
+    local next, now = it:recv(), ya.time()
+    if not next then
+      return size
+    end
+    size = size + next
+    if now >= last + 0.1 then
+      last = now
+      progress(tostring(url), size)
+    end
+  end
+end
+
+local function calc(url)
+  local key = tostring(url)
+  local name = url.name or key
+  local task = ya.task("custom", { pool = "plugin", scope = rt.scope() }):name(task_title(key)):spawn()
+  if not task:acquire() then
+    return finish(tostring(url))
+  end
+
+  -- Whatever goes wrong, clear the spinner and end the task, so neither is left running.
+  -- The size is kept by this plugin rather than on yazi's file, so Shift+R can forget it.
+  local ok, size = pcall(measure, url)
+  finish(key, ok and size or nil)
+
+  if not ok then
+    ya.notify { title = "Folder size", content = name .. ": " .. tostring(size), timeout = 10, level = "error" }
+    return task:fail(tostring(size))
+  end
+  task:succeed {}
+  ya.notify { title = "Folder size", content = name .. ": " .. readable(size), timeout = 5 }
+end
+
+local function entry(_, job)
+  if job.args[1] == "clear" then
+    return clear()
+  end
+  for _, url in ipairs(start()) do
+    calc(url)
+  end
+end
+
+return { setup = setup, entry = entry }
