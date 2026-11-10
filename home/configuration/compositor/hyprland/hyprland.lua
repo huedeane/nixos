@@ -111,8 +111,8 @@ hl.monitor({
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 hl.config({
   general = {
-    gaps_in = 15,
-    gaps_out = 20,
+    gaps_in = 10,
+    gaps_out = { top = 20, right = 40, bottom = 20, left = 40 },
     border_size = 3,
     col = {
       inactive_border = colors.overlay0,
@@ -239,8 +239,7 @@ hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "o
 hl.config({
   scrolling = {
     fullscreen_on_one_column = true,
-    column_width = 0.98,
-    focus_fit_method = 0,
+    column_width = 1,
     follow_focus = true,
     follow_min_visible = 0.5,
     direction = "right",
@@ -639,16 +638,38 @@ hl.window_rule({
   size  = { "monitor_w*0.31", "monitor_h*0.55" },
 })
 
--- Float firefox extension popups. They open titled "Mozilla Firefox", so float every new
--- firefox window up front (keeps it out of the scrolling columns), then once the real
--- title arrives keep extensions floating and send anything else back to tiling
+-- Float firefox extension and Google sign-in popups. They open titled "Mozilla Firefox", so
+-- float every new firefox window up front (keeps it out of the scrolling columns), then once
+-- the real title arrives keep popups floating and send anything else back to tiling
 -- https://wiki.hypr.land/configuring/code-snippets/#float-browsers-extension-windows
+
+-- Last two active firefox windows, so a popup knows which window opened it
+local fx_prev, fx_cur = nil, nil
+
+hl.on("window.active", function(w)
+  if w and w.class == "firefox" then
+    local a = "address:" .. tostring(w.address)
+    if a ~= fx_cur then fx_prev, fx_cur = fx_cur, a end
+  end
+end)
+
 hl.on("window.open", function(w)
   if w.class ~= "firefox" then return end
   if w.initial_title ~= "Mozilla Firefox" then return end
   if #hl.get_windows({ class = "firefox" }) <= 1 then return end
 
+  local popup = "address:" .. tostring(w.address)
+  local parent = (fx_cur == popup) and fx_prev or fx_cur
+
+  -- Focusing the parent scrolls the columns back to it (the new window shifted them),
+  -- then the floating popup gets focus on top without moving the view again
+  local refocus = function()
+    if parent then hl.dispatch(hl.dsp.focus({ window = parent })) end
+    hl.dispatch(hl.dsp.focus({ window = popup }))
+  end
+
   hl.dispatch(hl.dsp.window.float({ action = "set", window = w }))
+  refocus()
 
   local sub
   sub = hl.on("window.title", function(tw)
@@ -662,7 +683,8 @@ hl.on("window.open", function(w)
 
     sub:remove()
 
-    if tw.title:match("^Extension:") then
+    -- Extension popups and Google's sign-in popup stay floating
+    if tw.title:match("^Extension:") or tw.title:match("^Sign in %- Google Accounts") then
       local mon = hl.get_active_monitor()
       hl.dispatch(hl.dsp.window.resize({
         window = tw,
@@ -670,7 +692,7 @@ hl.on("window.open", function(w)
         y = math.floor(mon.height * 0.55),
       }))
       hl.dispatch(hl.dsp.window.center({ window = tw }))
-      hl.dispatch(hl.dsp.focus({ window = tw }))
+      refocus()
     else
       hl.dispatch(hl.dsp.window.float({ action = "unset", window = tw }))
     end

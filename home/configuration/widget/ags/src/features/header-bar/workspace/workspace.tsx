@@ -22,19 +22,24 @@ export default function Workspace({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
       .sort((a, b) => a.id - b.id),
   )
 
-  const focusWorkspace = (workspaceID) =>
+  // Clicking here shouldn't drag the cursor to the newly focused window, so warping is
+  // switched off just for these dispatches
+  const withoutWarp = (lua: string) =>
     execAsync([
       "hyprctl",
       "dispatch",
-      `function() hl.plugin.split_monitor_workspaces.workspace(${workspaceID}) end`,
+      `function()
+        hl.config({ cursor = { no_warps = true } })
+        ${lua}
+        hl.config({ cursor = { no_warps = false } })
+      end`,
     ]).catch(console.error)
 
+  const focusWorkspace = (workspaceID) =>
+    withoutWarp(`hl.plugin.split_monitor_workspaces.workspace(${workspaceID})`)
+
   const focusWindow = (direction) =>
-    execAsync([
-      "hyprctl",
-      "dispatch",
-      `hl.dsp.layout("move ${direction}col")`,
-    ]).catch(console.error)
+    withoutWarp(`hl.dispatch(hl.dsp.layout("move ${direction}col"))`)
 
   return (
     <box

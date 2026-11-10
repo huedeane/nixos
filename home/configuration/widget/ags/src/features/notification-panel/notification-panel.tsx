@@ -3,6 +3,7 @@ import type { Accessor } from "ags"
 import { Gdk, Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { interval } from "ags/time"
+import Gio from "gi://Gio"
 import GLib from "gi://GLib"
 import Pango from "gi://Pango"
 import app from "ags/gtk4/app"
@@ -205,7 +206,7 @@ function ItemIcon({ item }: { item: Item }) {
     return (
       <box cssClasses={["icon", "image"]} hexpand={false} valign={Gtk.Align.CENTER}>
         <Gtk.Picture
-          file={item.icon}
+          file={Gio.File.new_for_path(item.icon)}
           contentFit={Gtk.ContentFit.COVER}
           widthRequest={46}
           heightRequest={32}

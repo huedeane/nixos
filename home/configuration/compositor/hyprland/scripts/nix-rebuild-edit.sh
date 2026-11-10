@@ -3,6 +3,12 @@ session="nixos-build-edit"
 
 tmux start-server
 for s in nixos-build nixos-build-edit; do
+  # Sessions restored by tmux-resurrect are plain shells, not builds: drop them
+  if tmux has-session -t "=$s" 2>/dev/null \
+    && ! tmux list-panes -t "=$s" -F "#{pane_start_command}" | grep -q "nh os switch"; then
+    tmux kill-session -t "=$s"
+    continue
+  fi
   if tmux has-session -t "=$s" 2>/dev/null; then
     case "$s" in
       nixos-build-edit) running="Edit Mode" ;;
