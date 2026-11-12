@@ -23,15 +23,47 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
+      # Catppuccin with Unifont swapped for ComicShannsMono; install-grub loadfonts every .pf2 in the theme
       theme =
-        pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "grub";
-          rev = "main";
-          sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-        }
-        + "/src/catppuccin-mocha-grub-theme";
+        pkgs.runCommand "catppuccin-mocha-grub-theme-comic" { nativeBuildInputs = [ pkgs.grub2 ]; } ''
+          cp -r ${
+            pkgs.fetchFromGitHub {
+              owner = "catppuccin";
+              repo = "grub";
+              rev = "main";
+              sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
+            }
+          }/src/catppuccin-mocha-grub-theme $out
+          chmod -R u+w $out
+          grub-mkfont -s 24 -o $out/comic.pf2 \
+            ${pkgs.nerd-fonts.comic-shanns-mono}/share/fonts/opentype/NerdFonts/ComicShannsMono/ComicShannsMonoNerdFontMono-Bold.otf
+          sed -i 's/Unifont Regular 16/ComicShannsMono Nerd Font Mono Bold 24/' $out/theme.txt
+          # Widen the menu so the longest entry still fits at the bigger font size
+          sed -i 's/left = 50%-240/left = 50%-320/; s/width = 480/width = 640/' $out/theme.txt
+        '';
+      # "auto" picks a low mode on the 1440p monitors; first one the firmware offers wins
+      gfxmodeEfi = "2560x1440,1920x1080,auto";
+      # extraEntries always lands above the submenu and os-prober entries, so append
+      # to grub.cfg after install-grub writes it. --class picks the theme icon
+      extraInstallCommands = ''
+        cat ${pkgs.writeText "grub-power-entries.cfg" ''
+          # GRUB has no real separators; a no-op entry fakes one
+          menuentry "────────────────────────────────────────" {
+            true
+          }
+          menuentry "UEFI Firmware Settings" --class efi {
+            fwsetup
+          }
+          menuentry "Reboot" --class restart {
+            reboot
+          }
+          menuentry "Shutdown" --class shutdown {
+            halt
+          }
+        ''} >> /boot/grub/grub.cfg
+      '';
     };
+    timeout = 15;
     efi.canTouchEfiVariables = true;
   };
 
