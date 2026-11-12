@@ -12,6 +12,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/sddm.nix
+    ../../modules/vfio.nix
   ]
   ++ lib.optional withSecrets ../../modules/qnap-nas.nix;
 

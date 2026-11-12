@@ -1,0 +1,129 @@
+<!-- Windows passthrough VM, defined by hosts/modules/vfio.nix in the iGPU boot entry.
+     Edits made in virt-manager are overwritten on the next boot; change this file instead. -->
+<domain type="kvm">
+  <name>windows</name>
+  <!-- Fixed so re-defining on a live switch updates the domain instead of clashing -->
+  <uuid>9bf2cbc7-9c16-4dc8-8691-a6cf46d2bc1f</uuid>
+  <memory unit="GiB">16</memory>
+  <currentMemory unit="GiB">16</currentMemory>
+  <vcpu placement="static">12</vcpu>
+  <cputune>
+    <!-- cores 2-7 (+ SMT siblings 10-15) for the guest, cores 0-1 left to the host -->
+    <vcpupin vcpu="0" cpuset="2"/>
+    <vcpupin vcpu="1" cpuset="10"/>
+    <vcpupin vcpu="2" cpuset="3"/>
+    <vcpupin vcpu="3" cpuset="11"/>
+    <vcpupin vcpu="4" cpuset="4"/>
+    <vcpupin vcpu="5" cpuset="12"/>
+    <vcpupin vcpu="6" cpuset="5"/>
+    <vcpupin vcpu="7" cpuset="13"/>
+    <vcpupin vcpu="8" cpuset="6"/>
+    <vcpupin vcpu="9" cpuset="14"/>
+    <vcpupin vcpu="10" cpuset="7"/>
+    <vcpupin vcpu="11" cpuset="15"/>
+    <emulatorpin cpuset="0-1,8-9"/>
+  </cputune>
+  <os firmware="efi">
+    <type arch="x86_64" machine="q35">hvm</type>
+    <firmware>
+      <feature enabled="yes" name="secure-boot"/>
+      <feature enabled="no" name="enrolled-keys"/>
+    </firmware>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv mode="custom">
+      <relaxed state="on"/>
+      <vapic state="on"/>
+      <spinlocks state="on" retries="8191"/>
+      <vpindex state="on"/>
+      <synic state="on"/>
+      <stimer state="on"/>
+      <reset state="on"/>
+      <frequencies state="on"/>
+      <tlbflush state="on"/>
+      <ipi state="on"/>
+    </hyperv>
+    <kvm>
+      <hidden state="on"/>
+    </kvm>
+    <vmport state="off"/>
+    <smm state="on"/>
+  </features>
+  <cpu mode="host-passthrough" check="none" migratable="off">
+    <topology sockets="1" dies="1" cores="6" threads="2"/>
+    <cache mode="passthrough"/>
+    <feature policy="require" name="topoext"/>
+  </cpu>
+  <clock offset="localtime">
+    <timer name="rtc" tickpolicy="catchup"/>
+    <timer name="pit" tickpolicy="delay"/>
+    <timer name="hpet" present="no"/>
+    <timer name="hypervclock" present="yes"/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled="no"/>
+    <suspend-to-disk enabled="no"/>
+  </pm>
+  <devices>
+    <!-- Private copy of the Windows bootloader (sudo windows-vm-setup) -->
+    <disk type="file" device="disk">
+      <driver name="qemu" type="raw"/>
+      <source file="/var/lib/libvirt/images/windows-esp.img"/>
+      <target dev="sda" bus="sata"/>
+      <boot order="1"/>
+    </disk>
+    <!-- The real dual-boot Windows SSD (T-FORCE 512GB, /dev/sda on the host).
+         SATA so Windows boots without virtio drivers. -->
+    <disk type="block" device="disk">
+      <driver name="qemu" type="raw" cache="none" io="native" discard="unmap"/>
+      <source dev="/dev/disk/by-id/ata-T-FORCE_512GB_TPBF2112290040300005"/>
+      <target dev="sdb" bus="sata"/>
+      <!-- OVMF only connects disks that have a boot order; without one bootmgr
+           can't see the Windows partition (0xc000000e) -->
+      <boot order="2"/>
+    </disk>
+    <controller type="sata" index="0"/>
+    <controller type="usb" model="qemu-xhci" ports="15"/>
+
+    <interface type="network">
+      <source network="default"/>
+      <model type="e1000e"/>
+    </interface>
+
+    <!-- RX 6800 XT + its HDMI/DP audio; plug a monitor into the card and switch inputs -->
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
+      </source>
+      <!-- Full ROM (legacy + UEFI GOP) read straight from the card in IGD-primary mode -->
+      <rom file="@gpuRom@"/>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0x0000" bus="0x03" slot="0x00" function="0x1"/>
+      </source>
+    </hostdev>
+
+    <!-- No keyboard/mouse here: USB devices behind the KVM switch's VM-side output are
+         hotplugged in by udev (kvm-usb in vfio.nix) -->
+
+    <tpm model="tpm-crb">
+      <backend type="emulator" version="2.0"/>
+    </tpm>
+    <!-- Virtual display for virt-manager's console, so boot can be watched without
+         switching the KVM; Windows sees it as a second monitor next to the 6800 XT -->
+    <graphics type="spice" autoport="yes">
+      <listen type="none"/>
+    </graphics>
+    <input type="tablet" bus="usb"/>
+    <video>
+      <model type="vga" vram="16384" heads="1" primary="yes"/>
+    </video>
+    <memballoon model="none"/>
+  </devices>
+</domain>

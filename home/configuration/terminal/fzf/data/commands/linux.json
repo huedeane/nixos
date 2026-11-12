@@ -68,5 +68,35 @@
     "command": "systemctl stop mount-nas && echo \"NAS unmounted.\"",
     "description": "Unmount QNAP NAS",
     "tags": ["nas", "qnap", "cifs", "unmount"]
+  },
+  {
+    "command": "virsh -c qemu:///system start windows",
+    "description": "Start Windows VM",
+    "tags": ["vm", "windows", "qemu", "vfio"]
+  },
+  {
+    "command": "virsh -c qemu:///system shutdown windows",
+    "description": "Shutdown Windows VM",
+    "tags": ["vm", "windows", "qemu", "vfio"]
+  },
+  {
+    "command": "virsh -c qemu:///system destroy windows",
+    "description": "Force Off Windows VM",
+    "tags": ["vm", "windows", "qemu", "vfio"]
+  },
+  {
+    "command": "virsh -c qemu:///system list --all",
+    "description": "List VMs",
+    "tags": ["vm", "qemu"]
+  },
+  {
+    "command": "virsh -c qemu:///system define $HOME/.config/nixos/hosts/modules/windows-vm.xml",
+    "description": "Redefine Windows VM From Repo XML",
+    "tags": ["vm", "windows", "qemu", "vfio"]
+  },
+  {
+    "command": "sudo tail -60 /var/log/libvirt/qemu/windows.log",
+    "description": "Windows VM QEMU Log",
+    "tags": ["vm", "windows", "qemu", "debug"]
   }
 ]
