@@ -1,6 +1,6 @@
 <!-- Windows passthrough VM, defined by hosts/modules/virtualisation/vfio/vfio.nix in the iGPU boot entry.
      Edits made in virt-manager are overwritten on the next boot; change this file instead. -->
-<domain type="kvm">
+<domain type="kvm" xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0">
   <name>windows</name>
   <!-- Fixed so re-defining on a live switch updates the domain instead of clashing -->
   <uuid>9bf2cbc7-9c16-4dc8-8691-a6cf46d2bc1f</uuid>
@@ -91,6 +91,8 @@
     <controller type="usb" model="qemu-xhci" ports="15"/>
 
     <interface type="network">
+      <!-- Fixed, or every re-define rolls a new one and Windows gets a new IP/adapter -->
+      <mac address="52:54:00:c7:f6:e9"/>
       <source network="default"/>
       <model type="e1000e"/>
     </interface>
@@ -109,6 +111,13 @@
       </source>
     </hostdev>
 
+    <!-- Speakers hang off the host's onboard jack (shared with the iGPU/USB IOMMU group,
+         so it can't be passed through); play guest audio into the host's PipeWire instead -->
+    <sound model="ich9">
+      <audio id="1"/>
+    </sound>
+    <audio id="1" type="pipewire" runtimeDir="/run/user/1000"/>
+
     <!-- No keyboard/mouse here: USB devices behind the KVM switch's VM-side output are
          hotplugged in by udev (kvm-usb in vfio.nix) -->
 
@@ -116,14 +125,26 @@
       <backend type="emulator" version="2.0"/>
     </tpm>
     <!-- Virtual display for virt-manager's console, so boot can be watched without
-         switching the KVM; Windows sees it as a second monitor next to the 6800 XT -->
+         switching the KVM; Windows sees it as a second monitor next to the 6800 XT.
+         QXL + spice-guest-tools in Windows lets the guest follow the window size;
+         64 MiB of video memory covers 1440p and above. -->
     <graphics type="spice" autoport="yes">
       <listen type="none"/>
     </graphics>
+    <channel type="spicevmc">
+      <target type="virtio" name="com.redhat.spice.0"/>
+    </channel>
     <input type="tablet" bus="usb"/>
     <video>
-      <model type="vga" vram="16384" heads="1" primary="yes"/>
+      <model type="qxl" ram="65536" vram="65536" vgamem="65536" heads="1" primary="yes"/>
     </video>
     <memballoon model="none"/>
   </devices>
+  <!-- QEMU's HDA mixer forwards the guest's volume to the PipeWire stream, but its amp
+       range is so small that Windows' slider saturates above ~10%. With the mixer off
+       Windows sees no hardware volume control and scales in software on its usual curve. -->
+  <qemu:commandline>
+    <qemu:arg value="-global"/>
+    <qemu:arg value="hda-duplex.mixer=off"/>
+  </qemu:commandline>
 </domain>

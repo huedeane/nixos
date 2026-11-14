@@ -631,6 +631,13 @@ hl.window_rule({
   size  = { "monitor_w*0.80", "monitor_h*0.70" },
 })
 
+-- The VM console grabs the keyboard via shortcuts-inhibit; ignore it so Hyprland binds still win
+hl.window_rule({
+  name                 = "windowrule-virt-manager",
+  match                = { class = "^(\\.?virt-manager.*)$" },
+  no_shortcuts_inhibit = true,
+})
+
 hl.window_rule({
   name  = "windowrule-firefox-connection",
   match = { initial_title = "Incoming Connection", initial_class = "firefox" },
