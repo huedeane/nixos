@@ -11,9 +11,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/sddm.nix
+    ../../modules/display/sddm/sddm.nix
   ]
-  ++ lib.optional withSecrets ../../modules/qnap-nas.nix;
+  ++ lib.optional withSecrets ../../modules/storage/qnap-nas/qnap-nas.nix;
 
   # Bootloader
   boot.loader = {

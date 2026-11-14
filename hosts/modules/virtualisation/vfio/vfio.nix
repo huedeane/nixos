@@ -24,7 +24,7 @@ let
   # falls back to a broken "platform" VBIOS (no connectors). Hand it the good image,
   # dumped once in IGD-primary mode, as an ACPI VFCT table, which amdgpu checks first.
   # The kernel's initrd table upgrade rejects VFCT, so GRUB's `acpi` command adds it.
-  vbios = ./cezanne-vbios.rom;
+  vbios = ./vbios/cezanne-vbios.rom;
   vfct = pkgs.runCommand "cezanne-vfct.aml" { nativeBuildInputs = [ pkgs.python3 ]; } ''
     python3 - ${vbios} $out <<'EOF'
     import struct, sys
@@ -219,7 +219,7 @@ in
     systemd.services.windows-vm-define.script = ''
       virsh net-autostart default
       virsh net-info default | grep -q 'Active: *yes' || virsh net-start default
-      virsh define ${pkgs.replaceVars ./windows-vm.xml { gpuRom = ./rx6800xt-vbios.rom; }}
+      virsh define ${pkgs.replaceVars ./windows-vm.xml { gpuRom = ./vbios/rx6800xt-vbios.rom; }}
     '';
   };
 }

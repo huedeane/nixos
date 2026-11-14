@@ -1,4 +1,4 @@
-<!-- Windows passthrough VM, defined by hosts/modules/vfio.nix in the iGPU boot entry.
+<!-- Windows passthrough VM, defined by hosts/modules/virtualisation/vfio/vfio.nix in the iGPU boot entry.
      Edits made in virt-manager are overwritten on the next boot; change this file instead. -->
 <domain type="kvm">
   <name>windows</name>

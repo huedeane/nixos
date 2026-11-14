@@ -11,10 +11,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/sddm.nix
-    ../../modules/vfio.nix
+    ../../modules/display/sddm/sddm.nix
+    ../../modules/virtualisation/vfio/vfio.nix
   ]
-  ++ lib.optional withSecrets ../../modules/qnap-nas.nix;
+  ++ lib.optional withSecrets ../../modules/storage/qnap-nas/qnap-nas.nix;
 
   # Bootloader
   boot.loader = {

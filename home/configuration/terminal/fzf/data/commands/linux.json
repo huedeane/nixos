@@ -90,7 +90,7 @@
     "tags": ["vm", "qemu"]
   },
   {
-    "command": "virsh -c qemu:///system define $HOME/.config/nixos/hosts/modules/windows-vm.xml",
+    "command": "virsh -c qemu:///system define $HOME/.config/nixos/hosts/modules/virtualisation/vfio/windows-vm.xml",
     "description": "Redefine Windows VM From Repo XML",
     "tags": ["vm", "windows", "qemu", "vfio"]
   },
