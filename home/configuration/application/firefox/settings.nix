@@ -5,6 +5,9 @@
 
   # FASTFOX
   "gfx.canvas.accelerated.cache-size" = 256;
+  # Native Wayland compositor gets Firefox killed by Hyprland (invalid wl_surface.attach)
+  "gfx.webrender.compositor" = false;
+  "widget.dmabuf.enabled" = false;
 
   # SECUREFOX
   # Tracking Protection

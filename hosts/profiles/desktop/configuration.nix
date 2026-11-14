@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   hostname,
@@ -66,6 +67,23 @@
     timeout = 15;
     efi.canTouchEfiVariables = true;
   };
+
+  # The KVM switch unplugs both monitors, so Hyprland shuffles every window onto a
+  # headless fallback output and back, which kills Firefox (wl_surface.attach error).
+  # Pin the dGPU connectors as always-connected with their EDIDs, dumped from
+  # /sys/class/drm/card1-DP-*/edid. Skipped in the iGPU entry, where the dGPU is the VM's
+  # and the same connector names would force phantom outputs on the iGPU.
+  hardware.firmware = [
+    (pkgs.runCommand "monitor-edid" { } ''
+      install -Dm444 ${./edid/dp-1.bin} $out/lib/firmware/edid/dp-1.bin
+      install -Dm444 ${./edid/dp-2.bin} $out/lib/firmware/edid/dp-2.bin
+    '')
+  ];
+  boot.kernelParams = lib.mkIf (!lib.elem "igpu" config.system.nixos.tags) [
+    "drm.edid_firmware=DP-1:edid/dp-1.bin,DP-2:edid/dp-2.bin"
+    "video=DP-1:e"
+    "video=DP-2:e"
+  ];
 
   # Networking
   networking = {
