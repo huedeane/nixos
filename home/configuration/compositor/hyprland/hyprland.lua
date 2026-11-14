@@ -71,6 +71,10 @@ do
     hl.env("XCURSOR_THEME", x_theme)
     hl.config({ cursor = { invisible = false, enable_hyprcursor = true } })
     hl.exec_cmd("hyprctl setcursor " .. hypr_theme .. " " .. (os.getenv("HYPRCURSOR_SIZE") or "24"))
+    -- Hyprland only hands XWayland its cursor when the server starts (still blank then), so reset the X root cursor
+    hl.exec_cmd("XCURSOR_THEME=" .. x_theme .. " xsetroot -cursor_name left_ptr")
+    -- uwsm finalize already exported the blank themes to systemd/dbus; push the real ones so launched apps inherit them
+    hl.exec_cmd("dbus-update-activation-environment --systemd HYPRCURSOR_THEME=" .. hypr_theme .. " XCURSOR_THEME=" .. x_theme)
   end
 
   local file = io.open(marker, "r")

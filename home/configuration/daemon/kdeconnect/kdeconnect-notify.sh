@@ -1,6 +1,7 @@
 # Listens for kdeconnectd's shareReceived D-Bus signal and pops a notification per received file
 
 device=""
+pending=0
 dbus-monitor --session "type='signal',interface='org.kde.kdeconnect.device.share',member='shareReceived'" |
   while read -r line; do
     case "$line" in
@@ -10,8 +11,13 @@ dbus-monitor --session "type='signal',interface='org.kde.kdeconnect.device.share
         id=${id%%/*}
         device=$(busctl --user get-property org.kde.kdeconnect "/modules/kdeconnect/devices/$id" \
           org.kde.kdeconnect.device name 2>/dev/null | sed -E 's/^s "(.*)"$/\1/')
+        pending=1
         ;;
+      # dbus-monitor also prints its own NameAcquired etc. on startup; only the arg of shareReceived is a file
+      signal* | method* | error*) pending=0 ;;
       string\ \"*)
+        [ "$pending" = 1 ] || continue
+        pending=0
         url=${line#string \"}
         url=${url%\"}
         file=${url#file://}

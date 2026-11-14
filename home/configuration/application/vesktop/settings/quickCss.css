@@ -390,6 +390,8 @@
   background-color: #303446;
   color: var(--yellow-3);
   padding: 0px 15px;
+  width: min-content;
+  height: 12px;
 }
 #app-mount .appAsidePanelWrapper_YRXZu0 .app_YRXZu0 .layers_Fd0FEH .content_pog62O .page_pog62O .chatContent_z_gUBg .messagesWrapper_8AE1Qq .chatGradient_8AE1Qq {
   border-radius: 10px;
