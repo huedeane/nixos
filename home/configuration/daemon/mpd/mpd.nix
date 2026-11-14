@@ -8,6 +8,9 @@ let
   mpdPartition = pkgs.writers.writePython3Bin "mpd-partition" {
     flakeIgnore = [ "E501" ];
   } (builtins.readFile ./scripts/mpd-partition.py);
+  mpdSongChange = pkgs.writers.writePython3Bin "mpd-song-change" {
+    flakeIgnore = [ "E501" ];
+  } (builtins.readFile ./scripts/mpd-song-change.py);
 in
 {
   home.packages = [ mpdPartition ];
@@ -38,6 +41,30 @@ in
     };
     Service = {
       ExecStart = "${mpdPartition}/bin/mpd-partition watch";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+    Install.WantedBy = [ "mpd.service" ];
+  };
+
+  # rmpc's on_song_change only fires while the TUI is open, so songs skipped from a
+  # keybind or played with rmpc closed never got their playCount bumped
+  systemd.user.services.mpd-song-change = {
+    Unit = {
+      Description = "Run the rmpc song-change script whenever MPD starts a new song";
+      After = [ "mpd.service" ];
+      BindsTo = [ "mpd.service" ];
+    };
+    Service = {
+      ExecStart = "${mpdSongChange}/bin/mpd-song-change ${config.xdg.configHome}/rmpc/script/song-change.sh";
+      Environment = "PATH=${
+        lib.makeBinPath [
+          config.programs.rmpc.package
+          pkgs.jq
+          pkgs.coreutils
+          pkgs.bash
+        ]
+      }";
       Restart = "on-failure";
       RestartSec = 2;
     };

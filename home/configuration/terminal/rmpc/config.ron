@@ -135,7 +135,8 @@
     First element is the command, rest are arguments.
     Nothing executed if left empty.
     */
-    on_song_change: ["~/.config/rmpc/script/song-change.sh"],
+    // Handled by the mpd-song-change user service instead, so it also runs with rmpc closed
+    on_song_change: None,
 
     /*
     Execute the command provided to on_song_change at rmpc startup.
