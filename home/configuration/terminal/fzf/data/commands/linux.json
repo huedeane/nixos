@@ -103,5 +103,30 @@
     "command": "sudo tail -60 /var/log/libvirt/qemu/windows.log",
     "description": "Windows VM QEMU Log",
     "tags": ["vm", "windows", "qemu", "debug"]
+  },
+  {
+    "command": "nmcli device wifi list --rescan yes",
+    "description": "List Wi-Fi Networks",
+    "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "nmcli --ask device wifi connect \"$(nmcli -t -f SSID device wifi list --rescan yes | grep . | sort -u | fzf --prompt='Wi-Fi> ')\"",
+    "description": "Connect To Wi-Fi Network (Prompts Password)",
+    "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "nmcli device disconnect wlp7s0",
+    "description": "Disconnect Wi-Fi",
+    "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "nmcli radio wifi off",
+    "description": "Turn Wi-Fi Off",
+    "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "nmcli radio wifi on",
+    "description": "Turn Wi-Fi On",
+    "tags": ["network", "wifi", "nmcli"]
   }
 ]

@@ -12,56 +12,17 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/application/steam/steam.nix
+    ../../modules/boot/grub/grub.nix
     ../../modules/display/sddm/sddm.nix
+    ../../modules/network/networkmanager/networkmanager.nix
     ../../modules/virtualisation/vfio/vfio.nix
   ]
   ++ lib.optional withSecrets ../../modules/storage/qnap-nas/qnap-nas.nix;
 
-  # Bootloader
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-      # Catppuccin with the "Booting in N seconds" countdown pinned to the bottom edge
-      theme = pkgs.runCommand "catppuccin-mocha-grub-theme" { } ''
-        cp -r ${
-          pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "grub";
-            rev = "main";
-            sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-          }
-        }/src/catppuccin-mocha-grub-theme $out
-        chmod -R u+w $out
-        sed -i 's/top = 82%/top = 100%-60/' $out/theme.txt
-      '';
-      # "auto" picks a low mode on the 1440p monitors; first one the firmware offers wins
-      gfxmodeEfi = "2560x1440,1920x1080,auto";
-      # extraEntries always lands above the submenu and os-prober entries, so append
-      # to grub.cfg after install-grub writes it. --class picks the theme icon
-      extraInstallCommands = ''
-        cat ${pkgs.writeText "grub-power-entries.cfg" ''
-          # GRUB has no real separators; a no-op entry fakes one
-          menuentry "────────────────────────────────────────" {
-            true
-          }
-          menuentry "UEFI Firmware Settings" --class efi {
-            fwsetup
-          }
-          menuentry "Reboot" --class restart {
-            reboot
-          }
-          menuentry "Shutdown" --class shutdown {
-            halt
-          }
-        ''} >> /boot/grub/grub.cfg
-      '';
-    };
-    timeout = 15;
-    efi.canTouchEfiVariables = true;
-  };
+  # Bootloader (shared GRUB setup in hosts/modules/boot/grub)
+  # "auto" picks a low mode on the 1440p monitors; first one the firmware offers wins
+  boot.loader.grub.gfxmodeEfi = "2560x1440,1920x1080,auto";
 
   # The KVM switch unplugs both monitors, so Hyprland shuffles every window onto a
   # headless fallback output and back, which kills Firefox (wl_surface.attach error).
@@ -83,7 +44,6 @@
   # Networking
   networking = {
     hostName = "${hostname}";
-    networkmanager.enable = true;
   };
 
   # Time zone
@@ -143,19 +103,13 @@
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
+    # No "input"/"uinput": they let any program read every keystroke (sudo password
+    # included) or inject fake ones
     extraGroups = [
       "networkmanager"
       "wheel"
-      "input"
-      "uinput"
     ];
   };
-
-  hardware.uinput.enable = true;
-
-  services.udev.extraRules = ''
-    KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
 
   # Phone Integration: KDE Connect (opens TCP/UDP 1714-1764)
   programs.kdeconnect.enable = true;

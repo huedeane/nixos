@@ -11,33 +11,16 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/application/steam/steam.nix
+    ../../modules/boot/grub/grub.nix
     ../../modules/display/sddm/sddm.nix
+    ../../modules/network/networkmanager/networkmanager.nix
   ]
   ++ lib.optional withSecrets ../../modules/storage/qnap-nas/qnap-nas.nix;
-
-  # Bootloader
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-      theme =
-        pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "grub";
-          rev = "main";
-          sha256 = "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
-        }
-        + "/src/catppuccin-mocha-grub-theme";
-    };
-    efi.canTouchEfiVariables = true;
-  };
 
   # Networking
   networking = {
     hostName = "${hostname}";
-    networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
   };
 
