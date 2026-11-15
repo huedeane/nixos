@@ -8,7 +8,7 @@ Item {
   property bool   propOpen:             false
   property int    propCurrentIndex:     0
   property color  propBackgroundColor:  config.ColorBase
-  property color  propAccentColor:      config.ColorGreen
+  property color  propAccentColor:      config.ColorAccent || config.ColorGreen
   property color  propTextColor:        config.ColorText
   property color  propDimTextColor:     config.ColorOverlay1
   property string propFontFamily:       config.Font

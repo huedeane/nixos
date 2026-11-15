@@ -110,7 +110,8 @@ Item {
       }
     }
 
-    // Focus ring: offset outside the control, rounded
+    // Focus ring: offset outside the control, rounded, in the pill's own accent
+    // (green for reboot, red for shutdown)
     Rectangle {
       // Position
       anchors {
@@ -122,7 +123,7 @@ Item {
       color: "transparent"
       radius: 6 * propScale
       border {
-        color: config.ColorGreen
+        color: idPill.propAccent
         width: 2 * propScale
       }
       visible: idPill.activeFocus

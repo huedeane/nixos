@@ -51,10 +51,11 @@ Item {
     // propCrop:
   }
 
-  // Overlay -300
+  // Overlay -300: darkens the bottom edge (theme.conf BottomFade="false" turns it off)
   Rectangle {
     anchors.fill: parent
     z: -300
+    visible: String(config.BottomFade) !== "false"
     gradient: Gradient {
       GradientStop { position: 0.0; color: "#00000000" }
       GradientStop { position: 0.5; color: "#00000000" }
@@ -77,7 +78,8 @@ Item {
     Clock {
       anchors {
         top: parent.top
-        topMargin: 120 * s
+        // 1080p pixels from the top (theme.conf ClockTopMargin)
+        topMargin: (config.ClockTopMargin !== undefined && config.ClockTopMargin !== "" ? parseInt(config.ClockTopMargin) : 120) * s
         horizontalCenter: parent.horizontalCenter
       }
 

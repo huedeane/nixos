@@ -14,12 +14,23 @@ stdenvNoCC.mkDerivation {
     qt5compat
   ];
 
+  # Two themes from one QML source: "sddm-theme" (video background) and "sddm-theme-space"
+  # (wallpaper background + lock screen palette), which only swaps theme.conf and the background
   installPhase =
     let
-      basePath = "$out/share/sddm/themes/sddm-theme";
+      themes = "$out/share/sddm/themes";
     in
     ''
-      mkdir -p ${basePath}
-      cp -rv $src/. ${basePath}/
+      mkdir -p ${themes}/sddm-theme
+      cp -rv $src/. ${themes}/sddm-theme/
+
+      space=${themes}/sddm-theme-space
+      mkdir -p $space
+      cp -r $src/. $space/
+      chmod -R u+w $space
+      rm $space/Assets/bg.mp4
+      cp ${../../resources/wallpaper.png} $space/Assets/bg.png
+      cp ${./space/theme.conf} $space/theme.conf
+      sed -i 's/^Name=.*/Name=Huedeane Space/; s/^Description=.*/Description=Huedeane SDDM Theme (space wallpaper)/' $space/metadata.desktop
     '';
 }

@@ -8,8 +8,9 @@ Item {
   property real   propScale:            1
   property color  propErrorColor:       config.ColorRed
   property color  propBackgroundColor:  config.ColorBase
-  property color  propAccentColor:      config.ColorGreen
+  property color  propAccentColor:      config.ColorAccent || config.ColorGreen
   property color  propTitleColor:       config.ColorYellow
+  property color  propUserColor:        config.ColorUser || propAccentColor
   property color  propTextColor:        config.ColorText
   property color  propDimTextColor:     config.ColorOverlay1
   property string propFontFamily:       config.Font
@@ -91,13 +92,15 @@ Item {
     id: idCard
 
     // Size
-    width: 330 * propScale
+    // theme.conf LoginWidth, in 1080p pixels
+    width: (config.LoginWidth !== undefined && config.LoginWidth !== "" ? parseInt(config.LoginWidth) : 330) * propScale
     height: idCardColumn.implicitHeight + 28 * propScale
 
     // Position
     anchors {
       centerIn: parent
-      verticalCenterOffset: 150 * propScale
+      // Distance below screen centre, in 1080p pixels (theme.conf LoginOffsetY)
+      verticalCenterOffset: (config.LoginOffsetY !== undefined && config.LoginOffsetY !== "" ? parseInt(config.LoginOffsetY) : 150) * propScale
     }
 
     // Modification
@@ -164,7 +167,7 @@ Item {
           anchors.right: parent.right
 
           // Modification
-          color: propAccentColor
+          color: propUserColor
           font {
             italic: true
             family: propFontFamily
@@ -485,9 +488,10 @@ Item {
           color: idLoginMouseArea.pressed ? withAlpha(propAccentColor, 0.25)
             : idLoginMouseArea.containsMouse ? withAlpha(propBackgroundColor, 0.9)
             : "transparent"
+          // theme.conf LoginButtonBorder (px, default 1); one thicker on hover
           border {
             color: propAccentColor
-            width: idLoginMouseArea.containsMouse ? 2 : 1
+            width: (config.LoginButtonBorder !== undefined && config.LoginButtonBorder !== "" ? parseInt(config.LoginButtonBorder) : 1) + (idLoginMouseArea.containsMouse ? 1 : 0)
           }
           opacity: propStateLoggingIn ? 0.5 : 1
 

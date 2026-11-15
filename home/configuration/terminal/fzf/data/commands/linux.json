@@ -20,6 +20,11 @@
     "tags": ["sddm", "theme"]
   },
   {
+    "command": "sddm-greeter-qt6 --test-mode --theme /run/current-system/sw/share/sddm/themes/sddm-theme-space",
+    "description": "Open Login Manager In Test Mode (Space Theme)",
+    "tags": ["sddm", "theme", "space"]
+  },
+  {
     "command": "nix-collect-garbage",
     "description": "Nix Garbage Collection",
     "tags": ["nix", "maintenance", "cleanup"]

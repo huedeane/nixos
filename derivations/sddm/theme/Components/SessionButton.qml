@@ -11,7 +11,7 @@ Item {
   property real   propScale:            1
   property color  propTextColor:        config.ColorText
   property color  propDimTextColor:     config.ColorOverlay1
-  property color  propAccentColor:      config.ColorGreen
+  property color  propAccentColor:      config.ColorAccent || config.ColorGreen
   property color  propNameColor:        config.ColorYellow
   property color  propBackgroundColor:  config.ColorBase
   property string propFontFamily:       config.Font
