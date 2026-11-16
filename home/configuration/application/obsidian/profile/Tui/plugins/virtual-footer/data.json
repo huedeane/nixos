@@ -1,0 +1,16 @@
+{
+  "rules": [
+    {
+      "name": "Default Rule",
+      "enabled": true,
+      "type": "folder",
+      "contentSource": "file",
+      "footerText": "\n```dataviewjs\ndv.view(\"Plugin/Virtual Footer/BaseFooter\", {dv})\n```",
+      "renderLocation": "footer",
+      "recursive": true,
+      "path": "",
+      "footerFilePath": "Plugin/Virtual Footer/Base.md"
+    }
+  ],
+  "refreshOnFileOpen": false
+}

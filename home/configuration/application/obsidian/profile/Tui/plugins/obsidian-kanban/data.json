@@ -1,0 +1,67 @@
+{
+  "move-tags": true,
+  "tag-colors": [
+    {
+      "tagKey": "#P1",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(237, 135, 150, 1)"
+    },
+    {
+      "tagKey": "#P2",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(238, 212, 159, 1)"
+    },
+    {
+      "tagKey": "#P3",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(166, 218, 149, 1)"
+    },
+    {
+      "tagKey": "#Mercenary",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(138, 173, 244, 1)"
+    },
+    {
+      "tagKey": "#WorldBuilding",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(198, 160, 246, 1)"
+    },
+    {
+      "tagKey": "#Personal",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(245, 169, 127, 1)"
+    },
+    {
+      "tagKey": "#All",
+      "color": "rgba(36, 39, 58, 1)",
+      "backgroundColor": "rgba(245, 189, 230, 1)"
+    }
+  ],
+  "tag-sort": [
+    {
+      "tag": "#All"
+    },
+    {
+      "tag": "#Mercenary"
+    },
+    {
+      "tag": "#WorldBuilding"
+    },
+    {
+      "tag": "#Personal"
+    },
+    {
+      "tag": "#P1"
+    },
+    {
+      "tag": "#P3"
+    },
+    {
+      "tag": "#P2"
+    }
+  ],
+  "tag-action": "kanban",
+  "show-checkboxes": false,
+  "full-list-lane-width": false,
+  "move-task-metadata": false
+}

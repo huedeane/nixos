@@ -1,0 +1,47 @@
+{
+  "confirmDeletion": true,
+  "showAddCommand": false,
+  "debug": false,
+  "editorMenu": [],
+  "fileMenu": [],
+  "leftRibbon": [],
+  "rightRibbon": [],
+  "titleBar": [],
+  "statusBar": [],
+  "pageHeader": [],
+  "macros": [],
+  "explorer": [],
+  "textToolbarCommands": [],
+  "hide": {
+    "statusbar": [],
+    "leftRibbon": [
+      "Open virtual content in sidebar",
+      "Open command palette",
+      "Omnisearch",
+      "Open map view",
+      "Create new base",
+      "Publish changes...",
+      "Open quick switcher",
+      "Create new canvas",
+      "Open today's daily note",
+      "Insert template",
+      "Templater",
+      "Create new board",
+      "Open graph view"
+    ],
+    "editorMenuItems": [],
+    "fileMenuItems": []
+  },
+  "spacing": 0,
+  "advancedToolbar": {
+    "rowHeight": 48,
+    "rowCount": 1,
+    "spacing": 0,
+    "buttonWidth": 48,
+    "columnLayout": false,
+    "mappedIcons": [],
+    "tooltips": false,
+    "heightOffset": 0
+  },
+  "spacingReset": true
+}

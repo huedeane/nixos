@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "type": "group",
+      "ctime": 1747641838307,
+      "items": [
+        {
+          "type": "folder",
+          "ctime": 1749447791812,
+          "path": "Plugin"
+        },
+        {
+          "type": "folder",
+          "ctime": 1749447794593,
+          "path": "Reference Note"
+        },
+        {
+          "type": "folder",
+          "ctime": 1749447811876,
+          "path": "World"
+        },
+        {
+          "type": "file",
+          "ctime": 1749447798602,
+          "path": "Home.md"
+        },
+        {
+          "type": "file",
+          "ctime": 1749447806938,
+          "path": "README.md"
+        }
+      ],
+      "title": "Index"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "theme": "obsidian",
+  "cssTheme": "catppuccin-custom",
+  "enabledCssSnippets": [],
+  "nativeMenus": false,
+  "monospaceFontFamily": "ComicShannsMono Nerd Font Mono",
+  "textFontFamily": "ComicShannsMono Nerd Font Mono",
+  "interfaceFontFamily": "ComicShannsMono Nerd Font Mono",
+  "showRibbon": true
+}
