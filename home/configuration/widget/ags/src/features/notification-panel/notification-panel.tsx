@@ -24,6 +24,7 @@ const ICON_MUSIC = "\u{f001}"
 const ICON_CLIPBOARD = "\u{f0ea}"
 const ICON_WARNING = "\u{f071}"
 const ICON_CHECK = "\u{f00c}"
+const ICON_KDECONNECT = "\u{f10b}"
 const ICON_CLOSE = "×"
 
 const TEXT = "#c6d0f5"
@@ -37,8 +38,10 @@ const RED = "#e78284"
 
 const MEDIA_APPS = ["rmpc", "mpd", "mpv", "spotify"]
 const CHAT_APPS = ["vesktop", "discord", "webcord", "telegramdesktop", "signal", "slack"]
+// Notifications mirrored from the phone (and files it sends) all come in under KDE Connect
+const KDECONNECT_APPS = ["kde connect"]
 
-export type Category = "media" | "chat" | "system"
+export type Category = "media" | "chat" | "kdeconnect" | "system"
 export type Urgency = "LOW" | "NORMAL" | "CRITICAL"
 
 export type Item = {
@@ -69,6 +72,7 @@ const FILTERS: { key: Category | "all"; label: string }[] = [
   { key: "all", label: "All" },
   { key: "media", label: "Media" },
   { key: "chat", label: "Chat" },
+  { key: "kdeconnect", label: "KDE Connect" },
   { key: "system", label: "System" },
 ]
 
@@ -76,6 +80,7 @@ const categoryOf = (appName: string): Category => {
   const a = appName.toLowerCase()
   if (MEDIA_APPS.includes(a)) return "media"
   if (CHAT_APPS.includes(a)) return "chat"
+  if (KDECONNECT_APPS.includes(a)) return "kdeconnect"
   return "system"
 }
 
@@ -95,11 +100,28 @@ const safeMarkup = (s: string) => {
   }
 }
 
+// Some senders (Slack etc. via KDE Connect) use HTML, which Pango rejects as a whole (so the
+// raw tags got shown). Map the common bits onto Pango markup and drop tags it doesn't know.
+const PANGO_TAGS = ["b", "i", "u", "s", "tt", "big", "small", "sub", "sup", "span"]
+const htmlToPango = (s: string) =>
+  s
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<(\/?)strong\b[^>]*>/gi, "<$1b>")
+    .replace(/<(\/?)em\b[^>]*>/gi, "<$1i>")
+    .replace(/<(\/?)(?:code|pre)\b[^>]*>/gi, "<$1tt>")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&(?!(?:[a-z]+|#\d+|#x[0-9a-f]+);)/gi, "&amp;")
+    .replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (tag, name: string) =>
+      PANGO_TAGS.includes(name.toLowerCase()) ? tag : "",
+    )
+
 const cleanBody = (body: string, summary: string) =>
   safeMarkup(
-    body.replace(
-      new RegExp(`^<span[^>]*>${escapeRegex(summary)}</span>\\s*<span[^>]*>⋮</span>\\s*`),
-      "",
+    htmlToPango(
+      body.replace(
+        new RegExp(`^<span[^>]*>${escapeRegex(summary)}</span>\\s*<span[^>]*>⋮</span>\\s*`),
+        "",
+      ),
     ),
   )
 
@@ -238,6 +260,8 @@ function ItemIcon({ item }: { item: Item }) {
       ? [ICON_CHECK, GREEN]
       : item.category === "media"
       ? [ICON_MUSIC, GREEN]
+      : item.category === "kdeconnect"
+      ? [ICON_KDECONNECT, LAVENDER]
       : item.app === "clipboard"
         ? [ICON_CLIPBOARD, SUBTEXT]
         : [ICON_BELL, SUBTEXT]
@@ -317,7 +341,11 @@ function Row({ item, src }: { item: Item; src: Source }) {
           <box spacing={8}>
             <label
               useMarkup
-              label={paint(item.summary || item.app, summaryColor, true)}
+              label={paint(
+                item.category === "kdeconnect" ? `${item.summary || "KDE Connect"} (kde-connect)` : item.summary || item.app,
+                summaryColor,
+                true,
+              )}
               xalign={0}
               ellipsize={Pango.EllipsizeMode.END}
             />

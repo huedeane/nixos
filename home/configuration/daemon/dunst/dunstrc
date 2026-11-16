@@ -102,3 +102,7 @@ appname = rmpc
 format = "%b"
 word_wrap = no
 ellipsize = end
+
+[kdeconnect]
+appname = "KDE Connect"
+format = "<span font_size='14pt'> <b>--- %s (kde-connect) ---</b> </span>\n%b"
