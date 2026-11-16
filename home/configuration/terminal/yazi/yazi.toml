@@ -41,6 +41,9 @@ play = [
 music = [
   { run = "rmpc-open.sh %s", desc = "Play in rmpc", for = "linux", orphan = true },
 ]
+obsidian = [
+  { run = "obsidian-open.sh %s1", desc = "Obsidian", for = "linux", orphan = true },
+]
 open = [
   { run = "xdg-open %s1", desc = "Open", for = "linux" },
   { run = "open %s", desc = "Open", for = "macos" },
@@ -84,6 +87,12 @@ rules = [
   ] },
   { url = "*.sql", use = [
     "sql",
+    "reveal",
+  ] },
+  # Markdown (matched by name, ahead of the text/* rule): Enter edits in $EDITOR, <space>o opens in Obsidian
+  { url = "*.md", use = [
+    "edit",
+    "obsidian",
     "reveal",
   ] },
   # Text
