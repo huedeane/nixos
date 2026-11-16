@@ -16,13 +16,17 @@ PREVIEW='
     fzf-preview.sh "$f2"
     rm -f "$f"
 '
+# Clipboard text is untrusted (web pages, KDE Connect), so EDIT expands a leading ~ by hand
+# instead of eval, which would run any $(...) in it. Keep comments out of these strings:
+# fzf ends an execute(...) action at a ")" followed by "," or "+", so prose inside breaks the bind.
 EDIT='
     t=$(printf %s {} | clipvault get 2>/dev/null) || exit
     case $t in
-        /*|~/*|./*)
-            p=$(eval printf %s "\"$t\"")
-            [ -f "$p" ] && exec '"$EDITOR_CMD"' "$p" ;;
+        "~/"*) p=$HOME/${t#"~/"} ;;
+        /*|./*) p=$t ;;
+        *) p= ;;
     esac
+    [ -n "$p" ] && [ -f "$p" ] && exec '"$EDITOR_CMD"' "$p"
     f=$(mktemp) || exit
     printf %s "$t" >"$f"
     '"$EDITOR_CMD"' "$f"

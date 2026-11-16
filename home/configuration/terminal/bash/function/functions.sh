@@ -27,7 +27,7 @@ nix-rebuild() {
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
   _sudo_upfront || return 1
-  WITH_SECRETS=$(_with_secrets) nh os switch "$NIXOS_CONFIG" -H "$host" --impure
+  WITH_SECRETS=$(_with_secrets) nh os switch "$NIXOS_CONFIG" -H "$host" --impure -Q
 }
 
 nix-rebuild-edit() {
@@ -36,7 +36,7 @@ nix-rebuild-edit() {
     "$NIXOS_CONFIG/hosts/profiles/$host/configuration.nix" \
     || return 1
   _sudo_upfront || return 1
-  WITH_SECRETS=$(_with_secrets) EDIT_MODE=1 nh os switch "$NIXOS_CONFIG" -H "$host" --impure
+  WITH_SECRETS=$(_with_secrets) EDIT_MODE=1 nh os switch "$NIXOS_CONFIG" -H "$host" --impure -Q
 }
 
 nix-edit() {

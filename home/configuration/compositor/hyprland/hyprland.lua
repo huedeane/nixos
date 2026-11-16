@@ -643,6 +643,14 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  name   = "windowrule-share-picker",
+  match  = { class = "^(hyprland-share-picker)$" },
+  float  = true,
+  center = true,
+  size   = { "monitor_w*0.40", "monitor_h*0.50" },
+})
+
+hl.window_rule({
   name  = "windowrule-firefox-connection",
   match = { initial_title = "Incoming Connection", initial_class = "firefox" },
   float = true,

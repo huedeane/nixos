@@ -6,8 +6,8 @@
     gtk.enable = true;
     x11.enable = true;
     hyprcursor.enable = true;
-    name = "catppuccin-frappe-lavender-cursors";
+    name = "catppuccin-frappe-yellow-cursors";
     size = 24;
-    package = pkgs.catppuccin-cursors.frappeLavender;
+    package = pkgs.catppuccin-cursors.frappeYellow;
   };
 }

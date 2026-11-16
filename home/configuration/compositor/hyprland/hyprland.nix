@@ -89,7 +89,7 @@ in
   xdg.configFile."uwsm/env".text = ''
     export PATH="$HOME/.local/bin:$PATH"
     export GTK_USE_PORTAL=1
-    export XCURSOR_THEME=catppuccin-frappe-green-cursors
+    export XCURSOR_THEME=${config.home.pointerCursor.name}
     export XCURSOR_SIZE=36
     export EDITOR=nvim
     export VISUAL=nvim
@@ -102,7 +102,7 @@ in
   '';
 
   xdg.configFile."uwsm/env-hyprland".text = ''
-    export HYPRCURSOR_THEME=catppuccin-frappe-green-cursors
+    export HYPRCURSOR_THEME=${config.home.pointerCursor.name}
     export HYPRCURSOR_SIZE=36
   '';
 

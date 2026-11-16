@@ -44,7 +44,7 @@ auth="SUDO_ASKPASS='$SUDO_ASKPASS' SUDO_PROMPT='NixOS' sudo -A -v || { echo 1 > 
 secrets=""
 grep -qs AGE-SECRET-KEY "$HOME/.config/sops/age/keys.txt" && secrets="WITH_SECRETS=1"
 tmux new-session -d -s "$session" -x 220 -y 50 \
-  "$auth SUDO_PROMPT='NixOS' NH_SUDO_ASKPASS='$SUDO_ASKPASS' $secrets nh os switch '$NIXOS_CONFIG' -H '$NIXOS_HOST' --impure 2>&1; echo \$? > '$status_file'; kill \$!"
+  "$auth SUDO_PROMPT='NixOS' NH_SUDO_ASKPASS='$SUDO_ASKPASS' $secrets nh os switch '$NIXOS_CONFIG' -H '$NIXOS_HOST' --impure -Q 2>&1; echo \$? > '$status_file'; kill \$!"
 tmux set-option -g history-limit "$old_limit"
 tmux set-option -w -t "$session" remain-on-exit on
 tmux set-option -w -t "$session" automatic-rename off
