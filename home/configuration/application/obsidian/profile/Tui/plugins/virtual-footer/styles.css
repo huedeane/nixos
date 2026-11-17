@@ -1,0 +1,40 @@
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-sizer>.virtual-footer-dynamic-content-element {
+    max-width: var(--max-width);
+    width: var(--line-width);
+    margin-inline: var(--content-margin);
+}
+
+.markdown-source-view.mod-cm6 .cm-contentContainer.virtual-footer-remove-flex {
+    flex: 0 1 auto;
+}
+
+.virtual-footer-footer-group{
+    padding-bottom: var(--virtual-footer-bottom-padding, 240px);
+}
+
+.virtual-footer-footer-group.virtual-footer-above-backlinks {
+    padding-bottom: 0;
+}
+
+.virtual-footer-embedded-content.virtual-footer-header-group,
+.virtual-footer-canvas-content.virtual-footer-header-group {
+    margin-bottom: var(--p-spacing);
+}
+
+.virtual-footer-embedded-content.virtual-footer-footer-group,
+.virtual-footer-canvas-content.virtual-footer-footer-group {
+    margin-top: var(--p-spacing);
+}
+
+.markdown-preview-view [class^="el-h"] > .virtual-footer-section-header-group,
+.markdown-preview-view [class*=" el-h"] > .virtual-footer-section-header-group {
+    margin-top: var(--p-spacing);
+}
+
+.markdown-preview-view .el-p > .virtual-footer-section-header-group,
+.markdown-preview-view .el-ul > .virtual-footer-section-header-group,
+.markdown-preview-view .el-ol > .virtual-footer-section-header-group,
+.markdown-preview-view .el-div > .virtual-footer-section-header-group,
+.markdown-preview-view .el-table > .virtual-footer-section-header-group {
+    margin-top: var(--p-spacing);
+}

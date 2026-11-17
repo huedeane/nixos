@@ -1,0 +1,12 @@
+{
+  "name": "Tui",
+  "autoSync": true,
+  "appearance": true,
+  "app": true,
+  "bookmarks": true,
+  "communityPlugins": true,
+  "corePlugins": true,
+  "graph": true,
+  "hotkeys": true,
+  "modifiedAt": "2026-11-26T10:08:45.934Z"
+}

@@ -1,0 +1,19 @@
+{
+  "activeProfile": {
+    "name": "test",
+    "modifiedAt": "2026-11-26T00:24:49.371Z"
+  },
+  "profileUpdate": true,
+  "profileUpdateDelay": 800,
+  "uiUpdate": true,
+  "uiUpdateInterval": 1000,
+  "devices": {
+    "c2043c5594662743498f4920a4d582cc37df77e31b521086f11b6f180a6437fd": "/home/huedeane/.local/share/obsidianplugins/Profiles"
+  },
+  "statusbarInteraction": {
+    "click": "auto",
+    "ctrl_click": "none",
+    "shift_click": "none",
+    "alt_click": "none"
+  }
+}

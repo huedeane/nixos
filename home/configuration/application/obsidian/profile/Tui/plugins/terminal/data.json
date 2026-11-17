@@ -1,0 +1,119 @@
+{
+  "addToCommand": true,
+  "addToContextMenu": true,
+  "createInstanceNearExistingOnes": false,
+  "errorNoticeTimeout": 0,
+  "experiments": {},
+  "exposeInternalModules": true,
+  "focusOnNewInstance": true,
+  "hideStatusBar": "never",
+  "showTerminalTabPrefix": false,
+  "tabStatus": "animated",
+  "interceptKeysWhenFocused": false,
+  "interceptLogging": true,
+  "keymappings": [
+    {
+      "action": "passthrough",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": true,
+      "key": "Enter",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    },
+    {
+      "action": "sendToObsidian",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": true,
+      "key": "p",
+      "meta": false,
+      "platform": "win32",
+      "shift": false
+    },
+    {
+      "action": "sendToObsidian",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": false,
+      "key": "p",
+      "meta": true,
+      "platform": "darwin",
+      "shift": false
+    }
+  ],
+  "keymappingDefaultsVersion": 1,
+  "language": "",
+  "macOSOptionKeyPassthrough": true,
+  "rightClickAction": "copyPaste",
+  "newInstanceBehavior": "newTab",
+  "noticeTimeout": 5,
+  "openChangelogOnUpdate": false,
+  "pinNewInstance": false,
+  "preferredRenderer": "webgl",
+  "prewarmConPty": true,
+  "windowsTerminalConsoleHost": true,
+  "pythonExecutable": "/etc/profiles/per-user/huedeane/bin/python3",
+  "profiles": {
+    "nvim": {
+      "args": [
+        "-c",
+        "export TERMINFO_DIRS=\"/run/current-system/sw/share/terminfo:/etc/profiles/per-user/huedeane/share/terminfo\"; d=\"${XDG_RUNTIME_DIR:-/tmp}\"; c=\"$(/run/current-system/sw/bin/cat \"$d/obsidian-claude-target\" 2>/dev/null)\"; if [ -n \"$c\" ]; then /run/current-system/sw/bin/rm -f \"$d/obsidian-claude-target\"; cd \"$c\" && exec /run/current-system/sw/bin/bash -lc \"exec claude\"; fi; f=\"$(/run/current-system/sw/bin/cat \"${XDG_RUNTIME_DIR:-/tmp}/obsidian-nvim-target\" 2>/dev/null)\"; if [ -n \"$f\" ]; then exec /etc/profiles/per-user/huedeane/bin/nvim \"$f\"; else exec /etc/profiles/per-user/huedeane/bin/nvim; fi"
+      ],
+      "environment": [],
+      "executable": "/bin/sh",
+      "followTheme": true,
+      "name": "Neovim",
+      "platforms": {
+        "linux": true
+      },
+      "pythonExecutable": "/etc/profiles/per-user/huedeane/bin/python3",
+      "restoreHistory": false,
+      "rightClickAction": "copyPaste",
+      "successExitCodes": [
+        "0",
+        "SIGINT",
+        "SIGTERM"
+      ],
+      "terminalOptions": {
+        "documentOverride": null
+      },
+      "type": "integrated",
+      "win32Backend": "conpty"
+    },
+    "claude": {
+      "args": [
+        "-c",
+        "export PATH=\"/etc/profiles/per-user/huedeane/bin:/run/current-system/sw/bin:$PATH\"; export TERMINFO_DIRS=\"/run/current-system/sw/share/terminfo:/etc/profiles/per-user/huedeane/share/terminfo\"; exec /etc/profiles/per-user/huedeane/bin/claude"
+      ],
+      "environment": [],
+      "executable": "/bin/sh",
+      "followTheme": true,
+      "name": "Claude Code",
+      "platforms": {
+        "linux": true
+      },
+      "pythonExecutable": "/etc/profiles/per-user/huedeane/bin/python3",
+      "restoreHistory": false,
+      "rightClickAction": "copyPaste",
+      "successExitCodes": [
+        "0",
+        "SIGINT",
+        "SIGTERM"
+      ],
+      "terminalOptions": {
+        "documentOverride": null,
+        "fontFamily": "\"ComicShannsMono Nerd Font Mono\", monospace"
+      },
+      "type": "integrated",
+      "win32Backend": "conpty"
+    }
+  },
+  "defaultProfile": "nvim",
+  "terminalOptions": {
+    "documentOverride": null,
+    "fontFamily": "ComicShannsMono Nerd Font Mono",
+    "fontSize": 16
+  }
+}

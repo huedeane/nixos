@@ -1,0 +1,118 @@
+{
+  "addToCommand": true,
+  "addToContextMenu": true,
+  "createInstanceNearExistingOnes": false,
+  "errorNoticeTimeout": 0,
+  "exposeInternalModules": true,
+  "focusOnNewInstance": true,
+  "hideStatusBar": "never",
+  "showTerminalTabPrefix": false,
+  "interceptKeysWhenFocused": false,
+  "interceptLogging": true,
+  "keymappings": [
+    {
+      "action": "sendEscapeSequence",
+      "actionArg": "\r",
+      "alt": false,
+      "ctrl": false,
+      "key": "Enter",
+      "meta": false,
+      "platform": null,
+      "shift": true
+    },
+    {
+      "action": "scrollPages",
+      "actionArg": -1,
+      "alt": false,
+      "ctrl": false,
+      "key": "PageUp",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    },
+    {
+      "action": "scrollPages",
+      "actionArg": 1,
+      "alt": false,
+      "ctrl": false,
+      "key": "PageDown",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    },
+    {
+      "action": "scrollToTop",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": false,
+      "key": "Home",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    },
+    {
+      "action": "scrollToBottom",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": false,
+      "key": "End",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    },
+    {
+      "action": "passthrough",
+      "actionArg": null,
+      "alt": false,
+      "ctrl": true,
+      "key": "Enter",
+      "meta": false,
+      "platform": null,
+      "shift": false
+    }
+  ],
+  "language": "",
+  "macOSOptionKeyPassthrough": true,
+  "rightClickAction": "copyPaste",
+  "newInstanceBehavior": "newTab",
+  "noticeTimeout": 5,
+  "openChangelogOnUpdate": false,
+  "pinNewInstance": false,
+  "preferredRenderer": "webgl",
+  "prewarmConPty": true,
+  "pythonExecutable": "/etc/profiles/per-user/huedeane/bin/python3",
+  "profiles": {
+    "nvim": {
+      "args": [
+        "-c",
+        "f=\"$(/run/current-system/sw/bin/cat \"${XDG_RUNTIME_DIR:-/tmp}/obsidian-nvim-target\" 2>/dev/null)\"; if [ -n \"$f\" ]; then exec /etc/profiles/per-user/huedeane/bin/nvim \"$f\"; else exec /etc/profiles/per-user/huedeane/bin/nvim; fi"
+      ],
+      "environment": [],
+      "executable": "/bin/sh",
+      "followTheme": true,
+      "name": "Neovim",
+      "platforms": {
+        "linux": true
+      },
+      "pythonExecutable": "/etc/profiles/per-user/huedeane/bin/python3",
+      "restoreHistory": false,
+      "rightClickAction": "copyPaste",
+      "successExitCodes": [
+        "0",
+        "SIGINT",
+        "SIGTERM"
+      ],
+      "terminalOptions": {
+        "documentOverride": null
+      },
+      "type": "integrated",
+      "win32Backend": "conpty"
+    }
+  },
+  "defaultProfile": "nvim",
+  "terminalOptions": {
+    "documentOverride": null,
+    "fontFamily": "ComicShannsMono Nerd Font Mono",
+    "fontSize": 16
+  }
+}

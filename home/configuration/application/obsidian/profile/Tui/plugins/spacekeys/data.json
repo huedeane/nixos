@@ -1,0 +1,19 @@
+{
+  "keymapFile": {
+    "path": "Plugin/Spacekey/keymap.md",
+    "format": "auto",
+    "extend": false,
+    "autoReload": true
+  },
+  "modal": {
+    "delay": 500,
+    "execDelay": 100,
+    "showInvalid": true,
+    "backspaceReverts": true,
+    "backspaceCloses": true,
+    "trimDescriptions": true,
+    "dimBackground": true
+  },
+  "activateOnSpace": "disabled",
+  "pluginVersion": "0.5.0"
+}

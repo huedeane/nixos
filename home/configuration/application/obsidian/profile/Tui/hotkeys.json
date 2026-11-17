@@ -1,0 +1,49 @@
+{
+  "terminal:close-terminal": [],
+  "terminal:find-in-terminal": [],
+  "terminal:clear-terminal": [],
+  "terminal:toggle-focus-on-last-terminal": [],
+  "global-search-and-replace:search-and-replace": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "R"
+    }
+  ],
+  "command-palette:open": [],
+  "editor:open-link-in-new-leaf": [],
+  "editor:delete-paragraph": [],
+  "global-search:open": [],
+  "markdown:add-metadata-property": [],
+  "workspace:close": [],
+  "workspace:close-window": [],
+  "file-explorer:new-file-in-new-pane": [],
+  "file-explorer:new-file": [],
+  "editor:follow-link": [],
+  "graph:open": [],
+  "obsidian-icon-folder:iconize:set-icon-for-file": [],
+  "editor:insert-link": [],
+  "app:go-back": [],
+  "app:go-forward": [],
+  "workspace:new-tab": [],
+  "app:open-help": [],
+  "editor:open-link-in-new-window": [],
+  "editor:open-link-in-new-split": [],
+  "app:open-settings": [],
+  "switcher:open": [],
+  "workspace:edit-file-title": [],
+  "editor:save-file": [],
+  "editor:open-search-replace": [],
+  "editor:open-search": [],
+  "workspace:goto-last-tab": [],
+  "spacekeys:leader": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": " "
+    }
+  ]
+}
