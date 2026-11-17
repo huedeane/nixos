@@ -85,6 +85,7 @@ keymap = [
   { on = ["<space>", "t"], run = "shell 'tree-directory.sh Yazi'", desc = "Get directory tree output" },
   { on = ["<space>", "v"], run = "shell 'nvim .' --block", desc = "Open nvim at this directory" },
   { on = ["<space>", "s"], run = "plugin column-header", desc = "Calculate folder size" },
+  { on = ["<space>", "o"], run = "shell 'case %h in *.md) obsidian-open.sh %h ;; *) notify-send Yazi \"Not a markdown file\" ;; esac' --orphan", desc = "Open hovered markdown in Obsidian" },
 
   # Linemode
   { on = ["m", "s"], run = "linemode size", desc = "Linemode: size" },
