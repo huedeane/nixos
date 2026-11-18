@@ -3,6 +3,7 @@ import type { Accessor } from "ags"
 import { Gdk, Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import AstalApps from "gi://AstalApps"
+import Gio from "gi://Gio"
 import GLib from "gi://GLib"
 import Pango from "gi://Pango"
 import app from "ags/gtk4/app"
@@ -14,8 +15,10 @@ app.apply_css(style)
 const RECENT_MAX = 5
 const RECENT_FILE = `${GLib.get_user_cache_dir()}/ags/launcher-recent.json`
 const TILE_COLORS = 8
+const SEARCH_URL = "https://duckduckgo.com/?q="
 
 const ICON_SEARCH = "\u{f002}"
+const ICON_WEB = "\u{f0ac}"
 const ICON_TERMINAL = "\u{f120}"
 const ICON_NIX = "\u{f313}"
 
@@ -78,6 +81,15 @@ const highlight = (text: string, query: string, color: string, bold = false, mat
   if (qi < q.length) return null
   const span = `<span foreground="${color}">${out}</span>`
   return bold ? `<b>${span}</b>` : span
+}
+
+const hostOf = (term: string) => {
+  if (/\s/.test(term) || !/[.:]/.test(term)) return null
+  try {
+    return GLib.Uri.parse(term.includes("://") ? term : `http://${term}`, GLib.UriFlags.NONE).get_host()
+  } catch {
+    return null
+  }
 }
 
 const loadRecent = (): string[] => {
@@ -158,9 +170,9 @@ export function LauncherPanel() {
   // Before typing or moving, the search box has focus and nothing is selected; typing moves
   // the focus to the first result (the entry keeps the keyboard, so typing still works)
   const showSelection = navigating
-  // While searching, the two "Also try" rows follow the results in the selection
+  // While searching, the three "Also try" rows follow the results in the selection
   const alsoStart = createComputed(() => flat().length)
-  const total = createComputed(() => flat().length + (searching() ? 2 : 0))
+  const total = createComputed(() => flat().length + (searching() ? 3 : 0))
 
   const close = () => (root?.get_ancestor(Gtk.Popover.$gtype) as Gtk.Popover | null)?.popdown()
 
@@ -173,6 +185,22 @@ export function LauncherPanel() {
     setRecentIds(ids)
     saveRecent(ids)
     close()
+  }
+
+  const searchWeb = (term: string) => {
+    const open = (url: string) => execAsync(["uwsm", "app", "--", "firefox", "--new-tab", url]).catch(console.error)
+    const search = () => open(SEARCH_URL + GLib.uri_escape_string(term, null, true))
+    close()
+    const host = hostOf(term)
+    if (!host) return search()
+    Gio.Resolver.get_default().lookup_by_name_async(host, null, (resolver, res) => {
+      try {
+        resolver!.lookup_by_name_finish(res)
+        open(term)
+      } catch {
+        search()
+      }
+    })
   }
 
   const runInTerminal = (cmd: string) => {
@@ -234,8 +262,9 @@ export function LauncherPanel() {
           const a = current.get()
           const also = selected.get() - alsoStart.get()
           if (a) launch(a)
-          else if (also === 0) runInTerminal(query.get().trim())
-          else if (also === 1) searchNixpkgs(query.get().trim())
+          else if (also === 0) searchWeb(query.get().trim())
+          else if (also === 1) runInTerminal(query.get().trim())
+          else if (also === 2) searchNixpkgs(query.get().trim())
         }
         return true
       case Gdk.KEY_Escape:
@@ -439,8 +468,14 @@ export function LauncherPanel() {
       <box cssClasses={["also"]} orientation={Gtk.Orientation.VERTICAL} spacing={4} visible={searching}>
         <label cssClasses={["section-label"]} xalign={0} useMarkup label={paint("Also try", YELLOW)} />
         <Also
-          icon={ICON_TERMINAL}
+          icon={ICON_WEB}
           index={0}
+          label={(q, sel) => `${paint("Search the web for ", sel ? MANTLE : SUBTEXT)}${paint(q, sel ? MANTLE : TEXT, true)}`}
+          onClicked={() => searchWeb(query.get().trim())}
+        />
+        <Also
+          icon={ICON_TERMINAL}
+          index={1}
           label={(q, sel) =>
             `${paint("Run ", sel ? MANTLE : SUBTEXT)}${paint(q, sel ? MANTLE : TEXT, true)}${paint(" in a terminal", sel ? MANTLE : SUBTEXT)}`
           }
@@ -448,7 +483,7 @@ export function LauncherPanel() {
         />
         <Also
           icon={ICON_NIX}
-          index={1}
+          index={2}
           label={(q, sel) => `${paint("Search nixpkgs for ", sel ? MANTLE : SUBTEXT)}${paint(q, sel ? MANTLE : TEXT, true)}`}
           onClicked={() => searchNixpkgs(query.get().trim())}
         />
