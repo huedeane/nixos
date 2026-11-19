@@ -62,6 +62,13 @@
   --panel-color: white !important;
 }
 
+/* <select> dropdowns take the page's colours, so the generic hover background could leave
+   white text on a light row; pin both for the highlighted option */
+#ContentSelectDropdown menuitem[_moz-menuactive="true"]:not([disabled="true"]) {
+  background-color: var(--tf-bg) !important;
+  color: white !important;
+}
+
 /* navbar.css */
 #navigator-toolbox {
   background-color: var(--tf-bg);

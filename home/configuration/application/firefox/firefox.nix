@@ -22,6 +22,10 @@
         isDefault = true;
         name = "${username}";
         settings = import ./settings.nix;
+        search = {
+          force = true;
+          default = "ddg";
+        };
       };
     };
   };
