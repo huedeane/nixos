@@ -12,6 +12,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/application/printing/printing.nix
     ../../modules/application/steam/steam.nix
     ../../modules/boot/grub/grub.nix
     ../../modules/display/sddm/sddm.nix
@@ -78,9 +79,6 @@
 
   # Polkit
   security.polkit.enable = true;
-
-  # Printing
-  services.printing.enable = true;
 
   # Audio
   services.pulseaudio.enable = false;

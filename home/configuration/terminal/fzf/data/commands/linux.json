@@ -110,8 +110,13 @@
     "tags": ["network", "wifi", "nmcli"]
   },
   {
-    "command": "nmcli --ask device wifi connect \"$(nmcli -t -f SSID device wifi list --rescan yes | grep . | sort -u | fzf --prompt='Wi-Fi> ')\"",
-    "description": "Connect To Wi-Fi Network (Prompts Password)",
+    "command": "ssid=$(nmcli -t -f SSID device wifi list --rescan yes | grep . | sort -u | fzf --prompt='Wi-Fi> '); [ -n \"$ssid\" ] && { nmcli -t -f NAME connection show | grep -qxF \"$ssid\" && known=1 || known=; nmcli --ask device wifi connect \"$ssid\" || { [ -z \"$known\" ] && nmcli connection delete id \"$ssid\" >/dev/null 2>&1 && echo \"Connect failed - forgot '$ssid' so it won't keep the bad password\"; }; }",
+    "description": "Connect To Wi-Fi Network (Prompts Password, Forgets On Failure)",
+    "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "name=$(nmcli -t -f NAME,TYPE connection show | sed -n 's/:802-11-wireless$//p' | fzf --prompt='Forget> '); [ -n \"$name\" ] && nmcli connection delete id \"$name\"",
+    "description": "Forget Saved Wi-Fi Network",
     "tags": ["network", "wifi", "nmcli"]
   },
   {
@@ -128,5 +133,40 @@
     "command": "nmcli radio wifi on",
     "description": "Turn Wi-Fi On",
     "tags": ["network", "wifi", "nmcli"]
+  },
+  {
+    "command": "bluetoothctl --timeout 8 scan on >/dev/null; bluetoothctl devices",
+    "description": "List Bluetooth Devices (Scans 8s)",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "mac=$(bluetoothctl devices Paired | fzf --prompt='Bluetooth> ' | awk '{print $2}'); [ -n \"$mac\" ] && bluetoothctl connect \"$mac\"",
+    "description": "Connect To Paired Bluetooth Device",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "bluetoothctl power on >/dev/null; bluetoothctl --timeout 8 scan on >/dev/null; mac=$(bluetoothctl devices | fzf --prompt='Pair> ' | awk '{print $2}'); [ -n \"$mac\" ] && { bluetoothctl pair \"$mac\"; bluetoothctl trust \"$mac\"; bluetoothctl connect \"$mac\"; }",
+    "description": "Pair And Connect New Bluetooth Device (Put Device In Pairing Mode)",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "mac=$(bluetoothctl devices Connected | fzf --prompt='Disconnect> ' | awk '{print $2}'); [ -n \"$mac\" ] && bluetoothctl disconnect \"$mac\"",
+    "description": "Disconnect Bluetooth Device",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "mac=$(bluetoothctl devices Paired | fzf --prompt='Remove> ' | awk '{print $2}'); [ -n \"$mac\" ] && bluetoothctl remove \"$mac\"",
+    "description": "Remove (Unpair) Bluetooth Device",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "bluetoothctl power off",
+    "description": "Turn Bluetooth Off",
+    "tags": ["bluetooth", "bluetoothctl"]
+  },
+  {
+    "command": "bluetoothctl power on",
+    "description": "Turn Bluetooth On",
+    "tags": ["bluetooth", "bluetoothctl"]
   }
 ]
