@@ -35,25 +35,57 @@ export const trackFullRedraw = (popover: Gtk.Popover) => {
       console.error,
     )
   }
-  popover.connect("show", () => (openPopovers.add(popover), update()))
+  popover.connect("show", () => {
+    openPopovers.add(popover)
+    update()
+    // Park the cursor on it once the popup surface has its final size and position, so a
+    // stray mouse nudge doesn't drop focus
+    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => (popover.visible && parkOnPopover(popover), GLib.SOURCE_REMOVE))
+  })
   popover.connect("closed", () => (openPopovers.delete(popover), update()))
 }
 
 const hyprLua = (code: string) => execAsync(["hyprctl", "dispatch", `function() ${code} end`]).catch(console.error)
 
+const findByClass = (widget: Gtk.Widget, cssClass: string): Gtk.Widget | null => {
+  if (widget.has_css_class(cssClass)) return widget
+  for (let c = widget.get_first_child(); c; c = c.get_next_sibling()) {
+    const found = findByClass(c, cssClass)
+    if (found) return found
+  }
+  return null
+}
+
+// Aim at the panel's title label rather than the middle, which would land on (and hover) a
+// list row; falls back to the middle for popovers without a header
+const parkOnPopover = (popover: Gtk.Popover) => {
+  const popup = popover.get_surface() as Gdk.Popup | null
+  const bar = popover.get_parent()?.get_root() as Astal.Window | null | undefined
+  const monitor = bar?.gdkmonitor?.get_geometry()
+  if (!popup || !monitor) return false
+  let [px, py] = [popup.get_width() / 2, popup.get_height() / 2]
+  const title = findByClass(popover, "header")?.get_first_child()
+  if (title) {
+    const center = new Graphene.Point({ x: title.get_width() / 2, y: title.get_height() / 2 })
+    const [ok, point] = title.compute_point(popover, center)
+    // Widget coordinates exclude the surface's shadow margin
+    const [sx, sy] = popover.get_surface_transform()
+    if (ok) [px, py] = [point.x + sx, point.y + sy]
+  }
+  // The popup's position is relative to the bar, which sits at the monitor's top-left
+  const x = Math.round(monitor.x + popup.get_position_x() + px)
+  const y = Math.round(monitor.y + popup.get_position_y() + py)
+  hyprLua(`park_cursor({ x = ${x}, y = ${y} })`)
+  return true
+}
+
 // Super+Shift+F (`ags request focus-popup`): park the cursor in the middle of the newest open
 // popover, or hand over to Hyprland's focus_topmost_float when none is open
 export const focusPopup = () => {
   const popover = [...openPopovers].at(-1)
-  const popup = popover?.get_surface() as Gdk.Popup | null | undefined
-  const bar = popover?.get_parent()?.get_root() as Astal.Window | null | undefined
-  const monitor = bar?.gdkmonitor?.get_geometry()
-  if (!popup || !monitor) return hyprLua("focus_topmost_float()"), "float"
-  // The popup's position is relative to the bar, which sits at the monitor's top-left
-  const x = Math.round(monitor.x + popup.get_position_x() + popup.get_width() / 2)
-  const y = Math.round(monitor.y + popup.get_position_y() + popup.get_height() / 2)
-  hyprLua(`park_cursor({ x = ${x}, y = ${y} })`)
-  return "popup"
+  if (popover && parkOnPopover(popover)) return "popup"
+  hyprLua("focus_topmost_float()")
+  return "float"
 }
 
 // Bar popovers close as soon as Hyprland moves focus somewhere else. Otherwise one can lose

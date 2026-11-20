@@ -46,6 +46,7 @@ local colors = {
 hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- hyprmoncfgd")
   hl.exec_cmd("uwsm app -- rofi-polkit-agent")
+  hl.exec_cmd("uwsm app -- system-config-printer-applet")
   hl.exec_cmd(
     "uwsm app -- wl-paste --watch clipvault store --ignore-pattern '^<meta http-equiv=' --max-entries 50 --max-entry-age 1d")
   hl.exec_cmd("uwsm app -- wl-paste --type image --watch clipvault store --max-entries 50 --max-entry-age 1d")
@@ -488,6 +489,36 @@ function focus_topmost_float()
   park_cursor({ x = target.at.x + target.size.x / 2, y = target.at.y + target.size.y / 2 })
 end
 
+-- Focus a new float and park the cursor on it once it has settled (size rules and centering
+-- land after the open event). Focus can't be left to the open event: with the cursor over
+-- another window, Hyprland hands focus straight back to that one
+-- Pending timers are kept referenced here: an unreferenced timer can be garbage collected
+-- before it fires
+local float_timers = {}
+
+local function park_on_float(address)
+  if float_timers[address] then float_timers[address]:set_enabled(false) end
+  float_timers[address] = hl.timer(function()
+    float_timers[address] = nil
+    local w
+    for _, c in ipairs(hl.get_windows({ floating = true, mapped = true })) do
+      if c.address == address then w = c end
+    end
+    -- Unnamed XWayland floats are drag helpers (no_focus rule below)
+    if not w or w.hidden or w.class == "" then return end
+    local monitor = w.monitor
+    local on_screen = w.pinned or (w.workspace and monitor and monitor.active_workspace
+      and w.workspace.id == monitor.active_workspace.id)
+    if not on_screen then return end
+    hl.dispatch(hl.dsp.focus({ window = "address:" .. address }))
+    park_cursor({ x = w.at.x + w.size.x / 2, y = w.at.y + w.size.y / 2 })
+  end, { timeout = 150, type = "oneshot" })
+end
+
+hl.on("window.open", function(w)
+  if w then park_on_float(w.address) end
+end)
+
 -- ags answers for its popups and calls focus_topmost_float itself when none is open; the
 -- fallback covers ags not running
 hl.bind(mainMod .. " + SHIFT + F",
@@ -712,6 +743,7 @@ hl.on("window.open", function(w)
       }))
       hl.dispatch(hl.dsp.window.center({ window = tw }))
       refocus()
+      park_on_float(tw.address)
     else
       hl.dispatch(hl.dsp.window.float({ action = "unset", window = tw }))
     end
