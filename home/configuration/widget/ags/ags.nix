@@ -24,6 +24,8 @@ in
       astal.battery
       astal.bluetooth
       astal.cava
+      # Only for trying the greeter with `ags run greeter.ts`; the real one is bundled by greetd.nix
+      astal.greet
       astal.mpris
       astal.network
       astal.notifd

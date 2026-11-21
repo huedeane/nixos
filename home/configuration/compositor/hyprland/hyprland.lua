@@ -257,7 +257,7 @@ hl.config({
     force_default_wallpaper = 0,
     disable_hyprland_logo   = true,
     disable_splash_rendering = true,
-    -- Black until the startup fade overlay maps, matching SDDM's fade-out
+    -- Black until the startup fade overlay maps, matching the greeter's fade-out
     background_color        = "#000000",
   },
 })

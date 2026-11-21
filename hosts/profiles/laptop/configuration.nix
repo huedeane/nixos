@@ -14,7 +14,7 @@
     ../../modules/application/printing/printing.nix
     ../../modules/application/steam/steam.nix
     ../../modules/boot/grub/grub.nix
-    ../../modules/display/sddm/sddm.nix
+    ../../modules/display/greetd/greetd.nix
     ../../modules/network/networkmanager/networkmanager.nix
   ]
   ++ lib.optional withSecrets ../../modules/storage/qnap-nas/qnap-nas.nix;
