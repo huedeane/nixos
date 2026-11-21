@@ -18,11 +18,11 @@
       padding-bottom: 2px;
 
       &.repaint-a {
-        background: rgba(48, 52, 70, 0.02);
+        background: rgba($base, 0.02);
       }
 
       &.repaint-b {
-        background: rgba(48, 52, 70, 0.03);
+        background: rgba($base, 0.03);
       }
     }
   }

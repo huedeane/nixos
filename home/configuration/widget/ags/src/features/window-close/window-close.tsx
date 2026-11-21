@@ -6,13 +6,14 @@ import app from "ags/gtk4/app"
 import Hyprland from "gi://AstalHyprland"
 import { pointer } from "../../lib/utils"
 import style from "./window-close.scss"
+import { palette } from "../../lib/palette"
 
 app.apply_css(style)
 
 const SIZE = 29
 const ICON = "\u{f00d}"
-const LAVENDER = "#babbf1"
-const RED = "#e78284"
+const LAVENDER = palette.lavender
+const RED = palette.red
 
 type Target = { address: string; monitor: string; x: number; y: number } | null
 

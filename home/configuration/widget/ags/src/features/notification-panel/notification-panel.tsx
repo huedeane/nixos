@@ -10,6 +10,7 @@ import app from "ags/gtk4/app"
 import { pointer } from "../../lib/utils"
 import { Hint } from "../launcher-panel/launcher-panel"
 import style from "./notification-panel.scss"
+import { palette } from "../../lib/palette"
 
 app.apply_css(style)
 
@@ -27,14 +28,14 @@ const ICON_CHECK = "\u{f00c}"
 const ICON_KDECONNECT = "\u{f10b}"
 const ICON_CLOSE = "×"
 
-const TEXT = "#c6d0f5"
-const SUBTEXT = "#a5adce"
-export const DIM = "#838ba7"
-const MANTLE = "#292c3c"
-const LAVENDER = "#babbf1"
-const YELLOW = "#e5c890"
-const GREEN = "#a6d189"
-const RED = "#e78284"
+const TEXT = palette.text
+const SUBTEXT = palette.subtext0
+export const DIM = palette.overlay1
+const MANTLE = palette.mantle
+const LAVENDER = palette.lavender
+const YELLOW = palette.yellow
+const GREEN = palette.green
+const RED = palette.red
 
 const MEDIA_APPS = ["rmpc", "mpd", "mpv", "spotify"]
 const CHAT_APPS = ["vesktop", "discord", "webcord", "telegramdesktop", "signal", "slack"]

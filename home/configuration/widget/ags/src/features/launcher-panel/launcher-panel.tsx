@@ -9,6 +9,7 @@ import Pango from "gi://Pango"
 import app from "ags/gtk4/app"
 import { pointer } from "../../lib/utils"
 import style from "./launcher-panel.scss"
+import { palette } from "../../lib/palette"
 
 app.apply_css(style)
 
@@ -22,12 +23,12 @@ const ICON_WEB = "\u{f0ac}"
 const ICON_TERMINAL = "\u{f120}"
 const ICON_NIX = "\u{f313}"
 
-const TEXT = "#c6d0f5"
-const SUBTEXT = "#a5adce"
-const DIM = "#838ba7"
-const MANTLE = "#292c3c"
-const SURFACE = "#51576d"
-const YELLOW = "#e5c890"
+const TEXT = palette.text
+const SUBTEXT = palette.subtext0
+const DIM = palette.overlay1
+const MANTLE = palette.mantle
+const SURFACE = palette.surface1
+const YELLOW = palette.yellow
 
 // First matching desktop category wins
 const CATEGORIES: [string, string][] = [

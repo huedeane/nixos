@@ -10,6 +10,7 @@ import style from "./media.scss"
 import app from "ags/gtk4/app"
 import AstalMpris from "gi://AstalMpris"
 import { pointer } from "../../../lib/utils"
+import { palette } from "../../../lib/palette"
 
 app.apply_css(style)
 
@@ -23,10 +24,10 @@ const ICON_PREV = "\u{f04ae}"
 const ICON_NEXT = "\u{f04ad}"
 const ICON_MUSIC = "\u{f001}"
 
-const HOVER_ICON = "#292c3c"
-const DIM = "#838ba7"
-const TEXT = "#c6d0f5"
-const YELLOW = "#e5c890"
+const HOVER_ICON = palette.mantle
+const DIM = palette.overlay1
+const TEXT = palette.text
+const YELLOW = palette.yellow
 
 const MAX_TEXT = 26
 const MARQUEE_GAP = "   ·   "
