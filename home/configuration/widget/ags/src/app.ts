@@ -3,7 +3,7 @@ import style from "./style.scss"
 import HeaderBar from "./features/header-bar/header-bar"
 import WindowClose from "./features/window-close/window-close"
 import RecordBorder, { handleRecordBorder } from "./features/record-border/record-border"
-import StartupFade from "./features/startup-fade/startup-fade"
+import StartupFade, { logout } from "./features/startup-fade/startup-fade"
 import ColumnPeek from "./features/column-peek/column-peek"
 import { toggleLauncher } from "./features/header-bar/launcher/launcher"
 import { toggleNotifications } from "./features/header-bar/notification/notification"
@@ -17,6 +17,7 @@ app.start({
     if (argv[0] === "notifications") return res(toggleNotifications())
     if (argv[0] === "focus-popup") return res(focusPopup())
     if (argv[0] === "close-popups") return res(closePopups())
+    if (argv[0] === "logout") return res(logout())
     res(`unknown request: ${argv.join(" ")}`)
   },
   main() {

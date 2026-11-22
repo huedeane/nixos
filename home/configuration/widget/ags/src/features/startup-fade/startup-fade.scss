@@ -1,13 +1,20 @@
+@use "../../style" as *;
+
 window.startup-fade-window {
   background: transparent;
 
   .startup-fade {
-    background: black;
+    background: $black;
     opacity: 1;
     transition: opacity 3000ms ease-in-out;
   }
 
   &.faded .startup-fade {
     opacity: 0;
+  }
+
+  // Logout fade: quicker, matches LOGOUT_FADE_MS
+  &.logout .startup-fade {
+    transition: opacity 1500ms ease-in-out;
   }
 }

@@ -69,3 +69,48 @@ export default function StartupFade(gdkmonitor: Gdk.Monitor) {
     </window>
   )
 }
+
+const LOGOUT_FADE_MS = 1500
+let loggingOut = false
+
+// Super+Ctrl+Shift+Escape (`ags request logout`): fade every monitor to black, then end the session
+export function logout() {
+  if (loggingOut) return "already logging out"
+  loggingOut = true
+  const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
+
+  // Hide the cursor for the whole fade; the session ends before it would need to come back
+  execAsync(["hyprctl", "eval", "hl.config({ cursor = { invisible = true } })"]).catch(console.error)
+
+  for (const gdkmonitor of app.get_monitors()) {
+    ;(
+      <window
+        visible
+        namespace="startup-fade"
+        cssClasses={["startup-fade-window", "logout", "faded"]}
+        gdkmonitor={gdkmonitor}
+        layer={Astal.Layer.OVERLAY}
+        exclusivity={Astal.Exclusivity.IGNORE}
+        keymode={Astal.Keymode.NONE}
+        anchor={TOP | BOTTOM | LEFT | RIGHT}
+        application={app}
+        $={(self) => {
+          // Starts transparent and darkens a frame after mapping, so the transition runs
+          const onMap = () =>
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => (self.remove_css_class("faded"), GLib.SOURCE_REMOVE))
+          if (self.get_mapped()) onMap()
+          else self.connect("map", onMap)
+        }}
+      >
+        <box cssClasses={["startup-fade"]} hexpand vexpand />
+      </window>
+    )
+  }
+
+  // Exits Hyprland while the overlay is still up; `uwsm stop` would kill ags (and the black) first,
+  // flashing the wallpaper until the compositor went down. uwsm tears down the rest after the exit
+  sleep(LOGOUT_FADE_MS + 150).then(() =>
+    execAsync(["hyprctl", "dispatch", "hl.dsp.exit()"]).catch(() => execAsync("uwsm stop").catch(console.error)),
+  )
+  return "logging out"
+}

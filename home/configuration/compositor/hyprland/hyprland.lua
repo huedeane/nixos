@@ -314,7 +314,8 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("ags request notifications"))
 -- Window Manager
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
 -- Log Out
-hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("uwsm stop"))
+-- Fades to black through ags first; plain logout if ags is down or predates the request
+hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("ags request logout | grep -q logging || uwsm stop"))
 -- Nix Rebuild (Edit Mode)
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("nix-rebuild-edit.sh"))
 -- Nix Rebuild
