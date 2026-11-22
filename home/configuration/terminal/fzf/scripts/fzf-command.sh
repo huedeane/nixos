@@ -54,10 +54,18 @@ selected=$(display | fzf \
   --list-label='' \
   --bind 'result:transform-list-label:echo ""' \
   --bind 'ctrl-e:execute(ln=$(grep -nF -- {2} "$COMMAND_FILE" | head -1 | cut -d: -f1); nvim "+${ln:-1}" "$COMMAND_FILE")' \
-  --bind 'enter:execute-silent(printf "%s" {2} | ${COPY_CMD:-cat >/dev/null})+abort' \
   --ellipsis='...' \
   --delimiter='\t' \
   --exact \
   --with-nth=1) || exit 0
 
 [ -z "$selected" ] && exit 0
+cmd=${selected#*	}
+
+# wl-copy stays running to serve the clipboard; keep it off the popup's tty or the popup never closes
+[ -n "$COPY_CMD" ] && printf "%s" "$cmd" | $COPY_CMD >/dev/null 2>&1
+# From the tmux popup (prefix + c): paste into the pane it was opened over, only on Enter
+if [ -n "${1:-}" ]; then
+  tmux set-buffer -- "$cmd"
+  tmux paste-buffer -t "$1"
+fi
