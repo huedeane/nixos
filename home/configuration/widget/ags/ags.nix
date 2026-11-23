@@ -21,6 +21,8 @@ in
     extraPackages = [
       astal.hyprland
       astal.apps
+      # PAM password check for the lock screen
+      astal.auth
       astal.battery
       astal.bluetooth
       astal.cava

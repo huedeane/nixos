@@ -259,6 +259,9 @@ hl.config({
     disable_splash_rendering = true,
     -- Black until the startup fade overlay maps, matching the greeter's fade-out
     background_color        = "#000000",
+    -- Lets `ags request lock` take over again if ags dies while locked (run it from a TTY),
+    -- instead of being stuck on the "lock app died" screen
+    allow_session_lock_restore = true,
   },
 })
 
@@ -313,6 +316,9 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("ags request launcher"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("ags request notifications"))
 -- Window Manager
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(rofi_window))
+-- Lock: leader + Windows key + L; hypridle runs the ags lock screen, the same as when idle or
+-- going to sleep
+hl.bind(mainMod .. " + SUPER + L", hl.dsp.exec_cmd("loginctl lock-session"))
 -- Log Out
 -- Fades to black through ags first; plain logout if ags is down or predates the request
 hl.bind(mainMod .. " + CTRL + SHIFT + Escape", hl.dsp.exec_cmd("ags request logout | grep -q logging || uwsm stop"))

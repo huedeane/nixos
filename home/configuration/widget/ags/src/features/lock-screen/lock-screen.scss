@@ -1,0 +1,114 @@
+@use "../../lib/variables" as *;
+@use "../../shared/login-screen/mixins" as *;
+
+// Lock-only parts; the clock, card and power pills are in shared/login-screen
+window.lock-screen {
+  // Every panel rises into place as the lock appears
+  .clock {
+    @include rise;
+  }
+
+  .login-card,
+  .lock-widgets,
+  .actions {
+    @include rise(80ms);
+  }
+
+  // The bar's widgets (shared/), unchanged apart from height: the row is as tall as a pill (its
+  // 30 plus the border top and bottom), and the widgets stretch to fill it whatever their own
+  // padding
+  .lock-widgets {
+    min-height: calc(30px * var(--s, 1) + #{2 * $border-width});
+
+    // The pills' see-through background and side padding instead of the bar's, and the pills'
+    // offset focus ring (the bar never takes keyboard focus, so it has none)
+    .component {
+      padding: 0 px(14);
+      background: rgba($space-base, 0.8);
+      outline: none;
+
+      &:focus-visible {
+        outline: px(2) solid $accent;
+        outline-offset: px(6);
+      }
+    }
+
+    // The bell's padding sits on its inner button in the bar; here the component has it
+    .notification.component > button {
+      padding: 0;
+      min-width: 0;
+    }
+  }
+
+  // Machine info, bottom left: a pill body like reboot and shutdown, but nothing to click
+  .actions .machine {
+    @include pill-box($accent);
+
+    label {
+      letter-spacing: px(1);
+    }
+
+    .icon {
+      color: $accent;
+    }
+
+    .host {
+      color: $yellow;
+      font-weight: bold;
+    }
+
+    .uptime {
+      color: $space-dim;
+    }
+
+    .divider {
+      min-width: 1px;
+      min-height: px(14);
+      margin: 0 px(10);
+      background: rgba($space-text, 0.4);
+    }
+  }
+
+  .lock-widgets .component {
+    // Light text and icons like the rest of the lock screen, not the bar's lavender
+    label {
+      color: $space-text;
+    }
+
+    // Text lowered 1.5 px (a 3 px top margin, centred): digits and lowercase have nothing below
+    // the baseline, so they'd sit above the middle of the box the icon is centred in
+    label:not(.icon) {
+      margin-top: 3px;
+    }
+
+    // Icons with the same gap before the text in each, drawn as big as the reboot and shutdown
+    // icons (the glyphs fill different amounts of their cell)
+    label.icon {
+      margin-right: px(10);
+      font-size: px(17);
+    }
+
+    &.microphone label.icon {
+      font-size: px(14.5);
+    }
+
+    &.volume label.icon {
+      font-size: px(16);
+    }
+
+    // The bell glyph's weight is in its top half, so it reads high; lowered 1.5 px (a 3 px top
+    // margin, centred)
+    &.notification label.icon {
+      margin-top: 3px;
+    }
+  }
+
+  // Top right, as far from the edges as the bottom row, spaced like reboot and shutdown
+  .lock-widgets.top {
+    margin: px(50);
+
+    .component {
+      margin-left: px(20);
+    }
+  }
+}

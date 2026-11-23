@@ -5,8 +5,9 @@ import WindowClose from "./features/window-close/window-close"
 import RecordBorder, { handleRecordBorder } from "./features/record-border/record-border"
 import StartupFade, { logout } from "./features/startup-fade/startup-fade"
 import ColumnPeek from "./features/column-peek/column-peek"
+import { lock } from "./features/lock-screen/lock-screen"
 import { toggleLauncher } from "./features/header-bar/launcher/launcher"
-import { toggleNotifications } from "./features/header-bar/notification/notification"
+import { toggleNotifications } from "./shared/notification/notification"
 import { closePopups, focusPopup } from "./lib/utils"
 
 app.start({
@@ -18,6 +19,7 @@ app.start({
     if (argv[0] === "focus-popup") return res(focusPopup())
     if (argv[0] === "close-popups") return res(closePopups())
     if (argv[0] === "logout") return res(logout())
+    if (argv[0] === "lock") return res(lock())
     res(`unknown request: ${argv.join(" ")}`)
   },
   main() {

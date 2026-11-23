@@ -1,0 +1,77 @@
+@use "../../lib/variables" as *;
+
+// Sizes are 1080p pixels times --s, which setScale (common.ts) sets from the screen width
+@function px($n) {
+  @return calc(#{$n}px * var(--s, 1));
+}
+
+// Panels rise into place and fade in when the screen appears (greeter and lock screen); the
+// keyframes are emitted into each stylesheet that uses this file, so either finds them
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@mixin rise($delay: 0ms) {
+  animation: rise 2s cubic-bezier(0.22, 1, 0.36, 1) $delay both;
+}
+
+// Panels (card, pills, session list): a full border in their accent colour with small rounded
+// corners, like the shell's bar components
+// The border is the shell's $border-width, the same as the bar's components, and unscaled so
+// other rows can match a pill's height exactly (lock-widgets in lock-screen.scss)
+@mixin panel($accent) {
+  border: $border-width solid $accent;
+  border-radius: px(4);
+}
+
+// Buttons are a bare shell that only draws an offset focus ring; the square control you see
+// is the box inside it, so the ring's corners never cut into it
+@mixin ring-shell($color) {
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  // GTK grows rounded corners by the outline offset (square ones stay square), so this
+  // near-zero radius gives the ring 6 px corners
+  border-radius: 0.01px;
+  background: none;
+  box-shadow: none;
+
+  &:focus-visible {
+    outline: px(2) solid $color;
+    outline-offset: px(6);
+  }
+}
+
+// The pill body: bordered box 30 tall plus the border
+@mixin pill-box($accent) {
+  @include panel($accent);
+  min-height: px(30);
+  padding: 0 px(14);
+  background: rgba($space-base, 0.8);
+}
+
+// Square pill button with an accent border (session, reboot, shutdown)
+@mixin pill($accent) {
+  @include ring-shell($accent);
+
+  > box {
+    @include pill-box($accent);
+    transition: background-color 150ms;
+  }
+
+  &:hover > box {
+    background: rgba($space-base, 0.9);
+  }
+
+  &:active > box {
+    background: rgba($space-base, 0.97);
+  }
+}

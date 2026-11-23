@@ -43,6 +43,7 @@ in
   imports = [
     ./plugins/hyprmoncfg/hyprmoncfg.nix
     ./plugins/hyprpaper/hyprpaper.nix
+    ./plugins/hypridle/hypridle.nix
   ];
 
   wayland.windowManager.hyprland = {

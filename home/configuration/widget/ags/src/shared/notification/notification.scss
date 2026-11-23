@@ -1,4 +1,4 @@
-@use "../../../style" as *;
+@use "../../style" as *;
 
 .notification.component {
   padding: 0px;
@@ -8,6 +8,11 @@
     border: none;
     padding: 0px 2px 0px 0px;
     min-width: 30px;
+  }
+
+  // With a count next to the bell, pad both sides like the other components
+  &.has-count > button {
+    padding: 0px 10px;
   }
 
   &.dnd > button {

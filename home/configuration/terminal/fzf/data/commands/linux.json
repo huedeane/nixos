@@ -25,6 +25,16 @@
     "tags": ["greeter", "greetd", "ags", "login", "cage"]
   },
   {
+    "command": "loginctl lock-session",
+    "description": "Lock Screen",
+    "tags": ["lock", "ags", "hypridle", "login"]
+  },
+  {
+    "command": "ags run $HOME/.config/nixos/home/configuration/widget/ags/src/lock-test.ts",
+    "description": "Open Lock Screen In Test Mode",
+    "tags": ["lock", "ags", "login"]
+  },
+  {
     "command": "uwsm start hyprland-uwsm.desktop",
     "description": "Start Hyprland From TTY",
     "tags": ["hyprland", "uwsm", "tty", "login"]

@@ -2,7 +2,7 @@ import { createState } from "ags"
 import type { Accessor } from "ags"
 import { Gtk } from "ags/gtk4"
 import GLib from "gi://GLib"
-import { pointer } from "./common"
+import { pointer } from "../../shared/login-screen/common"
 import type { Session } from "./system"
 
 const ICON_SESSION = "\uf108"

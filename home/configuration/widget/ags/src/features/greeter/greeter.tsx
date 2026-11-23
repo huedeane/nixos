@@ -3,30 +3,35 @@ import { Gdk, Gtk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import Gio from "gi://Gio"
 import GLib from "gi://GLib"
-import Clock from "./clock"
-import LoginCard from "./login-card"
-import PowerButtons from "./power-buttons"
+import Clock from "../../shared/login-screen/clock"
+import { applyCss, setScale } from "../../shared/login-screen/common"
+import LoginCard from "../../shared/login-screen/login-card"
+import PowerButtons from "../../shared/login-screen/power-buttons"
 import SessionButton from "./session-button"
-import { authenticate, loadState, saveState, start, sessions as listSessions, sway, users as listUsers } from "./system"
+import {
+  authenticate,
+  loadState,
+  powerOff,
+  reboot,
+  saveState,
+  start,
+  sessions as listSessions,
+  sway,
+  users as listUsers,
+} from "./system"
 import style from "./greeter.scss"
 
-app.apply_css(style)
+applyCss(style)
 
 // Set by the greetd module; `ags run` falls back to the repo's copy
 const WALLPAPER =
   typeof GREETER_WALLPAPER !== "undefined" ? GREETER_WALLPAPER : `${SRC}/../../../../../resources/wallpaper.png`
 
-// The layout is drawn in 1080p pixels and scaled to the screen (--s in greeter.scss)
-const DESIGN_WIDTH = 1920
 // The screen fades to black before the session starts, and back in quickly if login fails
 const LOGIN_FADE_MS = 3000
 
 const sleep = (ms: number) =>
   new Promise<void>((resolve) => GLib.timeout_add(GLib.PRIORITY_DEFAULT, ms, () => (resolve(), GLib.SOURCE_REMOVE)))
-
-const scale = new Gtk.CssProvider()
-const setScale = (monitor: Gdk.Monitor | null) =>
-  monitor && scale.load_from_string(`window.greeter { --s: ${monitor.get_geometry().width / DESIGN_WIDTH}; }`)
 
 export default function Greeter() {
   const users = listUsers()
@@ -73,13 +78,12 @@ export default function Greeter() {
   }
 
   const display = Gdk.Display.get_default()!
-  Gtk.StyleContext.add_provider_for_display(display, scale, Gtk.STYLE_PROVIDER_PRIORITY_USER)
   setScale(display.get_monitors().get_item(0) as Gdk.Monitor | null)
 
   return (
     <Gtk.Window
       application={app}
-      cssClasses={["greeter"]}
+      cssClasses={["login-screen", "greeter"]}
       decorated={false}
       $={(self) => {
         let shown = false
@@ -128,7 +132,7 @@ export default function Greeter() {
         <box $type="overlay" cssClasses={["actions"]} valign={Gtk.Align.END}>
           <SessionButton sessions={sessions} current={session} onSelect={setSession} />
           <box hexpand />
-          <PowerButtons />
+          <PowerButtons onReboot={reboot} onPowerOff={powerOff} />
         </box>
         {/* Swallows input while the screen is dark, and fades for login */}
         <box

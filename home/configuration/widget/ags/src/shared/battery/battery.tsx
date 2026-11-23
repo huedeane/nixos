@@ -1,5 +1,5 @@
 import { createBinding, createComputed } from "ags"
-import { MonitorFocusContext } from "../../../lib/context"
+import { MonitorFocusContext } from "../../lib/context"
 import style from "./battery.scss"
 import app from "ags/gtk4/app"
 import AstalBattery from "gi://AstalBattery"

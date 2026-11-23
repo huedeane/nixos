@@ -1,0 +1,307 @@
+@use "../../lib/variables" as *;
+@use "mixins" as *;
+
+// Shared by the greeter and the lock screen; both windows carry the login-screen class.
+// Loaded above the shell's stylesheets (applyCss in common.ts), so every rule stays inside
+// these windows, and inside the parts drawn here: shell widgets placed on a login screen (the
+// bar's music widget) keep their own look
+window.login-screen {
+  background: $space-crust;
+  font-family: $font-family;
+
+  .clock,
+  .login-card,
+  .actions .pill {
+    label {
+      color: $space-text;
+    }
+  }
+
+  .login-card,
+  .actions .pill {
+    button {
+      border: none;
+      border-radius: 0;
+      font-size: inherit;
+    }
+  }
+
+  .clock {
+    margin-top: px(45);
+
+    .time {
+      font-size: px(150);
+      font-weight: 100;
+    }
+
+    .date {
+      margin-top: px(10);
+      font-size: px(21);
+      letter-spacing: px(10.5);
+      color: $white;
+    }
+  }
+
+  .login-card {
+    // Centred, 310 px below the middle of the screen (margins move the centre by half)
+    margin-top: px(620);
+    // 370 wide counting the padding and border, which GTK's min-width doesn't
+    min-width: px(338);
+    padding: px(14);
+    @include panel($accent);
+    box-shadow: 0 px(6) px(24) rgba($black, 0.5);
+    background: rgba($space-base, 0.85);
+    transition: border-color 200ms;
+
+    &.failed {
+      border-color: $red;
+    }
+
+    .header {
+      margin-bottom: px(12);
+
+      .title {
+        color: $yellow;
+        font-size: px(13);
+      }
+
+      .user {
+        padding: 0;
+        background: none;
+        min-height: 0;
+
+        label {
+          color: $yellow;
+          font-size: px(13);
+          font-weight: bold;
+          font-style: italic;
+        }
+      }
+    }
+
+    // Password field: an underline that brightens on focus and turns red on failure; drawn as a
+    // shadow so going from 1 to 2 px doesn't move the rest of the card
+    .password {
+      min-height: px(34);
+      margin-bottom: px(12);
+      box-shadow: inset 0 calc(-1px * var(--s, 1)) rgba($space-text, 0.35);
+      transition: box-shadow 200ms;
+
+      &:focus-within {
+        box-shadow: inset 0 calc(-2px * var(--s, 1)) $accent;
+      }
+
+      .caret {
+        min-width: px(2.5);
+        background: $space-text;
+      }
+
+      entry {
+        min-height: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        background: none;
+        color: $space-text;
+        // GTK's caret touches the last character; login-card.tsx draws one a little after it
+        caret-color: transparent;
+        // The asterisk fills its cell, so letter spacing keeps them apart
+        font-size: px(20);
+        letter-spacing: px(3);
+
+        &.shown {
+          font-size: px(15);
+          letter-spacing: px(1);
+        }
+
+        // Room on the right for the caret's gap when a long password scrolls to the end
+        > text {
+          margin-right: px(6);
+        }
+
+        // Starts a little right of the caret instead of under it, in the same dim colour as
+        // the "locked 12m ago" line (opacity 1: the theme fades placeholders further)
+        > text > placeholder {
+          margin-left: px(6);
+          color: $space-dim;
+          opacity: 1;
+          font-size: px(14);
+          letter-spacing: 0;
+        }
+
+        selection {
+          background: $accent;
+          color: $space-base;
+        }
+      }
+
+      .eye {
+        min-width: px(26);
+        min-height: px(26);
+        padding: 0;
+        border-radius: 50%;
+        background: none;
+        transition: background-color 150ms;
+
+        // The same size as the other icons (power pills), dim like the placeholder
+        label {
+          font-size: px(17);
+          color: $space-dim;
+        }
+
+        &:hover {
+          background: rgba($space-base, 0.85);
+
+          label {
+            color: $space-text;
+          }
+        }
+
+        &.active label {
+          color: $accent;
+        }
+      }
+
+      .spinner {
+        min-width: px(14);
+        min-height: px(14);
+        margin: 0 px(6);
+        color: $accent;
+      }
+    }
+
+    &.failed .password {
+      box-shadow: inset 0 calc(-2px * var(--s, 1)) $red;
+    }
+
+    .status {
+      min-height: px(24);
+
+      .caps {
+        padding: 0 px(6);
+        border: 1px solid $yellow;
+
+        label {
+          margin-right: px(5);
+          color: $yellow;
+          font-size: px(11);
+        }
+      }
+
+      .error {
+        color: $red;
+        font-size: px(11);
+      }
+
+      // Quiet line when nothing's wrong ("locked 12m ago")
+      .status-note {
+        color: $space-dim;
+        font-size: px(11);
+      }
+
+      .login {
+        @include ring-shell($accent);
+
+        // 24 tall and 16 wider than its text, both counting the border
+        > box {
+          min-height: calc(24px * var(--s, 1) - #{2 * $border-width});
+          padding: 0 calc(8px * var(--s, 1) - #{$border-width});
+          border: $border-width solid $accent;
+          transition: background-color 150ms;
+        }
+
+        label {
+          color: $accent;
+          font-size: px(12);
+        }
+
+        // Return key: a small tinted box centred in the button
+        .key {
+          min-width: px(19);
+          min-height: px(16);
+          margin-left: px(8);
+          border-radius: px(2);
+          background: $accent;
+          color: $space-base;
+          font-size: px(10);
+        }
+
+        &:hover {
+          > box {
+            // One pixel thicker, drawn inside so the button (and the card) keep their size
+            box-shadow: inset 0 0 0 1px $accent;
+            background: rgba($space-base, 0.9);
+          }
+
+          // The return-key badge keeps its dark arrow on the light fill
+          label:not(.key) {
+            color: $space-text;
+          }
+        }
+
+        &:active > box {
+          background: rgba($accent, 0.25);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  // Bottom row: a feature's own pills bottom left, reboot and shutdown bottom right
+  .actions {
+    margin: px(50);
+
+    .pill label {
+      font-size: px(12);
+      letter-spacing: px(2);
+
+      &.icon {
+        margin-right: px(10);
+        font-size: px(17);
+        letter-spacing: 0;
+      }
+    }
+
+    .power {
+      // Wide enough that a focus ring (8 px out) stays clear of the neighbouring pill
+      .pill {
+        margin-left: px(20);
+      }
+
+      // Capitals have nothing below the baseline and would sit above the middle; lowered 1.5 px
+      // (a 3 px top margin, centred) to line up with the icon
+      .caption {
+        margin-top: 3px;
+      }
+
+      // Each power pill tints its icon in its own colour, and its label too on hover
+      .reboot {
+        @include pill($green);
+
+        .icon {
+          color: $green;
+        }
+
+        &:hover:not(:active) .caption {
+          color: $green;
+        }
+      }
+
+      .shutdown {
+        @include pill($red);
+
+        .icon {
+          color: $red;
+        }
+
+        &:hover:not(:active) .caption {
+          color: $red;
+        }
+      }
+    }
+  }
+}

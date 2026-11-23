@@ -112,6 +112,9 @@
   # Phone Integration: KDE Connect (opens TCP/UDP 1714-1764)
   programs.kdeconnect.enable = true;
 
+  # Lock screen password check (AstalAuth's default PAM service, used by the ags lock screen)
+  security.pam.services.astal-auth = { };
+
   # Desktop Environment: Hyprland
   programs.hyprland = {
     enable = true;

@@ -1,9 +1,9 @@
 import { createState, createBinding } from "ags"
-import { MonitorFocusContext } from "../../../lib/context"
+import { MonitorFocusContext } from "../../lib/context"
 import app from "ags/gtk4/app"
 import AstalWp from "gi://AstalWp"
 import style from "./microphone.scss"
-import { pointer } from "../../../lib/utils"
+import { pointer } from "../../lib/utils"
 
 app.apply_css(style)
 
@@ -18,7 +18,8 @@ function muteAllInputs(state: boolean) {
   setAllMuted(state)
 }
 
-export default function Microphone() {
+// lockScreen: no spacing of its own, the lock screen spaces the icon
+export default function Microphone({ lockScreen = false }: { lockScreen?: boolean } = {}) {
   const isFocused = MonitorFocusContext.use()
 
   return (
@@ -31,8 +32,9 @@ export default function Microphone() {
       )}
       onClicked={() => muteAllInputs(!allMuted.peek())}
     >
-      <box spacing={10}>
-        <label label={allMuted((m) => (m ? "󰍭" : "󰍬"))} />
+      {/* No spacing on the lock screen, which spaces the icon itself (lock-screen.scss) */}
+      <box spacing={lockScreen ? 0 : 10}>
+        <label cssClasses={["icon"]} label={allMuted((m) => (m ? "󰍭" : "󰍬"))} />
         <label
           cssClasses={["percentage"]}
           label={volume((v) => `${Math.round(v * 100)}%`)}

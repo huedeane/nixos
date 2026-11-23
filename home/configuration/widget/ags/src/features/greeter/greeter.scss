@@ -1,345 +1,34 @@
-@use "../../style" as *;
+@use "../../lib/variables" as *;
+@use "../../shared/login-screen/mixins" as *;
 
-// Sizes are 1080p pixels times --s, which greeter.tsx sets from the screen width
-@function px($n) {
-  @return calc(#{$n}px * var(--s, 1));
-}
-
-// Panels (card, pills, session list): a full border in their accent colour with small rounded
-// corners, like the shell's bar components
-@mixin panel($accent) {
-  border: px(2) solid $accent;
-  border-radius: px(4);
-}
-
-// Buttons are a bare shell that only draws an offset focus ring; the square control you see
-// is the box inside it, so the ring's corners never cut into it
-@mixin ring-shell($color) {
-  min-height: 0;
-  min-width: 0;
-  padding: 0;
-  border: none;
-  // GTK grows rounded corners by the outline offset (square ones stay square), so this
-  // near-zero radius gives the ring 6 px corners
-  border-radius: 0.01px;
-  background: none;
-  box-shadow: none;
-
-  &:focus-visible {
-    outline: px(2) solid $color;
-    outline-offset: px(6);
-  }
-}
-
-// Square pill with an accent bar on the left (session, reboot, shutdown)
-@mixin pill($accent) {
-  @include ring-shell($accent);
-
-  > box {
-    @include panel($accent);
-    // 34 tall overall, counting the border
-    min-height: px(30);
-    padding: 0 px(14);
-    background: rgba($space-base, 0.8);
-    transition: background-color 150ms;
-  }
-
-  &:hover > box {
-    background: rgba($space-base, 0.9);
-  }
-
-  &:active > box {
-    background: rgba($space-base, 0.97);
-  }
-}
-
+// Greeter-only parts; the clock, card and power pills are in shared/login-screen
 window.greeter {
-  background: $space-crust;
-  font-family: $font-family;
-
-  label {
-    color: $space-text;
-  }
-
-  button {
-    font-size: inherit;
-  }
-
-  .clock {
-    margin-top: px(45);
-
-    .time {
-      font-size: px(150);
-      font-weight: 100;
+  // Session picker bottom left
+  .actions .session {
+    // The menubutton's own button is what draws, gets focus and is hovered
+    > button {
+      @include pill($accent);
     }
 
-    .date {
-      margin-top: px(10);
-      font-size: px(21);
-      letter-spacing: px(10.5);
-      // letter-spacing pads after the last letter too; nudge right so the text sits centred
-      margin-left: px(10.5);
-      color: $white;
-    }
-  }
-
-  .login-card {
-    // Centred, 310 px below the middle of the screen (margins move the centre by half)
-    margin-top: px(620);
-    // 370 wide counting the padding and border, which GTK's min-width doesn't
-    min-width: px(338);
-    padding: px(14);
-    @include panel($accent);
-    box-shadow: 0 px(6) px(24) rgba($black, 0.5);
-    background: rgba($space-base, 0.85);
-    transition: border-color 200ms;
-
-    &.failed {
-      border-color: $red;
+    &.open > button > box {
+      background: rgba($space-base, 0.85);
     }
 
-    .header {
-      margin-bottom: px(12);
-
-      .title {
-        color: $yellow;
-        font-size: px(13);
-      }
-
-      .user {
-        padding: 0;
-        background: none;
-        min-height: 0;
-
-        label {
-          color: $yellow;
-          font-size: px(13);
-          font-weight: bold;
-          font-style: italic;
-        }
-      }
+    .icon {
+      color: $yellow;
     }
 
-    // Password field: an underline that brightens on focus and turns red on failure; drawn as a
-    // shadow so going from 1 to 2 px doesn't move the rest of the card
-    .password {
-      min-height: px(34);
-      margin-bottom: px(12);
-      box-shadow: inset 0 calc(-1px * var(--s, 1)) rgba($space-text, 0.35);
-      transition: box-shadow 200ms;
-
-      &:focus-within {
-        box-shadow: inset 0 calc(-2px * var(--s, 1)) $accent;
-      }
-
-      entry {
-        min-height: 0;
-        padding: 0;
-        border: none;
-        outline: none;
-        box-shadow: none;
-        background: none;
-        color: $space-text;
-        caret-color: $space-text;
-        font-size: px(12);
-        letter-spacing: px(5);
-
-        &.shown {
-          font-size: px(15);
-          letter-spacing: px(1);
-        }
-
-        > text > placeholder {
-          color: $space-dim;
-          font-size: px(14);
-          letter-spacing: 0;
-        }
-
-        selection {
-          background: $accent;
-          color: $space-base;
-        }
-      }
-
-      .eye {
-        min-width: px(26);
-        min-height: px(26);
-        padding: 0;
-        border-radius: 50%;
-        background: none;
-        transition: background-color 150ms;
-
-        label {
-          font-size: px(14);
-          opacity: 0.85;
-        }
-
-        &:hover {
-          background: rgba($space-base, 0.85);
-
-          label {
-            opacity: 1;
-          }
-        }
-
-        &.active label {
-          color: $accent;
-          opacity: 1;
-        }
-      }
-
-      .spinner {
-        min-width: px(14);
-        min-height: px(14);
-        margin: 0 px(6);
-        color: $accent;
-      }
+    .divider {
+      min-width: 1px;
+      min-height: px(14);
+      margin: 0 px(10);
+      background: rgba($space-text, 0.4);
     }
 
-    &.failed .password {
-      box-shadow: inset 0 calc(-2px * var(--s, 1)) $red;
-    }
-
-    .status {
-      min-height: px(24);
-
-      .caps {
-        padding: 0 px(6);
-        border: 1px solid $yellow;
-
-        label {
-          margin-right: px(5);
-          color: $yellow;
-          font-size: px(11);
-        }
-      }
-
-      .error {
-        color: $red;
-        font-size: px(11);
-      }
-
-      .login {
-        @include ring-shell($accent);
-
-        // 24 tall and 16 wider than its text, both counting the 2 px border
-        > box {
-          min-height: calc(24px * var(--s, 1) - 4px);
-          padding: 0 calc(8px * var(--s, 1) - 2px);
-          border: 2px solid $accent;
-          transition: background-color 150ms;
-        }
-
-        label {
-          color: $accent;
-          font-size: px(12);
-        }
-
-        // Return key: a small tinted box centred in the button
-        .key {
-          min-width: px(16);
-          min-height: px(14);
-          margin-left: px(8);
-          border-radius: px(2);
-          background: $accent;
-          color: $space-base;
-          font-size: px(10);
-        }
-
-        &:hover {
-          > box {
-            // One pixel thicker, drawn inside so the button (and the card) keep their size
-            box-shadow: inset 0 0 0 1px $accent;
-            background: rgba($space-base, 0.9);
-          }
-
-          // The return-key badge keeps its dark arrow on the light fill
-          label:not(.key) {
-            color: $space-text;
-          }
-        }
-
-        &:active > box {
-          background: rgba($accent, 0.25);
-        }
-
-        &:disabled {
-          opacity: 0.5;
-        }
-      }
-    }
-  }
-
-  // Session picker bottom left, reboot and shutdown bottom right
-  .actions {
-    margin: px(50);
-
-    .pill label {
-      font-size: px(12);
-      letter-spacing: px(2);
-
-      &.icon {
-        margin-right: px(10);
-        font-size: px(17);
-        letter-spacing: 0;
-      }
-    }
-
-    .session {
-      // The menubutton's own button is what draws, gets focus and is hovered
-      > button {
-        @include pill($accent);
-      }
-
-      &.open > button > box {
-        background: rgba($space-base, 0.85);
-      }
-
-      .icon {
-        color: $yellow;
-      }
-
-      .divider {
-        min-width: 1px;
-        min-height: px(14);
-        margin: 0 px(10);
-        background: rgba($space-text, 0.4);
-      }
-
-      .caret {
-        margin-left: px(8);
-        color: $space-dim;
-        font-size: px(11);
-      }
-    }
-
-    .power {
-      // Wide enough that a focus ring (8 px out) stays clear of the neighbouring pill
-      .pill {
-        margin-left: px(20);
-      }
-
-      // Each power pill tints its icon in its own colour
-      .reboot {
-        @include pill($green);
-
-        .icon {
-          color: $green;
-        }
-      }
-
-      // Shutdown tints its icon red, and its label red on hover
-      .shutdown {
-        @include pill($red);
-
-        .icon {
-          color: $red;
-        }
-
-        &:hover:not(:active) .caption {
-          color: $red;
-        }
-      }
+    .caret {
+      margin-left: px(8);
+      color: $space-dim;
+      font-size: px(11);
     }
   }
 
@@ -382,6 +71,17 @@ window.greeter {
 
   &.ready .boot-fade {
     opacity: 0;
+  }
+
+  // The panels rise into place as the boot fade starts; the animation only begins once ready is
+  // added, so it isn't over before the window is on screen
+  &.ready .clock {
+    @include rise;
+  }
+
+  &.ready .login-card,
+  &.ready .actions {
+    @include rise(80ms);
   }
 
   // The session list opens upwards from its button
